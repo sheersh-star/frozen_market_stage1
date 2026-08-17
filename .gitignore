@@ -1,0 +1,12 @@
+# generated
+data/processed/market_data.json
+
+# python
+__pycache__/
+*.pyc
+
+# os
+.DS_Store
+
+# secrets
+.env
