@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Frozen Dessert Market Console</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0E1526',
+          panel: '#161F35',
+          hairline: '#2A3655',
+          ivory: '#EDEFF4',
+          muted: '#8892AB',
+          brass: '#C9A24E',
+          positive: '#4FAE7C',
+          negative: '#C2564B',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-ink text-ivory font-body min-h-screen antialiased">
+
+<header class="border-b border-hairline">
+  <div class="max-w-6xl mx-auto px-6 py-5 flex flex-wrap items-end justify-between gap-3">
+    <div>
+      <p class="text-xs tracking-[0.2em] uppercase text-muted mb-1">Category Intelligence</p>
+      <h1 class="font-display text-3xl md:text-4xl font-medium text-ivory">Frozen Dessert Market Console</h1>
+    </div>
+    <div class="text-right font-mono text-xs text-muted">
+      <div id="sync-time">Loading…</div>
+      <div id="provenance-summary" class="mt-1"></div>
+    </div>
+  </div>
+</header>
+
+<main id="dashboard-main" class="max-w-6xl mx-auto px-6 py-8 opacity-60 motion-safe:transition-opacity motion-safe:duration-500">
+
+  <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <div class="flex items-start justify-between mb-4 gap-3">
+      <div>
+        <h2 class="font-display text-xl text-ivory">Production &amp; Sales Trend</h2>
+        <p id="trend-readout" class="font-mono text-sm text-muted mt-1">—</p>
+      </div>
+      <div id="seal-trend" class="shrink-0"></div>
+    </div>
+    <div class="h-72"><canvas id="trendChart"></canvas></div>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="bg-panel border border-hairline rounded-lg p-6">
+      <div class="flex items-start justify-between mb-4 gap-3">
+        <h2 class="font-display text-lg text-ivory leading-tight">Regional Commodity<br>Distribution</h2>
+        <div id="seal-regional" class="shrink-0"></div>
+      </div>
+      <div class="h-56"><canvas id="regionChart"></canvas></div>
+    </div>
+
+    <div class="bg-panel border border-hairline rounded-lg p-6">
+      <div class="flex items-start justify-between mb-4 gap-3">
+        <h2 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h2>
+        <div id="seal-sentiment" class="shrink-0"></div>
+      </div>
+      <div class="h-56"><canvas id="sentimentChart"></canvas></div>
+    </div>
+
+    <div class="bg-panel border border-hairline rounded-lg p-6">
+      <div class="flex items-start justify-between mb-4 gap-3">
+        <h2 class="font-display text-lg text-ivory leading-tight">Nutrition<br>Profile</h2>
+        <div id="seal-nutrition" class="shrink-0"></div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="text-muted border-b border-hairline">
+              <th class="pb-2 font-body font-medium">Item</th>
+              <th class="pb-2 font-body font-medium text-right">Cal</th>
+              <th class="pb-2 font-body font-medium text-right">Sugar g</th>
+              <th class="pb-2 font-body font-medium text-right">Fat g</th>
+            </tr>
+          </thead>
+          <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <div id="error-banner" class="hidden mt-6 border border-negative/40 bg-negative/10 text-ivory rounded-lg p-4 text-sm"></div>
+</main>
+
+<footer class="max-w-6xl mx-auto px-6 pb-8 text-xs text-muted">
+  Local console — refreshes automatically every 30s from data/processed/market_data.json.
+</footer>
+
+<script>
+let charts = {};
+
+function sealBadge(isLive) {
+  const ring = isLive ? 'border-brass text-brass' : 'border-muted/50 text-muted border-dashed';
+  const label = isLive ? 'LIVE' : 'MOCK';
+  return `<span class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 ${ring} font-mono text-[9px] tracking-widest">${label}</span>`;
+}
+
+function chartBaseOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: '#2A3655' }, ticks: { color: '#8892AB', font: { family: 'IBM Plex Mono', size: 10 } } },
+      y: { grid: { color: '#2A3655' }, ticks: { color: '#8892AB', font: { family: 'IBM Plex Mono', size: 10 } } },
+    },
+  };
+}
+
+function showError(message) {
+  const banner = document.getElementById('error-banner');
+  banner.textContent = message;
+  banner.classList.remove('hidden');
+}
+
+function hideError() {
+  document.getElementById('error-banner').classList.add('hidden');
+}
+
+async function loadDashboardData(isFirstLoad) {
+  try {
+    const res = await fetch('/data/processed/market_data.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Server responded ${res.status}`);
+    const data = await res.json();
+    hideError();
+    render(data);
+    document.getElementById('dashboard-main').classList.remove('opacity-60');
+  } catch (err) {
+    console.error(err);
+    if (isFirstLoad) {
+      showError('Couldn\u2019t load market_data.json. Run `python3 data_pipeline.py`, then `python3 server.py`, and reload this page.');
+    }
+    // on later polls, fail quietly and keep showing the last good render
+  }
+}
+
+function render(data) {
+  document.getElementById('sync-time').textContent = `Synced ${data.last_updated}`;
+
+  const panelKeys = ['sales_trend', 'brand_sentiment', 'nutrition', 'regional_distribution'];
+  const liveCount = panelKeys.filter(k => data[k] && data[k].source === 'real').length;
+  document.getElementById('provenance-summary').textContent = `${liveCount}/4 panels on live data`;
+
+  renderTrend(data.sales_trend || {});
+  renderRegional(data.regional_distribution || {});
+  renderSentiment(data.brand_sentiment || {});
+  renderNutrition(data.nutrition || {});
+}
+
+function renderTrend(panel) {
+  document.getElementById('seal-trend').innerHTML = sealBadge(panel.source === 'real');
+  const series = panel.series || [];
+  const latest = series[series.length - 1];
+  const prev = series[series.length - 2];
+  const readout = document.getElementById('trend-readout');
+  if (latest && prev && prev.value) {
+    const pct = ((latest.value - prev.value) / prev.value * 100).toFixed(1);
+    const sign = pct >= 0 ? '+' : '';
+    readout.textContent = `${latest.value} ${panel.unit || ''} \u00b7 ${sign}${pct}% MoM`;
+  } else {
+    readout.textContent = '\u2014';
+  }
+
+  const labels = series.map(s => s.date);
+  const values = series.map(s => s.value);
+
+  if (charts.trend) {
+    charts.trend.data.labels = labels;
+    charts.trend.data.datasets[0].data = values;
+    charts.trend.update();
+    return;
+  }
+
+  charts.trend = new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Production index',
+        data: values,
+        borderColor: '#C9A24E',
+        backgroundColor: 'rgba(201, 162, 78, 0.12)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 0,
+        borderWidth: 2,
+      }],
+    },
+    options: chartBaseOptions(),
+  });
+}
+
+function renderRegional(panel) {
+  document.getElementById('seal-regional').innerHTML = sealBadge(panel.source === 'real');
+  const items = panel.items || [];
+  const labels = items.map(i => i.region);
+  const values = items.map(i => i.share);
+
+  if (charts.regional) {
+    charts.regional.data.labels = labels;
+    charts.regional.data.datasets[0].data = values;
+    charts.regional.update();
+    return;
+  }
+
+  const opts = chartBaseOptions();
+  opts.indexAxis = 'y';
+  charts.regional = new Chart(document.getElementById('regionChart'), {
+    type: 'bar',
+    data: { labels, datasets: [{ data: values, backgroundColor: '#3B6FA0', borderRadius: 3 }] },
+    options: opts,
+  });
+}
+
+function renderSentiment(panel) {
+  document.getElementById('seal-sentiment').innerHTML = sealBadge(panel.source === 'real');
+  const items = (panel.items || []).slice(0, 6);
+  const labels = items.map(i => i.flavor);
+  const values = items.map(i => i.sentiment_score);
+  const colors = items.map(i =>
+    i.status === 'Trending Up' ? '#4FAE7C' : i.status === 'Declining' ? '#C2564B' : '#8892AB'
+  );
+
+  if (charts.sentiment) {
+    charts.sentiment.data.labels = labels;
+    charts.sentiment.data.datasets[0].data = values;
+    charts.sentiment.data.datasets[0].backgroundColor = colors;
+    charts.sentiment.update();
+    return;
+  }
+
+  const opts = chartBaseOptions();
+  opts.indexAxis = 'y';
+  opts.scales.x.min = 0;
+  opts.scales.x.max = 5;
+  charts.sentiment = new Chart(document.getElementById('sentimentChart'), {
+    type: 'bar',
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 3 }] },
+    options: opts,
+  });
+}
+
+function renderNutrition(panel) {
+  document.getElementById('seal-nutrition').innerHTML = sealBadge(panel.source === 'real');
+  const body = document.getElementById('nutrition-body');
+  body.innerHTML = '';
+  (panel.items || []).forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="py-2 font-body">${item.item ?? ''}</td>
+      <td class="py-2 text-right">${item.calories ?? '\u2014'}</td>
+      <td class="py-2 text-right">${item.sugar_g ?? '\u2014'}</td>
+      <td class="py-2 text-right">${item.fat_g ?? '\u2014'}</td>
+    `;
+    body.appendChild(row);
+  });
+}
+
+loadDashboardData(true);
+setInterval(() => loadDashboardData(false), 30000);
+</script>
+</body>
+</html>
