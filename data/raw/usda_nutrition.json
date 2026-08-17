@@ -1,0 +1,140 @@
+{
+  "foods": [
+    {
+      "description": "Vanilla Bean Ice Cream",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 250
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 21.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 15.0
+        }
+      ]
+    },
+    {
+      "description": "Chocolate Fudge Ice Cream",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 280
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 24.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 16.0
+        }
+      ]
+    },
+    {
+      "description": "Sea Salt Caramel Gelato",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 230
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 22.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 12.0
+        }
+      ]
+    },
+    {
+      "description": "Strawberry Sorbet",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 140
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 30.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 0.2
+        }
+      ]
+    },
+    {
+      "description": "Mint Chocolate Chip Ice Cream",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 270
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 23.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 17.0
+        }
+      ]
+    },
+    {
+      "description": "Vanilla Frozen Yogurt",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 190
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 19.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 4.5
+        }
+      ]
+    },
+    {
+      "description": "Cookies and Cream Ice Cream",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 290
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 25.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 16.0
+        }
+      ]
+    },
+    {
+      "description": "Non-Dairy Coconut Frozen Dessert",
+      "foodNutrients": [
+        {
+          "nutrientName": "Energy",
+          "value": 220
+        },
+        {
+          "nutrientName": "Sugars, total including NLEA",
+          "value": 20.0
+        },
+        {
+          "nutrientName": "Total lipid (fat)",
+          "value": 14.0
+        }
+      ]
+    }
+  ]
+}
