@@ -53,6 +53,8 @@ import random
 import datetime
 from pathlib import Path
 
+import synthesis
+
 BASE_DIR = Path(__file__).resolve().parent
 RAW_DIR = BASE_DIR / "data" / "raw"
 OUT_DIR = BASE_DIR / "data" / "processed"
@@ -317,6 +319,10 @@ def generate_market_data():
         "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         **panels,
     }
+    payload["synthesis"] = synthesis.generate_synthesis(payload, RAW_DIR)
+    timeline = synthesis.generate_synthesis_timeline(RAW_DIR)
+    if timeline:
+        payload["synthesis_timeline"] = timeline
 
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
@@ -326,6 +332,11 @@ def generate_market_data():
     for name, p in panels.items():
         tag = "REAL" if p["source"] == "real" else "mock"
         print(f"  - {name:<22} {tag}")
+    print(f"  - synthesis flags       {len(payload['synthesis']['flags'])}")
+    if timeline:
+        print(f"  - recent-cycles timeline  {len(timeline['months'])} months")
+    else:
+        print("  - recent-cycles timeline  not present (drop in the 3 recent-window CSVs to enable)")
 
 
 if __name__ == "__main__":

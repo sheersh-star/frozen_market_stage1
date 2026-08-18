@@ -1,0 +1,73 @@
+brand,quarter,avg_score,review_count
+Frosty Peak,2024-Q3,4.05,38
+Frosty Peak,2024-Q4,3.98,41
+Frosty Peak,2025-Q1,4.02,35
+Frosty Peak,2025-Q2,3.95,44
+Frosty Peak,2025-Q3,3.9,39
+Frosty Peak,2025-Q4,3.88,46
+Frosty Peak,2026-Q1,3.86,47
+Frosty Peak,2026-Q2,3.64,53
+Glacier Bay Creamery,2024-Q3,4.35,9
+Glacier Bay Creamery,2024-Q4,4.38,94
+Glacier Bay Creamery,2025-Q1,4.44,80
+Glacier Bay Creamery,2025-Q2,4.38,80
+Glacier Bay Creamery,2025-Q3,4.44,81
+Glacier Bay Creamery,2025-Q4,4.45,22
+Glacier Bay Creamery,2026-Q1,4.41,30
+Glacier Bay Creamery,2026-Q2,4.45,83
+Orchard Hill Dairy,2024-Q3,4.0,41
+Orchard Hill Dairy,2024-Q4,4.07,79
+Orchard Hill Dairy,2025-Q1,4.1,81
+Orchard Hill Dairy,2025-Q2,4.04,70
+Orchard Hill Dairy,2025-Q3,4.12,12
+Orchard Hill Dairy,2025-Q4,4.13,28
+Orchard Hill Dairy,2026-Q1,4.07,33
+Orchard Hill Dairy,2026-Q2,4.12,52
+Velvet Churn,2024-Q3,3.45,63
+Velvet Churn,2024-Q4,3.41,92
+Velvet Churn,2025-Q1,3.5,80
+Velvet Churn,2025-Q2,3.59,87
+Velvet Churn,2025-Q3,3.6,94
+Velvet Churn,2025-Q4,3.6,28
+Velvet Churn,2026-Q1,3.54,35
+Velvet Churn,2026-Q2,3.62,57
+Sunny Meadow Creamery,2024-Q3,4.1,67
+Sunny Meadow Creamery,2024-Q4,4.1,43
+Sunny Meadow Creamery,2025-Q1,4.2,67
+Sunny Meadow Creamery,2025-Q2,4.11,62
+Sunny Meadow Creamery,2025-Q3,4.19,11
+Sunny Meadow Creamery,2025-Q4,4.16,56
+Sunny Meadow Creamery,2026-Q1,4.24,81
+Sunny Meadow Creamery,2026-Q2,4.26,39
+Northstar Dairy,2024-Q3,3.85,84
+Northstar Dairy,2024-Q4,3.87,76
+Northstar Dairy,2025-Q1,3.91,26
+Northstar Dairy,2025-Q2,3.82,12
+Northstar Dairy,2025-Q3,3.9,24
+Northstar Dairy,2025-Q4,3.95,42
+Northstar Dairy,2026-Q1,3.99,20
+Northstar Dairy,2026-Q2,4.0,84
+Cloud Nine Creamery,2024-Q3,4.25,35
+Cloud Nine Creamery,2024-Q4,4.32,67
+Cloud Nine Creamery,2025-Q1,4.33,28
+Cloud Nine Creamery,2025-Q2,4.26,40
+Cloud Nine Creamery,2025-Q3,4.26,71
+Cloud Nine Creamery,2025-Q4,4.2,84
+Cloud Nine Creamery,2026-Q1,4.12,85
+Cloud Nine Creamery,2026-Q2,4.19,45
+Golden Scoop,2024-Q3,3.9,29
+Golden Scoop,2024-Q4,3.93,70
+Golden Scoop,2025-Q1,4.0,41
+Golden Scoop,2025-Q2,3.97,38
+Golden Scoop,2025-Q3,4.0,86
+Golden Scoop,2025-Q4,4.03,53
+Golden Scoop,2026-Q1,4.04,45
+Golden Scoop,2026-Q2,4.05,89
+Silver Spoon Creamery,2024-Q3,4.0,51
+Silver Spoon Creamery,2024-Q4,3.99,31
+Silver Spoon Creamery,2025-Q1,4.04,41
+Silver Spoon Creamery,2025-Q2,3.96,58
+Silver Spoon Creamery,2025-Q3,4.03,55
+Silver Spoon Creamery,2025-Q4,3.96,11
+Silver Spoon Creamery,2026-Q1,4.03,50
+Silver Spoon Creamery,2026-Q2,3.94,30
