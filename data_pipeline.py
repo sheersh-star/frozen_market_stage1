@@ -298,6 +298,76 @@ def load_regional_distribution():
 
 
 # ---------------------------------------------------------------------------
+# 5. company revenue comparison (FY2025 vs FY2026)
+# ---------------------------------------------------------------------------
+
+def load_company_revenue():
+    """Optional panel — reads company_revenue.csv if present, else the panel
+    is simply absent (same graceful pattern as the synthesis timeline). Two
+    rows per company (fiscal_year 2025 and 2026) are grouped into one record
+    with a computed YoY delta and a confidence tier ("real" / "grounded_estimate"
+    / "placeholder", from the CSV's `confidence` column) rather than the
+    dashboard's usual binary real/mock badge — most of these companies never
+    disclose ice-cream-specific revenue, so a three-way honesty signal matters
+    more here than elsewhere.
+    """
+    real_file = RAW_DIR / "company_revenue.csv"
+    if not real_file.exists():
+        return None
+
+    by_company = {}
+    for row in _read_csv(real_file):
+        company = row.get("company")
+        try:
+            fy = int(row["fiscal_year"])
+            revenue = float(row["revenue_usd_millions"])
+        except (KeyError, ValueError, TypeError):
+            continue
+        if not company or fy not in (2025, 2026):
+            continue
+        entry = by_company.setdefault(company, {
+            "company": company,
+            "ultimate_owner": row.get("ultimate_owner", ""),
+            "scope": row.get("scope", ""),
+        })
+        entry[f"fy{fy}"] = revenue
+        entry[f"confidence_{fy}"] = row.get("confidence", "placeholder")
+        entry[f"basis_{fy}"] = row.get("basis", "")
+
+    out = []
+    for entry in by_company.values():
+        fy2025, fy2026 = entry.get("fy2025"), entry.get("fy2026")
+        if fy2025 is None or fy2026 is None:
+            continue
+        delta_pct = (fy2026 - fy2025) / fy2025 * 100 if fy2025 else None
+
+        tiers = {entry.get("confidence_2025"), entry.get("confidence_2026")}
+        if "real" in tiers:
+            confidence = "real"
+        elif "grounded_estimate" in tiers:
+            confidence = "grounded_estimate"
+        else:
+            confidence = "placeholder"
+
+        out.append({
+            "company": entry["company"],
+            "ultimate_owner": entry["ultimate_owner"],
+            "scope": entry["scope"],
+            "fy2025": round(fy2025, 1),
+            "fy2026": round(fy2026, 1),
+            "delta_pct": round(delta_pct, 1) if delta_pct is not None else None,
+            "confidence": confidence,
+            "basis_2025": entry.get("basis_2025", ""),
+            "basis_2026": entry.get("basis_2026", ""),
+        })
+
+    if not out:
+        return None
+    out.sort(key=lambda x: -x["fy2026"])
+    return {"source": "real", "items": out}
+
+
+# ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
 
@@ -323,6 +393,9 @@ def generate_market_data():
     timeline = synthesis.generate_synthesis_timeline(RAW_DIR)
     if timeline:
         payload["synthesis_timeline"] = timeline
+    revenue = load_company_revenue()
+    if revenue:
+        payload["company_revenue"] = revenue
 
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
@@ -337,6 +410,10 @@ def generate_market_data():
         print(f"  - recent-cycles timeline  {len(timeline['months'])} months")
     else:
         print("  - recent-cycles timeline  not present (drop in the 3 recent-window CSVs to enable)")
+    if revenue:
+        print(f"  - company revenue         {len(revenue['items'])} companies")
+    else:
+        print("  - company revenue         not present (drop in company_revenue.csv to enable)")
 
 
 if __name__ == "__main__":

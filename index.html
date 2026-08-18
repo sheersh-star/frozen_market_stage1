@@ -129,6 +129,37 @@
 
   </section>
 
+  <section id="revenue-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mt-6">
+    <div class="flex items-start justify-between mb-2 gap-3">
+      <div>
+        <h2 class="font-display text-xl text-ivory">Company Revenue Comparison</h2>
+        <p class="font-mono text-sm text-muted mt-1">FY2025 vs FY2026 · log scale — company sizes span a very wide range</p>
+      </div>
+      <div class="shrink-0 flex items-center gap-1 font-mono text-[10px]">
+        <button id="btn-revenue-chart" class="px-2 py-1 rounded border border-brass text-brass">Chart</button>
+        <button id="btn-revenue-table" class="px-2 py-1 rounded border border-hairline text-muted">Table</button>
+      </div>
+    </div>
+    <div id="revenue-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4"></div>
+    <div id="revenue-chart-wrap"><canvas id="revenueChart"></canvas></div>
+    <div id="revenue-table-wrap" class="hidden overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-muted border-b border-hairline">
+            <th class="pb-2 font-body font-medium">Company</th>
+            <th class="pb-2 font-body font-medium">Owner</th>
+            <th class="pb-2 font-body font-medium text-right">FY2025 $M</th>
+            <th class="pb-2 font-body font-medium text-right">FY2026 $M</th>
+            <th class="pb-2 font-body font-medium text-right">&Delta;%</th>
+            <th class="pb-2 font-body font-medium">Confidence</th>
+            <th class="pb-2 font-body font-medium">Basis</th>
+          </tr>
+        </thead>
+        <tbody id="revenue-body" class="font-mono divide-y divide-hairline align-top"></tbody>
+      </table>
+    </div>
+  </section>
+
   <div id="error-banner" class="hidden mt-6 border border-negative/40 bg-negative/10 text-ivory rounded-lg p-4 text-sm"></div>
 </main>
 
@@ -220,6 +251,7 @@ function render(data) {
   renderRegional(data.regional_distribution || {});
   renderSentiment(data.brand_sentiment || {});
   renderNutrition(data.nutrition || {});
+  renderRevenue(data.company_revenue || null);
 }
 
 function renderSynthesis(panel) {
@@ -450,6 +482,148 @@ function renderNutrition(panel) {
     body.appendChild(row);
   });
 }
+
+const CONFIDENCE_ICON = { real: '●', grounded_estimate: '◐', placeholder: '○' };
+const CONFIDENCE_LABEL = { real: 'Real disclosed', grounded_estimate: 'Grounded estimate', placeholder: 'Placeholder — illustrative' };
+let revenueView = 'chart'; // 'chart' | 'table'
+
+function dumbbellPlugin(items) {
+  return {
+    id: 'dumbbell',
+    afterDatasetsDraw(chart) {
+      const { ctx, scales } = chart;
+      const xScale = scales.x;
+      const meta = chart.getDatasetMeta(0);
+      ctx.save();
+      meta.data.forEach((bar, i) => {
+        const item = items[i];
+        if (!item) return;
+        const y = bar.y;
+        const x2025 = xScale.getPixelForValue(item.fy2025);
+        const x2026 = xScale.getPixelForValue(item.fy2026);
+
+        [[x2025, '#F8B9C7'], [x2026, '#F2839B']].forEach(([x, color]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.fill();
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = '#241712';
+          ctx.stroke();
+        });
+
+        const rightX = Math.max(x2025, x2026) + 10;
+        const delta = item.delta_pct ?? 0;
+        const deltaColor = delta >= 0 ? '#6FC796' : '#E2634F';
+        const deltaSign = delta >= 0 ? '+' : '';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'left';
+        ctx.font = "10px 'IBM Plex Mono'";
+        ctx.fillStyle = '#C9AD93';
+        ctx.fillText(`$${item.fy2026.toLocaleString(undefined, { maximumFractionDigits: 0 })}M`, rightX, y - 6);
+        ctx.fillStyle = deltaColor;
+        ctx.fillText(`${deltaSign}${delta.toFixed(1)}%`, rightX, y + 6);
+      });
+      ctx.restore();
+    },
+  };
+}
+
+function renderRevenue(panel) {
+  const section = document.getElementById('revenue-section');
+  if (!panel || !panel.items || !panel.items.length) {
+    section.classList.add('hidden');
+    return;
+  }
+  section.classList.remove('hidden');
+
+  const items = panel.items; // pre-sorted by FY2026 descending
+
+  document.getElementById('revenue-legend').innerHTML = `
+    <span class="inline-flex items-center gap-1"><span class="text-brass">●</span> Real disclosed</span>
+    <span class="inline-flex items-center gap-1"><span class="text-brass">◐</span> Grounded estimate</span>
+    <span class="inline-flex items-center gap-1"><span class="text-brass">○</span> Placeholder — illustrative</span>
+    <span class="inline-flex items-center gap-1" style="color:#F8B9C7">●</span> FY2025
+    <span class="inline-flex items-center gap-1 text-brass">●</span> FY2026
+  `;
+
+  const labels = items.map(i => `${CONFIDENCE_ICON[i.confidence] || ''} ${i.company}`);
+  document.getElementById('revenue-chart-wrap').style.height = `${items.length * 30 + 20}px`;
+
+  if (charts.revenue) charts.revenue.destroy();
+
+  const opts = chartBaseOptions();
+  opts.indexAxis = 'y';
+  opts.layout = { padding: { right: 80 } };
+  opts.scales.x.type = 'logarithmic';
+  opts.scales.x.min = 40;
+  opts.plugins.tooltip = {
+    callbacks: {
+      label: (ctx) => {
+        const item = items[ctx.dataIndex];
+        return [
+          `FY2025: $${item.fy2025.toLocaleString()}M`,
+          `FY2026: $${item.fy2026.toLocaleString()}M`,
+          CONFIDENCE_LABEL[item.confidence] || item.confidence,
+        ];
+      },
+    },
+  };
+
+  charts.revenue = new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: items.map(i => [i.fy2025, i.fy2026]),
+        backgroundColor: 'rgba(201, 173, 147, 0.35)',
+        borderRadius: 2,
+        barThickness: 4,
+      }],
+    },
+    options: opts,
+    plugins: [dumbbellPlugin(items)],
+  });
+
+  document.getElementById('revenue-body').innerHTML = items.map(i => {
+    const delta = i.delta_pct ?? 0;
+    return `
+      <tr>
+        <td class="py-2 font-body">${CONFIDENCE_ICON[i.confidence] || ''} ${i.company}</td>
+        <td class="py-2 font-body text-muted">${i.ultimate_owner}</td>
+        <td class="py-2 text-right">${i.fy2025.toLocaleString()}</td>
+        <td class="py-2 text-right">${i.fy2026.toLocaleString()}</td>
+        <td class="py-2 text-right" style="color:${delta >= 0 ? '#6FC796' : '#E2634F'}">${delta >= 0 ? '+' : ''}${delta.toFixed(1)}%</td>
+        <td class="py-2 font-body">${CONFIDENCE_LABEL[i.confidence] || i.confidence}</td>
+        <td class="py-2 font-body text-muted text-xs max-w-md">${i.basis_2025}<br><br>${i.basis_2026}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function updateRevenueToggleStyles() {
+  const activeCls = ['border-brass', 'text-brass'];
+  const inactiveCls = ['border-hairline', 'text-muted'];
+  const chartBtn = document.getElementById('btn-revenue-chart');
+  const tableBtn = document.getElementById('btn-revenue-table');
+  chartBtn.classList.remove(...activeCls, ...inactiveCls);
+  chartBtn.classList.add(...(revenueView === 'chart' ? activeCls : inactiveCls));
+  tableBtn.classList.remove(...activeCls, ...inactiveCls);
+  tableBtn.classList.add(...(revenueView === 'table' ? activeCls : inactiveCls));
+}
+
+document.getElementById('btn-revenue-chart').addEventListener('click', () => {
+  revenueView = 'chart';
+  document.getElementById('revenue-chart-wrap').classList.remove('hidden');
+  document.getElementById('revenue-table-wrap').classList.add('hidden');
+  updateRevenueToggleStyles();
+});
+document.getElementById('btn-revenue-table').addEventListener('click', () => {
+  revenueView = 'table';
+  document.getElementById('revenue-chart-wrap').classList.add('hidden');
+  document.getElementById('revenue-table-wrap').classList.remove('hidden');
+  updateRevenueToggleStyles();
+});
 
 document.getElementById('btn-full-history').addEventListener('click', () => {
   trendView = 'history';
