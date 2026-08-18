@@ -240,6 +240,7 @@ def load_nutrition():
                     "calories": nutrients.get("Energy"),
                     "sugar_g": nutrients.get("Sugars, total including NLEA") or nutrients.get("Total Sugars"),
                     "fat_g": nutrients.get("Total lipid (fat)"),
+                    "protein_g": nutrients.get("Protein"),
                 })
             out = [o for o in out if o["calories"] is not None or o["sugar_g"] is not None]
             if out:
@@ -253,6 +254,7 @@ def load_nutrition():
             "calories": random.randint(180, 320),
             "sugar_g": round(random.uniform(14, 26), 1),
             "fat_g": round(random.uniform(6, 18), 1),
+            "protein_g": round(random.uniform(0.3, 5.5), 1),
         }
         for c in categories
     ]

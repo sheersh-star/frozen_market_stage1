@@ -66,7 +66,7 @@
     <div class="h-72"><canvas id="trendChart"></canvas></div>
   </section>
 
-  <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
 
     <div class="bg-panel border border-hairline rounded-lg p-6">
       <div class="flex items-start justify-between mb-4 gap-3">
@@ -81,7 +81,7 @@
         <h2 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h2>
         <div id="seal-sentiment" class="shrink-0"></div>
       </div>
-      <div class="h-56"><canvas id="sentimentChart"></canvas></div>
+      <div class="h-80"><canvas id="sentimentChart"></canvas></div>
     </div>
 
     <div class="bg-panel border border-hairline rounded-lg p-6">
@@ -97,6 +97,7 @@
               <th class="pb-2 font-body font-medium text-right">Cal</th>
               <th class="pb-2 font-body font-medium text-right">Sugar g</th>
               <th class="pb-2 font-body font-medium text-right">Fat g</th>
+              <th class="pb-2 font-body font-medium text-right">Protein g</th>
             </tr>
           </thead>
           <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
@@ -241,7 +242,7 @@ function renderRegional(panel) {
 
 function renderSentiment(panel) {
   document.getElementById('seal-sentiment').innerHTML = sealBadge(panel.source === 'real');
-  const items = (panel.items || []).slice(0, 6);
+  const items = (panel.items || []).slice(0, 10);
   const labels = items.map(i => i.flavor);
   const values = items.map(i => i.sentiment_score);
   const colors = items.map(i =>
@@ -278,6 +279,7 @@ function renderNutrition(panel) {
       <td class="py-2 text-right">${item.calories ?? '\u2014'}</td>
       <td class="py-2 text-right">${item.sugar_g ?? '\u2014'}</td>
       <td class="py-2 text-right">${item.fat_g ?? '\u2014'}</td>
+      <td class="py-2 text-right">${item.protein_g ?? '\u2014'}</td>
     `;
     body.appendChild(row);
   });
