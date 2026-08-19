@@ -1,0 +1,7 @@
+region,weeks_on_hand,weeks_to_expiry,units_on_hand,unit_cost_usd,confidence,snapshot_date
+New England,1.4,5.2,28420,2.85,real,2026-08-17
+Mid Atlantic,4.6,4.8,238280,2.6,real,2026-08-17
+North Central,7.1,2.1,278320,2.45,real,2026-08-17
+South,1.8,6.0,120960,2.7,real,2026-08-17
+West,3.9,4.3,141960,3.1,grounded_estimate,2026-08-17
+Puerto Rico,6.4,1.6,43904,3.85,placeholder,2026-08-17

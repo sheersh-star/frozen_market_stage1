@@ -1,0 +1,10 @@
+equipment_id,region,asset_type,failure_risk_pct,days_to_predicted_failure,units_at_risk,unit_cost_usd,confidence,reading_date
+COMP-NE-01,New England,compressor,67.8,9,2842,2.85,real,2026-08-17
+FRZ-MA-02,Mid Atlantic,walk-in freezer,21.6,45,9531,2.6,real,2026-08-17
+TRK-MA-01,Mid Atlantic,refrigerated truck,12.1,90,5957,2.6,real,2026-08-17
+CASE-NC-01,North Central,reach-in case,40.9,21,3340,2.45,grounded_estimate,2026-08-17
+TRK-S-03,South,refrigerated truck,56.7,14,6048,2.7,real,2026-08-17
+COMP-S-01,South,compressor,32.5,38,4234,2.7,real,2026-08-17
+FRZ-W-01,West,walk-in freezer,18.3,60,4969,3.1,grounded_estimate,2026-08-17
+CASE-W-02,West,reach-in case,61.5,7,1704,3.1,real,2026-08-17
+COMP-PR-01,Puerto Rico,compressor,29.4,50,4390,3.85,placeholder,2026-08-17

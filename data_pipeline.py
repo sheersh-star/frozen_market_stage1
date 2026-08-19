@@ -54,6 +54,7 @@ import datetime
 from pathlib import Path
 
 import synthesis
+import command_center
 
 BASE_DIR = Path(__file__).resolve().parent
 RAW_DIR = BASE_DIR / "data" / "raw"
@@ -396,6 +397,9 @@ def generate_market_data():
     revenue = load_company_revenue()
     if revenue:
         payload["company_revenue"] = revenue
+    cc = command_center.build(RAW_DIR)
+    if cc:
+        payload["command_center"] = cc
 
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
@@ -414,6 +418,10 @@ def generate_market_data():
         print(f"  - company revenue         {len(revenue['items'])} companies")
     else:
         print("  - company revenue         not present (drop in company_revenue.csv to enable)")
+    if cc:
+        print(f"  - command center          {len(cc['activity_log'])} log entries, {len(cc['equipment'])} equipment, {len(cc['regional_inventory'])} regions")
+    else:
+        print("  - command center          not present (drop in equipment_health.csv, regional_inventory.csv, demand_vs_plan.csv to enable)")
 
 
 if __name__ == "__main__":

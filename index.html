@@ -160,6 +160,79 @@
     </div>
   </section>
 
+  <section id="command-center-section" class="hidden mt-6">
+    <div class="mb-4">
+      <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Supply Chain Command Center</p>
+      <h2 class="font-display text-2xl text-ivory">Sense · Prescribe · Act</h2>
+    </div>
+
+    <div id="cc-kpi-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>
+
+    <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
+      <div class="flex items-start justify-between mb-2 gap-3">
+        <div>
+          <h3 class="font-display text-lg text-ivory">Demand Signal vs Production Plan</h3>
+          <p id="cc-demand-readout" class="font-mono text-sm text-muted mt-1">—</p>
+        </div>
+      </div>
+      <div id="cc-demand-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
+      <div class="h-64"><canvas id="ccDemandChart"></canvas></div>
+    </section>
+
+    <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
+      <h3 class="font-display text-lg text-ivory mb-4">Regional Inventory Risk</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="text-muted border-b border-hairline">
+              <th class="pb-2 font-body font-medium">Region</th>
+              <th class="pb-2 font-body font-medium text-right">Weeks on hand</th>
+              <th class="pb-2 font-body font-medium text-right">Weeks to expiry</th>
+              <th class="pb-2 font-body font-medium">Status</th>
+              <th class="pb-2 font-body font-medium">Agent recommendation</th>
+            </tr>
+          </thead>
+          <tbody id="cc-regional-body" class="font-mono divide-y divide-hairline"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
+      <h3 class="font-display text-lg text-ivory mb-4">Equipment Risk</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="text-muted border-b border-hairline">
+              <th class="pb-2 font-body font-medium">Equipment</th>
+              <th class="pb-2 font-body font-medium">Region</th>
+              <th class="pb-2 font-body font-medium text-right">Failure risk</th>
+              <th class="pb-2 font-body font-medium text-right">Days out</th>
+              <th class="pb-2 font-body font-medium text-right">Exposure</th>
+            </tr>
+          </thead>
+          <tbody id="cc-equipment-body" class="font-mono divide-y divide-hairline"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="bg-panel border border-hairline rounded-lg p-6">
+      <h3 class="font-display text-lg text-ivory mb-4">Agent Activity Log</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="text-muted border-b border-hairline">
+              <th class="pb-2 font-body font-medium">Date</th>
+              <th class="pb-2 font-body font-medium">Action</th>
+              <th class="pb-2 font-body font-medium text-right">Impact</th>
+              <th class="pb-2 font-body font-medium">Status</th>
+            </tr>
+          </thead>
+          <tbody id="cc-activity-body" class="font-mono divide-y divide-hairline"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
   <div id="error-banner" class="hidden mt-6 border border-negative/40 bg-negative/10 text-ivory rounded-lg p-4 text-sm"></div>
 </main>
 
@@ -252,6 +325,7 @@ function render(data) {
   renderSentiment(data.brand_sentiment || {});
   renderNutrition(data.nutrition || {});
   renderRevenue(data.company_revenue || null);
+  renderCommandCenter(data.command_center || null);
 }
 
 function renderSynthesis(panel) {
@@ -610,6 +684,151 @@ function updateRevenueToggleStyles() {
   chartBtn.classList.add(...(revenueView === 'chart' ? activeCls : inactiveCls));
   tableBtn.classList.remove(...activeCls, ...inactiveCls);
   tableBtn.classList.add(...(revenueView === 'table' ? activeCls : inactiveCls));
+}
+
+const CC_STATUS = {
+  'Stockout risk': { icon: '▼', color: '#E2634F' },
+  'Spoilage risk': { icon: '⚠', color: '#E3A857' },
+  'Balanced': { icon: '●', color: '#6FC796' },
+};
+
+function ccFmtUsd(amount) {
+  const sign = amount < 0 ? '-' : '';
+  return `${sign}$${Math.abs(amount).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+}
+
+function ccKpiCard(label, value, sub) {
+  return `
+    <div class="bg-panel border border-hairline rounded-lg p-5">
+      <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">${label}</p>
+      <p class="font-display text-2xl text-ivory">${value}</p>
+      ${sub ? `<p class="font-mono text-xs text-muted mt-1">${sub}</p>` : ''}
+    </div>
+  `;
+}
+
+function renderCcKpis(kpis) {
+  document.getElementById('cc-kpi-row').innerHTML = [
+    ccKpiCard('Spoilage exposure, this cycle', ccFmtUsd(kpis.spoilage_exposure_usd)),
+    ccKpiCard('Cash tied up, frozen inventory', ccFmtUsd(kpis.cash_tied_up_usd)),
+    ccKpiCard('Equipment exposure', ccFmtUsd(kpis.equipment_exposure_usd)),
+    ccKpiCard(
+      'Autonomous actions, this cycle',
+      kpis.autonomous_actions_count,
+      `${ccFmtUsd(kpis.autonomous_actions_impact_usd)} impact protected`
+    ),
+  ].join('');
+}
+
+function renderCcDemand(demand) {
+  if (!demand) return;
+  const readout = document.getElementById('cc-demand-readout');
+  readout.textContent = `${demand.featured_region} · peak gap ${demand.gap_pct}%` +
+    (demand.event_note ? ` · ${demand.event_note} (${demand.event_date})` : '');
+
+  document.getElementById('cc-demand-legend').innerHTML = `
+    <span class="inline-flex items-center gap-1"><span style="color:#F2839B">●</span> Agentic demand sensing</span>
+    <span class="inline-flex items-center gap-1"><span style="color:#83909C">●</span> Legacy production plan</span>
+  `;
+
+  const labels = demand.series.map(p => p.date);
+  const sensed = demand.series.map(p => p.sensed_demand_units);
+  const plan = demand.series.map(p => p.production_plan_units);
+
+  if (charts.ccDemand) charts.ccDemand.destroy();
+
+  const opts = chartBaseOptions();
+  charts.ccDemand = new Chart(document.getElementById('ccDemandChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Agentic demand sensing',
+          data: sensed,
+          borderColor: '#F2839B',
+          backgroundColor: 'rgba(242, 131, 155, 0.10)',
+          tension: 0.3,
+          pointRadius: 0,
+          borderWidth: 2,
+          fill: true,
+        },
+        {
+          label: 'Legacy production plan',
+          data: plan,
+          borderColor: '#83909C',
+          borderDash: [4, 3],
+          tension: 0.3,
+          pointRadius: 0,
+          borderWidth: 2,
+          fill: false,
+        },
+      ],
+    },
+    options: opts,
+  });
+}
+
+function renderCcRegional(regions) {
+  document.getElementById('cc-regional-body').innerHTML = regions.map(r => {
+    const s = CC_STATUS[r.status] || { icon: '', color: '#C9AD93' };
+    return `
+      <tr>
+        <td class="py-2 font-body">${r.region}</td>
+        <td class="py-2 text-right">${r.weeks_on_hand.toFixed(1)}</td>
+        <td class="py-2 text-right">${r.weeks_to_expiry.toFixed(1)}</td>
+        <td class="py-2"><span style="color:${s.color}">${s.icon}</span> ${r.status}</td>
+        <td class="py-2 font-body text-muted">${r.recommendation}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function renderCcEquipment(items) {
+  document.getElementById('cc-equipment-body').innerHTML = items.map(e => {
+    const riskColor = e.failure_risk_pct >= 50 ? '#E2634F' : e.failure_risk_pct >= 30 ? '#E3A857' : '#83909C';
+    return `
+      <tr>
+        <td class="py-2 font-body">${e.equipment_id} <span class="text-muted">(${e.asset_type})</span></td>
+        <td class="py-2 font-body text-muted">${e.region}</td>
+        <td class="py-2 text-right" style="color:${riskColor}">${e.failure_risk_pct.toFixed(1)}%</td>
+        <td class="py-2 text-right">${e.days_to_predicted_failure}</td>
+        <td class="py-2 text-right" title="${e.exposure_basis}">${ccFmtUsd(e.exposure_usd)}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function renderCcActivity(entries) {
+  document.getElementById('cc-activity-body').innerHTML = entries.map(a => {
+    const auto = a.status === 'auto_executed';
+    const badge = auto
+      ? '<span style="color:#6FC796">✓ Auto-executed</span>'
+      : '<span style="color:#E3A857">⏳ Pending approval</span>';
+    return `
+      <tr>
+        <td class="py-2 font-body text-muted">${a.date || '—'}</td>
+        <td class="py-2 font-body" title="${a.impact_basis}">${a.action}</td>
+        <td class="py-2 text-right">${ccFmtUsd(a.impact_usd)}</td>
+        <td class="py-2 font-body">${badge}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function renderCommandCenter(cc) {
+  const section = document.getElementById('command-center-section');
+  if (!cc) {
+    section.classList.add('hidden');
+    return;
+  }
+  section.classList.remove('hidden');
+
+  renderCcKpis(cc.kpis);
+  renderCcDemand(cc.demand_vs_plan);
+  renderCcRegional(cc.regional_inventory);
+  renderCcEquipment(cc.equipment);
+  renderCcActivity(cc.activity_log);
 }
 
 document.getElementById('btn-revenue-chart').addEventListener('click', () => {
