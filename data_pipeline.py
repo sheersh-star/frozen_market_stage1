@@ -369,6 +369,56 @@ def load_company_revenue():
 
 
 # ---------------------------------------------------------------------------
+# 6. volume vs dollar sales
+# ---------------------------------------------------------------------------
+
+def load_volume_dollar_sales():
+    """Optional panel — reads volume_dollar_sales.csv if present, else absent
+    (same graceful pattern as the other add-on panels). Deliberately kept as
+    two separate series rather than one dual-axis chart: volume (units) and
+    dollar sales ($) are different scales, and a shared y-axis between them
+    would fabricate a visual correlation that isn't really there. The front
+    end renders them as two independent charts plus one indexed-to-100
+    comparison, which is the honest way to show whether they're diverging.
+    """
+    real_file = RAW_DIR / "volume_dollar_sales.csv"
+    if not real_file.exists():
+        return None
+
+    rows = []
+    for row in _read_csv(real_file):
+        try:
+            volume = float(row["volume_units"])
+            dollars = float(row["dollar_sales_usd"])
+        except (KeyError, ValueError, TypeError):
+            continue
+        date = row.get("date")
+        if not date:
+            continue
+        rows.append({
+            "date": date,
+            "volume_units": volume,
+            "dollar_sales_usd": dollars,
+            "confidence": row.get("confidence", "placeholder"),
+        })
+
+    if not rows:
+        return None
+    rows.sort(key=lambda r: r["date"])
+
+    # Index both series to the first month = 100, so a divergence (e.g. unit
+    # volume growing faster than dollar revenue — a price/promo signal) is
+    # readable on one shared axis without mixing units.
+    base_volume = rows[0]["volume_units"] or 1
+    base_dollars = rows[0]["dollar_sales_usd"] or 1
+    for r in rows:
+        r["volume_index"] = round(r["volume_units"] / base_volume * 100, 1)
+        r["dollar_index"] = round(r["dollar_sales_usd"] / base_dollars * 100, 1)
+
+    return {"source": "real", "series": rows}
+
+
+# ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
 
@@ -400,6 +450,9 @@ def generate_market_data():
     cc = command_center.build(RAW_DIR)
     if cc:
         payload["command_center"] = cc
+    volume_dollar = load_volume_dollar_sales()
+    if volume_dollar:
+        payload["volume_dollar_sales"] = volume_dollar
 
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
@@ -422,6 +475,10 @@ def generate_market_data():
         print(f"  - command center          {len(cc['activity_log'])} log entries, {len(cc['equipment'])} equipment, {len(cc['regional_inventory'])} regions")
     else:
         print("  - command center          not present (drop in equipment_health.csv, regional_inventory.csv, demand_vs_plan.csv to enable)")
+    if volume_dollar:
+        print(f"  - volume vs dollar sales  {len(volume_dollar['series'])} months")
+    else:
+        print("  - volume vs dollar sales  not present (drop in volume_dollar_sales.csv to enable)")
 
 
 if __name__ == "__main__":

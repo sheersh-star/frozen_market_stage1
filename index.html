@@ -87,6 +87,33 @@
     <div class="h-72"><canvas id="trendChart"></canvas></div>
   </section>
 
+  <section id="volume-dollar-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <div class="flex items-start justify-between mb-4 gap-3">
+      <div>
+        <h2 class="font-display text-xl text-ivory">Volume vs Dollar Sales</h2>
+        <p id="vd-readout" class="font-mono text-sm text-muted mt-1">—</p>
+      </div>
+      <div class="shrink-0 font-mono text-[10px] text-muted flex items-center gap-1">
+        <span id="vd-confidence-icon"></span><span id="vd-confidence-label"></span>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Volume (units)</p>
+        <div class="h-48"><canvas id="volumeChart"></canvas></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Dollar sales ($)</p>
+        <div class="h-48"><canvas id="dollarChart"></canvas></div>
+      </div>
+    </div>
+    <div class="pt-4 border-t border-hairline/60">
+      <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-2">Indexed comparison &middot; first month = 100</p>
+      <div id="vd-index-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
+      <div class="h-48"><canvas id="vdIndexChart"></canvas></div>
+    </div>
+  </section>
+
   <section class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
 
     <div class="bg-panel border border-hairline rounded-lg p-6">
@@ -321,6 +348,7 @@ function render(data) {
 
   renderSynthesis(data.synthesis || {});
   renderTrend(data.sales_trend || {});
+  renderVolumeDollar(data.volume_dollar_sales || null);
   renderRegional(data.regional_distribution || {});
   renderSentiment(data.brand_sentiment || {});
   renderNutrition(data.nutrition || {});
@@ -479,6 +507,98 @@ function showLatestBrief() {
   document.getElementById('brief-back').classList.add('hidden');
   document.getElementById('brief-label').textContent = 'Auto-generated \u00b7 rule-based';
   renderSynthesis(currentData.synthesis || {});
+}
+
+function renderVolumeDollar(panel) {
+  const section = document.getElementById('volume-dollar-section');
+  if (!panel || !panel.series || !panel.series.length) {
+    section.classList.add('hidden');
+    return;
+  }
+  section.classList.remove('hidden');
+
+  const series = panel.series;
+  const labels = series.map(s => s.date);
+  const volume = series.map(s => s.volume_units);
+  const dollars = series.map(s => s.dollar_sales_usd);
+  const volumeIdx = series.map(s => s.volume_index);
+  const dollarIdx = series.map(s => s.dollar_index);
+
+  const tiers = new Set(series.map(s => s.confidence));
+  const tier = tiers.has('real') ? 'real' : tiers.has('grounded_estimate') ? 'grounded_estimate' : 'placeholder';
+  document.getElementById('vd-confidence-icon').innerHTML = `<span class="text-brass">${CONFIDENCE_ICON[tier] || ''}</span>`;
+  document.getElementById('vd-confidence-label').textContent = CONFIDENCE_LABEL[tier] || tier;
+
+  const lastVolIdx = volumeIdx[volumeIdx.length - 1];
+  const lastDolIdx = dollarIdx[dollarIdx.length - 1];
+  const readout = document.getElementById('vd-readout');
+  if (lastVolIdx !== undefined) {
+    const volPct = (lastVolIdx - 100).toFixed(1);
+    const dolPct = (lastDolIdx - 100).toFixed(1);
+    const gap = Math.abs(lastVolIdx - lastDolIdx).toFixed(1);
+    const direction = lastVolIdx - lastDolIdx > 0.5 ? `volume outpacing dollars by ${gap} pts — price/mix erosion`
+      : lastDolIdx - lastVolIdx > 0.5 ? `dollars outpacing volume by ${gap} pts — price/mix gain`
+      : 'volume and dollars moving together';
+    readout.textContent = `Volume ${volPct >= 0 ? '+' : ''}${volPct}% · Dollars ${dolPct >= 0 ? '+' : ''}${dolPct}% since ${labels[0]} — ${direction}`;
+  } else {
+    readout.textContent = '—';
+  }
+
+  if (charts.volume) {
+    charts.volume.data.labels = labels;
+    charts.volume.data.datasets[0].data = volume;
+    charts.volume.update();
+  } else {
+    charts.volume = new Chart(document.getElementById('volumeChart'), {
+      type: 'line',
+      data: { labels, datasets: [{
+        data: volume, borderColor: '#E3A857', backgroundColor: 'rgba(227, 168, 87, 0.10)',
+        fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
+      }] },
+      options: chartBaseOptions(),
+    });
+  }
+
+  if (charts.dollar) {
+    charts.dollar.data.labels = labels;
+    charts.dollar.data.datasets[0].data = dollars;
+    charts.dollar.update();
+  } else {
+    const dolOpts = chartBaseOptions();
+    dolOpts.plugins.tooltip = { callbacks: { label: (ctx) => `$${ctx.parsed.y.toLocaleString()}` } };
+    charts.dollar = new Chart(document.getElementById('dollarChart'), {
+      type: 'line',
+      data: { labels, datasets: [{
+        data: dollars, borderColor: '#F2839B', backgroundColor: 'rgba(242, 131, 155, 0.10)',
+        fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
+      }] },
+      options: dolOpts,
+    });
+  }
+
+  document.getElementById('vd-index-legend').innerHTML = `
+    <span class="inline-flex items-center gap-1"><span style="color:#E3A857">──</span> Volume index</span>
+    <span class="inline-flex items-center gap-1"><span style="color:#83909C">- -</span> Dollar sales index</span>
+  `;
+
+  if (charts.vdIndex) {
+    charts.vdIndex.data.labels = labels;
+    charts.vdIndex.data.datasets[0].data = volumeIdx;
+    charts.vdIndex.data.datasets[1].data = dollarIdx;
+    charts.vdIndex.update();
+  } else {
+    charts.vdIndex = new Chart(document.getElementById('vdIndexChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Volume index', data: volumeIdx, borderColor: '#E3A857', tension: 0.3, pointRadius: 0, borderWidth: 2, fill: false },
+          { label: 'Dollar sales index', data: dollarIdx, borderColor: '#83909C', borderDash: [4, 3], tension: 0.3, pointRadius: 0, borderWidth: 2, fill: false },
+        ],
+      },
+      options: chartBaseOptions(),
+    });
+  }
 }
 
 function renderRegional(panel) {
