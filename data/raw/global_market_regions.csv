@@ -1,0 +1,6 @@
+region,share_pct,confidence,basis
+North America,34,grounded_estimate,"Fortune Business Insights, Ice Cream Market Report: North America accounted for ~34% of global ice cream consumption/revenue share. Third-party market-research sizing (not a government or audited-company disclosure), hence grounded_estimate rather than real."
+Europe,27,grounded_estimate,"Fortune Business Insights, Ice Cream Market Report: Europe ~27% global share. Cross-checked against IMARC Group's independent estimate of ~35.1% for Europe for the same year — market-research firms diverge meaningfully on regional splits since no single body centrally measures global ice cream sales; this row uses the Fortune Business Insights figure for internal consistency with the other regions in this set."
+Asia-Pacific,25,grounded_estimate,"Fortune Business Insights, Ice Cream Market Report: Asia-Pacific ~25% global share, cited as the fastest-growing region on rising disposable incomes and urbanization in China and India."
+Latin America,9,grounded_estimate,"Fortune Business Insights, Ice Cream Market Report: Latin America ~9% global share."
+Middle East & Africa,5,grounded_estimate,"Residual share (100% - North America - Europe - Asia-Pacific - Latin America) implied by the same Fortune Business Insights breakdown; not independently published as its own line figure by that source."

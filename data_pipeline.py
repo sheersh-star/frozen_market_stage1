@@ -11,10 +11,13 @@ never have to touch this file just to switch a panel from mock to real.
 Expected files in data/raw/ (all optional):
 
   1. ice_cream_production.csv
-     Source: Kaggle "Monthly Ice Cream Sales Data (1972-2020)", which mirrors
-     the FRED series IPN31152N (Industrial Production: Ice Cream & Frozen
-     Dessert, NAICS 31152, index 2017=100). Real columns are literally
-     DATE and VALUE — this loader looks for those first.
+     Source: FRED series IPN31152N (Industrial Production: Ice Cream &
+     Frozen Dessert, NAICS 31152, index 2017=100), pulled live from
+     fred.stlouisfed.org/graph/fredgraph.csv?id=IPN31152N. Real columns are
+     literally DATE and VALUE — this loader looks for those first. Re-pull
+     periodically (curl works directly against that URL, no API key) to
+     keep the trend panel current — the Fed publishes with roughly a
+     2-week lag under the G.17 Industrial Production release.
      -> powers the production/sales trend panel
 
   2. ice_cream_reviews.csv  (+ optional ice_cream_products.csv)
@@ -30,18 +33,23 @@ Expected files in data/raw/ (all optional):
      fetch_usda_data.py, which does this for you with one command.
      -> powers the nutrition panel
 
-  4. sweetener_market.csv
-     Source: USDA Farm Service Agency Sweetener Market Data (SMD), via
-     data.gov / Ag Data Commons. These ship as regional .xls files —
-     grab the "Ice Cream and Related Products" use-category file (or
-     combine a few regions), and save it as CSV here. Real region names
-     are: New England, Mid Atlantic, North Central, South, West, Puerto Rico.
-     -> powers the regional commodity distribution panel
+  4. global_market_regions.csv
+     Source: published third-party market-research sizing (e.g. Fortune
+     Business Insights' Ice Cream Market Report) giving global share by
+     continent. USDA's Sweetener Market Data (SMD) was the original real
+     source for this panel's US-regional predecessor, but that program was
+     discontinued around 2009-2010 — there is no current public version of
+     it, which is why this panel is now global-continent market share
+     instead. No central body measures worldwide ice cream sales directly,
+     so every row here is confidence=grounded_estimate with its own basis
+     citation, never "real" in the government/audited-disclosure sense.
+     -> powers the global market distribution panel
 
 None of these need to be exact — the loaders match on several likely column
-name variants (see _find_field). If a real file's columns don't match at
-all, that panel just quietly keeps using mock data; check the console output
-after running this script to see what loaded as real vs. mock.
+name variants (see _find_field). Every optional panel (company revenue,
+volume/dollar sales, Magnum precedent, command center) is simply absent
+from the JSON if its file isn't there — check the console output after
+running this script to see what's populated.
 
 Run:    python3 data_pipeline.py
 Output: data/processed/market_data.json
@@ -60,9 +68,6 @@ BASE_DIR = Path(__file__).resolve().parent
 RAW_DIR = BASE_DIR / "data" / "raw"
 OUT_DIR = BASE_DIR / "data" / "processed"
 OUT_FILE = OUT_DIR / "market_data.json"
-
-# Real region names used by USDA's Sweetener Market Data reports.
-REAL_REGIONS = ["New England", "Mid Atlantic", "North Central", "South", "West", "Puerto Rico"]
 
 # Set an integer here (e.g. 42) if you want reproducible mock data run-to-run.
 MOCK_SEED = None
@@ -265,37 +270,42 @@ def load_nutrition():
 
 
 # ---------------------------------------------------------------------------
-# 4. regional sweetener / commodity distribution
+# 4. global market distribution by region
 # ---------------------------------------------------------------------------
+#
+# Previously sourced from USDA's Sweetener Market Data (SMD), whose 6
+# US-only regions (New England, Mid Atlantic, ...) matched the file's real
+# region taxonomy but whose values were hand-approximated, not a live pull —
+# and the SMD program itself was discontinued around 2009-2010, so there is
+# no current public version of that dataset regardless. Replaced with a
+# global-continent market-share breakdown so the panel reflects worldwide
+# distribution as requested, sourced from published third-party market
+# research rather than a primary government/company disclosure — hence
+# confidence is grounded_estimate throughout, not real (see basis per row).
 
 def load_regional_distribution():
-    real_file = RAW_DIR / "sweetener_market.csv"
+    real_file = RAW_DIR / "global_market_regions.csv"
+    out = []
     if real_file.exists():
-        rows = _read_csv(real_file)
-        agg = {}
-        for row in rows:
-            region = _find_field(row, ["region", "area"])
-            volume_raw = _find_field(row, ["value", "volume", "deliveries", "short tons", "pounds"])
-            if not region or volume_raw is None:
-                continue
+        for row in _read_csv(real_file):
+            region = row.get("region")
             try:
-                volume = float(str(volume_raw).replace(",", ""))
-            except ValueError:
+                share = float(row["share_pct"])
+            except (KeyError, ValueError, TypeError):
                 continue
-            agg[region] = agg.get(region, 0) + volume
+            if not region:
+                continue
+            out.append({
+                "region": region,
+                "share": share,
+                "confidence": row.get("confidence", "placeholder"),
+                "basis": row.get("basis", ""),
+            })
 
-        if agg:
-            total = sum(agg.values()) or 1
-            out = [{"region": r, "share": round(v / total * 100, 1)} for r, v in agg.items()]
-            out.sort(key=lambda x: -x["share"])
-            return {"source": "real", "items": out}
-
-    # ---- fallback mock, using the real SMD region names ----
-    shares = [random.uniform(1, 10) for _ in REAL_REGIONS]
-    total = sum(shares)
-    out = [{"region": r, "share": round(s / total * 100, 1)} for r, s in zip(REAL_REGIONS, shares)]
+    if not out:
+        return {"source": "unavailable", "items": []}
     out.sort(key=lambda x: -x["share"])
-    return {"source": "mock", "items": out}
+    return {"source": "real", "items": out}
 
 
 # ---------------------------------------------------------------------------
@@ -470,7 +480,26 @@ def load_magnum_annual():
         r["volume_index"] = round(volume_index, 1)
         r["price_index"] = round(price_index, 1)
 
-    return {"source": "real", "items": rows}
+    regions = []
+    regional_file = RAW_DIR / "magnum_regional_fy2025.csv"
+    if regional_file.exists():
+        for row in _read_csv(regional_file):
+            try:
+                usg = float(row["usg_pct"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            region = row.get("region")
+            if not region:
+                continue
+            regions.append({
+                "region": region,
+                "usg_pct": usg,
+                "confidence": row.get("confidence", "placeholder"),
+                "basis": row.get("basis", ""),
+            })
+        regions.sort(key=lambda r: -r["usg_pct"])
+
+    return {"source": "real", "items": rows, "regions_fy2025": regions}
 
 
 # ---------------------------------------------------------------------------
@@ -518,13 +547,13 @@ def generate_market_data():
     live_count = sum(1 for p in panels.values() if p["source"] == "real")
     print(f"market_data.json written to {OUT_FILE}  ({live_count}/4 panels on real data)")
     for name, p in panels.items():
-        tag = "REAL" if p["source"] == "real" else "mock"
+        tag = {"real": "REAL", "mock": "mock"}.get(p["source"], p["source"].upper())
         print(f"  - {name:<22} {tag}")
     print(f"  - synthesis flags       {len(payload['synthesis']['flags'])}")
     if timeline:
         print(f"  - recent-cycles timeline  {len(timeline['months'])} months")
     else:
-        print("  - recent-cycles timeline  not present (drop in the 3 recent-window CSVs to enable)")
+        print("  - recent-cycles timeline  retired (no current real source for the quarterly regional/brand recent-window data it needed)")
     if revenue:
         print(f"  - company revenue         {len(revenue['items'])} companies")
     else:
