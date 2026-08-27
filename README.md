@@ -11,9 +11,15 @@ manual re-run required either: `server.py` watches `data/raw/` in the
 background and regenerates `market_data.json` on its own whenever a file
 there is added or changed (see "Self-updating" below).
 
-The Production & Sales Trend panel is already wired to real data — a copy of
-`ice_cream.csv` (FRED series IPN31152N, monthly ice cream production index,
-1972–2020) lives at `data/raw/ice_cream_production.csv`.
+The Production & Sales Trend panel is already wired to real data — FRED
+series IPN31152N (monthly ice cream production index), live-pulled through
+the present, lives at `data/raw/ice_cream_production.csv`. Re-pull it
+anytime with:
+
+```bash
+curl "https://fred.stlouisfed.org/graph/fredgraph.csv?id=IPN31152N" -o data/raw/ice_cream_production.csv.new
+# then reformat the header from `observation_date,IPN31152N` to `DATE,IPN31152N`
+```
 
 ## Quickstart
 
@@ -64,10 +70,10 @@ up on its own — see "Self-updating" above.
 
 | File | Source | Powers | Recommended size |
 |---|---|---|---|
-| `ice_cream_production.csv` | Kaggle "Monthly Ice Cream Sales Data (1972–2020)" (mirrors FRED series IPN31152N) | Production & sales trend | Already provided — 577 real rows (1972–2020) |
+| `ice_cream_production.csv` | FRED series IPN31152N, live pull (`fredgraph.csv?id=IPN31152N`) | Production & sales trend | Already provided — 654 real rows (1972–present), re-pull to extend |
 | `ice_cream_reviews.csv` + optional `ice_cream_products.csv` | Kaggle "Ice Cream Dataset" (tysonpo) — Ben & Jerry's, Häagen-Dazs, Breyers, Talenti reviews | Brand & flavor sentiment | ~5 brands × ~20 reviews each (~100 rows in `ice_cream_reviews.csv`); 5 rows in `ice_cream_products.csv`, one per brand key |
 | `usda_nutrition.json` | USDA FoodData Central API | Nutrition profile | ~8 food items in the `foods` array (only the first 12 are used) |
-| `sweetener_market.csv` | USDA Sweetener Market Data (data.gov / Ag Data Commons) | Regional commodity distribution | 6 rows minimum, one per real region; up to ~24 (6 regions × 4 quarters) for a quarterly-report feel — rows per region are summed |
+| `global_market_regions.csv` | Published market-research sizing (e.g. Fortune Business Insights' Ice Cream Market Report) | Global market distribution | One row per continent, `region,share_pct,confidence,basis` — confidence is `grounded_estimate` throughout since no central body measures worldwide ice cream sales directly |
 
 Column names the loaders match (case-insensitive, several aliases each — see
 `_find_field` in `data_pipeline.py`):
@@ -83,10 +89,9 @@ Column names the loaders match (case-insensitive, several aliases each — see
   `{"nutrientName": ..., "value": ...}` or the nested `{"nutrient": {"name":
   ...}, "amount": ...}` form). Nutrient names read: `Energy`, `Sugars, total
   including NLEA` (or `Total Sugars`), `Total lipid (fat)`.
-- **`sweetener_market.csv`**: region column `region` or `area`, using the
-  real USDA region names — New England, Mid Atlantic, North Central, South,
-  West, Puerto Rico; value column `value`, `volume`, `deliveries`, `short
-  tons`, or `pounds` (commas OK, e.g. `1,234`).
+- **`global_market_regions.csv`**: `region`, `share_pct` (float), `confidence`
+  (`real`/`grounded_estimate`/`placeholder`), `basis` (citation text, shown
+  in the chart's tooltip).
 
 Notes on each, from checking the real sources while building this:
 
@@ -104,13 +109,16 @@ Notes on each, from checking the real sources while building this:
   pipeline expects. Branded-food nutrient values are usually per serving,
   not per 100g — check `servingSize`/`servingSizeUnit` in the raw JSON if
   the numbers look off.
-- **Sweetener market**: these ship from USDA as separate `.xls` files per
-  region or per use-category (there's a use-category literally called "Ice
-  Cream and Related Products" — worth grabbing that one specifically).
-  Export whichever you pull as CSV into `data/raw/sweetener_market.csv`.
-  Real region names are New England, Mid Atlantic, North Central, South,
-  West, and Puerto Rico — the mock data already uses these same names so
-  the panel won't visually jump when you switch it over.
+- **Regional distribution**: originally modeled on USDA's Sweetener Market
+  Data (SMD), which really did report by these US regions — but the SMD
+  program was discontinued around 2009–2010 and has no current public
+  version. Replaced with global continent-level market share from
+  published market research instead (see `global_market_regions.csv`
+  above); "Recent Cycles," the old interactive per-month timeline that
+  depended on a quarterly-cadence version of this same discontinued data
+  plus a fictional-brand sentiment file, is retired for the same reason —
+  no current real source exists at that grain, so it's disabled rather
+  than kept running on fabricated numbers.
 
 ### Live USDA pull
 

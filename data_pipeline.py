@@ -241,16 +241,34 @@ def load_nutrition():
         if payload:
             foods = payload.get("foods", payload if isinstance(payload, list) else [])
             out = []
-            for food in foods[:12]:
+            seen_labels = set()
+            for food in foods:
+                description = (food.get("description") or "Unknown item").title()
+                brand = food.get("brandName") or food.get("brandOwner")
+                # Branded FoodData Central entries are overwhelmingly just
+                # "ICE CREAM" — the brand is what actually distinguishes rows.
+                if not brand:
+                    label = description
+                elif brand.lower() in description.lower() or description.lower() in brand.lower():
+                    label = brand.title() if len(brand) >= len(description) else description
+                else:
+                    label = f"{brand.title()} {description}"
+                if label in seen_labels:
+                    continue
                 nutrients = _extract_nutrients(food.get("foodNutrients", []))
-                out.append({
-                    "item": food.get("description", "Unknown item"),
+                item = {
+                    "item": label,
                     "calories": nutrients.get("Energy"),
                     "sugar_g": nutrients.get("Sugars, total including NLEA") or nutrients.get("Total Sugars"),
                     "fat_g": nutrients.get("Total lipid (fat)"),
                     "protein_g": nutrients.get("Protein"),
-                })
-            out = [o for o in out if o["calories"] is not None or o["sugar_g"] is not None]
+                }
+                if item["calories"] is None and item["sugar_g"] is None:
+                    continue
+                seen_labels.add(label)
+                out.append(item)
+                if len(out) == 12:
+                    break
             if out:
                 return {"source": "real", "items": out}
 

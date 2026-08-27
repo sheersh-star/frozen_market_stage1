@@ -8,10 +8,14 @@ Detection and prose generation both happen here in plain Python.
 
 Dollar figures are attached only where they can be honestly anchored, and
 every one carries a `basis` string plus `is_assumption` so the UI can label
-it clearly. Two panels get a real anchor:
+it clearly.
 
-  - Regional (sweetener_market.csv): real quarter-over-quarter volume change,
-    dollarized at an assumed sugar price.
+  - Regional (sweetener_market.csv): DORMANT — this detector reads real
+    quarter-over-quarter volume change from a US-regional file modeled on
+    USDA's Sweetener Market Data, discontinued ~2009-2010. The file no
+    longer ships in data/raw/, so detect_regional_signals() gracefully
+    returns no candidates (see its docstring). Left in place rather than
+    deleted in case a live regional-volume source turns up later.
   - Brand sentiment: illustrative-only — the reviewed *sample* volume times
     an assumed retail unit price, explicitly not a market-size claim.
 
@@ -67,9 +71,11 @@ MIN_BRAND_SAMPLE = 15
 # ---------------------------------------------------------------------------
 
 def detect_regional_signals(raw_dir):
-    """Reads sweetener_market.csv directly (bypassing the aggregated JSON,
-    which collapses the quarter dimension) so real QoQ volume moves are
-    still visible.
+    """DORMANT — sweetener_market.csv doesn't ship anymore (see module
+    docstring): it modeled USDA's Sweetener Market Data, discontinued
+    ~2009-2010, and its US-regional shape doesn't match the global-continent
+    data that replaced it for the main panel. Always returns [] until a live
+    quarterly-cadence regional-volume source exists to read here instead.
     """
     path = Path(raw_dir) / "sweetener_market.csv"
     if not path.exists():
@@ -535,12 +541,20 @@ def generate_synthesis(market_data, raw_dir):
 # "Recent Cycles" timeline — one brief per month, interactive
 # ---------------------------------------------------------------------------
 #
-# Reads three separate, quarterly-granularity recent-window files (kept
-# apart from the main real datasets so the existing panels are untouched):
-#   - ice_cream_production_recent.csv (DATE, VALUE) — real monthly grain,
-#     illustrative content (no FRED release covers this range yet)
-#   - sweetener_market_recent.csv (region, quarter, value)
-#   - brand_sentiment_recent.csv (brand, quarter, avg_score, review_count)
+# RETIRED (dormant, not deleted). generate_synthesis_timeline() requires
+# three quarterly-granularity recent-window files, none of which have a
+# current real source:
+#   - ice_cream_production_recent.csv — superseded; ice_cream_production.csv
+#     is now itself a live FRED pull, so no separate "recent" file is needed
+#   - sweetener_market_recent.csv — same discontinued-USDA-SMD problem as
+#     detect_regional_signals() above
+#   - brand_sentiment_recent.csv — used entirely fictional brand names
+#     (never real data to begin with)
+# None of these three files ship in data/raw/ anymore, so this function
+# gracefully returns None (its documented no-op behavior) and the front end
+# hides the Recent Cycles / Full History toggle entirely. Left in place
+# rather than deleted in case a real quarterly-cadence source for both
+# regional volume and named-brand sentiment turns up later.
 #
 # Regional and brand figures are linearly interpolated between quarterly
 # data points to fill in the months between — disclosed, not hidden: every
