@@ -419,6 +419,61 @@ def load_volume_dollar_sales():
 
 
 # ---------------------------------------------------------------------------
+# 7. real-world precedent — Unilever Ice Cream / The Magnum Ice Cream Company
+# ---------------------------------------------------------------------------
+
+def load_magnum_annual():
+    """Optional panel — reads magnum_icecream_annual.csv if present, else the
+    panel is simply absent. Public disclosure for this category only ever
+    comes as annual volume-growth% / price-growth% splits (Unilever's Business
+    Group reporting through FY2024, then The Magnum Ice Cream Company's own
+    standalone reporting from FY2025 on, after its 2025-12-06 demerger) —
+    never as absolute unit volumes or brand-level dollars. So instead of
+    inventing absolute numbers, this compounds the disclosed annual growth
+    rates into two indices (volume, price), each rebased to 100 the year
+    before the first row — the same indexed-comparison approach used for
+    volume_dollar_sales.csv, applied to real, cited figures instead of
+    illustrative ones. FY2023 is the real-world instance of the pattern that
+    panel was built to demonstrate: volume -6.0%, price +8.8%.
+    """
+    real_file = RAW_DIR / "magnum_icecream_annual.csv"
+    if not real_file.exists():
+        return None
+
+    rows = []
+    for row in _read_csv(real_file):
+        try:
+            fy = int(row["fiscal_year"])
+            usg = float(row["usg_pct"])
+            volume_growth = float(row["volume_growth_pct"])
+            price_growth = float(row["price_growth_pct"])
+        except (KeyError, ValueError, TypeError):
+            continue
+        rows.append({
+            "fiscal_year": fy,
+            "usg_pct": usg,
+            "volume_growth_pct": volume_growth,
+            "price_growth_pct": price_growth,
+            "confidence": row.get("confidence", "placeholder"),
+            "basis": row.get("basis", ""),
+        })
+
+    if not rows:
+        return None
+    rows.sort(key=lambda r: r["fiscal_year"])
+
+    volume_index = 100.0
+    price_index = 100.0
+    for r in rows:
+        volume_index *= 1 + r["volume_growth_pct"] / 100
+        price_index *= 1 + r["price_growth_pct"] / 100
+        r["volume_index"] = round(volume_index, 1)
+        r["price_index"] = round(price_index, 1)
+
+    return {"source": "real", "items": rows}
+
+
+# ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
 
@@ -453,6 +508,9 @@ def generate_market_data():
     volume_dollar = load_volume_dollar_sales()
     if volume_dollar:
         payload["volume_dollar_sales"] = volume_dollar
+    magnum_annual = load_magnum_annual()
+    if magnum_annual:
+        payload["magnum_real_precedent"] = magnum_annual
 
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
@@ -479,6 +537,10 @@ def generate_market_data():
         print(f"  - volume vs dollar sales  {len(volume_dollar['series'])} months")
     else:
         print("  - volume vs dollar sales  not present (drop in volume_dollar_sales.csv to enable)")
+    if magnum_annual:
+        print(f"  - magnum real precedent   {len(magnum_annual['items'])} fiscal years")
+    else:
+        print("  - magnum real precedent   not present (drop in magnum_icecream_annual.csv to enable)")
 
 
 if __name__ == "__main__":

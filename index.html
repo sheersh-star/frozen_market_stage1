@@ -114,6 +114,33 @@
     </div>
   </section>
 
+  <section id="magnum-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <div class="flex items-start justify-between mb-2 gap-3">
+      <div>
+        <h2 class="font-display text-xl text-ivory">Real-World Precedent &middot; Ice Cream Category</h2>
+        <p id="magnum-readout" class="font-mono text-sm text-muted mt-1">—</p>
+        <p class="font-mono text-xs text-muted mt-1">Unilever Ice Cream (FY2021&ndash;24) &rarr; The Magnum Ice Cream Company (FY2025, post-demerger) &middot; indexed to FY2020 = 100</p>
+      </div>
+    </div>
+    <div id="magnum-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3 mt-3"></div>
+    <div class="h-56"><canvas id="magnumChart"></canvas></div>
+    <div class="overflow-x-auto mt-6">
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-muted border-b border-hairline">
+            <th class="pb-2 font-body font-medium">FY</th>
+            <th class="pb-2 font-body font-medium text-right">Total growth</th>
+            <th class="pb-2 font-body font-medium text-right">Volume</th>
+            <th class="pb-2 font-body font-medium text-right">Price</th>
+            <th class="pb-2 font-body font-medium">Confidence</th>
+            <th class="pb-2 font-body font-medium">Basis</th>
+          </tr>
+        </thead>
+        <tbody id="magnum-body" class="font-mono divide-y divide-hairline align-top"></tbody>
+      </table>
+    </div>
+  </section>
+
   <section class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
 
     <div class="bg-panel border border-hairline rounded-lg p-6">
@@ -349,6 +376,7 @@ function render(data) {
   renderSynthesis(data.synthesis || {});
   renderTrend(data.sales_trend || {});
   renderVolumeDollar(data.volume_dollar_sales || null);
+  renderMagnum(data.magnum_real_precedent || null);
   renderRegional(data.regional_distribution || {});
   renderSentiment(data.brand_sentiment || {});
   renderNutrition(data.nutrition || {});
@@ -599,6 +627,70 @@ function renderVolumeDollar(panel) {
       options: chartBaseOptions(),
     });
   }
+}
+
+function renderMagnum(panel) {
+  const section = document.getElementById('magnum-section');
+  if (!panel || !panel.items || !panel.items.length) {
+    section.classList.add('hidden');
+    return;
+  }
+  section.classList.remove('hidden');
+
+  const items = panel.items; // pre-sorted by fiscal_year ascending
+  const labels = items.map(i => `FY${i.fiscal_year}`);
+  const volumeIdx = items.map(i => i.volume_index);
+  const priceIdx = items.map(i => i.price_index);
+
+  const worst = items.reduce((a, b) => a.volume_growth_pct < b.volume_growth_pct ? a : b);
+  document.getElementById('magnum-readout').textContent =
+    `FY${worst.fiscal_year}: volume ${worst.volume_growth_pct >= 0 ? '+' : ''}${worst.volume_growth_pct.toFixed(1)}% while price ${worst.price_growth_pct >= 0 ? '+' : ''}${worst.price_growth_pct.toFixed(1)}% — the real-world instance of the pattern above.`;
+
+  document.getElementById('magnum-legend').innerHTML = `
+    <span class="inline-flex items-center gap-1"><span style="color:#E3A857">──</span> Volume index</span>
+    <span class="inline-flex items-center gap-1"><span style="color:#83909C">- -</span> Price index</span>
+    <span class="inline-flex items-center gap-1 ml-2"><span class="text-brass">${CONFIDENCE_ICON.real}</span> Real disclosed</span>
+    <span class="inline-flex items-center gap-1"><span class="text-brass">${CONFIDENCE_ICON.grounded_estimate}</span> Grounded estimate</span>
+  `;
+
+  if (charts.magnum) charts.magnum.destroy();
+  const opts = chartBaseOptions();
+  opts.plugins.tooltip = {
+    callbacks: {
+      label: (ctx) => {
+        const item = items[ctx.dataIndex];
+        return ctx.dataset.label === 'Volume index'
+          ? `Volume: ${item.volume_growth_pct >= 0 ? '+' : ''}${item.volume_growth_pct.toFixed(1)}% this year`
+          : `Price: ${item.price_growth_pct >= 0 ? '+' : ''}${item.price_growth_pct.toFixed(1)}% this year`;
+      },
+    },
+  };
+  charts.magnum = new Chart(document.getElementById('magnumChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Volume index', data: volumeIdx, borderColor: '#E3A857', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#E3A857', borderWidth: 2, fill: false },
+        { label: 'Price index', data: priceIdx, borderColor: '#83909C', borderDash: [4, 3], tension: 0.3, pointRadius: 4, pointBackgroundColor: '#83909C', borderWidth: 2, fill: false },
+      ],
+    },
+    options: opts,
+  });
+
+  document.getElementById('magnum-body').innerHTML = items.map(i => {
+    const volColor = i.volume_growth_pct < 0 ? '#E2634F' : '#6FC796';
+    const priceColor = i.price_growth_pct < 0 ? '#E2634F' : '#6FC796';
+    return `
+      <tr>
+        <td class="py-2 font-body">FY${i.fiscal_year}</td>
+        <td class="py-2 text-right">${i.usg_pct >= 0 ? '+' : ''}${i.usg_pct.toFixed(1)}%</td>
+        <td class="py-2 text-right" style="color:${volColor}">${i.volume_growth_pct >= 0 ? '+' : ''}${i.volume_growth_pct.toFixed(1)}%</td>
+        <td class="py-2 text-right" style="color:${priceColor}">${i.price_growth_pct >= 0 ? '+' : ''}${i.price_growth_pct.toFixed(1)}%</td>
+        <td class="py-2 font-body">${CONFIDENCE_ICON[i.confidence] || ''} ${CONFIDENCE_LABEL[i.confidence] || i.confidence}</td>
+        <td class="py-2 font-body text-muted text-xs max-w-md">${i.basis}</td>
+      </tr>
+    `;
+  }).join('');
 }
 
 function renderRegional(panel) {
