@@ -178,13 +178,33 @@
               <th class="pb-2 font-body font-medium text-right">Sugar g</th>
               <th class="pb-2 font-body font-medium text-right">Fat g</th>
               <th class="pb-2 font-body font-medium text-right">Protein g</th>
+              <th class="pb-2 font-body font-medium text-right" title="Share of a child's (ages 2-18) daily added-sugar limit — American Heart Association: 25g/day">Child sugar limit&sup1;</th>
             </tr>
           </thead>
           <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
         </table>
+        <p class="font-mono text-[10px] text-muted mt-2">&sup1; One serving's share of the American Heart Association's daily added-sugar limit for ages 2&ndash;18 (25g). Blank where FDC doesn't report an added-sugar value for that item.</p>
       </div>
     </div>
 
+  </section>
+
+  <section id="demographics-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mt-6">
+    <div class="flex items-start justify-between mb-2 gap-3">
+      <div>
+        <h2 class="font-display text-xl text-ivory">Consumer &amp; Demographics</h2>
+        <p id="demographics-readout" class="font-mono text-sm text-muted mt-1">—</p>
+        <p class="font-mono text-xs text-muted mt-1">Population by age bracket, by region &middot; World Bank 2023 &middot; same regions as Global Market Distribution above</p>
+      </div>
+    </div>
+    <div id="demographics-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4 mt-3"></div>
+    <div class="h-64"><canvas id="demographicsChart"></canvas></div>
+
+    <div id="consumption-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
+      <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-1">Who eats sweet foods? &middot; US children &amp; teens</p>
+      <p id="consumption-callout" class="text-sm text-muted mb-3"></p>
+      <div id="consumption-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+    </div>
   </section>
 
   <section id="revenue-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mt-6">
@@ -384,6 +404,7 @@ function render(data) {
   renderRegional(data.regional_distribution || {});
   renderSentiment(data.brand_sentiment || {});
   renderNutrition(data.nutrition || {});
+  renderDemographics(data.consumer_demographics || null);
   renderRevenue(data.company_revenue || null);
   renderCommandCenter(data.command_center || null);
 }
@@ -792,6 +813,14 @@ function renderNutrition(panel) {
   const body = document.getElementById('nutrition-body');
   body.innerHTML = '';
   (panel.items || []).forEach(item => {
+    const pct = item.pct_of_child_daily_sugar_limit;
+    let pctCell = '\u2014';
+    if (pct !== null && pct !== undefined) {
+      const over = pct >= 100;
+      const color = over ? '#E2634F' : pct >= 60 ? '#E3A857' : '#83909C';
+      const icon = over ? '\u26a0 ' : '';
+      pctCell = `<span style="color:${color}">${icon}${pct}%</span>`;
+    }
     const row = document.createElement('tr');
     row.innerHTML = `
       <td class="py-2 font-body">${item.item ?? ''}</td>
@@ -799,6 +828,7 @@ function renderNutrition(panel) {
       <td class="py-2 text-right">${item.sugar_g ?? '\u2014'}</td>
       <td class="py-2 text-right">${item.fat_g ?? '\u2014'}</td>
       <td class="py-2 text-right">${item.protein_g ?? '\u2014'}</td>
+      <td class="py-2 text-right">${pctCell}</td>
     `;
     body.appendChild(row);
   });
@@ -806,6 +836,85 @@ function renderNutrition(panel) {
 
 const CONFIDENCE_ICON = { real: '●', grounded_estimate: '◐', placeholder: '○' };
 const CONFIDENCE_LABEL = { real: 'Real disclosed', grounded_estimate: 'Grounded estimate', placeholder: 'Placeholder — illustrative' };
+
+const AGE_BRACKETS = ['0-14', '15-64', '65+'];
+const AGE_BRACKET_COLORS = { '0-14': '#F3D9A8', '15-64': '#E3A857', '65+': '#8B6423' };
+
+function renderDemographics(panel) {
+  const section = document.getElementById('demographics-section');
+  const population = (panel && panel.population_by_region) || [];
+  if (!population.length) {
+    section.classList.add('hidden');
+    return;
+  }
+  section.classList.remove('hidden');
+
+  const byRegion = {};
+  population.forEach(r => {
+    (byRegion[r.region] = byRegion[r.region] || {})[r.age_bracket] = r;
+  });
+  const regions = Object.keys(byRegion).sort((a, b) => byRegion[b]['0-14'].share_pct - byRegion[a]['0-14'].share_pct);
+
+  const youngest = regions[0];
+  const oldest = [...regions].sort((a, b) => byRegion[b]['65+'].share_pct - byRegion[a]['65+'].share_pct)[0];
+  document.getElementById('demographics-readout').textContent =
+    `${youngest}: youngest population (${byRegion[youngest]['0-14'].share_pct}% under 14) · ${oldest}: oldest (${byRegion[oldest]['65+'].share_pct}% 65+)`;
+
+  document.getElementById('demographics-legend').innerHTML =
+    `<span class="text-brass">${CONFIDENCE_ICON.real}</span> Real disclosed (World Bank)` +
+    AGE_BRACKETS.map(b => `<span class="inline-flex items-center gap-1"><span style="color:${AGE_BRACKET_COLORS[b]}">●</span> Ages ${b}</span>`).join('');
+
+  const opts = chartBaseOptions();
+  opts.indexAxis = 'y';
+  opts.scales.x.stacked = true;
+  opts.scales.y.stacked = true;
+  opts.scales.x.max = 100;
+  opts.plugins.tooltip = {
+    callbacks: {
+      label: (ctx) => {
+        const region = ctx.label;
+        const bracket = ctx.dataset.label;
+        const row = byRegion[region][bracket];
+        return `Ages ${bracket}: ${row.share_pct}% (${(row.population / 1e6).toFixed(0)}M people)`;
+      },
+    },
+  };
+
+  if (charts.demographics) charts.demographics.destroy();
+  charts.demographics = new Chart(document.getElementById('demographicsChart'), {
+    type: 'bar',
+    data: {
+      labels: regions,
+      datasets: AGE_BRACKETS.map(bracket => ({
+        label: bracket,
+        data: regions.map(r => byRegion[r][bracket].share_pct),
+        backgroundColor: AGE_BRACKET_COLORS[bracket],
+        borderRadius: 2,
+        maxBarThickness: 32,
+      })),
+    },
+    options: opts,
+  });
+
+  const consumption = panel.sweet_food_consumption_by_age || [];
+  const wrap = document.getElementById('consumption-wrap');
+  if (consumption.length) {
+    wrap.classList.remove('hidden');
+    document.getElementById('consumption-callout').innerHTML =
+      `Ice cream &amp; frozen dairy desserts made up <strong class="text-ivory">${panel.ice_cream_share_of_sweet_foods_pct}%</strong> of all sweet-food consumption events among US children 2&ndash;19 — and on days any sweet food was eaten, sweet foods accounted for <strong class="text-ivory">${panel.sweet_foods_share_of_daily_added_sugar_pct}%</strong> of that day's added sugar intake.` +
+      `<br><span class="font-mono text-[10px] text-muted">${panel.consumption_basis}</span>`;
+    document.getElementById('consumption-row').innerHTML = consumption.map(c => `
+      <div class="bg-ink/40 border border-hairline rounded-lg p-4" title="${c.basis.replace(/"/g, '&quot;')}">
+        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-1">${c.age_bracket}</p>
+        <p class="font-display text-xl text-ivory">${c.pct_consumed_any_sweet_food}%</p>
+        <p class="font-mono text-[10px] text-muted mt-1">consumed a sweet food that day</p>
+      </div>
+    `).join('');
+  } else {
+    wrap.classList.add('hidden');
+  }
+}
+
 let revenueView = 'chart'; // 'chart' | 'table'
 
 function dumbbellPlugin(items) {

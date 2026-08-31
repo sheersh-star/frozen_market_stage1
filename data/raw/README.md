@@ -20,6 +20,12 @@ Real datasets, by filename:
   volume_dollar_sales.csv        Illustrative only (confidence=placeholder throughout) —
                                   demonstrates the volume/price divergence pattern that
                                   magnum_icecream_annual.csv then shows really happened.
+  population_by_age_region.csv   World Bank population-by-age-bracket indicators
+                                  (SP.POP.0014.TO / .1564.TO / .65UP.TO), 2023, mapped to
+                                  the same 5 continents as global_market_regions.csv.
+  sweet_foods_by_age_us.csv      USDA ARS Dietary Data Brief No. 34 (NHANES 2015-2018) —
+                                  % of US children/teens who consumed any sweet food that
+                                  day, by age bracket.
 
 Retired (no current real source, kept out rather than shown as real):
   sweetener_market.csv, sweetener_market_recent.csv  — USDA's Sweetener Market Data (SMD)

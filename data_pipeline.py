@@ -240,10 +240,13 @@ def load_nutrition():
 
         if payload:
             foods = payload.get("foods", payload if isinstance(payload, list) else [])
-            out = []
+            candidates = []
             seen_labels = set()
             for food in foods:
-                description = (food.get("description") or "Unknown item").title()
+                raw_description = food.get("description") or ""
+                if "ice cream" not in raw_description.lower():
+                    continue  # keyword search returns some non-ice-cream matches
+                description = raw_description.title()
                 brand = food.get("brandName") or food.get("brandOwner")
                 # Branded FoodData Central entries are overwhelmingly just
                 # "ICE CREAM" — the brand is what actually distinguishes rows.
@@ -256,19 +259,34 @@ def load_nutrition():
                 if label in seen_labels:
                     continue
                 nutrients = _extract_nutrients(food.get("foodNutrients", []))
+                sugar_g = nutrients.get("Sugars, total including NLEA") or nutrients.get("Total Sugars")
+                added_sugar_g = nutrients.get("Sugars, added")
                 item = {
                     "item": label,
                     "calories": nutrients.get("Energy"),
-                    "sugar_g": nutrients.get("Sugars, total including NLEA") or nutrients.get("Total Sugars"),
+                    "sugar_g": sugar_g,
                     "fat_g": nutrients.get("Total lipid (fat)"),
                     "protein_g": nutrients.get("Protein"),
+                    # one serving's share of a child's (ages 2-18) daily ADDED-sugar
+                    # limit — AHA: 25g/day. Uses the "Sugars, added" nutrient
+                    # specifically, not total sugar (which includes naturally
+                    # occurring dairy lactose) — null when FDC doesn't report it
+                    # for this item, never backfilled from total sugar.
+                    "pct_of_child_daily_sugar_limit": (
+                        round(added_sugar_g / CHILD_ADDED_SUGAR_LIMIT_G * 100) if added_sugar_g is not None else None
+                    ),
                 }
                 if item["calories"] is None and item["sugar_g"] is None:
                     continue
                 seen_labels.add(label)
-                out.append(item)
-                if len(out) == 12:
-                    break
+                candidates.append(item)
+
+            # Prefer items where FDC actually reports "Sugars, added" (only
+            # ~half of branded entries do) so the age-group cross-reference
+            # isn't blank for most rows — still every row shown is real,
+            # this only reorders which real rows make the top 12.
+            candidates.sort(key=lambda i: i["pct_of_child_daily_sugar_limit"] is None)
+            out = candidates[:12]
             if out:
                 return {"source": "real", "items": out}
 
@@ -521,6 +539,87 @@ def load_magnum_annual():
 
 
 # ---------------------------------------------------------------------------
+# 8. consumer & demographics — population by age, consumption by age
+# ---------------------------------------------------------------------------
+#
+# "Understanding the consumer" layer: real global population by age bracket
+# (World Bank), matched to the same 5 regions as global_market_regions.csv
+# so the two panels read side by side; and real US sweet-food/ice-cream
+# consumption-by-age data (USDA/NHANES) matched to the nutrition panel via
+# the added-sugar-limit cross-reference in load_nutrition(). Optional panel
+# — absent entirely if neither input file is present.
+
+CHILD_ADDED_SUGAR_LIMIT_G = 25  # American Heart Association, ages 2-18/day
+ICE_CREAM_SHARE_OF_SWEET_FOODS_PCT = 12  # of all sweet-food consumption events, US children 2-19
+SWEET_FOODS_SHARE_OF_DAILY_ADDED_SUGAR_PCT = 40  # among children who consumed any sweet food that day
+CONSUMPTION_BASIS = (
+    "USDA ARS Food Surveys Research Group, Dietary Data Brief No. 34 (Nov 2020), "
+    "'Sweet Foods Consumption by Children in the U.S.' — What We Eat In America, "
+    "NHANES 2015-2018."
+)
+
+
+def load_consumer_demographics():
+    population = []
+    pop_file = RAW_DIR / "population_by_age_region.csv"
+    if pop_file.exists():
+        for row in _read_csv(pop_file):
+            try:
+                pop = float(row["population"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            region, bracket = row.get("region"), row.get("age_bracket")
+            if not region or not bracket:
+                continue
+            population.append({
+                "region": region,
+                "age_bracket": bracket,
+                "population": pop,
+                "confidence": row.get("confidence", "placeholder"),
+                "basis": row.get("basis", ""),
+            })
+
+    region_totals = {}
+    for row in population:
+        region_totals[row["region"]] = region_totals.get(row["region"], 0) + row["population"]
+    for row in population:
+        total = region_totals.get(row["region"]) or 1
+        row["share_pct"] = round(row["population"] / total * 100, 1)
+
+    consumption = []
+    consumption_file = RAW_DIR / "sweet_foods_by_age_us.csv"
+    if consumption_file.exists():
+        for row in _read_csv(consumption_file):
+            try:
+                pct = float(row["pct_consumed_any_sweet_food"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            bracket = row.get("age_bracket")
+            if not bracket:
+                continue
+            consumption.append({
+                "age_bracket": bracket,
+                "pct_consumed_any_sweet_food": pct,
+                "confidence": row.get("confidence", "placeholder"),
+                "basis": row.get("basis", ""),
+            })
+
+    if not population and not consumption:
+        return None
+
+    return {
+        "source": "real",
+        "population_by_region": population,
+        "sweet_food_consumption_by_age": consumption,
+        "ice_cream_share_of_sweet_foods_pct": ICE_CREAM_SHARE_OF_SWEET_FOODS_PCT,
+        "sweet_foods_share_of_daily_added_sugar_pct": SWEET_FOODS_SHARE_OF_DAILY_ADDED_SUGAR_PCT,
+        "consumption_basis": CONSUMPTION_BASIS,
+        "child_added_sugar_limit_g": CHILD_ADDED_SUGAR_LIMIT_G,
+        "added_sugar_limit_basis": "American Heart Association: children ages 2-18 should limit added sugars to 25g (6 tsp) per day; under age 2, none.",
+    }
+
+
+# ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
 
@@ -558,6 +657,9 @@ def generate_market_data():
     magnum_annual = load_magnum_annual()
     if magnum_annual:
         payload["magnum_real_precedent"] = magnum_annual
+    demographics = load_consumer_demographics()
+    if demographics:
+        payload["consumer_demographics"] = demographics
 
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
@@ -588,6 +690,10 @@ def generate_market_data():
         print(f"  - magnum real precedent   {len(magnum_annual['items'])} fiscal years")
     else:
         print("  - magnum real precedent   not present (drop in magnum_icecream_annual.csv to enable)")
+    if demographics:
+        print(f"  - consumer demographics   {len(demographics['population_by_region'])} population rows, {len(demographics['sweet_food_consumption_by_age'])} consumption rows")
+    else:
+        print("  - consumer demographics   not present (drop in population_by_age_region.csv / sweet_foods_by_age_us.csv to enable)")
 
 
 if __name__ == "__main__":
