@@ -274,11 +274,11 @@
         <table class="w-full text-left text-sm">
           <thead>
             <tr class="text-muted border-b border-hairline">
-              <th class="pb-2 font-body font-medium">Region</th>
-              <th class="pb-2 font-body font-medium text-right">Weeks on hand</th>
-              <th class="pb-2 font-body font-medium text-right">Weeks to expiry</th>
-              <th class="pb-2 font-body font-medium">Status</th>
-              <th class="pb-2 font-body font-medium">Agent recommendation</th>
+              <th class="pb-2 pr-4 font-body font-medium">Region</th>
+              <th class="pb-2 pr-4 font-body font-medium text-right">Weeks on hand</th>
+              <th class="pb-2 pr-4 font-body font-medium text-right">Weeks to expiry</th>
+              <th class="pb-2 pr-4 font-body font-medium">Status</th>
+              <th class="pb-2 pr-4 font-body font-medium">Agent recommendation</th>
               <th class="pb-2 font-body font-medium">Agent action taken</th>
             </tr>
           </thead>
@@ -293,11 +293,11 @@
         <table class="w-full text-left text-sm">
           <thead>
             <tr class="text-muted border-b border-hairline">
-              <th class="pb-2 font-body font-medium">Equipment</th>
-              <th class="pb-2 font-body font-medium">Region</th>
-              <th class="pb-2 font-body font-medium text-right">Failure risk</th>
-              <th class="pb-2 font-body font-medium text-right">Days out</th>
-              <th class="pb-2 font-body font-medium text-right">Exposure</th>
+              <th class="pb-2 pr-4 font-body font-medium">Equipment</th>
+              <th class="pb-2 pr-4 font-body font-medium">Region</th>
+              <th class="pb-2 pr-4 font-body font-medium text-right">Failure risk</th>
+              <th class="pb-2 pr-4 font-body font-medium text-right">Days out</th>
+              <th class="pb-2 pr-4 font-body font-medium text-right">Exposure</th>
               <th class="pb-2 font-body font-medium">Agent action taken</th>
             </tr>
           </thead>
@@ -1172,11 +1172,11 @@ function renderCcRegional(regions, activityLog) {
     const entry = bySource[`regional:${r.region}`];
     return `
       <tr>
-        <td class="py-2 font-body">${r.region}</td>
-        <td class="py-2 text-right">${r.weeks_on_hand.toFixed(1)}</td>
-        <td class="py-2 text-right">${r.weeks_to_expiry.toFixed(1)}</td>
-        <td class="py-2"><span style="color:${s.color}">${s.icon}</span> ${r.status}</td>
-        <td class="py-2 font-body text-muted">${r.recommendation}</td>
+        <td class="py-2 pr-4 font-body">${r.region}</td>
+        <td class="py-2 pr-4 text-right">${r.weeks_on_hand.toFixed(1)}</td>
+        <td class="py-2 pr-4 text-right">${r.weeks_to_expiry.toFixed(1)}</td>
+        <td class="py-2 pr-4"><span style="color:${s.color}">${s.icon}</span> ${r.status}</td>
+        <td class="py-2 pr-4 font-body text-muted">${r.recommendation}</td>
         <td class="py-2 font-body">${ccActionCell(entry)}</td>
       </tr>
     `;
@@ -1190,11 +1190,11 @@ function renderCcEquipment(items, activityLog) {
     const entry = bySource[`equipment:${e.equipment_id}`];
     return `
       <tr>
-        <td class="py-2 font-body">${e.equipment_id} <span class="text-muted">(${e.asset_type})</span></td>
-        <td class="py-2 font-body text-muted">${e.region}</td>
-        <td class="py-2 text-right" style="color:${riskColor}">${e.failure_risk_pct.toFixed(1)}%</td>
-        <td class="py-2 text-right">${e.days_to_predicted_failure}</td>
-        <td class="py-2 text-right" title="${e.exposure_basis}">${ccFmtGbp(e.exposure_gbp)}</td>
+        <td class="py-2 pr-4 font-body">${e.equipment_id} <span class="text-muted">(${e.asset_type})</span></td>
+        <td class="py-2 pr-4 font-body text-muted">${e.region}</td>
+        <td class="py-2 pr-4 text-right" style="color:${riskColor}">${e.failure_risk_pct.toFixed(1)}%</td>
+        <td class="py-2 pr-4 text-right">${e.days_to_predicted_failure}</td>
+        <td class="py-2 pr-4 text-right" title="${e.exposure_basis}">${ccFmtGbp(e.exposure_gbp)}</td>
         <td class="py-2 font-body">${ccActionCell(entry)}</td>
       </tr>
     `;
