@@ -272,14 +272,15 @@
               <th class="pb-2 font-body font-medium text-right">Weeks to expiry</th>
               <th class="pb-2 font-body font-medium">Status</th>
               <th class="pb-2 font-body font-medium">Agent recommendation</th>
+              <th class="pb-2 font-body font-medium">Agent action taken</th>
             </tr>
           </thead>
-          <tbody id="cc-regional-body" class="font-mono divide-y divide-hairline"></tbody>
+          <tbody id="cc-regional-body" class="font-mono divide-y divide-hairline align-top"></tbody>
         </table>
       </div>
     </section>
 
-    <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <section class="bg-panel border border-hairline rounded-lg p-6">
       <h3 class="font-display text-lg text-ivory mb-4">Equipment Risk</h3>
       <div class="overflow-x-auto">
         <table class="w-full text-left text-sm">
@@ -290,26 +291,10 @@
               <th class="pb-2 font-body font-medium text-right">Failure risk</th>
               <th class="pb-2 font-body font-medium text-right">Days out</th>
               <th class="pb-2 font-body font-medium text-right">Exposure</th>
+              <th class="pb-2 font-body font-medium">Agent action taken</th>
             </tr>
           </thead>
-          <tbody id="cc-equipment-body" class="font-mono divide-y divide-hairline"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="bg-panel border border-hairline rounded-lg p-6">
-      <h3 class="font-display text-lg text-ivory mb-4">Agent Activity Log</h3>
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm">
-          <thead>
-            <tr class="text-muted border-b border-hairline">
-              <th class="pb-2 font-body font-medium">Date</th>
-              <th class="pb-2 font-body font-medium">Action</th>
-              <th class="pb-2 font-body font-medium text-right">Impact</th>
-              <th class="pb-2 font-body font-medium">Status</th>
-            </tr>
-          </thead>
-          <tbody id="cc-activity-body" class="font-mono divide-y divide-hairline"></tbody>
+          <tbody id="cc-equipment-body" class="font-mono divide-y divide-hairline align-top"></tbody>
         </table>
       </div>
     </section>
@@ -1129,9 +1114,32 @@ function renderCcDemand(demand) {
   });
 }
 
-function renderCcRegional(regions) {
+function ccActionCell(entry) {
+  // Every equipment row and every non-"Balanced" region maps to at most one
+  // activity-log entry via its `source` field (command_center.py's
+  // build_activity_log) — this cell is that mapping made visible, so the
+  // risk and the response to it read in the same row instead of a separate
+  // disconnected log table.
+  if (!entry) {
+    return '<span class="text-muted">No action needed</span>';
+  }
+  const auto = entry.status === 'auto_executed';
+  const badge = auto
+    ? '<span style="color:#6FC796">✓ Auto-executed</span>'
+    : '<span style="color:#E3A857">⏳ Pending approval</span>';
+  return `
+    <div title="${entry.impact_basis}">${entry.action}</div>
+    <div class="mt-1 flex items-center gap-2 text-xs">
+      ${badge}<span class="text-muted">${ccFmtUsd(entry.impact_usd)}</span>
+    </div>
+  `;
+}
+
+function renderCcRegional(regions, activityLog) {
+  const bySource = Object.fromEntries((activityLog || []).map(a => [a.source, a]));
   document.getElementById('cc-regional-body').innerHTML = regions.map(r => {
     const s = CC_STATUS[r.status] || { icon: '', color: '#C9AD93' };
+    const entry = bySource[`regional:${r.region}`];
     return `
       <tr>
         <td class="py-2 font-body">${r.region}</td>
@@ -1139,14 +1147,17 @@ function renderCcRegional(regions) {
         <td class="py-2 text-right">${r.weeks_to_expiry.toFixed(1)}</td>
         <td class="py-2"><span style="color:${s.color}">${s.icon}</span> ${r.status}</td>
         <td class="py-2 font-body text-muted">${r.recommendation}</td>
+        <td class="py-2 font-body">${ccActionCell(entry)}</td>
       </tr>
     `;
   }).join('');
 }
 
-function renderCcEquipment(items) {
+function renderCcEquipment(items, activityLog) {
+  const bySource = Object.fromEntries((activityLog || []).map(a => [a.source, a]));
   document.getElementById('cc-equipment-body').innerHTML = items.map(e => {
     const riskColor = e.failure_risk_pct >= 50 ? '#E2634F' : e.failure_risk_pct >= 30 ? '#E3A857' : '#83909C';
+    const entry = bySource[`equipment:${e.equipment_id}`];
     return `
       <tr>
         <td class="py-2 font-body">${e.equipment_id} <span class="text-muted">(${e.asset_type})</span></td>
@@ -1154,23 +1165,7 @@ function renderCcEquipment(items) {
         <td class="py-2 text-right" style="color:${riskColor}">${e.failure_risk_pct.toFixed(1)}%</td>
         <td class="py-2 text-right">${e.days_to_predicted_failure}</td>
         <td class="py-2 text-right" title="${e.exposure_basis}">${ccFmtUsd(e.exposure_usd)}</td>
-      </tr>
-    `;
-  }).join('');
-}
-
-function renderCcActivity(entries) {
-  document.getElementById('cc-activity-body').innerHTML = entries.map(a => {
-    const auto = a.status === 'auto_executed';
-    const badge = auto
-      ? '<span style="color:#6FC796">✓ Auto-executed</span>'
-      : '<span style="color:#E3A857">⏳ Pending approval</span>';
-    return `
-      <tr>
-        <td class="py-2 font-body text-muted">${a.date || '—'}</td>
-        <td class="py-2 font-body" title="${a.impact_basis}">${a.action}</td>
-        <td class="py-2 text-right">${ccFmtUsd(a.impact_usd)}</td>
-        <td class="py-2 font-body">${badge}</td>
+        <td class="py-2 font-body">${ccActionCell(entry)}</td>
       </tr>
     `;
   }).join('');
@@ -1186,9 +1181,8 @@ function renderCommandCenter(cc) {
 
   renderCcKpis(cc.kpis);
   renderCcDemand(cc.demand_vs_plan);
-  renderCcRegional(cc.regional_inventory);
-  renderCcEquipment(cc.equipment);
-  renderCcActivity(cc.activity_log);
+  renderCcRegional(cc.regional_inventory, cc.activity_log);
+  renderCcEquipment(cc.equipment, cc.activity_log);
 }
 
 document.getElementById('btn-revenue-chart').addEventListener('click', () => {
