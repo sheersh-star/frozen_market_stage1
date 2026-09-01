@@ -1,4 +1,7 @@
 region,age_bracket,population,confidence,basis
+United Kingdom,0-14,11929789,real,"World Bank SP.POP.0014.TO, 2023, country GBR (United Kingdom) — the launch market for this initiative."
+United Kingdom,15-64,43413091,real,"World Bank SP.POP.1564.TO, 2023, country GBR (United Kingdom)."
+United Kingdom,65+,13183120,real,"World Bank SP.POP.65UP.TO, 2023, country GBR (United Kingdom)."
 North America,0-14,65389140,real,"World Bank SP.POP.0014.TO, 2023, country aggregate NAC (North America)."
 North America,15-64,245010886,real,"World Bank SP.POP.1564.TO, 2023, country aggregate NAC (North America)."
 North America,65+,66468813,real,"World Bank SP.POP.65UP.TO, 2023, country aggregate NAC (North America)."

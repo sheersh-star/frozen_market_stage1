@@ -1,4 +1,0 @@
-age_bracket,pct_consumed_any_sweet_food,confidence,basis
-2-5 years,74,real,"USDA ARS Food Surveys Research Group, Dietary Data Brief No. 34 (Nov 2020), 'Sweet Foods Consumption by Children in the U.S.' — What We Eat In America, NHANES 2015-2018, Figure 1, 'All children' bar, age 2-5."
-6-11 years,75,real,"Same source, Figure 1, 'All children' bar, age 6-11."
-12-19 years,73,real,"Same source, Figure 1, 'All children' bar, age 12-19. Negative linear trend by age (p<0.001) — consumption is highest in early childhood and declines through adolescence."

@@ -11,13 +11,15 @@ never have to touch this file just to switch a panel from mock to real.
 Expected files in data/raw/ (all optional):
 
   1. ice_cream_production.csv
-     Source: FRED series IPN31152N (Industrial Production: Ice Cream &
-     Frozen Dessert, NAICS 31152, index 2017=100), pulled live from
-     fred.stlouisfed.org/graph/fredgraph.csv?id=IPN31152N. Real columns are
-     literally DATE and VALUE — this loader looks for those first. Re-pull
-     periodically (curl works directly against that URL, no API key) to
-     keep the trend panel current — the Fed publishes with roughly a
-     2-week lag under the G.17 Industrial Production release.
+     Source: Eurostat short-term statistics, NACE C1052 (Manufacture of
+     ice cream), Germany — production volume index, 2021=100. Pulled live
+     from ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/
+     sts_inpr_m?format=JSON&nace_r2=C1052&geo=DE&s_adj=NSA&indic_bt=PRD&unit=I21
+     (no API key). Germany is used specifically, not an EU-wide aggregate —
+     Eurostat suppresses the EU27 aggregate for this 4-digit NACE code
+     (confidentiality), but Germany, Italy, and Spain each publish real
+     country-level series. Real columns are literally DATE and VALUE — this
+     loader looks for those first.
      -> powers the production/sales trend panel
 
   2. ice_cream_reviews.csv  (+ optional ice_cream_products.csv)
@@ -151,7 +153,7 @@ def load_sales_trend():
             out.append({"date": d.strftime("%Y-%m"), "value": round(value, 2)})
         if out:
             out.sort(key=lambda r: r["date"])
-            return {"source": "real", "unit": "index (2017=100)", "series": out}
+            return {"source": "real", "unit": "index (2021=100)", "series": out}
 
     # ---- fallback: mock data, seasonal, correct month math, index-like scale ----
     series = []
@@ -159,7 +161,7 @@ def load_sales_trend():
         seasonality = 1.5 if d.month in (6, 7, 8) else (0.7 if d.month in (12, 1, 2) else 1.0)
         value = round(random.uniform(85, 115) * seasonality, 2)
         series.append({"date": d.strftime("%Y-%m"), "value": value})
-    return {"source": "mock", "unit": "index (2017=100)", "series": series}
+    return {"source": "mock", "unit": "index (2021=100)", "series": series}
 
 
 # ---------------------------------------------------------------------------
@@ -261,19 +263,48 @@ def load_nutrition():
                 nutrients = _extract_nutrients(food.get("foodNutrients", []))
                 sugar_g = nutrients.get("Sugars, total including NLEA") or nutrients.get("Total Sugars")
                 added_sugar_g = nutrients.get("Sugars, added")
+                serving_size = food.get("servingSize")
+                serving_unit = (food.get("servingSizeUnit") or "").lower()
+
+                # UK FSA front-of-pack "traffic light" labelling is based on
+                # TOTAL sugar per 100g (not added sugar) — green <=5g, amber
+                # 5-22.5g, red >22.5g. FDC branded entries report per-serving,
+                # so this is only computed when a real gram serving size is
+                # available to convert; never assumed or guessed.
+                sugar_per_100g = None
+                if sugar_g is not None and serving_size and serving_unit == "g":
+                    sugar_per_100g = sugar_g / serving_size * 100
+                if sugar_per_100g is None:
+                    traffic_light = None
+                elif sugar_per_100g <= UK_SUGAR_TRAFFIC_LIGHT_GREEN_MAX:
+                    traffic_light = "green"
+                elif sugar_per_100g <= UK_SUGAR_TRAFFIC_LIGHT_AMBER_MAX:
+                    traffic_light = "amber"
+                else:
+                    traffic_light = "red"
+
                 item = {
                     "item": label,
                     "calories": nutrients.get("Energy"),
                     "sugar_g": sugar_g,
                     "fat_g": nutrients.get("Total lipid (fat)"),
                     "protein_g": nutrients.get("Protein"),
-                    # one serving's share of a child's (ages 2-18) daily ADDED-sugar
-                    # limit — AHA: 25g/day. Uses the "Sugars, added" nutrient
-                    # specifically, not total sugar (which includes naturally
-                    # occurring dairy lactose) — null when FDC doesn't report it
-                    # for this item, never backfilled from total sugar.
-                    "pct_of_child_daily_sugar_limit": (
-                        round(added_sugar_g / CHILD_ADDED_SUGAR_LIMIT_G * 100) if added_sugar_g is not None else None
+                    "sugar_per_100g": round(sugar_per_100g, 1) if sugar_per_100g is not None else None,
+                    "uk_traffic_light": traffic_light,
+                    # one serving's share of WHO's free-sugar guideline for an
+                    # average adult (2000 kcal/day reference): the core
+                    # recommendation is <10% of energy (50g/day); WHO's
+                    # further-reduction guidance is <5% (25g/day). Uses FDC's
+                    # "Sugars, added" nutrient as the closest available proxy
+                    # for "free sugars" — not identical (WHO's definition also
+                    # includes sugars in honey/syrups/juice), but far closer
+                    # than total sugar, which would count natural dairy
+                    # lactose against a limit meant for added/free sugars.
+                    "pct_of_who_10pct_limit": (
+                        round(added_sugar_g / WHO_FREE_SUGAR_10PCT_LIMIT_G * 100) if added_sugar_g is not None else None
+                    ),
+                    "pct_of_who_5pct_limit": (
+                        round(added_sugar_g / WHO_FREE_SUGAR_5PCT_LIMIT_G * 100) if added_sugar_g is not None else None
                     ),
                 }
                 if item["calories"] is None and item["sugar_g"] is None:
@@ -282,10 +313,10 @@ def load_nutrition():
                 candidates.append(item)
 
             # Prefer items where FDC actually reports "Sugars, added" (only
-            # ~half of branded entries do) so the age-group cross-reference
-            # isn't blank for most rows — still every row shown is real,
-            # this only reorders which real rows make the top 12.
-            candidates.sort(key=lambda i: i["pct_of_child_daily_sugar_limit"] is None)
+            # ~half of branded entries do) so the WHO cross-reference isn't
+            # blank for most rows — still every row shown is real, this only
+            # reorders which real rows make the top 12.
+            candidates.sort(key=lambda i: i["pct_of_who_10pct_limit"] is None)
             out = candidates[:12]
             if out:
                 return {"source": "real", "items": out}
@@ -422,7 +453,7 @@ def load_volume_dollar_sales():
     """Optional panel — reads volume_dollar_sales.csv if present, else absent
     (same graceful pattern as the other add-on panels). Deliberately kept as
     two separate series rather than one dual-axis chart: volume (units) and
-    dollar sales ($) are different scales, and a shared y-axis between them
+    revenue (£) are different scales, and a shared y-axis between them
     would fabricate a visual correlation that isn't really there. The front
     end renders them as two independent charts plus one indexed-to-100
     comparison, which is the honest way to show whether they're diverging.
@@ -435,7 +466,7 @@ def load_volume_dollar_sales():
     for row in _read_csv(real_file):
         try:
             volume = float(row["volume_units"])
-            dollars = float(row["dollar_sales_usd"])
+            revenue = float(row["revenue_gbp"])
         except (KeyError, ValueError, TypeError):
             continue
         date = row.get("date")
@@ -444,7 +475,7 @@ def load_volume_dollar_sales():
         rows.append({
             "date": date,
             "volume_units": volume,
-            "dollar_sales_usd": dollars,
+            "revenue_gbp": revenue,
             "confidence": row.get("confidence", "placeholder"),
         })
 
@@ -453,13 +484,13 @@ def load_volume_dollar_sales():
     rows.sort(key=lambda r: r["date"])
 
     # Index both series to the first month = 100, so a divergence (e.g. unit
-    # volume growing faster than dollar revenue — a price/promo signal) is
-    # readable on one shared axis without mixing units.
+    # volume growing faster than revenue — a price/promo signal) is readable
+    # on one shared axis without mixing units.
     base_volume = rows[0]["volume_units"] or 1
-    base_dollars = rows[0]["dollar_sales_usd"] or 1
+    base_revenue = rows[0]["revenue_gbp"] or 1
     for r in rows:
         r["volume_index"] = round(r["volume_units"] / base_volume * 100, 1)
-        r["dollar_index"] = round(r["dollar_sales_usd"] / base_dollars * 100, 1)
+        r["revenue_index"] = round(r["revenue_gbp"] / base_revenue * 100, 1)
 
     return {"source": "real", "series": rows}
 
@@ -542,21 +573,24 @@ def load_magnum_annual():
 # 8. consumer & demographics — population by age, consumption by age
 # ---------------------------------------------------------------------------
 #
-# "Understanding the consumer" layer: real global population by age bracket
-# (World Bank), matched to the same 5 regions as global_market_regions.csv
-# so the two panels read side by side; and real US sweet-food/ice-cream
-# consumption-by-age data (USDA/NHANES) matched to the nutrition panel via
-# the added-sugar-limit cross-reference in load_nutrition(). Optional panel
-# — absent entirely if neither input file is present.
+# "Understanding the consumer" layer: real population by age bracket (World
+# Bank) led by the United Kingdom — the launch market — with the same 5
+# continents as global_market_regions.csv behind it as the "scale to
+# global" context; and real UK ice-cream-specific consumption-by-age data
+# (UKHSA / National Diet and Nutrition Survey) alongside the UK FSA /
+# WHO-anchored nutrition cross-reference in load_nutrition(). Optional
+# panel — absent entirely if neither input file is present.
 
-CHILD_ADDED_SUGAR_LIMIT_G = 25  # American Heart Association, ages 2-18/day
-ICE_CREAM_SHARE_OF_SWEET_FOODS_PCT = 12  # of all sweet-food consumption events, US children 2-19
-SWEET_FOODS_SHARE_OF_DAILY_ADDED_SUGAR_PCT = 40  # among children who consumed any sweet food that day
-CONSUMPTION_BASIS = (
-    "USDA ARS Food Surveys Research Group, Dietary Data Brief No. 34 (Nov 2020), "
-    "'Sweet Foods Consumption by Children in the U.S.' — What We Eat In America, "
-    "NHANES 2015-2018."
-)
+# UK FSA front-of-pack "traffic light" labelling thresholds — total sugar
+# per 100g. Voluntary scheme, adopted by most major UK supermarkets.
+UK_SUGAR_TRAFFIC_LIGHT_GREEN_MAX = 5.0
+UK_SUGAR_TRAFFIC_LIGHT_AMBER_MAX = 22.5
+
+# WHO free-sugar guideline (2015), reference adult at 2000 kcal/day: the
+# core recommendation is <10% of energy from free sugars; a further
+# reduction to <5% confers additional benefit.
+WHO_FREE_SUGAR_10PCT_LIMIT_G = 50
+WHO_FREE_SUGAR_5PCT_LIMIT_G = 25
 
 
 def load_consumer_demographics():
@@ -587,11 +621,14 @@ def load_consumer_demographics():
         row["share_pct"] = round(row["population"] / total * 100, 1)
 
     consumption = []
-    consumption_file = RAW_DIR / "sweet_foods_by_age_us.csv"
+    consumption_file = RAW_DIR / "ice_cream_consumption_by_age_uk.csv"
     if consumption_file.exists():
         for row in _read_csv(consumption_file):
             try:
-                pct = float(row["pct_consumed_any_sweet_food"])
+                mean_g = float(row["mean_g_per_day"])
+                sugar_g = float(row["mean_sugar_g_per_day"])
+                share_pct = float(row["share_of_diet_sugar_pct"])
+                portions = float(row["portions_per_year"])
             except (KeyError, ValueError, TypeError):
                 continue
             bracket = row.get("age_bracket")
@@ -599,7 +636,10 @@ def load_consumer_demographics():
                 continue
             consumption.append({
                 "age_bracket": bracket,
-                "pct_consumed_any_sweet_food": pct,
+                "mean_g_per_day": mean_g,
+                "mean_sugar_g_per_day": sugar_g,
+                "share_of_diet_sugar_pct": share_pct,
+                "portions_per_year": portions,
                 "confidence": row.get("confidence", "placeholder"),
                 "basis": row.get("basis", ""),
             })
@@ -610,12 +650,7 @@ def load_consumer_demographics():
     return {
         "source": "real",
         "population_by_region": population,
-        "sweet_food_consumption_by_age": consumption,
-        "ice_cream_share_of_sweet_foods_pct": ICE_CREAM_SHARE_OF_SWEET_FOODS_PCT,
-        "sweet_foods_share_of_daily_added_sugar_pct": SWEET_FOODS_SHARE_OF_DAILY_ADDED_SUGAR_PCT,
-        "consumption_basis": CONSUMPTION_BASIS,
-        "child_added_sugar_limit_g": CHILD_ADDED_SUGAR_LIMIT_G,
-        "added_sugar_limit_basis": "American Heart Association: children ages 2-18 should limit added sugars to 25g (6 tsp) per day; under age 2, none.",
+        "ice_cream_consumption_by_age": consumption,
     }
 
 
@@ -691,9 +726,9 @@ def generate_market_data():
     else:
         print("  - magnum real precedent   not present (drop in magnum_icecream_annual.csv to enable)")
     if demographics:
-        print(f"  - consumer demographics   {len(demographics['population_by_region'])} population rows, {len(demographics['sweet_food_consumption_by_age'])} consumption rows")
+        print(f"  - consumer demographics   {len(demographics['population_by_region'])} population rows, {len(demographics['ice_cream_consumption_by_age'])} consumption rows")
     else:
-        print("  - consumer demographics   not present (drop in population_by_age_region.csv / sweet_foods_by_age_us.csv to enable)")
+        print("  - consumer demographics   not present (drop in population_by_age_region.csv / ice_cream_consumption_by_age_uk.csv to enable)")
 
 
 if __name__ == "__main__":

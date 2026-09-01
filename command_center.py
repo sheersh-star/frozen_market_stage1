@@ -18,12 +18,19 @@ This pipeline regenerates a fresh snapshot each run, not a continuously
 running system with persisted history — so the activity log and KPIs are
 "this cycle," not a faked "trailing 7 days."
 
+This scenario is scoped to a hypothetical UK retail client — the 6
+"regions" below are UK statistical/constituent-country regions (London,
+South East, North West, Scotland, Wales, Northern Ireland), and dollar
+figures are GBP throughout. As with the rest of the Command Center, this
+is illustrative demo data (no public dataset of a real company's cold-chain
+telemetry exists), not a real client's actual operational numbers.
+
 Expected files in data/raw/ (all three required — see build() below):
   1. equipment_health.csv   (equipment_id, region, asset_type,
      failure_risk_pct, days_to_predicted_failure, units_at_risk,
-     unit_cost_usd, confidence, reading_date)
+     unit_cost_gbp, confidence, reading_date)
   2. regional_inventory.csv (region, weeks_on_hand, weeks_to_expiry,
-     units_on_hand, unit_cost_usd, confidence, snapshot_date)
+     units_on_hand, unit_cost_gbp, confidence, snapshot_date)
   3. demand_vs_plan.csv     (region, date, sensed_demand_units,
      production_plan_units, event_note)
 """
@@ -40,19 +47,19 @@ SPOILAGE_WEEKS_TO_EXPIRY = 2.5
 EQUIPMENT_HIGH_RISK_PCT = 50.0
 DEMAND_GAP_THRESHOLD_PCT = 15.0
 
-# Auto-execute policy: dollar-impact ceiling AND confidence tier, combined,
+# Auto-execute policy: impact ceiling (GBP) AND confidence tier, combined,
 # plus a hard carve-out — maintenance-dispatch actions always require human
-# approval regardless of dollar size, since dispatching a technician is a
+# approval regardless of impact size, since dispatching a technician is a
 # real-world action a business would want a human to sign off on.
-AUTO_EXECUTE_MAX_IMPACT_USD = 75000
+AUTO_EXECUTE_MAX_IMPACT_GBP = 75000
 AUTO_EXECUTE_CONFIDENCE_TIERS = {"real", "grounded_estimate"}
 CONFIDENCE_RANK = {"placeholder": 0, "grounded_estimate": 1, "real": 2}
 
 
-def _auto_execute(action_type, impact_usd, confidence):
+def _auto_execute(action_type, impact_gbp, confidence):
     if action_type == "maintenance_dispatch":
         return False
-    if impact_usd is not None and impact_usd >= AUTO_EXECUTE_MAX_IMPACT_USD:
+    if impact_gbp is not None and impact_gbp >= AUTO_EXECUTE_MAX_IMPACT_GBP:
         return False
     return confidence in AUTO_EXECUTE_CONFIDENCE_TIERS
 
@@ -81,10 +88,10 @@ def compute_equipment_risk(raw_dir):
             risk = float(row["failure_risk_pct"])
             days = int(float(row["days_to_predicted_failure"]))
             units = int(float(row["units_at_risk"]))
-            unit_cost = float(row["unit_cost_usd"])
+            unit_cost = float(row["unit_cost_gbp"])
         except (KeyError, ValueError):
             continue
-        exposure_usd = units * unit_cost
+        exposure_gbp = units * unit_cost
         items.append({
             "equipment_id": row["equipment_id"],
             "region": row["region"],
@@ -92,9 +99,9 @@ def compute_equipment_risk(raw_dir):
             "failure_risk_pct": risk,
             "days_to_predicted_failure": days,
             "units_at_risk": units,
-            "unit_cost_usd": unit_cost,
-            "exposure_usd": exposure_usd,
-            "exposure_basis": f"{units:,} units x ${unit_cost:.2f}/unit",
+            "unit_cost_gbp": unit_cost,
+            "exposure_gbp": exposure_gbp,
+            "exposure_basis": f"{units:,} units x £{unit_cost:.2f}/unit",
             "confidence": row.get("confidence", "placeholder"),
             "reading_date": row.get("reading_date"),
             "high_risk": risk >= EQUIPMENT_HIGH_RISK_PCT,
@@ -118,7 +125,7 @@ def compute_regional_inventory(raw_dir):
             weeks_on_hand = float(row["weeks_on_hand"])
             weeks_to_expiry = float(row["weeks_to_expiry"])
             units_on_hand = int(float(row["units_on_hand"]))
-            unit_cost = float(row["unit_cost_usd"])
+            unit_cost = float(row["unit_cost_gbp"])
         except (KeyError, ValueError):
             continue
 
@@ -134,8 +141,8 @@ def compute_regional_inventory(raw_dir):
             "weeks_on_hand": weeks_on_hand,
             "weeks_to_expiry": weeks_to_expiry,
             "units_on_hand": units_on_hand,
-            "unit_cost_usd": unit_cost,
-            "inventory_value_usd": units_on_hand * unit_cost,
+            "unit_cost_gbp": unit_cost,
+            "inventory_value_gbp": units_on_hand * unit_cost,
             "confidence": row.get("confidence", "placeholder"),
             "snapshot_date": row.get("snapshot_date"),
             "status": status,
@@ -189,7 +196,7 @@ def compute_regional_inventory(raw_dir):
                 "from_region": best_donor["region"],
                 "to_region": region["region"],
                 "units": transfer_units,
-                "impact_usd": transfer_units * region["unit_cost_usd"],
+                "impact_gbp": transfer_units * region["unit_cost_gbp"],
                 "confidence": _weaker_confidence(region["confidence"], best_donor["confidence"]),
             }
         else:
@@ -268,12 +275,12 @@ def build_activity_log(equipment, regional):
     for eq in equipment or []:
         if not eq["high_risk"]:
             continue
-        impact = eq["exposure_usd"]
+        impact = eq["exposure_gbp"]
         auto = _auto_execute("maintenance_dispatch", impact, eq["confidence"])
         entries.append({
             "date": eq.get("reading_date"),
             "action": f"Flagged {eq['equipment_id']} ({eq['asset_type']}, {eq['region']}) for maintenance",
-            "impact_usd": impact,
+            "impact_gbp": impact,
             "impact_basis": eq["exposure_basis"],
             "status": "auto_executed" if auto else "pending_approval",
             "source": f"equipment:{eq['equipment_id']}",
@@ -281,7 +288,7 @@ def build_activity_log(equipment, regional):
 
     for r in regional or []:
         if r["status"] == "Spoilage risk":
-            impact = r["inventory_value_usd"]
+            impact = r["inventory_value_gbp"]
             auto = _auto_execute("promo", impact, r["confidence"])
             entries.append({
                 "date": r.get("snapshot_date"),
@@ -289,27 +296,27 @@ def build_activity_log(equipment, regional):
                     f"{'Triggered' if auto else 'Recommended'} regional promo, {r['region']} "
                     f"({r['units_on_hand']:,} units at risk)"
                 ),
-                "impact_usd": impact,
-                "impact_basis": f"{r['units_on_hand']:,} units x ${r['unit_cost_usd']:.2f}/unit",
+                "impact_gbp": impact,
+                "impact_basis": f"{r['units_on_hand']:,} units x £{r['unit_cost_gbp']:.2f}/unit",
                 "status": "auto_executed" if auto else "pending_approval",
                 "source": f"regional:{r['region']}",
             })
 
         action = r.get("recommendation_action")
         if action:
-            impact = action["impact_usd"]
+            impact = action["impact_gbp"]
             auto = _auto_execute(action["type"], impact, action["confidence"])
             verb = "Reallocated" if auto else "Recommended: expedite"
             entries.append({
                 "date": r.get("snapshot_date"),
                 "action": f"{verb} {action['units']:,} units, {action['from_region']} to {action['to_region']}",
-                "impact_usd": impact,
-                "impact_basis": f"{action['units']:,} units x ${r['unit_cost_usd']:.2f}/unit",
+                "impact_gbp": impact,
+                "impact_basis": f"{action['units']:,} units x £{r['unit_cost_gbp']:.2f}/unit",
                 "status": "auto_executed" if auto else "pending_approval",
                 "source": f"regional:{action['to_region']}",
             })
 
-    entries.sort(key=lambda e: -(e["impact_usd"] or 0))
+    entries.sort(key=lambda e: -(e["impact_gbp"] or 0))
     return entries
 
 
@@ -319,21 +326,21 @@ def build_activity_log(equipment, regional):
 
 def compute_kpis(equipment, regional, activity_log):
     spoilage_exposure = sum(
-        r["inventory_value_usd"] for r in (regional or []) if r["status"] == "Spoilage risk"
+        r["inventory_value_gbp"] for r in (regional or []) if r["status"] == "Spoilage risk"
     )
-    cash_tied_up = sum(r["inventory_value_usd"] for r in (regional or []))
-    equipment_exposure = sum(e["exposure_usd"] for e in (equipment or []) if e["high_risk"])
+    cash_tied_up = sum(r["inventory_value_gbp"] for r in (regional or []))
+    equipment_exposure = sum(e["exposure_gbp"] for e in (equipment or []) if e["high_risk"])
 
     auto_entries = [e for e in (activity_log or []) if e["status"] == "auto_executed"]
     autonomous_count = len(auto_entries)
-    autonomous_impact = sum(e["impact_usd"] or 0 for e in auto_entries)
+    autonomous_impact = sum(e["impact_gbp"] or 0 for e in auto_entries)
 
     return {
-        "spoilage_exposure_usd": spoilage_exposure,
-        "cash_tied_up_usd": cash_tied_up,
-        "equipment_exposure_usd": equipment_exposure,
+        "spoilage_exposure_gbp": spoilage_exposure,
+        "cash_tied_up_gbp": cash_tied_up,
+        "equipment_exposure_gbp": equipment_exposure,
         "autonomous_actions_count": autonomous_count,
-        "autonomous_actions_impact_usd": autonomous_impact,
+        "autonomous_actions_impact_gbp": autonomous_impact,
     }
 
 

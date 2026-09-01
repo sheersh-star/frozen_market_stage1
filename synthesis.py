@@ -35,16 +35,17 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 ASSUMPTIONS = {
-    # midpoint of the $0.40-$0.50/lb range supplied for refined sugar
-    "sugar_price_per_lb": 0.45,
-    # midpoints of the supplied retail unit price ranges
+    # midpoint of a GBP0.35-GBP0.45/lb range assumed for refined sugar (UK
+    # wholesale scale)
+    "sugar_price_per_lb": 0.40,
+    # midpoints of assumed UK retail unit price ranges
     "retail_unit_price": {
-        "premium_pint": 6.00,       # $5.50-$6.50 — name-brand pints
-        "mass_market_tub": 4.00,    # $3.50-$4.50 — standard grocery tubs
-        "impulse_single": 3.00,     # $2.50-$3.50 — bars/cones, single-serve
+        "premium_pint": 5.00,       # GBP4.50-GBP5.50 — name-brand 500ml tubs
+        "mass_market_tub": 3.00,    # GBP2.50-GBP3.50 — standard supermarket 1L tubs
+        "impulse_single": 2.00,     # GBP1.50-GBP2.50 — bars/cones/lollies, single-serve
     },
     # supplied but unused today — no dairy-volume dataset yet to anchor it
-    "milk_price_per_cwt": 20.00,
+    "milk_price_per_cwt": 16.00,
 }
 
 # Brand label (as load_brand_sentiment() emits it) -> retail price tier.
@@ -115,17 +116,17 @@ def detect_regional_signals(raw_dir):
             "latest_volume": latest,
             "pct_change": pct_change,
             "dollar_estimate": {
-                "amount_usd": dollar,
+                "amount_gbp": dollar,
                 "basis": (
                     f"real volume delta of {delta_volume:,.0f} lbs (assumed unit) "
-                    f"x ${ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb assumed sugar price "
-                    "(midpoint of $0.40-$0.50/lb) - volume is real, price is an assumption"
+                    f"x £{ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb assumed sugar price "
+                    "(midpoint of £0.35-£0.45/lb) - volume is real, price is an assumption"
                 ),
                 "is_assumption": True,
             },
         })
 
-    candidates.sort(key=lambda c: abs(c["dollar_estimate"]["amount_usd"]), reverse=True)
+    candidates.sort(key=lambda c: abs(c["dollar_estimate"]["amount_gbp"]), reverse=True)
     return candidates
 
 
@@ -177,9 +178,9 @@ def detect_brand_signals(market_data):
             price = ASSUMPTIONS["retail_unit_price"][tier]
             amount = price * item["mention_volume"]
             dollar_estimate = {
-                "amount_usd": amount,
+                "amount_gbp": amount,
                 "basis": (
-                    f"{item['mention_volume']} sampled reviews x ${price:.2f} assumed "
+                    f"{item['mention_volume']} sampled reviews x £{price:.2f} assumed "
                     f"{tier.replace('_', ' ')} unit price - illustrates this dataset's "
                     "reviewed sample only, not total market sales"
                 ),
@@ -245,24 +246,24 @@ def _select_and_rank(regional_candidates, brand_candidates, trend_signal):
 # prose — plain Python templates, no LLM
 # ---------------------------------------------------------------------------
 
-def _fmt_usd(amount):
+def _fmt_gbp(amount):
     sign = "-" if amount < 0 else ""
-    return f"{sign}${abs(amount):,.0f}"
+    return f"{sign}£{abs(amount):,.0f}"
 
 
 def _write_regional(signal):
     region = signal["region"]
     pct = signal["pct_change"]
     direction = "up" if pct > 0 else "down"
-    dollar = signal["dollar_estimate"]["amount_usd"]
+    dollar = signal["dollar_estimate"]["amount_gbp"]
     cost_word = "incremental" if dollar > 0 else "reduced"
     headline = f"{region} sweetener costs {direction} {abs(pct):.1f}% QoQ"
     body = (
         f"{region} sweetener deliveries moved from {signal['prior_volume']:,.0f} to "
         f"{signal['latest_volume']:,.0f} lbs quarter-over-quarter ({direction} "
-        f"{abs(pct):.1f}%), representing roughly {_fmt_usd(dollar)} in {cost_word} raw "
-        f"sugar cost exposure at an assumed ${ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb "
-        "(midpoint of the $0.40-$0.50/lb range)."
+        f"{abs(pct):.1f}%), representing roughly {_fmt_gbp(dollar)} in {cost_word} raw "
+        f"sugar cost exposure at an assumed £{ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb "
+        "(midpoint of the £0.35-£0.45/lb range)."
     )
     return headline, body
 
@@ -283,7 +284,7 @@ def _write_brand(signal):
     if dollar_estimate:
         body += (
             f" At an assumed unit price, that sample represents roughly "
-            f"{_fmt_usd(dollar_estimate['amount_usd'])} of reviewed-unit retail value - "
+            f"{_fmt_gbp(dollar_estimate['amount_gbp'])} of reviewed-unit retail value - "
             "illustrative of price-tier exposure in this sample, not total market sales."
         )
     return headline, body
@@ -311,14 +312,14 @@ def _write_bundle(signal):
     brand_s = signal["brand"]
     regional_s = signal["regional"]
     brand, region = brand_s["brand"], regional_s["region"]
-    regional_dollar = regional_s["dollar_estimate"]["amount_usd"]
+    regional_dollar = regional_s["dollar_estimate"]["amount_gbp"]
     headline = f"Margin pressure: {brand} softening while {region} costs rise"
     body = (
         f"{brand} is currently averaging {brand_s['score']:.2f}/5 across "
         f"{brand_s['mention_volume']} sampled reviews, while {region} - a sweetener-"
         f"delivery region - posted a {regional_s['pct_change']:.1f}% QoQ cost increase "
-        f"(roughly {_fmt_usd(regional_dollar)} in assumed incremental sugar cost exposure "
-        f"at ${ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb). Together this is a margin story, "
+        f"(roughly {_fmt_gbp(regional_dollar)} in assumed incremental sugar cost exposure "
+        f"at £{ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb). Together this is a margin story, "
         "not two separate charts: a softening brand and rising input costs in the same "
         "reporting cycle."
     )
@@ -344,7 +345,7 @@ _WRITERS = {
 def _recommend_regional(signal):
     region = signal["region"]
     pct = signal["pct_change"]
-    dollar = signal["dollar_estimate"]["amount_usd"]
+    dollar = signal["dollar_estimate"]["amount_gbp"]
     if pct > 0:
         return [
             {"stage": "This week", "action": (
@@ -354,7 +355,7 @@ def _recommend_regional(signal):
             {"stage": "This month", "action": (
                 f"If structural, get a comparison quote from an alternate sweetener "
                 f"supplier for {region}, or negotiate a volume-based rate to offset "
-                f"the ~{_fmt_usd(dollar)} exposure."
+                f"the ~{_fmt_gbp(dollar)} exposure."
             )},
             {"stage": "This quarter", "action": (
                 f"If {region} repeats this move next cycle, reduce sourcing "
@@ -370,7 +371,7 @@ def _recommend_regional(signal):
             f"before it reverts."
         )},
         {"stage": "This quarter", "action": (
-            f"Redirect the freed ~{_fmt_usd(abs(dollar))} toward the category's "
+            f"Redirect the freed ~{_fmt_gbp(abs(dollar))} toward the category's "
             "weakest-performing brand or region."
         )},
     ]
@@ -474,7 +475,7 @@ def _materiality(signal):
         return (brand_m + regional_m) * 1.5
     dollar = signal.get("dollar_estimate")
     if dollar:
-        return abs(dollar["amount_usd"])
+        return abs(dollar["amount_gbp"])
     if signal["type"] == "trend":
         return abs(signal["mom_pct"]) * 50  # documented heuristic, not a dollar-equivalent scale
     if signal["type"] == "brand":
@@ -751,16 +752,16 @@ def generate_synthesis_timeline(raw_dir):
                 "type": "regional", "region": region, "quarter": date,
                 "prior_volume": prev["value"], "latest_volume": cur["value"], "pct_change": pct,
                 "dollar_estimate": {
-                    "amount_usd": dollar,
+                    "amount_gbp": dollar,
                     "basis": (
                         f"interpolated monthly volume delta of {delta:,.0f} lbs (assumed unit; "
-                        f"linearly interpolated between quarterly data points) x "
-                        f"${ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb assumed sugar price"
+                        f"linearly interpolated between quarterly data points) x " +
+                        f"£{ASSUMPTIONS['sugar_price_per_lb']:.2f}/lb assumed sugar price"
                     ),
                     "is_assumption": True,
                 },
             })
-        regional_candidates.sort(key=lambda c: abs(c["dollar_estimate"]["amount_usd"]), reverse=True)
+        regional_candidates.sort(key=lambda c: abs(c["dollar_estimate"]["amount_gbp"]), reverse=True)
 
         brand_candidates = []
         for brand, by_date in brand_by_date.items():
@@ -780,10 +781,10 @@ def generate_synthesis_timeline(raw_dir):
                 price = ASSUMPTIONS["retail_unit_price"][tier]
                 amount = price * cur["review_count"]
                 dollar_estimate = {
-                    "amount_usd": amount,
+                    "amount_gbp": amount,
                     "basis": (
                         f"{cur['review_count']} reviews (this quarter's aggregate, held flat "
-                        f"across its 3 months) x ${price:.2f} assumed {tier.replace('_', ' ')} "
+                        f"across its 3 months) x £{price:.2f} assumed {tier.replace('_', ' ')} "
                         "unit price - illustrates the reviewed sample only"
                     ),
                     "is_assumption": True,

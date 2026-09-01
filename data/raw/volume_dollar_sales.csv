@@ -1,4 +1,4 @@
-date,volume_units,dollar_sales_usd,confidence
+date,volume_units,revenue_gbp,confidence
 2024-07,1170000,3744000.0,placeholder
 2024-08,1178190,3775863.31,placeholder
 2024-09,1186437,3807997.8,placeholder

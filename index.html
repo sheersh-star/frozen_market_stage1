@@ -43,7 +43,7 @@
 <header class="border-b border-hairline">
   <div class="max-w-6xl mx-auto px-6 py-5 flex flex-wrap items-end justify-between gap-3">
     <div>
-      <p class="text-xs tracking-[0.2em] uppercase text-muted mb-1">Category Intelligence</p>
+      <p class="text-xs tracking-[0.2em] uppercase text-muted mb-1">Category Intelligence &middot; UK Launch &middot; EU/WHO Regulated</p>
       <h1 class="font-display text-3xl md:text-4xl font-medium text-ivory">Frozen Dessert Market Console</h1>
     </div>
     <div class="text-right font-mono text-xs text-muted">
@@ -74,6 +74,7 @@
       <div>
         <h2 class="font-display text-xl text-ivory">Production &amp; Sales Trend</h2>
         <p id="trend-readout" class="font-mono text-sm text-muted mt-1">—</p>
+        <p class="font-mono text-xs text-muted mt-1">Eurostat, NACE C1052 (ice cream manufacture) &middot; Germany &mdash; the EU27 aggregate is confidentiality-suppressed at this level, so the largest reporting producer stands in for the EU trend.</p>
         <p id="trend-interp-note" class="hidden font-mono text-xs text-muted mt-1">Illustrative — interpolated between quarterly data points, not independently measured. Click a point for that month's brief.</p>
       </div>
       <div class="shrink-0 flex items-center gap-3">
@@ -90,7 +91,7 @@
   <section id="volume-dollar-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mb-6">
     <div class="flex items-start justify-between mb-4 gap-3">
       <div>
-        <h2 class="font-display text-xl text-ivory">Volume vs Dollar Sales</h2>
+        <h2 class="font-display text-xl text-ivory">Volume vs Revenue</h2>
         <p id="vd-readout" class="font-mono text-sm text-muted mt-1">—</p>
       </div>
       <div class="shrink-0 font-mono text-[10px] text-muted flex items-center gap-1">
@@ -103,7 +104,7 @@
         <div class="h-48"><canvas id="volumeChart"></canvas></div>
       </div>
       <div>
-        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Dollar sales ($)</p>
+        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Revenue (£)</p>
         <div class="h-48"><canvas id="dollarChart"></canvas></div>
       </div>
     </div>
@@ -159,7 +160,10 @@
 
       <div class="bg-panel border border-hairline rounded-lg p-6">
         <div class="flex items-start justify-between mb-4 gap-3">
-          <h2 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h2>
+          <div>
+            <h2 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h2>
+            <p class="font-mono text-[10px] text-muted mt-1">US consumer review sample &mdash; no equivalent UK/EU dataset found; kept as-is rather than implied to be UK data.</p>
+          </div>
           <div id="seal-sentiment" class="shrink-0"></div>
         </div>
         <div id="sentiment-legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
@@ -182,12 +186,14 @@
               <th class="pb-2 font-body font-medium text-right">Sugar g</th>
               <th class="pb-2 font-body font-medium text-right">Fat g</th>
               <th class="pb-2 font-body font-medium text-right">Protein g</th>
-              <th class="pb-2 font-body font-medium text-right" title="Share of a child's (ages 2-18) daily added-sugar limit — American Heart Association: 25g/day">Child sugar limit&sup1;</th>
+              <th class="pb-2 font-body font-medium" title="UK FSA front-of-pack labelling: total sugar per 100g. Green <=5g, amber 5-22.5g, red >22.5g.">UK label&sup1;</th>
+              <th class="pb-2 font-body font-medium text-right" title="Share of WHO's free-sugar guideline for a reference adult (2000 kcal/day): <10% of energy (50g/day) is the core recommendation; a further reduction to <5% (25g/day) confers additional benefit.">WHO free sugar&sup2;</th>
             </tr>
           </thead>
           <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
         </table>
-        <p class="font-mono text-[10px] text-muted mt-2">&sup1; One serving's share of the American Heart Association's daily added-sugar limit for ages 2&ndash;18 (25g). Blank where FDC doesn't report an added-sugar value for that item.</p>
+        <p class="font-mono text-[10px] text-muted mt-2">&sup1; UK FSA front-of-pack labelling, total sugar per 100g (converted from per-serving using FDC's reported serving size). Blank where no gram serving size is reported.<br>
+        &sup2; One serving's share of WHO's 5% free-sugar guideline (25g/day) for a reference 2000 kcal adult diet. Uses FDC's "added sugar" as the closest available proxy for WHO's "free sugars"; blank where FDC doesn't report it for that item.</p>
       </div>
     </div>
 
@@ -198,14 +204,14 @@
       <div>
         <h2 class="font-display text-xl text-ivory">Consumer &amp; Demographics</h2>
         <p id="demographics-readout" class="font-mono text-sm text-muted mt-1">—</p>
-        <p class="font-mono text-xs text-muted mt-1">Population by age bracket, by region &middot; World Bank 2023 &middot; same regions as Global Market Distribution above</p>
+        <p class="font-mono text-xs text-muted mt-1">Population by age bracket &middot; World Bank 2023 &middot; United Kingdom (launch market) alongside the same continents as Global Market Distribution above (scale-up context)</p>
       </div>
     </div>
     <div id="demographics-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4 mt-3"></div>
     <div class="h-64"><canvas id="demographicsChart"></canvas></div>
 
     <div id="consumption-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
-      <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-1">Who eats sweet foods? &middot; US children &amp; teens</p>
+      <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-1">Ice cream consumption &middot; UK children &middot; UKHSA / National Diet and Nutrition Survey</p>
       <p id="consumption-callout" class="text-sm text-muted mb-3"></p>
       <div id="consumption-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
     </div>
@@ -216,6 +222,7 @@
       <div>
         <h2 class="font-display text-xl text-ivory">Company Revenue Comparison</h2>
         <p class="font-mono text-sm text-muted mt-1">FY2025 vs FY2026 · log scale — company sizes span a very wide range</p>
+        <p class="font-mono text-xs text-muted mt-1">Shown in USD, the common denominator for comparing companies that report natively in EUR, GBP, and RMB — each conversion rate is cited per-row in the basis column.</p>
       </div>
       <div class="shrink-0 flex items-center gap-1 font-mono text-[10px]">
         <button id="btn-revenue-chart" class="px-2 py-1 rounded border border-brass text-brass">Chart</button>
@@ -411,8 +418,8 @@ function renderSynthesis(panel) {
     const d = flag.dollar_estimate;
     let badge = '';
     if (d) {
-      const sign = d.amount_usd < 0 ? '-' : '';
-      const amount = `${sign}$${Math.abs(d.amount_usd).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+      const sign = d.amount_gbp < 0 ? '-' : '';
+      const amount = `${sign}£${Math.abs(d.amount_gbp).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
       const style = d.is_assumption
         ? 'border-muted/50 border-dashed text-muted'
         : 'border-positive text-positive';
@@ -562,9 +569,9 @@ function renderVolumeDollar(panel) {
   const series = panel.series;
   const labels = series.map(s => s.date);
   const volume = series.map(s => s.volume_units);
-  const dollars = series.map(s => s.dollar_sales_usd);
+  const revenue = series.map(s => s.revenue_gbp);
   const volumeIdx = series.map(s => s.volume_index);
-  const dollarIdx = series.map(s => s.dollar_index);
+  const revenueIdx = series.map(s => s.revenue_index);
 
   const tiers = new Set(series.map(s => s.confidence));
   const tier = tiers.has('real') ? 'real' : tiers.has('grounded_estimate') ? 'grounded_estimate' : 'placeholder';
@@ -572,16 +579,16 @@ function renderVolumeDollar(panel) {
   document.getElementById('vd-confidence-label').textContent = CONFIDENCE_LABEL[tier] || tier;
 
   const lastVolIdx = volumeIdx[volumeIdx.length - 1];
-  const lastDolIdx = dollarIdx[dollarIdx.length - 1];
+  const lastRevIdx = revenueIdx[revenueIdx.length - 1];
   const readout = document.getElementById('vd-readout');
   if (lastVolIdx !== undefined) {
     const volPct = (lastVolIdx - 100).toFixed(1);
-    const dolPct = (lastDolIdx - 100).toFixed(1);
-    const gap = Math.abs(lastVolIdx - lastDolIdx).toFixed(1);
-    const direction = lastVolIdx - lastDolIdx > 0.5 ? `volume outpacing dollars by ${gap} pts — price/mix erosion`
-      : lastDolIdx - lastVolIdx > 0.5 ? `dollars outpacing volume by ${gap} pts — price/mix gain`
-      : 'volume and dollars moving together';
-    readout.textContent = `Volume ${volPct >= 0 ? '+' : ''}${volPct}% · Dollars ${dolPct >= 0 ? '+' : ''}${dolPct}% since ${labels[0]} — ${direction}`;
+    const revPct = (lastRevIdx - 100).toFixed(1);
+    const gap = Math.abs(lastVolIdx - lastRevIdx).toFixed(1);
+    const direction = lastVolIdx - lastRevIdx > 0.5 ? `volume outpacing revenue by ${gap} pts — price/mix erosion`
+      : lastRevIdx - lastVolIdx > 0.5 ? `revenue outpacing volume by ${gap} pts — price/mix gain`
+      : 'volume and revenue moving together';
+    readout.textContent = `Volume ${volPct >= 0 ? '+' : ''}${volPct}% · Revenue ${revPct >= 0 ? '+' : ''}${revPct}% since ${labels[0]} — ${direction}`;
   } else {
     readout.textContent = '—';
   }
@@ -603,30 +610,30 @@ function renderVolumeDollar(panel) {
 
   if (charts.dollar) {
     charts.dollar.data.labels = labels;
-    charts.dollar.data.datasets[0].data = dollars;
+    charts.dollar.data.datasets[0].data = revenue;
     charts.dollar.update();
   } else {
-    const dolOpts = chartBaseOptions();
-    dolOpts.plugins.tooltip = { callbacks: { label: (ctx) => `$${ctx.parsed.y.toLocaleString()}` } };
+    const revOpts = chartBaseOptions();
+    revOpts.plugins.tooltip = { callbacks: { label: (ctx) => `£${ctx.parsed.y.toLocaleString()}` } };
     charts.dollar = new Chart(document.getElementById('dollarChart'), {
       type: 'line',
       data: { labels, datasets: [{
-        data: dollars, borderColor: '#F2839B', backgroundColor: 'rgba(242, 131, 155, 0.10)',
+        data: revenue, borderColor: '#F2839B', backgroundColor: 'rgba(242, 131, 155, 0.10)',
         fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
       }] },
-      options: dolOpts,
+      options: revOpts,
     });
   }
 
   document.getElementById('vd-index-legend').innerHTML = `
     <span class="inline-flex items-center gap-1"><span style="color:#E3A857">──</span> Volume index</span>
-    <span class="inline-flex items-center gap-1"><span style="color:#83909C">- -</span> Dollar sales index</span>
+    <span class="inline-flex items-center gap-1"><span style="color:#83909C">- -</span> Revenue index</span>
   `;
 
   if (charts.vdIndex) {
     charts.vdIndex.data.labels = labels;
     charts.vdIndex.data.datasets[0].data = volumeIdx;
-    charts.vdIndex.data.datasets[1].data = dollarIdx;
+    charts.vdIndex.data.datasets[1].data = revenueIdx;
     charts.vdIndex.update();
   } else {
     charts.vdIndex = new Chart(document.getElementById('vdIndexChart'), {
@@ -635,7 +642,7 @@ function renderVolumeDollar(panel) {
         labels,
         datasets: [
           { label: 'Volume index', data: volumeIdx, borderColor: '#E3A857', tension: 0.3, pointRadius: 0, borderWidth: 2, fill: false },
-          { label: 'Dollar sales index', data: dollarIdx, borderColor: '#83909C', borderDash: [4, 3], tension: 0.3, pointRadius: 0, borderWidth: 2, fill: false },
+          { label: 'Revenue index', data: revenueIdx, borderColor: '#83909C', borderDash: [4, 3], tension: 0.3, pointRadius: 0, borderWidth: 2, fill: false },
         ],
       },
       options: chartBaseOptions(),
@@ -797,18 +804,29 @@ function renderSentiment(panel) {
   });
 }
 
+const UK_TRAFFIC_LIGHT = {
+  green: { icon: '\u25cf', color: '#6FC796', label: 'Green' },
+  amber: { icon: '\u25cf', color: '#E3A857', label: 'Amber' },
+  red: { icon: '\u25cf', color: '#E2634F', label: 'Red' },
+};
+
 function renderNutrition(panel) {
   document.getElementById('seal-nutrition').innerHTML = sealBadge(panel.source === 'real');
   const body = document.getElementById('nutrition-body');
   body.innerHTML = '';
   (panel.items || []).forEach(item => {
-    const pct = item.pct_of_child_daily_sugar_limit;
+    const tl = UK_TRAFFIC_LIGHT[item.uk_traffic_light];
+    const labelCell = tl
+      ? `<span style="color:${tl.color}">${tl.icon}</span> ${tl.label}`
+      : '<span class="text-muted">\u2014</span>';
+
+    const pct = item.pct_of_who_5pct_limit;
     let pctCell = '\u2014';
     if (pct !== null && pct !== undefined) {
       const over = pct >= 100;
       const color = over ? '#E2634F' : pct >= 60 ? '#E3A857' : '#83909C';
       const icon = over ? '\u26a0 ' : '';
-      pctCell = `<span style="color:${color}">${icon}${pct}%</span>`;
+      pctCell = `<span style="color:${color}" title="${item.pct_of_who_10pct_limit}% of the 10% guideline (50g)">${icon}${pct}%</span>`;
     }
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -817,6 +835,7 @@ function renderNutrition(panel) {
       <td class="py-2 text-right">${item.sugar_g ?? '\u2014'}</td>
       <td class="py-2 text-right">${item.fat_g ?? '\u2014'}</td>
       <td class="py-2 text-right">${item.protein_g ?? '\u2014'}</td>
+      <td class="py-2 font-body" title="${item.sugar_per_100g !== null && item.sugar_per_100g !== undefined ? item.sugar_per_100g + 'g sugar per 100g' : ''}">${labelCell}</td>
       <td class="py-2 text-right">${pctCell}</td>
     `;
     body.appendChild(row);
@@ -842,12 +861,22 @@ function renderDemographics(panel) {
   population.forEach(r => {
     (byRegion[r.region] = byRegion[r.region] || {})[r.age_bracket] = r;
   });
-  const regions = Object.keys(byRegion).sort((a, b) => byRegion[b]['0-14'].share_pct - byRegion[a]['0-14'].share_pct);
+  // United Kingdom pinned first — the launch market this initiative starts
+  // in — everything else (the "scale to global" context) sorts by youth
+  // share behind it.
+  const regions = Object.keys(byRegion).sort((a, b) => {
+    if (a === 'United Kingdom') return -1;
+    if (b === 'United Kingdom') return 1;
+    return byRegion[b]['0-14'].share_pct - byRegion[a]['0-14'].share_pct;
+  });
 
-  const youngest = regions[0];
+  const youngest = [...regions].sort((a, b) => byRegion[b]['0-14'].share_pct - byRegion[a]['0-14'].share_pct)[0];
   const oldest = [...regions].sort((a, b) => byRegion[b]['65+'].share_pct - byRegion[a]['65+'].share_pct)[0];
+  const ukLine = byRegion['United Kingdom']
+    ? `UK: ${byRegion['United Kingdom']['0-14'].share_pct}% under 14, ${byRegion['United Kingdom']['65+'].share_pct}% over 65 · `
+    : '';
   document.getElementById('demographics-readout').textContent =
-    `${youngest}: youngest population (${byRegion[youngest]['0-14'].share_pct}% under 14) · ${oldest}: oldest (${byRegion[oldest]['65+'].share_pct}% 65+)`;
+    `${ukLine}${youngest}: youngest overall (${byRegion[youngest]['0-14'].share_pct}% under 14) · ${oldest}: oldest (${byRegion[oldest]['65+'].share_pct}% 65+)`;
 
   document.getElementById('demographics-legend').innerHTML =
     `<span class="text-brass">${CONFIDENCE_ICON.real}</span> Real disclosed (World Bank)` +
@@ -885,18 +914,19 @@ function renderDemographics(panel) {
     options: opts,
   });
 
-  const consumption = panel.sweet_food_consumption_by_age || [];
+  const consumption = panel.ice_cream_consumption_by_age || [];
   const wrap = document.getElementById('consumption-wrap');
   if (consumption.length) {
     wrap.classList.remove('hidden');
+    const c0 = consumption[0];
     document.getElementById('consumption-callout').innerHTML =
-      `Ice cream &amp; frozen dairy desserts made up <strong class="text-ivory">${panel.ice_cream_share_of_sweet_foods_pct}%</strong> of all sweet-food consumption events among US children 2&ndash;19 — and on days any sweet food was eaten, sweet foods accounted for <strong class="text-ivory">${panel.sweet_foods_share_of_daily_added_sugar_pct}%</strong> of that day's added sugar intake.` +
-      `<br><span class="font-mono text-[10px] text-muted">${panel.consumption_basis}</span>`;
+      `Real, ice-cream-specific — not a general "sweet foods" proxy.` +
+      `<br><span class="font-mono text-[10px] text-muted">${c0.basis}</span>`;
     document.getElementById('consumption-row').innerHTML = consumption.map(c => `
-      <div class="bg-ink/40 border border-hairline rounded-lg p-4" title="${c.basis.replace(/"/g, '&quot;')}">
-        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-1">${c.age_bracket}</p>
-        <p class="font-display text-xl text-ivory">${c.pct_consumed_any_sweet_food}%</p>
-        <p class="font-mono text-[10px] text-muted mt-1">consumed a sweet food that day</p>
+      <div class="bg-ink/40 border border-hairline rounded-lg p-4">
+        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-1">Ages ${c.age_bracket}</p>
+        <p class="font-display text-xl text-ivory">${c.mean_g_per_day}g<span class="text-sm text-muted">/day</span></p>
+        <p class="font-mono text-[10px] text-muted mt-1">${c.mean_sugar_g_per_day}g sugar/day from ice cream &middot; ${c.portions_per_year} ice creams/year &middot; ${c.share_of_diet_sugar_pct}% of total diet sugar</p>
       </div>
     `).join('');
   } else {
@@ -1037,9 +1067,9 @@ const CC_STATUS = {
   'Balanced': { icon: '●', color: '#6FC796' },
 };
 
-function ccFmtUsd(amount) {
+function ccFmtGbp(amount) {
   const sign = amount < 0 ? '-' : '';
-  return `${sign}$${Math.abs(amount).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+  return `${sign}£${Math.abs(amount).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
 function ccKpiCard(label, value, sub) {
@@ -1054,13 +1084,13 @@ function ccKpiCard(label, value, sub) {
 
 function renderCcKpis(kpis) {
   document.getElementById('cc-kpi-row').innerHTML = [
-    ccKpiCard('Spoilage exposure, this cycle', ccFmtUsd(kpis.spoilage_exposure_usd)),
-    ccKpiCard('Cash tied up, frozen inventory', ccFmtUsd(kpis.cash_tied_up_usd)),
-    ccKpiCard('Equipment exposure', ccFmtUsd(kpis.equipment_exposure_usd)),
+    ccKpiCard('Spoilage exposure, this cycle', ccFmtGbp(kpis.spoilage_exposure_gbp)),
+    ccKpiCard('Cash tied up, frozen inventory', ccFmtGbp(kpis.cash_tied_up_gbp)),
+    ccKpiCard('Equipment exposure', ccFmtGbp(kpis.equipment_exposure_gbp)),
     ccKpiCard(
       'Autonomous actions, this cycle',
       kpis.autonomous_actions_count,
-      `${ccFmtUsd(kpis.autonomous_actions_impact_usd)} impact protected`
+      `${ccFmtGbp(kpis.autonomous_actions_impact_gbp)} impact protected`
     ),
   ].join('');
 }
@@ -1130,7 +1160,7 @@ function ccActionCell(entry) {
   return `
     <div title="${entry.impact_basis}">${entry.action}</div>
     <div class="mt-1 flex items-center gap-2 text-xs">
-      ${badge}<span class="text-muted">${ccFmtUsd(entry.impact_usd)}</span>
+      ${badge}<span class="text-muted">${ccFmtGbp(entry.impact_gbp)}</span>
     </div>
   `;
 }
@@ -1164,7 +1194,7 @@ function renderCcEquipment(items, activityLog) {
         <td class="py-2 font-body text-muted">${e.region}</td>
         <td class="py-2 text-right" style="color:${riskColor}">${e.failure_risk_pct.toFixed(1)}%</td>
         <td class="py-2 text-right">${e.days_to_predicted_failure}</td>
-        <td class="py-2 text-right" title="${e.exposure_basis}">${ccFmtUsd(e.exposure_usd)}</td>
+        <td class="py-2 text-right" title="${e.exposure_basis}">${ccFmtGbp(e.exposure_gbp)}</td>
         <td class="py-2 font-body">${ccActionCell(entry)}</td>
       </tr>
     `;

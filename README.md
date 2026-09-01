@@ -5,20 +5,31 @@ writes a JSON file, a Python stdlib server serves it, and a plain HTML/JS
 front end renders it. No database, no npm install, no framework — just
 `python3`.
 
+**Scope: UK launch market, scaling to a global initiative.** Regulatory and
+nutrition framing runs on UK FSA (front-of-pack sugar labelling) and WHO
+(free-sugar guideline) standards rather than US ones; currency throughout is
+GBP; the Command Center scenario is a hypothetical UK retail client (6 UK
+regions); population and consumption data lead with the UK, with global
+continents as the scale-up context. Two panels remain US-sourced where no
+real UK/EU equivalent exists — each is labeled as such rather than implied
+to be UK data (see the table below).
+
 It runs immediately on mock data. As you drop in real datasets, each panel
 switches from mock to live automatically — no code changes required, and no
 manual re-run required either: `server.py` watches `data/raw/` in the
 background and regenerates `market_data.json` on its own whenever a file
 there is added or changed (see "Self-updating" below).
 
-The Production & Sales Trend panel is already wired to real data — FRED
-series IPN31152N (monthly ice cream production index), live-pulled through
-the present, lives at `data/raw/ice_cream_production.csv`. Re-pull it
-anytime with:
+The Production & Sales Trend panel is already wired to real data — Eurostat
+NACE C1052 (ice cream manufacture), Germany — production volume index,
+live-pulled, lives at `data/raw/ice_cream_production.csv`. Germany stands in
+for an EU-wide trend because Eurostat suppresses the EU27 aggregate at this
+4-digit NACE level (confidentiality) — Germany, Italy, and Spain are the
+countries that do publish it. Re-pull it anytime with:
 
 ```bash
-curl "https://fred.stlouisfed.org/graph/fredgraph.csv?id=IPN31152N" -o data/raw/ice_cream_production.csv.new
-# then reformat the header from `observation_date,IPN31152N` to `DATE,IPN31152N`
+curl "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/sts_inpr_m?format=JSON&nace_r2=C1052&geo=DE&s_adj=NSA&indic_bt=PRD&unit=I21" -o /tmp/eurostat.json
+# then reshape {date, value} pairs from the JSON-stat payload into DATE,VALUE CSV rows
 ```
 
 ## Quickstart
@@ -70,10 +81,12 @@ up on its own — see "Self-updating" above.
 
 | File | Source | Powers | Recommended size |
 |---|---|---|---|
-| `ice_cream_production.csv` | FRED series IPN31152N, live pull (`fredgraph.csv?id=IPN31152N`) | Production & sales trend | Already provided — 654 real rows (1972–present), re-pull to extend |
-| `ice_cream_reviews.csv` + optional `ice_cream_products.csv` | Kaggle "Ice Cream Dataset" (tysonpo) — Ben & Jerry's, Häagen-Dazs, Breyers, Talenti reviews | Brand & flavor sentiment | ~5 brands × ~20 reviews each (~100 rows in `ice_cream_reviews.csv`); 5 rows in `ice_cream_products.csv`, one per brand key |
-| `usda_nutrition.json` | USDA FoodData Central API | Nutrition profile | ~8 food items in the `foods` array (only the first 12 are used) |
+| `ice_cream_production.csv` | Eurostat NACE C1052, Germany, live pull | Production & sales trend | Already provided — 426 real rows (1991–present), re-pull to extend |
+| `ice_cream_reviews.csv` + optional `ice_cream_products.csv` | Kaggle "Ice Cream Dataset" (tysonpo) — Ben & Jerry's, Häagen-Dazs, Breyers, Talenti reviews | Brand & flavor sentiment | **US sample** — no equivalent UK/EU dataset found; ~5 brands × ~20 reviews each (~100 rows in `ice_cream_reviews.csv`); 5 rows in `ice_cream_products.csv`, one per brand key |
+| `usda_nutrition.json` | USDA FoodData Central API | Nutrition profile (values) | **US branded products** — the values themselves are US, but the regulatory judgment applied to them (UK FSA traffic-light thresholds, WHO free-sugar %) is UK/WHO; ~12 items used |
 | `global_market_regions.csv` | Published market-research sizing (e.g. Fortune Business Insights' Ice Cream Market Report) | Global market distribution | One row per continent, `region,share_pct,confidence,basis` — confidence is `grounded_estimate` throughout since no central body measures worldwide ice cream sales directly |
+| `population_by_age_region.csv` | World Bank age-bracket population indicators | Consumer & demographics | United Kingdom (launch market) + 5 continents (scale-up context), 3 age brackets each |
+| `ice_cream_consumption_by_age_uk.csv` | UKHSA / National Diet and Nutrition Survey (NDNS) | Consumer & demographics | Real UK ice-cream-specific consumption, ages 5-11 |
 
 Column names the loaders match (case-insensitive, several aliases each — see
 `_find_field` in `data_pipeline.py`):
@@ -92,12 +105,18 @@ Column names the loaders match (case-insensitive, several aliases each — see
 - **`global_market_regions.csv`**: `region`, `share_pct` (float), `confidence`
   (`real`/`grounded_estimate`/`placeholder`), `basis` (citation text, shown
   in the chart's tooltip).
+- **`population_by_age_region.csv`**: `region`, `age_bracket` (`0-14`,
+  `15-64`, `65+`), `population`, `confidence`, `basis`.
+- **`ice_cream_consumption_by_age_uk.csv`**: `age_bracket`,
+  `mean_g_per_day`, `mean_sugar_g_per_day`, `share_of_diet_sugar_pct`,
+  `portions_per_year`, `confidence`, `basis`.
 
 Notes on each, from checking the real sources while building this:
 
 - **Production/sales**: the real columns are literally `DATE` and `VALUE`
-  (index, 2017=100) — the loader looks for those first, so a straight
-  Kaggle CSV should just work.
+  (index, 2021=100) — the loader looks for those first, so a straight
+  Eurostat pull should just work. Uses Germany specifically, not an EU27
+  aggregate (see the sourcing note above).
 - **Brand reviews**: confirmed to cover Ben & Jerry's, Häagen-Dazs, Breyers
   and Talenti with 1–5 star ratings. Exact column names weren't
   confirmable without downloading it myself, so the loader matches several
