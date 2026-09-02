@@ -1,0 +1,3068 @@
+{
+  "last_updated": "2026-09-02 12:34:58",
+  "sales_trend": {
+    "source": "real",
+    "unit": "index (2021=100)",
+    "series": [
+      {
+        "date": "1991-01",
+        "value": 168.2
+      },
+      {
+        "date": "1991-02",
+        "value": 183.3
+      },
+      {
+        "date": "1991-03",
+        "value": 187.1
+      },
+      {
+        "date": "1991-04",
+        "value": 219.8
+      },
+      {
+        "date": "1991-05",
+        "value": 177.8
+      },
+      {
+        "date": "1991-06",
+        "value": 199.9
+      },
+      {
+        "date": "1991-07",
+        "value": 218.9
+      },
+      {
+        "date": "1991-08",
+        "value": 199.4
+      },
+      {
+        "date": "1991-09",
+        "value": 169.4
+      },
+      {
+        "date": "1991-10",
+        "value": 128.2
+      },
+      {
+        "date": "1991-11",
+        "value": 112.6
+      },
+      {
+        "date": "1991-12",
+        "value": 64.1
+      },
+      {
+        "date": "1992-01",
+        "value": 165.4
+      },
+      {
+        "date": "1992-02",
+        "value": 203.3
+      },
+      {
+        "date": "1992-03",
+        "value": 225.2
+      },
+      {
+        "date": "1992-04",
+        "value": 237.4
+      },
+      {
+        "date": "1992-05",
+        "value": 203.5
+      },
+      {
+        "date": "1992-06",
+        "value": 214.0
+      },
+      {
+        "date": "1992-07",
+        "value": 289.6
+      },
+      {
+        "date": "1992-08",
+        "value": 169.1
+      },
+      {
+        "date": "1992-09",
+        "value": 146.6
+      },
+      {
+        "date": "1992-10",
+        "value": 103.1
+      },
+      {
+        "date": "1992-11",
+        "value": 98.5
+      },
+      {
+        "date": "1992-12",
+        "value": 72.7
+      },
+      {
+        "date": "1993-01",
+        "value": 184.8
+      },
+      {
+        "date": "1993-02",
+        "value": 182.1
+      },
+      {
+        "date": "1993-03",
+        "value": 210.7
+      },
+      {
+        "date": "1993-04",
+        "value": 212.4
+      },
+      {
+        "date": "1993-05",
+        "value": 215.8
+      },
+      {
+        "date": "1993-06",
+        "value": 261.3
+      },
+      {
+        "date": "1993-07",
+        "value": 221.3
+      },
+      {
+        "date": "1993-08",
+        "value": 131.9
+      },
+      {
+        "date": "1993-09",
+        "value": 114.1
+      },
+      {
+        "date": "1993-10",
+        "value": 96.4
+      },
+      {
+        "date": "1993-11",
+        "value": 82.9
+      },
+      {
+        "date": "1993-12",
+        "value": 49.8
+      },
+      {
+        "date": "1994-01",
+        "value": 149.9
+      },
+      {
+        "date": "1994-02",
+        "value": 165.4
+      },
+      {
+        "date": "1994-03",
+        "value": 204.4
+      },
+      {
+        "date": "1994-04",
+        "value": 220.7
+      },
+      {
+        "date": "1994-05",
+        "value": 191.5
+      },
+      {
+        "date": "1994-06",
+        "value": 214.0
+      },
+      {
+        "date": "1994-07",
+        "value": 225.2
+      },
+      {
+        "date": "1994-08",
+        "value": 204.0
+      },
+      {
+        "date": "1994-09",
+        "value": 132.5
+      },
+      {
+        "date": "1994-10",
+        "value": 104.4
+      },
+      {
+        "date": "1994-11",
+        "value": 88.8
+      },
+      {
+        "date": "1994-12",
+        "value": 44.6
+      },
+      {
+        "date": "1995-01",
+        "value": 174.6
+      },
+      {
+        "date": "1995-02",
+        "value": 195.6
+      },
+      {
+        "date": "1995-03",
+        "value": 222.7
+      },
+      {
+        "date": "1995-04",
+        "value": 210.1
+      },
+      {
+        "date": "1995-05",
+        "value": 226.3
+      },
+      {
+        "date": "1995-06",
+        "value": 215.2
+      },
+      {
+        "date": "1995-07",
+        "value": 209.0
+      },
+      {
+        "date": "1995-08",
+        "value": 168.1
+      },
+      {
+        "date": "1995-09",
+        "value": 125.5
+      },
+      {
+        "date": "1995-10",
+        "value": 103.5
+      },
+      {
+        "date": "1995-11",
+        "value": 111.7
+      },
+      {
+        "date": "1995-12",
+        "value": 46.2
+      },
+      {
+        "date": "1996-01",
+        "value": 139.0
+      },
+      {
+        "date": "1996-02",
+        "value": 159.0
+      },
+      {
+        "date": "1996-03",
+        "value": 179.3
+      },
+      {
+        "date": "1996-04",
+        "value": 202.3
+      },
+      {
+        "date": "1996-05",
+        "value": 196.6
+      },
+      {
+        "date": "1996-06",
+        "value": 211.4
+      },
+      {
+        "date": "1996-07",
+        "value": 229.7
+      },
+      {
+        "date": "1996-08",
+        "value": 141.4
+      },
+      {
+        "date": "1996-09",
+        "value": 113.8
+      },
+      {
+        "date": "1996-10",
+        "value": 75.7
+      },
+      {
+        "date": "1996-11",
+        "value": 106.2
+      },
+      {
+        "date": "1996-12",
+        "value": 51.7
+      },
+      {
+        "date": "1997-01",
+        "value": 126.6
+      },
+      {
+        "date": "1997-02",
+        "value": 124.9
+      },
+      {
+        "date": "1997-03",
+        "value": 135.1
+      },
+      {
+        "date": "1997-04",
+        "value": 161.5
+      },
+      {
+        "date": "1997-05",
+        "value": 147.6
+      },
+      {
+        "date": "1997-06",
+        "value": 151.7
+      },
+      {
+        "date": "1997-07",
+        "value": 158.6
+      },
+      {
+        "date": "1997-08",
+        "value": 108.2
+      },
+      {
+        "date": "1997-09",
+        "value": 100.8
+      },
+      {
+        "date": "1997-10",
+        "value": 67.5
+      },
+      {
+        "date": "1997-11",
+        "value": 97.1
+      },
+      {
+        "date": "1997-12",
+        "value": 46.0
+      },
+      {
+        "date": "1998-01",
+        "value": 115.3
+      },
+      {
+        "date": "1998-02",
+        "value": 139.9
+      },
+      {
+        "date": "1998-03",
+        "value": 144.8
+      },
+      {
+        "date": "1998-04",
+        "value": 155.6
+      },
+      {
+        "date": "1998-05",
+        "value": 151.9
+      },
+      {
+        "date": "1998-06",
+        "value": 173.3
+      },
+      {
+        "date": "1998-07",
+        "value": 158.6
+      },
+      {
+        "date": "1998-08",
+        "value": 110.2
+      },
+      {
+        "date": "1998-09",
+        "value": 87.9
+      },
+      {
+        "date": "1998-10",
+        "value": 99.5
+      },
+      {
+        "date": "1998-11",
+        "value": 96.8
+      },
+      {
+        "date": "1998-12",
+        "value": 27.9
+      },
+      {
+        "date": "1999-01",
+        "value": 153.8
+      },
+      {
+        "date": "1999-02",
+        "value": 130.5
+      },
+      {
+        "date": "1999-03",
+        "value": 154.1
+      },
+      {
+        "date": "1999-04",
+        "value": 174.0
+      },
+      {
+        "date": "1999-05",
+        "value": 134.9
+      },
+      {
+        "date": "1999-06",
+        "value": 171.2
+      },
+      {
+        "date": "1999-07",
+        "value": 153.6
+      },
+      {
+        "date": "1999-08",
+        "value": 96.4
+      },
+      {
+        "date": "1999-09",
+        "value": 107.2
+      },
+      {
+        "date": "1999-10",
+        "value": 114.0
+      },
+      {
+        "date": "1999-11",
+        "value": 103.0
+      },
+      {
+        "date": "1999-12",
+        "value": 51.0
+      },
+      {
+        "date": "2000-01",
+        "value": 130.9
+      },
+      {
+        "date": "2000-02",
+        "value": 147.1
+      },
+      {
+        "date": "2000-03",
+        "value": 147.8
+      },
+      {
+        "date": "2000-04",
+        "value": 149.6
+      },
+      {
+        "date": "2000-05",
+        "value": 166.3
+      },
+      {
+        "date": "2000-06",
+        "value": 159.1
+      },
+      {
+        "date": "2000-07",
+        "value": 181.3
+      },
+      {
+        "date": "2000-08",
+        "value": 123.9
+      },
+      {
+        "date": "2000-09",
+        "value": 108.9
+      },
+      {
+        "date": "2000-10",
+        "value": 94.1
+      },
+      {
+        "date": "2000-11",
+        "value": 99.5
+      },
+      {
+        "date": "2000-12",
+        "value": 31.7
+      },
+      {
+        "date": "2001-01",
+        "value": 107.3
+      },
+      {
+        "date": "2001-02",
+        "value": 131.8
+      },
+      {
+        "date": "2001-03",
+        "value": 155.5
+      },
+      {
+        "date": "2001-04",
+        "value": 150.0
+      },
+      {
+        "date": "2001-05",
+        "value": 167.4
+      },
+      {
+        "date": "2001-06",
+        "value": 131.5
+      },
+      {
+        "date": "2001-07",
+        "value": 143.8
+      },
+      {
+        "date": "2001-08",
+        "value": 135.9
+      },
+      {
+        "date": "2001-09",
+        "value": 102.8
+      },
+      {
+        "date": "2001-10",
+        "value": 88.7
+      },
+      {
+        "date": "2001-11",
+        "value": 90.3
+      },
+      {
+        "date": "2001-12",
+        "value": 40.2
+      },
+      {
+        "date": "2002-01",
+        "value": 104.1
+      },
+      {
+        "date": "2002-02",
+        "value": 128.1
+      },
+      {
+        "date": "2002-03",
+        "value": 120.1
+      },
+      {
+        "date": "2002-04",
+        "value": 165.0
+      },
+      {
+        "date": "2002-05",
+        "value": 141.6
+      },
+      {
+        "date": "2002-06",
+        "value": 160.4
+      },
+      {
+        "date": "2002-07",
+        "value": 156.9
+      },
+      {
+        "date": "2002-08",
+        "value": 126.0
+      },
+      {
+        "date": "2002-09",
+        "value": 112.7
+      },
+      {
+        "date": "2002-10",
+        "value": 97.0
+      },
+      {
+        "date": "2002-11",
+        "value": 95.4
+      },
+      {
+        "date": "2002-12",
+        "value": 53.8
+      },
+      {
+        "date": "2003-01",
+        "value": 101.3
+      },
+      {
+        "date": "2003-02",
+        "value": 116.4
+      },
+      {
+        "date": "2003-03",
+        "value": 143.0
+      },
+      {
+        "date": "2003-04",
+        "value": 176.2
+      },
+      {
+        "date": "2003-05",
+        "value": 163.7
+      },
+      {
+        "date": "2003-06",
+        "value": 196.0
+      },
+      {
+        "date": "2003-07",
+        "value": 225.9
+      },
+      {
+        "date": "2003-08",
+        "value": 180.9
+      },
+      {
+        "date": "2003-09",
+        "value": 127.7
+      },
+      {
+        "date": "2003-10",
+        "value": 100.2
+      },
+      {
+        "date": "2003-11",
+        "value": 106.8
+      },
+      {
+        "date": "2003-12",
+        "value": 54.3
+      },
+      {
+        "date": "2004-01",
+        "value": 116.3
+      },
+      {
+        "date": "2004-02",
+        "value": 151.0
+      },
+      {
+        "date": "2004-03",
+        "value": 167.8
+      },
+      {
+        "date": "2004-04",
+        "value": 169.2
+      },
+      {
+        "date": "2004-05",
+        "value": 155.0
+      },
+      {
+        "date": "2004-06",
+        "value": 157.4
+      },
+      {
+        "date": "2004-07",
+        "value": 146.1
+      },
+      {
+        "date": "2004-08",
+        "value": 102.6
+      },
+      {
+        "date": "2004-09",
+        "value": 60.1
+      },
+      {
+        "date": "2004-10",
+        "value": 73.1
+      },
+      {
+        "date": "2004-11",
+        "value": 78.8
+      },
+      {
+        "date": "2004-12",
+        "value": 49.3
+      },
+      {
+        "date": "2005-01",
+        "value": 117.3
+      },
+      {
+        "date": "2005-02",
+        "value": 131.1
+      },
+      {
+        "date": "2005-03",
+        "value": 131.5
+      },
+      {
+        "date": "2005-04",
+        "value": 179.7
+      },
+      {
+        "date": "2005-05",
+        "value": 147.1
+      },
+      {
+        "date": "2005-06",
+        "value": 169.5
+      },
+      {
+        "date": "2005-07",
+        "value": 179.6
+      },
+      {
+        "date": "2005-08",
+        "value": 119.7
+      },
+      {
+        "date": "2005-09",
+        "value": 91.2
+      },
+      {
+        "date": "2005-10",
+        "value": 73.0
+      },
+      {
+        "date": "2005-11",
+        "value": 106.5
+      },
+      {
+        "date": "2005-12",
+        "value": 65.0
+      },
+      {
+        "date": "2006-01",
+        "value": 150.0
+      },
+      {
+        "date": "2006-02",
+        "value": 147.9
+      },
+      {
+        "date": "2006-03",
+        "value": 158.4
+      },
+      {
+        "date": "2006-04",
+        "value": 155.2
+      },
+      {
+        "date": "2006-05",
+        "value": 173.9
+      },
+      {
+        "date": "2006-06",
+        "value": 141.6
+      },
+      {
+        "date": "2006-07",
+        "value": 178.1
+      },
+      {
+        "date": "2006-08",
+        "value": 138.7
+      },
+      {
+        "date": "2006-09",
+        "value": 111.0
+      },
+      {
+        "date": "2006-10",
+        "value": 77.6
+      },
+      {
+        "date": "2006-11",
+        "value": 101.5
+      },
+      {
+        "date": "2006-12",
+        "value": 56.7
+      },
+      {
+        "date": "2007-01",
+        "value": 133.7
+      },
+      {
+        "date": "2007-02",
+        "value": 153.5
+      },
+      {
+        "date": "2007-03",
+        "value": 193.5
+      },
+      {
+        "date": "2007-04",
+        "value": 198.9
+      },
+      {
+        "date": "2007-05",
+        "value": 216.2
+      },
+      {
+        "date": "2007-06",
+        "value": 216.5
+      },
+      {
+        "date": "2007-07",
+        "value": 201.1
+      },
+      {
+        "date": "2007-08",
+        "value": 139.7
+      },
+      {
+        "date": "2007-09",
+        "value": 106.1
+      },
+      {
+        "date": "2007-10",
+        "value": 80.9
+      },
+      {
+        "date": "2007-11",
+        "value": 104.1
+      },
+      {
+        "date": "2007-12",
+        "value": 37.8
+      },
+      {
+        "date": "2008-01",
+        "value": 144.0
+      },
+      {
+        "date": "2008-02",
+        "value": 164.9
+      },
+      {
+        "date": "2008-03",
+        "value": 160.6
+      },
+      {
+        "date": "2008-04",
+        "value": 215.5
+      },
+      {
+        "date": "2008-05",
+        "value": 173.9
+      },
+      {
+        "date": "2008-06",
+        "value": 197.3
+      },
+      {
+        "date": "2008-07",
+        "value": 172.3
+      },
+      {
+        "date": "2008-08",
+        "value": 101.6
+      },
+      {
+        "date": "2008-09",
+        "value": 87.7
+      },
+      {
+        "date": "2008-10",
+        "value": 59.5
+      },
+      {
+        "date": "2008-11",
+        "value": 91.0
+      },
+      {
+        "date": "2008-12",
+        "value": 40.9
+      },
+      {
+        "date": "2009-01",
+        "value": 128.4
+      },
+      {
+        "date": "2009-02",
+        "value": 128.8
+      },
+      {
+        "date": "2009-03",
+        "value": 158.2
+      },
+      {
+        "date": "2009-04",
+        "value": 184.3
+      },
+      {
+        "date": "2009-05",
+        "value": 196.5
+      },
+      {
+        "date": "2009-06",
+        "value": 186.7
+      },
+      {
+        "date": "2009-07",
+        "value": 177.5
+      },
+      {
+        "date": "2009-08",
+        "value": 123.1
+      },
+      {
+        "date": "2009-09",
+        "value": 104.0
+      },
+      {
+        "date": "2009-10",
+        "value": 64.3
+      },
+      {
+        "date": "2009-11",
+        "value": 109.0
+      },
+      {
+        "date": "2009-12",
+        "value": 62.7
+      },
+      {
+        "date": "2010-01",
+        "value": 126.9
+      },
+      {
+        "date": "2010-02",
+        "value": 156.9
+      },
+      {
+        "date": "2010-03",
+        "value": 199.3
+      },
+      {
+        "date": "2010-04",
+        "value": 191.0
+      },
+      {
+        "date": "2010-05",
+        "value": 176.4
+      },
+      {
+        "date": "2010-06",
+        "value": 185.7
+      },
+      {
+        "date": "2010-07",
+        "value": 201.2
+      },
+      {
+        "date": "2010-08",
+        "value": 161.8
+      },
+      {
+        "date": "2010-09",
+        "value": 101.1
+      },
+      {
+        "date": "2010-10",
+        "value": 55.1
+      },
+      {
+        "date": "2010-11",
+        "value": 89.0
+      },
+      {
+        "date": "2010-12",
+        "value": 59.6
+      },
+      {
+        "date": "2011-01",
+        "value": 131.5
+      },
+      {
+        "date": "2011-02",
+        "value": 145.8
+      },
+      {
+        "date": "2011-03",
+        "value": 196.9
+      },
+      {
+        "date": "2011-04",
+        "value": 191.4
+      },
+      {
+        "date": "2011-05",
+        "value": 230.8
+      },
+      {
+        "date": "2011-06",
+        "value": 196.5
+      },
+      {
+        "date": "2011-07",
+        "value": 169.8
+      },
+      {
+        "date": "2011-08",
+        "value": 81.2
+      },
+      {
+        "date": "2011-09",
+        "value": 68.3
+      },
+      {
+        "date": "2011-10",
+        "value": 41.4
+      },
+      {
+        "date": "2011-11",
+        "value": 120.8
+      },
+      {
+        "date": "2011-12",
+        "value": 79.1
+      },
+      {
+        "date": "2012-01",
+        "value": 143.5
+      },
+      {
+        "date": "2012-02",
+        "value": 148.8
+      },
+      {
+        "date": "2012-03",
+        "value": 207.1
+      },
+      {
+        "date": "2012-04",
+        "value": 177.9
+      },
+      {
+        "date": "2012-05",
+        "value": 200.1
+      },
+      {
+        "date": "2012-06",
+        "value": 173.2
+      },
+      {
+        "date": "2012-07",
+        "value": 105.8
+      },
+      {
+        "date": "2012-08",
+        "value": 58.6
+      },
+      {
+        "date": "2012-09",
+        "value": 55.7
+      },
+      {
+        "date": "2012-10",
+        "value": 32.1
+      },
+      {
+        "date": "2012-11",
+        "value": 57.2
+      },
+      {
+        "date": "2012-12",
+        "value": 31.5
+      },
+      {
+        "date": "2013-01",
+        "value": 90.0
+      },
+      {
+        "date": "2013-02",
+        "value": 107.6
+      },
+      {
+        "date": "2013-03",
+        "value": 122.1
+      },
+      {
+        "date": "2013-04",
+        "value": 136.3
+      },
+      {
+        "date": "2013-05",
+        "value": 119.4
+      },
+      {
+        "date": "2013-06",
+        "value": 110.6
+      },
+      {
+        "date": "2013-07",
+        "value": 113.3
+      },
+      {
+        "date": "2013-08",
+        "value": 94.6
+      },
+      {
+        "date": "2013-09",
+        "value": 54.6
+      },
+      {
+        "date": "2013-10",
+        "value": 28.4
+      },
+      {
+        "date": "2013-11",
+        "value": 46.9
+      },
+      {
+        "date": "2013-12",
+        "value": 26.3
+      },
+      {
+        "date": "2014-01",
+        "value": 81.5
+      },
+      {
+        "date": "2014-02",
+        "value": 110.6
+      },
+      {
+        "date": "2014-03",
+        "value": 126.0
+      },
+      {
+        "date": "2014-04",
+        "value": 143.1
+      },
+      {
+        "date": "2014-05",
+        "value": 135.9
+      },
+      {
+        "date": "2014-06",
+        "value": 126.0
+      },
+      {
+        "date": "2014-07",
+        "value": 127.2
+      },
+      {
+        "date": "2014-08",
+        "value": 62.2
+      },
+      {
+        "date": "2014-09",
+        "value": 42.0
+      },
+      {
+        "date": "2014-10",
+        "value": 35.1
+      },
+      {
+        "date": "2014-11",
+        "value": 46.3
+      },
+      {
+        "date": "2014-12",
+        "value": 35.6
+      },
+      {
+        "date": "2015-01",
+        "value": 67.3
+      },
+      {
+        "date": "2015-02",
+        "value": 83.0
+      },
+      {
+        "date": "2015-03",
+        "value": 100.8
+      },
+      {
+        "date": "2015-04",
+        "value": 98.9
+      },
+      {
+        "date": "2015-05",
+        "value": 79.5
+      },
+      {
+        "date": "2015-06",
+        "value": 90.9
+      },
+      {
+        "date": "2015-07",
+        "value": 94.0
+      },
+      {
+        "date": "2015-08",
+        "value": 69.2
+      },
+      {
+        "date": "2015-09",
+        "value": 52.7
+      },
+      {
+        "date": "2015-10",
+        "value": 38.9
+      },
+      {
+        "date": "2015-11",
+        "value": 49.0
+      },
+      {
+        "date": "2015-12",
+        "value": 22.8
+      },
+      {
+        "date": "2016-01",
+        "value": 64.1
+      },
+      {
+        "date": "2016-02",
+        "value": 81.7
+      },
+      {
+        "date": "2016-03",
+        "value": 87.0
+      },
+      {
+        "date": "2016-04",
+        "value": 97.2
+      },
+      {
+        "date": "2016-05",
+        "value": 87.6
+      },
+      {
+        "date": "2016-06",
+        "value": 91.7
+      },
+      {
+        "date": "2016-07",
+        "value": 84.6
+      },
+      {
+        "date": "2016-08",
+        "value": 59.4
+      },
+      {
+        "date": "2016-09",
+        "value": 39.9
+      },
+      {
+        "date": "2016-10",
+        "value": 37.1
+      },
+      {
+        "date": "2016-11",
+        "value": 45.0
+      },
+      {
+        "date": "2016-12",
+        "value": 29.8
+      },
+      {
+        "date": "2017-01",
+        "value": 77.3
+      },
+      {
+        "date": "2017-02",
+        "value": 86.5
+      },
+      {
+        "date": "2017-03",
+        "value": 90.4
+      },
+      {
+        "date": "2017-04",
+        "value": 90.3
+      },
+      {
+        "date": "2017-05",
+        "value": 100.1
+      },
+      {
+        "date": "2017-06",
+        "value": 96.0
+      },
+      {
+        "date": "2017-07",
+        "value": 107.1
+      },
+      {
+        "date": "2017-08",
+        "value": 75.4
+      },
+      {
+        "date": "2017-09",
+        "value": 49.8
+      },
+      {
+        "date": "2017-10",
+        "value": 30.1
+      },
+      {
+        "date": "2017-11",
+        "value": 41.1
+      },
+      {
+        "date": "2017-12",
+        "value": 20.5
+      },
+      {
+        "date": "2018-01",
+        "value": 63.5
+      },
+      {
+        "date": "2018-02",
+        "value": 75.4
+      },
+      {
+        "date": "2018-03",
+        "value": 83.4
+      },
+      {
+        "date": "2018-04",
+        "value": 78.7
+      },
+      {
+        "date": "2018-05",
+        "value": 84.2
+      },
+      {
+        "date": "2018-06",
+        "value": 89.7
+      },
+      {
+        "date": "2018-07",
+        "value": 88.9
+      },
+      {
+        "date": "2018-08",
+        "value": 78.4
+      },
+      {
+        "date": "2018-09",
+        "value": 63.2
+      },
+      {
+        "date": "2018-10",
+        "value": 43.5
+      },
+      {
+        "date": "2018-11",
+        "value": 44.8
+      },
+      {
+        "date": "2018-12",
+        "value": 29.0
+      },
+      {
+        "date": "2019-01",
+        "value": 103.9
+      },
+      {
+        "date": "2019-02",
+        "value": 112.0
+      },
+      {
+        "date": "2019-03",
+        "value": 114.0
+      },
+      {
+        "date": "2019-04",
+        "value": 114.1
+      },
+      {
+        "date": "2019-05",
+        "value": 125.7
+      },
+      {
+        "date": "2019-06",
+        "value": 105.9
+      },
+      {
+        "date": "2019-07",
+        "value": 119.5
+      },
+      {
+        "date": "2019-08",
+        "value": 110.9
+      },
+      {
+        "date": "2019-09",
+        "value": 77.5
+      },
+      {
+        "date": "2019-10",
+        "value": 66.6
+      },
+      {
+        "date": "2019-11",
+        "value": 65.6
+      },
+      {
+        "date": "2019-12",
+        "value": 37.8
+      },
+      {
+        "date": "2020-01",
+        "value": 92.5
+      },
+      {
+        "date": "2020-02",
+        "value": 112.1
+      },
+      {
+        "date": "2020-03",
+        "value": 113.8
+      },
+      {
+        "date": "2020-04",
+        "value": 109.3
+      },
+      {
+        "date": "2020-05",
+        "value": 113.7
+      },
+      {
+        "date": "2020-06",
+        "value": 134.4
+      },
+      {
+        "date": "2020-07",
+        "value": 130.2
+      },
+      {
+        "date": "2020-08",
+        "value": 86.3
+      },
+      {
+        "date": "2020-09",
+        "value": 77.8
+      },
+      {
+        "date": "2020-10",
+        "value": 53.0
+      },
+      {
+        "date": "2020-11",
+        "value": 70.1
+      },
+      {
+        "date": "2020-12",
+        "value": 49.3
+      },
+      {
+        "date": "2021-01",
+        "value": 81.1
+      },
+      {
+        "date": "2021-02",
+        "value": 93.0
+      },
+      {
+        "date": "2021-03",
+        "value": 134.9
+      },
+      {
+        "date": "2021-04",
+        "value": 132.9
+      },
+      {
+        "date": "2021-05",
+        "value": 123.9
+      },
+      {
+        "date": "2021-06",
+        "value": 132.9
+      },
+      {
+        "date": "2021-07",
+        "value": 128.9
+      },
+      {
+        "date": "2021-08",
+        "value": 117.2
+      },
+      {
+        "date": "2021-09",
+        "value": 86.3
+      },
+      {
+        "date": "2021-10",
+        "value": 52.2
+      },
+      {
+        "date": "2021-11",
+        "value": 68.0
+      },
+      {
+        "date": "2021-12",
+        "value": 48.1
+      },
+      {
+        "date": "2022-01",
+        "value": 81.9
+      },
+      {
+        "date": "2022-02",
+        "value": 106.1
+      },
+      {
+        "date": "2022-03",
+        "value": 132.3
+      },
+      {
+        "date": "2022-04",
+        "value": 115.5
+      },
+      {
+        "date": "2022-05",
+        "value": 142.1
+      },
+      {
+        "date": "2022-06",
+        "value": 130.6
+      },
+      {
+        "date": "2022-07",
+        "value": 115.6
+      },
+      {
+        "date": "2022-08",
+        "value": 105.7
+      },
+      {
+        "date": "2022-09",
+        "value": 80.0
+      },
+      {
+        "date": "2022-10",
+        "value": 56.7
+      },
+      {
+        "date": "2022-11",
+        "value": 73.4
+      },
+      {
+        "date": "2022-12",
+        "value": 43.3
+      },
+      {
+        "date": "2023-01",
+        "value": 94.5
+      },
+      {
+        "date": "2023-02",
+        "value": 108.5
+      },
+      {
+        "date": "2023-03",
+        "value": 113.0
+      },
+      {
+        "date": "2023-04",
+        "value": 117.3
+      },
+      {
+        "date": "2023-05",
+        "value": 115.2
+      },
+      {
+        "date": "2023-06",
+        "value": 126.8
+      },
+      {
+        "date": "2023-07",
+        "value": 131.1
+      },
+      {
+        "date": "2023-08",
+        "value": 116.3
+      },
+      {
+        "date": "2023-09",
+        "value": 74.4
+      },
+      {
+        "date": "2023-10",
+        "value": 49.9
+      },
+      {
+        "date": "2023-11",
+        "value": 80.7
+      },
+      {
+        "date": "2023-12",
+        "value": 48.1
+      },
+      {
+        "date": "2024-01",
+        "value": 104.9
+      },
+      {
+        "date": "2024-02",
+        "value": 99.7
+      },
+      {
+        "date": "2024-03",
+        "value": 133.5
+      },
+      {
+        "date": "2024-04",
+        "value": 129.8
+      },
+      {
+        "date": "2024-05",
+        "value": 137.1
+      },
+      {
+        "date": "2024-06",
+        "value": 135.2
+      },
+      {
+        "date": "2024-07",
+        "value": 124.2
+      },
+      {
+        "date": "2024-08",
+        "value": 98.1
+      },
+      {
+        "date": "2024-09",
+        "value": 82.1
+      },
+      {
+        "date": "2024-10",
+        "value": 43.3
+      },
+      {
+        "date": "2024-11",
+        "value": 87.4
+      },
+      {
+        "date": "2024-12",
+        "value": 53.3
+      },
+      {
+        "date": "2025-01",
+        "value": 102.6
+      },
+      {
+        "date": "2025-02",
+        "value": 111.3
+      },
+      {
+        "date": "2025-03",
+        "value": 125.1
+      },
+      {
+        "date": "2025-04",
+        "value": 122.4
+      },
+      {
+        "date": "2025-05",
+        "value": 123.8
+      },
+      {
+        "date": "2025-06",
+        "value": 122.1
+      },
+      {
+        "date": "2025-07",
+        "value": 129.0
+      },
+      {
+        "date": "2025-08",
+        "value": 102.6
+      },
+      {
+        "date": "2025-09",
+        "value": 92.1
+      },
+      {
+        "date": "2025-10",
+        "value": 60.9
+      },
+      {
+        "date": "2025-11",
+        "value": 68.5
+      },
+      {
+        "date": "2025-12",
+        "value": 54.0
+      },
+      {
+        "date": "2026-01",
+        "value": 73.5
+      },
+      {
+        "date": "2026-02",
+        "value": 106.2
+      },
+      {
+        "date": "2026-03",
+        "value": 119.7
+      },
+      {
+        "date": "2026-04",
+        "value": 126.6
+      },
+      {
+        "date": "2026-05",
+        "value": 125.2
+      },
+      {
+        "date": "2026-06",
+        "value": 131.9
+      }
+    ]
+  },
+  "brand_sentiment": {
+    "source": "real",
+    "items": [
+      {
+        "flavor": "Ben & Jerry's",
+        "sentiment_score": 4.35,
+        "mention_volume": 20,
+        "status": "Trending Up"
+      },
+      {
+        "flavor": "Haagen-Dazs",
+        "sentiment_score": 4.55,
+        "mention_volume": 20,
+        "status": "Trending Up"
+      },
+      {
+        "flavor": "Talenti",
+        "sentiment_score": 4.15,
+        "mention_volume": 20,
+        "status": "Stable"
+      },
+      {
+        "flavor": "Breyers",
+        "sentiment_score": 3.75,
+        "mention_volume": 20,
+        "status": "Declining"
+      },
+      {
+        "flavor": "Store Brand",
+        "sentiment_score": 3.15,
+        "mention_volume": 20,
+        "status": "Declining"
+      },
+      {
+        "flavor": "Magnum",
+        "sentiment_score": 4.7,
+        "mention_volume": 20,
+        "status": "Trending Up"
+      },
+      {
+        "flavor": "Klondike",
+        "sentiment_score": 3.9,
+        "mention_volume": 20,
+        "status": "Stable"
+      },
+      {
+        "flavor": "Blue Bell",
+        "sentiment_score": 4.75,
+        "mention_volume": 20,
+        "status": "Trending Up"
+      },
+      {
+        "flavor": "Van Leeuwen",
+        "sentiment_score": 3.25,
+        "mention_volume": 20,
+        "status": "Declining"
+      }
+    ]
+  },
+  "nutrition": {
+    "source": "real",
+    "items": [
+      {
+        "item": "Howling Cow Ice Cream",
+        "calories": 235,
+        "sugar_g": 25.5,
+        "fat_g": 13.7,
+        "protein_g": 2.94,
+        "sugar_per_100g": 25.0,
+        "uk_traffic_light": "red",
+        "pct_of_who_10pct_limit": 41,
+        "pct_of_who_5pct_limit": 82
+      },
+      {
+        "item": "Prairie Farms Ice Cream",
+        "calories": 233,
+        "sugar_g": 22.1,
+        "fat_g": 11.6,
+        "protein_g": 3.49,
+        "sugar_per_100g": 25.7,
+        "uk_traffic_light": "red",
+        "pct_of_who_10pct_limit": 30,
+        "pct_of_who_5pct_limit": 60
+      },
+      {
+        "item": "Best Yet Ice Cream Cake Cups, Ice Cream",
+        "calories": 400,
+        "sugar_g": 20.0,
+        "fat_g": 0.0,
+        "protein_g": 0.0,
+        "sugar_per_100g": null,
+        "uk_traffic_light": null,
+        "pct_of_who_10pct_limit": 40,
+        "pct_of_who_5pct_limit": 80
+      },
+      {
+        "item": "Julie'S Ice Cream, Strawberries & Cream",
+        "calories": 209,
+        "sugar_g": 23.3,
+        "fat_g": 11.6,
+        "protein_g": 2.33,
+        "sugar_per_100g": 27.1,
+        "uk_traffic_light": "red",
+        "pct_of_who_10pct_limit": 40,
+        "pct_of_who_5pct_limit": 79
+      },
+      {
+        "item": "Lowes Foods Cookies & Cream Ice Cream",
+        "calories": 221,
+        "sugar_g": 19.8,
+        "fat_g": 10.5,
+        "protein_g": 3.49,
+        "sugar_per_100g": 23.0,
+        "uk_traffic_light": "red",
+        "pct_of_who_10pct_limit": 30,
+        "pct_of_who_5pct_limit": 60
+      },
+      {
+        "item": "Fuesta Ice Cream, Cookies & Cream",
+        "calories": 234,
+        "sugar_g": 17.0,
+        "fat_g": 11.7,
+        "protein_g": 4.26,
+        "sugar_per_100g": 18.1,
+        "uk_traffic_light": "amber",
+        "pct_of_who_10pct_limit": 28,
+        "pct_of_who_5pct_limit": 55
+      },
+      {
+        "item": "Clover Ice Cream, Cookies & Cream",
+        "calories": 242,
+        "sugar_g": 23.2,
+        "fat_g": 12.6,
+        "protein_g": 4.21,
+        "sugar_per_100g": 24.4,
+        "uk_traffic_light": "red",
+        "pct_of_who_10pct_limit": 36,
+        "pct_of_who_5pct_limit": 72
+      },
+      {
+        "item": "Hannaford Ice Cream, Cookies & Cream",
+        "calories": 239,
+        "sugar_g": 22.7,
+        "fat_g": 11.4,
+        "protein_g": 2.27,
+        "sugar_per_100g": 25.8,
+        "uk_traffic_light": "red",
+        "pct_of_who_10pct_limit": 36,
+        "pct_of_who_5pct_limit": 73
+      },
+      {
+        "item": "Clover Sonoma Ice Cream, Sweet Cream",
+        "calories": 211,
+        "sugar_g": 23.2,
+        "fat_g": 11.6,
+        "protein_g": 4.21,
+        "sugar_per_100g": 24.4,
+        "uk_traffic_light": "red",
+        "pct_of_who_10pct_limit": 36,
+        "pct_of_who_5pct_limit": 72
+      },
+      {
+        "item": "Big Easy Blends Ice Cream Flavored Snow Cone, Ice Cream",
+        "calories": 107,
+        "sugar_g": 24.9,
+        "fat_g": 0.0,
+        "protein_g": 0.0,
+        "sugar_per_100g": null,
+        "uk_traffic_light": null,
+        "pct_of_who_10pct_limit": 50,
+        "pct_of_who_5pct_limit": 100
+      },
+      {
+        "item": "Stone Ridge Creamery Neapolitan Ice Cream Sandwiches, Neapolitan Ice Cream",
+        "calories": 268,
+        "sugar_g": 23.2,
+        "fat_g": 8.93,
+        "protein_g": 3.57,
+        "sugar_per_100g": null,
+        "uk_traffic_light": null,
+        "pct_of_who_10pct_limit": 32,
+        "pct_of_who_5pct_limit": 64
+      },
+      {
+        "item": "Oberweis Dairy Turtle Ice Cream Pie, Turtle Ice Cream",
+        "calories": 333,
+        "sugar_g": 24.8,
+        "fat_g": 20.2,
+        "protein_g": 3.88,
+        "sugar_per_100g": 19.2,
+        "uk_traffic_light": "amber",
+        "pct_of_who_10pct_limit": 43,
+        "pct_of_who_5pct_limit": 87
+      }
+    ]
+  },
+  "regional_distribution": {
+    "source": "real",
+    "items": [
+      {
+        "region": "North America",
+        "share": 34.0,
+        "confidence": "grounded_estimate",
+        "basis": "Fortune Business Insights, Ice Cream Market Report: North America accounted for ~34% of global ice cream consumption/revenue share. Third-party market-research sizing (not a government or audited-company disclosure), hence grounded_estimate rather than real."
+      },
+      {
+        "region": "Europe",
+        "share": 27.0,
+        "confidence": "grounded_estimate",
+        "basis": "Fortune Business Insights, Ice Cream Market Report: Europe ~27% global share. Cross-checked against IMARC Group's independent estimate of ~35.1% for Europe for the same year \u2014 market-research firms diverge meaningfully on regional splits since no single body centrally measures global ice cream sales; this row uses the Fortune Business Insights figure for internal consistency with the other regions in this set."
+      },
+      {
+        "region": "Asia-Pacific",
+        "share": 25.0,
+        "confidence": "grounded_estimate",
+        "basis": "Fortune Business Insights, Ice Cream Market Report: Asia-Pacific ~25% global share, cited as the fastest-growing region on rising disposable incomes and urbanization in China and India."
+      },
+      {
+        "region": "Latin America",
+        "share": 9.0,
+        "confidence": "grounded_estimate",
+        "basis": "Fortune Business Insights, Ice Cream Market Report: Latin America ~9% global share."
+      },
+      {
+        "region": "Middle East & Africa",
+        "share": 5.0,
+        "confidence": "grounded_estimate",
+        "basis": "Residual share (100% - North America - Europe - Asia-Pacific - Latin America) implied by the same Fortune Business Insights breakdown; not independently published as its own line figure by that source."
+      }
+    ]
+  },
+  "synthesis": {
+    "generated_at": "2026-09-02 12:34:58",
+    "mode": "rule-based",
+    "flags": [
+      {
+        "rank": 1,
+        "headline": "Store Brand sentiment declining",
+        "body": "Store Brand is currently the weakest performer in this dataset's brand sentiment, averaging 3.15/5 across 20 reviews sampled. At an assumed unit price, that sample represents roughly \u00a360 of reviewed-unit retail value - illustrative of price-tier exposure in this sample, not total market sales.",
+        "dollar_estimate": {
+          "amount_gbp": 60.0,
+          "basis": "20 sampled reviews x \u00a33.00 assumed mass market tub unit price - illustrates this dataset's reviewed sample only, not total market sales",
+          "is_assumption": true
+        },
+        "materiality_score": 60.0,
+        "signals_used": [
+          "brand:Store Brand"
+        ],
+        "recommendation": [
+          {
+            "stage": "This week",
+            "action": "Pull Store Brand's lowest-scoring reviews and tag the top 2-3 recurring complaints (flavor, texture, price, availability)."
+          },
+          {
+            "stage": "This month",
+            "action": "Run a targeted fix on Store Brand's weakest SKU - reformulation, price adjustment, or a promotion tied to the specific complaint, not the whole line."
+          },
+          {
+            "stage": "This quarter",
+            "action": "If sentiment hasn't recovered, consider consolidating Store Brand into a stronger sibling line rather than continuing to invest evenly."
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "headline": "Production index up 5.4% MoM",
+        "body": "The production index reading for 2026-06 is 131.9 (2017=100), up 5.4% versus the prior month, and up 8.0% year-over-year. This is an index-based signal - no revenue anchor has been supplied for this panel, so no dollar figure is attached.",
+        "dollar_estimate": null,
+        "materiality_score": 267.57,
+        "signals_used": [
+          "trend:2026-06"
+        ],
+        "recommendation": [
+          {
+            "stage": "This week",
+            "action": "Confirm current supply chain capacity can sustain this pace without rush freight or overtime costs eating the gain."
+          },
+          {
+            "stage": "This month",
+            "action": "Pre-book raw material volumes at current prices before sustained demand pulls input costs up."
+          },
+          {
+            "stage": "This quarter",
+            "action": "Evaluate a capacity increase only if the uptrend holds for another cycle."
+          }
+        ]
+      }
+    ]
+  },
+  "company_revenue": {
+    "source": "real",
+    "items": [
+      {
+        "company": "TMICC",
+        "ultimate_owner": "\u2014 (independent public company)",
+        "scope": "total_company",
+        "fy2025": 9136.0,
+        "fy2026": 9565.0,
+        "delta_pct": 4.7,
+        "confidence": "real",
+        "basis_2025": "Real: TMICC FY2025 Annual Report (pub. 18 Mar 2026), revenue EUR7,910M; converted at ~1.155 USD/EUR (mid-Aug 2026 spot).",
+        "basis_2026": "Estimate: FY2025 actual (EUR7,910M) scaled by real H1 2026 organic sales growth of +4.7% (TMICC H1 2026 results, disclosed) -> ~EUR8,281M; converted at ~1.155 USD/EUR. FY2026 (ends 31 Dec 2026) not yet complete; H2 skews higher for ice cream seasonally, so this run-rate may understate the eventual actual."
+      },
+      {
+        "company": "Froneri",
+        "ultimate_owner": "Nestl\u00e9 + PAI Partners (JV)",
+        "scope": "total_company",
+        "fy2025": 6670.0,
+        "fy2026": 7004.0,
+        "delta_pct": 5.0,
+        "confidence": "grounded_estimate",
+        "basis_2025": "Estimate: grounded in real 2024 consolidated revenue of EUR5.5B (Froneri press materials via Spencer & Lewis, Oct 2025) grown by an assumed +5% (no 2025 figure publicly disclosed \u2014 Froneri is a private JV); converted at ~1.155 USD/EUR.",
+        "basis_2026": "Estimate: 2025 estimate (EUR5,775M) grown by a further assumed +5%. Same caveats as 2025 \u2014 not a disclosed figure."
+      },
+      {
+        "company": "H\u00e4agen-Dazs (General Mills)",
+        "ultimate_owner": "General Mills (trademark owner); manufactured under license by Froneri",
+        "scope": "ice_cream_segment",
+        "fy2025": 1800.0,
+        "fy2026": 1830.0,
+        "delta_pct": 1.7,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 General Mills' real FY2025 (ended 25 May 2025) total net sales were $19.5B (disclosed), but H\u00e4agen-Dazs brand/royalty revenue is not broken out (GM filings separately mention only the much smaller H\u00e4agen-Dazs Japan joint venture). This is a rough, unsourced order-of-magnitude placeholder for global H\u00e4agen-Dazs brand revenue \u2014 not GM's specific royalty income, which would be far smaller.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat. General Mills' FY2026 (ended 31 May 2026) total net sales were a real, disclosed $18.4B, but again no brand-level breakout exists."
+      },
+      {
+        "company": "Yili Group",
+        "ultimate_owner": "\u2014 (independent public company)",
+        "scope": "ice_cream_segment",
+        "fy2025": 1447.0,
+        "fy2026": 1520.0,
+        "delta_pct": 5.0,
+        "confidence": "grounded_estimate",
+        "basis_2025": "Tightly grounded estimate: Yili's real 9-month (Jan-Sep 2025) frozen dessert/ice cream revenue was RMB9.428B (+13% YoY, disclosed Nov 2025); Yili's FY2025 annual report (29 Apr 2026) describes full-year ice cream revenue as 'approaching RMB10 billion' without stating an exact figure. Uses RMB9.9B, consistent with that language, converted at the ~6.84 RMB/USD implied by Yili's own FY2025 total-revenue conversion (RMB115.931B = $16.94B).",
+        "basis_2026": "Estimate: extends the FY2025 figure assuming continued double-digit segment growth, consistent with Yili's own stated multi-year trend (31 consecutive years leading the category, per Yili). FY2026 full-year figures not yet published as of Aug 2026."
+      },
+      {
+        "company": "Mars Wrigley (ice cream)",
+        "ultimate_owner": "Mars, Incorporated",
+        "scope": "ice_cream_segment",
+        "fy2025": 1250.0,
+        "fy2026": 1325.0,
+        "delta_pct": 6.0,
+        "confidence": "grounded_estimate",
+        "basis_2025": "Estimate: grounded in Mars Wrigley's own public target of reaching ~$1.1B in global ice cream sales by 2024 (Food Dive reporting, 2022), plus reported double-digit growth in specific lines (e.g. Twix ice cream). Mars, Incorporated is privately held and publishes no actual results, so this assumes moderate continued growth past that stated target.",
+        "basis_2026": "Estimate: extends the 2025 estimate with a further assumed ~6% growth; not a disclosed figure."
+      },
+      {
+        "company": "Wells Enterprises (Blue Bunny, Halo Top, Bomb Pop)",
+        "ultimate_owner": "Ferrero Group",
+        "scope": "ice_cream_segment",
+        "fy2025": 950.0,
+        "fy2026": 985.0,
+        "delta_pct": 3.7,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Ferrero Group's real FY2025 (ended 31 Aug 2025) consolidated turnover was EUR19.3B / ~$22.3B (Ferrero key-figures page), but Ferrero does not break out Wells/ice cream segment revenue. No third-party estimate specific to Wells was found; treat this figure as non-authoritative.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat as 2025; not sourced."
+      },
+      {
+        "company": "Blue Bell Creameries",
+        "ultimate_owner": "Independent / family-owned",
+        "scope": "total_company",
+        "fy2025": 900.0,
+        "fy2026": 915.0,
+        "delta_pct": 1.7,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Blue Bell is privately held and discloses no financials. Loosely informed by its real reported headcount (~1,235 employees, PitchBook) against typical food-manufacturing revenue-per-employee ratios; this is an order-of-magnitude guess, not a researched estimate.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Mengniu (Aice + Deluxe)",
+        "ultimate_owner": "COFCO Corporation",
+        "scope": "ice_cream_segment",
+        "fy2025": 715.0,
+        "fy2026": 750.0,
+        "delta_pct": 4.9,
+        "confidence": "grounded_estimate",
+        "basis_2025": "Illustrative split \u2014 Mengniu's real FY2025 total revenue was RMB82.245B / ~$11.92B (2025 annual results, disclosed 25-26 Mar 2026), and the results note domestic ice cream posted 'double-digit growth' without a dollar figure. This row applies an unsourced ~6% share-of-total assumption to approximate the segment; the split itself is not disclosed.",
+        "basis_2026": "Illustrative split \u2014 same caveat as 2025; not sourced."
+      },
+      {
+        "company": "Inspire Brands (Baskin-Robbins)",
+        "ultimate_owner": "Roark Capital",
+        "scope": "ice_cream_segment",
+        "fy2025": 700.0,
+        "fy2026": 715.0,
+        "delta_pct": 2.1,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Inspire Brands is privately held (Roark Capital); no brand-level Baskin-Robbins revenue is disclosed, including in the reporting around its rumored 2026 IPO. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Turkey Hill",
+        "ultimate_owner": "Peak Rock Capital",
+        "scope": "total_company",
+        "fy2025": 550.0,
+        "fy2026": 560.0,
+        "delta_pct": 1.8,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Turkey Hill has been privately held by Peak Rock Capital since 2019 and discloses no financials. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "GoTo Foods (Carvel)",
+        "ultimate_owner": "Roark Capital",
+        "scope": "ice_cream_segment",
+        "fy2025": 220.0,
+        "fy2026": 226.0,
+        "delta_pct": 2.7,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 GoTo Foods (formerly Focus Brands) is privately held; no brand-level Carvel revenue is disclosed. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Tillamook",
+        "ultimate_owner": "Farmer-owned cooperative",
+        "scope": "ice_cream_segment",
+        "fy2025": 190.0,
+        "fy2026": 195.0,
+        "delta_pct": 2.6,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Tillamook County Creamery Association does not disclose category-level financials; ice cream is one of several product lines alongside cheese, yogurt, and butter. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Cold Stone Creamery",
+        "ultimate_owner": "MTY Food Group / Kahala Brands",
+        "scope": "ice_cream_segment",
+        "fy2025": 180.0,
+        "fy2026": 184.0,
+        "delta_pct": 2.2,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 MTY Food Group's real FY2025 (ended 30 Nov 2025) revenue was CAD $1.19B (\u2248$856M at ~0.719 USD/CAD), but MTY does not break out Cold Stone specifically among its 75+ brands. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Graeter's",
+        "ultimate_owner": "Independent / family-owned",
+        "scope": "total_company",
+        "fy2025": 145.0,
+        "fy2026": 150.0,
+        "delta_pct": 3.4,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Graeter's is privately held and discloses no financials. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Perry's Ice Cream",
+        "ultimate_owner": "Independent / family-owned",
+        "scope": "total_company",
+        "fy2025": 120.0,
+        "fy2026": 123.0,
+        "delta_pct": 2.5,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Perry's is privately held and discloses no financials. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Friendly's (DFA)",
+        "ultimate_owner": "Dairy Farmers of America \u2014 retail ice cream only, restaurant side excluded",
+        "scope": "ice_cream_segment",
+        "fy2025": 115.0,
+        "fy2026": 117.0,
+        "delta_pct": 1.7,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 DFA's approximate total cooperative revenue was ~$23B in 2024 (Dairy Foods Top 100 list, the most current reasonably-sourced figure located), but Friendly's retail ice cream is a minor legacy line within a cooperative whose scale is overwhelmingly raw milk marketing, so no percentage-based estimate is defensible. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Dippin' Dots",
+        "ultimate_owner": "J&J Snack Foods",
+        "scope": "ice_cream_segment",
+        "fy2025": 101.0,
+        "fy2026": 105.0,
+        "delta_pct": 4.0,
+        "confidence": "grounded_estimate",
+        "basis_2025": "Estimate: grounded in real FY2024 Dippin' Dots segment sales of $95.3M (J&J Snack Foods FY2024 10-K business-combination note) plus real disclosed quarterly growth commentary (e.g. +8.4% YoY in fiscal Q1 2025), moderating across the year. J&J's FY2025 total company net sales were a real, disclosed $1,583.2M, but FY2025 10-K/press releases reviewed did not restate an exact FY2025 dollar figure for Dippin' Dots specifically.",
+        "basis_2026": "Estimate: extends the FY2025 estimate with modest assumed growth. J&J's fiscal year ends late September, so FY2026 is not yet complete as of Aug 2026."
+      },
+      {
+        "company": "Jeni's Splendid Ice Creams",
+        "ultimate_owner": "Independent / founder-led",
+        "scope": "total_company",
+        "fy2025": 90.0,
+        "fy2026": 95.0,
+        "delta_pct": 5.6,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Jeni's is privately held and discloses no financials. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Van Leeuwen",
+        "ultimate_owner": "Independent",
+        "scope": "total_company",
+        "fy2025": 55.0,
+        "fy2026": 58.0,
+        "delta_pct": 5.5,
+        "confidence": "placeholder",
+        "basis_2025": "Illustrative placeholder \u2014 Van Leeuwen is privately held and discloses no financials. Not sourced.",
+        "basis_2026": "Illustrative placeholder \u2014 same caveat; not sourced."
+      },
+      {
+        "company": "Mackie's of Scotland",
+        "ultimate_owner": "Independent / family-owned (Aberdeenshire, UK)",
+        "scope": "total_company",
+        "fy2025": 31.5,
+        "fy2026": 35.0,
+        "delta_pct": 11.1,
+        "confidence": "real",
+        "basis_2025": "Real: Companies House-filed accounts, year ending 31 May 2025 \u2014 turnover GBP24.8M (+11% YoY, a company record); converted at ~1.27 USD/GBP. One of the few independents in this table with genuinely disclosed financials, since UK private limited companies must file accounts with Companies House.",
+        "basis_2026": "Estimate: FY2025 actual (GBP24.8M) extended by the same +11% YoY growth rate seen in the FY2025 filing -> ~GBP27.5M; converted at ~1.27 USD/GBP. FY2026 accounts (year ending 31 May 2026) not yet filed as of Aug 2026."
+      }
+    ]
+  },
+  "command_center": {
+    "kpis": {
+      "spoilage_exposure_gbp": 659069.6,
+      "cash_tied_up_gbp": 1819354.6,
+      "equipment_exposure_gbp": 23572.5,
+      "autonomous_actions_count": 2,
+      "autonomous_actions_impact_gbp": 56301.0
+    },
+    "equipment": [
+      {
+        "equipment_id": "COMP-LON-01",
+        "region": "London",
+        "asset_type": "compressor",
+        "failure_risk_pct": 67.8,
+        "days_to_predicted_failure": 9,
+        "units_at_risk": 2842,
+        "unit_cost_gbp": 2.25,
+        "exposure_gbp": 6394.5,
+        "exposure_basis": "2,842 units x \u00a32.25/unit",
+        "confidence": "real",
+        "reading_date": "2026-08-17",
+        "high_risk": true
+      },
+      {
+        "equipment_id": "CASE-WAL-02",
+        "region": "Wales",
+        "asset_type": "reach-in case",
+        "failure_risk_pct": 61.5,
+        "days_to_predicted_failure": 7,
+        "units_at_risk": 1704,
+        "unit_cost_gbp": 2.45,
+        "exposure_gbp": 4174.8,
+        "exposure_basis": "1,704 units x \u00a32.45/unit",
+        "confidence": "real",
+        "reading_date": "2026-08-17",
+        "high_risk": true
+      },
+      {
+        "equipment_id": "TRK-SCO-03",
+        "region": "Scotland",
+        "asset_type": "refrigerated truck",
+        "failure_risk_pct": 56.7,
+        "days_to_predicted_failure": 14,
+        "units_at_risk": 6048,
+        "unit_cost_gbp": 2.15,
+        "exposure_gbp": 13003.199999999999,
+        "exposure_basis": "6,048 units x \u00a32.15/unit",
+        "confidence": "real",
+        "reading_date": "2026-08-17",
+        "high_risk": true
+      },
+      {
+        "equipment_id": "CASE-NW-01",
+        "region": "North West",
+        "asset_type": "reach-in case",
+        "failure_risk_pct": 40.9,
+        "days_to_predicted_failure": 21,
+        "units_at_risk": 3340,
+        "unit_cost_gbp": 1.95,
+        "exposure_gbp": 6513.0,
+        "exposure_basis": "3,340 units x \u00a31.95/unit",
+        "confidence": "grounded_estimate",
+        "reading_date": "2026-08-17",
+        "high_risk": false
+      },
+      {
+        "equipment_id": "COMP-SCO-01",
+        "region": "Scotland",
+        "asset_type": "compressor",
+        "failure_risk_pct": 32.5,
+        "days_to_predicted_failure": 38,
+        "units_at_risk": 4234,
+        "unit_cost_gbp": 2.15,
+        "exposure_gbp": 9103.1,
+        "exposure_basis": "4,234 units x \u00a32.15/unit",
+        "confidence": "real",
+        "reading_date": "2026-08-17",
+        "high_risk": false
+      },
+      {
+        "equipment_id": "COMP-NI-01",
+        "region": "Northern Ireland",
+        "asset_type": "compressor",
+        "failure_risk_pct": 29.4,
+        "days_to_predicted_failure": 50,
+        "units_at_risk": 4390,
+        "unit_cost_gbp": 2.65,
+        "exposure_gbp": 11633.5,
+        "exposure_basis": "4,390 units x \u00a32.65/unit",
+        "confidence": "placeholder",
+        "reading_date": "2026-08-17",
+        "high_risk": false
+      },
+      {
+        "equipment_id": "FRZ-SE-02",
+        "region": "South East",
+        "asset_type": "walk-in freezer",
+        "failure_risk_pct": 21.6,
+        "days_to_predicted_failure": 45,
+        "units_at_risk": 9531,
+        "unit_cost_gbp": 2.05,
+        "exposure_gbp": 19538.55,
+        "exposure_basis": "9,531 units x \u00a32.05/unit",
+        "confidence": "real",
+        "reading_date": "2026-08-17",
+        "high_risk": false
+      },
+      {
+        "equipment_id": "FRZ-WAL-01",
+        "region": "Wales",
+        "asset_type": "walk-in freezer",
+        "failure_risk_pct": 18.3,
+        "days_to_predicted_failure": 60,
+        "units_at_risk": 4969,
+        "unit_cost_gbp": 2.45,
+        "exposure_gbp": 12174.050000000001,
+        "exposure_basis": "4,969 units x \u00a32.45/unit",
+        "confidence": "grounded_estimate",
+        "reading_date": "2026-08-17",
+        "high_risk": false
+      },
+      {
+        "equipment_id": "TRK-SE-01",
+        "region": "South East",
+        "asset_type": "refrigerated truck",
+        "failure_risk_pct": 12.1,
+        "days_to_predicted_failure": 90,
+        "units_at_risk": 5957,
+        "unit_cost_gbp": 2.05,
+        "exposure_gbp": 12211.849999999999,
+        "exposure_basis": "5,957 units x \u00a32.05/unit",
+        "confidence": "real",
+        "reading_date": "2026-08-17",
+        "high_risk": false
+      }
+    ],
+    "regional_inventory": [
+      {
+        "region": "London",
+        "weeks_on_hand": 1.4,
+        "weeks_to_expiry": 5.2,
+        "units_on_hand": 28420,
+        "unit_cost_gbp": 2.25,
+        "inventory_value_gbp": 63945.0,
+        "confidence": "real",
+        "snapshot_date": "2026-08-17",
+        "status": "Stockout risk",
+        "recommendation": "Expedite 12,180 units from North West",
+        "recommendation_action": {
+          "type": "reallocation",
+          "from_region": "North West",
+          "to_region": "London",
+          "units": 12180,
+          "impact_gbp": 27405.0,
+          "confidence": "real"
+        }
+      },
+      {
+        "region": "Scotland",
+        "weeks_on_hand": 1.8,
+        "weeks_to_expiry": 6.0,
+        "units_on_hand": 120960,
+        "unit_cost_gbp": 2.15,
+        "inventory_value_gbp": 260064.0,
+        "confidence": "real",
+        "snapshot_date": "2026-08-17",
+        "status": "Stockout risk",
+        "recommendation": "Expedite 13,440 units from North West",
+        "recommendation_action": {
+          "type": "reallocation",
+          "from_region": "North West",
+          "to_region": "Scotland",
+          "units": 13440,
+          "impact_gbp": 28896.0,
+          "confidence": "real"
+        }
+      },
+      {
+        "region": "Wales",
+        "weeks_on_hand": 3.9,
+        "weeks_to_expiry": 4.3,
+        "units_on_hand": 141960,
+        "unit_cost_gbp": 2.45,
+        "inventory_value_gbp": 347802.0,
+        "confidence": "grounded_estimate",
+        "snapshot_date": "2026-08-17",
+        "status": "Balanced",
+        "recommendation": "Monitor",
+        "recommendation_action": null
+      },
+      {
+        "region": "South East",
+        "weeks_on_hand": 4.6,
+        "weeks_to_expiry": 4.8,
+        "units_on_hand": 238280,
+        "unit_cost_gbp": 2.05,
+        "inventory_value_gbp": 488473.99999999994,
+        "confidence": "real",
+        "snapshot_date": "2026-08-17",
+        "status": "Balanced",
+        "recommendation": "Monitor",
+        "recommendation_action": null
+      },
+      {
+        "region": "Northern Ireland",
+        "weeks_on_hand": 6.4,
+        "weeks_to_expiry": 1.6,
+        "units_on_hand": 43904,
+        "unit_cost_gbp": 2.65,
+        "inventory_value_gbp": 116345.59999999999,
+        "confidence": "placeholder",
+        "snapshot_date": "2026-08-17",
+        "status": "Spoilage risk",
+        "recommendation": "Trigger regional promo \u2014 43,904 units at risk before expiry",
+        "recommendation_action": null
+      },
+      {
+        "region": "North West",
+        "weeks_on_hand": 7.1,
+        "weeks_to_expiry": 2.1,
+        "units_on_hand": 278320,
+        "unit_cost_gbp": 1.95,
+        "inventory_value_gbp": 542724.0,
+        "confidence": "real",
+        "snapshot_date": "2026-08-17",
+        "status": "Spoilage risk",
+        "recommendation": "Trigger regional promo \u2014 278,320 units at risk before expiry",
+        "recommendation_action": null
+      }
+    ],
+    "demand_vs_plan": {
+      "featured_region": "Scotland",
+      "gap_pct": 31.0,
+      "series": [
+        {
+          "date": "2026-08-04",
+          "sensed_demand_units": 9600,
+          "production_plan_units": 9600,
+          "gap_units": 0,
+          "gap_pct": 0.0,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-05",
+          "sensed_demand_units": 9890,
+          "production_plan_units": 9792,
+          "gap_units": 98,
+          "gap_pct": 1.0008169934640523,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-06",
+          "sensed_demand_units": 9596,
+          "production_plan_units": 9408,
+          "gap_units": 188,
+          "gap_pct": 1.9982993197278913,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-07",
+          "sensed_demand_units": 9793,
+          "production_plan_units": 9696,
+          "gap_units": 97,
+          "gap_pct": 1.0004125412541254,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-08",
+          "sensed_demand_units": 10930,
+          "production_plan_units": 9504,
+          "gap_units": 1426,
+          "gap_pct": 15.004208754208753,
+          "event_note": "Heatwave detected"
+        },
+        {
+          "date": "2026-08-09",
+          "sensed_demand_units": 12657,
+          "production_plan_units": 9888,
+          "gap_units": 2769,
+          "gap_pct": 28.00364077669903,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-10",
+          "sensed_demand_units": 13205,
+          "production_plan_units": 10080,
+          "gap_units": 3125,
+          "gap_pct": 31.001984126984127,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-11",
+          "sensed_demand_units": 11712,
+          "production_plan_units": 9600,
+          "gap_units": 2112,
+          "gap_pct": 22.0,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-12",
+          "sensed_demand_units": 10537,
+          "production_plan_units": 9408,
+          "gap_units": 1129,
+          "gap_pct": 12.000425170068027,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-13",
+          "sensed_demand_units": 9778,
+          "production_plan_units": 9312,
+          "gap_units": 466,
+          "gap_pct": 5.004295532646048,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-14",
+          "sensed_demand_units": 9890,
+          "production_plan_units": 9696,
+          "gap_units": 194,
+          "gap_pct": 2.0008250825082508,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-15",
+          "sensed_demand_units": 9890,
+          "production_plan_units": 9792,
+          "gap_units": 98,
+          "gap_pct": 1.0008169934640523,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-16",
+          "sensed_demand_units": 9504,
+          "production_plan_units": 9504,
+          "gap_units": 0,
+          "gap_pct": 0.0,
+          "event_note": ""
+        },
+        {
+          "date": "2026-08-17",
+          "sensed_demand_units": 9600,
+          "production_plan_units": 9600,
+          "gap_units": 0,
+          "gap_pct": 0.0,
+          "event_note": ""
+        }
+      ],
+      "event_note": "Heatwave detected",
+      "event_date": "2026-08-08"
+    },
+    "activity_log": [
+      {
+        "date": "2026-08-17",
+        "action": "Recommended regional promo, North West (278,320 units at risk)",
+        "impact_gbp": 542724.0,
+        "impact_basis": "278,320 units x \u00a31.95/unit",
+        "status": "pending_approval",
+        "source": "regional:North West"
+      },
+      {
+        "date": "2026-08-17",
+        "action": "Recommended regional promo, Northern Ireland (43,904 units at risk)",
+        "impact_gbp": 116345.59999999999,
+        "impact_basis": "43,904 units x \u00a32.65/unit",
+        "status": "pending_approval",
+        "source": "regional:Northern Ireland"
+      },
+      {
+        "date": "2026-08-17",
+        "action": "Reallocated 13,440 units, North West to Scotland",
+        "impact_gbp": 28896.0,
+        "impact_basis": "13,440 units x \u00a32.15/unit",
+        "status": "auto_executed",
+        "source": "regional:Scotland"
+      },
+      {
+        "date": "2026-08-17",
+        "action": "Reallocated 12,180 units, North West to London",
+        "impact_gbp": 27405.0,
+        "impact_basis": "12,180 units x \u00a32.25/unit",
+        "status": "auto_executed",
+        "source": "regional:London"
+      },
+      {
+        "date": "2026-08-17",
+        "action": "Flagged TRK-SCO-03 (refrigerated truck, Scotland) for maintenance",
+        "impact_gbp": 13003.199999999999,
+        "impact_basis": "6,048 units x \u00a32.15/unit",
+        "status": "pending_approval",
+        "source": "equipment:TRK-SCO-03"
+      },
+      {
+        "date": "2026-08-17",
+        "action": "Flagged COMP-LON-01 (compressor, London) for maintenance",
+        "impact_gbp": 6394.5,
+        "impact_basis": "2,842 units x \u00a32.25/unit",
+        "status": "pending_approval",
+        "source": "equipment:COMP-LON-01"
+      },
+      {
+        "date": "2026-08-17",
+        "action": "Flagged CASE-WAL-02 (reach-in case, Wales) for maintenance",
+        "impact_gbp": 4174.8,
+        "impact_basis": "1,704 units x \u00a32.45/unit",
+        "status": "pending_approval",
+        "source": "equipment:CASE-WAL-02"
+      }
+    ]
+  },
+  "volume_dollar_sales": {
+    "source": "real",
+    "series": [
+      {
+        "date": "2024-07",
+        "volume_units": 1170000.0,
+        "revenue_gbp": 3744000.0,
+        "confidence": "placeholder",
+        "volume_index": 100.0,
+        "revenue_index": 100.0
+      },
+      {
+        "date": "2024-08",
+        "volume_units": 1178190.0,
+        "revenue_gbp": 3775863.31,
+        "confidence": "placeholder",
+        "volume_index": 100.7,
+        "revenue_index": 100.9
+      },
+      {
+        "date": "2024-09",
+        "volume_units": 1186437.0,
+        "revenue_gbp": 3807997.8,
+        "confidence": "placeholder",
+        "volume_index": 101.4,
+        "revenue_index": 101.7
+      },
+      {
+        "date": "2024-10",
+        "volume_units": 1194742.0,
+        "revenue_gbp": 3840405.76,
+        "confidence": "placeholder",
+        "volume_index": 102.1,
+        "revenue_index": 102.6
+      },
+      {
+        "date": "2024-11",
+        "volume_units": 1203106.0,
+        "revenue_gbp": 3873089.54,
+        "confidence": "placeholder",
+        "volume_index": 102.8,
+        "revenue_index": 103.4
+      },
+      {
+        "date": "2024-12",
+        "volume_units": 1211527.0,
+        "revenue_gbp": 3906051.46,
+        "confidence": "placeholder",
+        "volume_index": 103.5,
+        "revenue_index": 104.3
+      },
+      {
+        "date": "2025-01",
+        "volume_units": 1182451.0,
+        "revenue_gbp": 3913863.56,
+        "confidence": "placeholder",
+        "volume_index": 101.1,
+        "revenue_index": 104.5
+      },
+      {
+        "date": "2025-02",
+        "volume_units": 1154072.0,
+        "revenue_gbp": 3921691.29,
+        "confidence": "placeholder",
+        "volume_index": 98.6,
+        "revenue_index": 104.7
+      },
+      {
+        "date": "2025-03",
+        "volume_units": 1126374.0,
+        "revenue_gbp": 3929534.67,
+        "confidence": "placeholder",
+        "volume_index": 96.3,
+        "revenue_index": 105.0
+      },
+      {
+        "date": "2025-04",
+        "volume_units": 1099341.0,
+        "revenue_gbp": 3937393.74,
+        "confidence": "placeholder",
+        "volume_index": 94.0,
+        "revenue_index": 105.2
+      },
+      {
+        "date": "2025-05",
+        "volume_units": 1072957.0,
+        "revenue_gbp": 3945268.53,
+        "confidence": "placeholder",
+        "volume_index": 91.7,
+        "revenue_index": 105.4
+      },
+      {
+        "date": "2025-06",
+        "volume_units": 1047206.0,
+        "revenue_gbp": 3953159.07,
+        "confidence": "placeholder",
+        "volume_index": 89.5,
+        "revenue_index": 105.6
+      },
+      {
+        "date": "2025-07",
+        "volume_units": 1022073.0,
+        "revenue_gbp": 3961065.38,
+        "confidence": "placeholder",
+        "volume_index": 87.4,
+        "revenue_index": 105.8
+      },
+      {
+        "date": "2025-08",
+        "volume_units": 997543.0,
+        "revenue_gbp": 3968987.52,
+        "confidence": "placeholder",
+        "volume_index": 85.3,
+        "revenue_index": 106.0
+      },
+      {
+        "date": "2025-09",
+        "volume_units": 1008516.0,
+        "revenue_gbp": 4008633.73,
+        "confidence": "placeholder",
+        "volume_index": 86.2,
+        "revenue_index": 107.1
+      },
+      {
+        "date": "2025-10",
+        "volume_units": 1019610.0,
+        "revenue_gbp": 4048675.97,
+        "confidence": "placeholder",
+        "volume_index": 87.1,
+        "revenue_index": 108.1
+      },
+      {
+        "date": "2025-11",
+        "volume_units": 1030826.0,
+        "revenue_gbp": 4089118.2,
+        "confidence": "placeholder",
+        "volume_index": 88.1,
+        "revenue_index": 109.2
+      },
+      {
+        "date": "2025-12",
+        "volume_units": 1042165.0,
+        "revenue_gbp": 4129964.4,
+        "confidence": "placeholder",
+        "volume_index": 89.1,
+        "revenue_index": 110.3
+      },
+      {
+        "date": "2026-01",
+        "volume_units": 1053629.0,
+        "revenue_gbp": 4171218.61,
+        "confidence": "placeholder",
+        "volume_index": 90.1,
+        "revenue_index": 111.4
+      },
+      {
+        "date": "2026-02",
+        "volume_units": 1065218.0,
+        "revenue_gbp": 4212884.92,
+        "confidence": "placeholder",
+        "volume_index": 91.0,
+        "revenue_index": 112.5
+      },
+      {
+        "date": "2026-03",
+        "volume_units": 1076936.0,
+        "revenue_gbp": 4254967.42,
+        "confidence": "placeholder",
+        "volume_index": 92.0,
+        "revenue_index": 113.6
+      },
+      {
+        "date": "2026-04",
+        "volume_units": 1088782.0,
+        "revenue_gbp": 4297470.29,
+        "confidence": "placeholder",
+        "volume_index": 93.1,
+        "revenue_index": 114.8
+      },
+      {
+        "date": "2026-05",
+        "volume_units": 1100759.0,
+        "revenue_gbp": 4340397.72,
+        "confidence": "placeholder",
+        "volume_index": 94.1,
+        "revenue_index": 115.9
+      },
+      {
+        "date": "2026-06",
+        "volume_units": 1112867.0,
+        "revenue_gbp": 4383753.96,
+        "confidence": "placeholder",
+        "volume_index": 95.1,
+        "revenue_index": 117.1
+      }
+    ]
+  },
+  "magnum_real_precedent": {
+    "source": "real",
+    "items": [
+      {
+        "fiscal_year": 2021,
+        "usg_pct": 4.5,
+        "volume_growth_pct": 2.2,
+        "price_growth_pct": 2.3,
+        "confidence": "grounded_estimate",
+        "basis": "Unilever FY2021 Full Year Results described Ice Cream growth as \"mid-single-digit, balanced across volume and price\" (~4.5% total) \u2014 exact split not separately disclosed that year; volume/price shown here assume an even split of the stated total, since Ice Cream was not yet broken out as its own reported Business Group in the original FY2021 filing.",
+        "volume_index": 102.2,
+        "price_index": 102.3
+      },
+      {
+        "fiscal_year": 2022,
+        "usg_pct": 9.0,
+        "volume_growth_pct": -0.7,
+        "price_growth_pct": 9.7,
+        "confidence": "real",
+        "basis": "Unilever FY2022 Full Year Results, Business Group performance table (Ice Cream): underlying sales growth +9.0%, comprising volume -0.7% and price +9.7% \u2014 Unilever's disciplined pricing action against input-cost inflation, with in-home volumes weak in Q4.",
+        "volume_index": 101.5,
+        "price_index": 112.2
+      },
+      {
+        "fiscal_year": 2023,
+        "usg_pct": 2.3,
+        "volume_growth_pct": -6.0,
+        "price_growth_pct": 8.8,
+        "confidence": "real",
+        "basis": "Unilever FY2023 Full Year Results, Business Group performance table (Ice Cream): underlying sales growth +2.3%, comprising volume -6.0% and price +8.8% \u2014 consumers downtrading to value formats amid high price elasticity; the clearest instance of price fully absorbing a volume decline in this window.",
+        "volume_index": 95.4,
+        "price_index": 122.1
+      },
+      {
+        "fiscal_year": 2024,
+        "usg_pct": 9.8,
+        "volume_growth_pct": 6.7,
+        "price_growth_pct": 2.9,
+        "confidence": "real",
+        "basis": "Unilever FY2024 Full Year Results, Business Group performance table (Ice Cream): underlying sales growth +9.8%, comprising volume +6.7% and price +2.9% \u2014 volume-led recovery as pricing normalized and promotional activity was optimized.",
+        "volume_index": 101.8,
+        "price_index": 125.6
+      },
+      {
+        "fiscal_year": 2025,
+        "usg_pct": 4.2,
+        "volume_growth_pct": 1.5,
+        "price_growth_pct": 2.6,
+        "confidence": "real",
+        "basis": "The Magnum Ice Cream Company (TMICC) 2025 Full Year Results \u2014 first standalone report after the 2025-12-06 demerger from Unilever: organic sales growth +4.2%, comprising volume +1.5% and price +2.6%.",
+        "volume_index": 103.3,
+        "price_index": 128.9
+      }
+    ],
+    "regions_fy2025": [
+      {
+        "region": "AMEA (Asia/Middle East/Africa)",
+        "usg_pct": 10.9,
+        "confidence": "real",
+        "basis": "The Magnum Ice Cream Company 2025 Full Year Results: AMEA organic sales growth +10.9%, the fastest-growing region."
+      },
+      {
+        "region": "Europe & ANZ",
+        "usg_pct": 3.3,
+        "confidence": "real",
+        "basis": "The Magnum Ice Cream Company 2025 Full Year Results: Europe & ANZ organic sales growth +3.3%."
+      },
+      {
+        "region": "Americas",
+        "usg_pct": 0.8,
+        "confidence": "real",
+        "basis": "The Magnum Ice Cream Company 2025 Full Year Results: Americas organic sales growth +0.8%."
+      }
+    ]
+  },
+  "consumer_demographics": {
+    "source": "real",
+    "population_by_region": [
+      {
+        "region": "United Kingdom",
+        "age_bracket": "0-14",
+        "population": 11929789.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.0014.TO, 2023, country GBR (United Kingdom) \u2014 the launch market for this initiative.",
+        "share_pct": 17.4
+      },
+      {
+        "region": "United Kingdom",
+        "age_bracket": "15-64",
+        "population": 43413091.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.1564.TO, 2023, country GBR (United Kingdom).",
+        "share_pct": 63.4
+      },
+      {
+        "region": "United Kingdom",
+        "age_bracket": "65+",
+        "population": 13183120.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.65UP.TO, 2023, country GBR (United Kingdom).",
+        "share_pct": 19.2
+      },
+      {
+        "region": "North America",
+        "age_bracket": "0-14",
+        "population": 65389140.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.0014.TO, 2023, country aggregate NAC (North America).",
+        "share_pct": 17.4
+      },
+      {
+        "region": "North America",
+        "age_bracket": "15-64",
+        "population": 245010886.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.1564.TO, 2023, country aggregate NAC (North America).",
+        "share_pct": 65.0
+      },
+      {
+        "region": "North America",
+        "age_bracket": "65+",
+        "population": 66468813.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.65UP.TO, 2023, country aggregate NAC (North America).",
+        "share_pct": 17.6
+      },
+      {
+        "region": "Europe",
+        "age_bracket": "0-14",
+        "population": 162775262.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.0014.TO, 2023, country aggregate ECS (Europe & Central Asia) \u2014 the closest single World Bank aggregate to 'Europe'; includes Central Asia, so slightly overstates Europe alone.",
+        "share_pct": 17.6
+      },
+      {
+        "region": "Europe",
+        "age_bracket": "15-64",
+        "population": 597902498.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.1564.TO, 2023, country aggregate ECS (Europe & Central Asia).",
+        "share_pct": 64.7
+      },
+      {
+        "region": "Europe",
+        "age_bracket": "65+",
+        "population": 164127311.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.65UP.TO, 2023, country aggregate ECS (Europe & Central Asia).",
+        "share_pct": 17.7
+      },
+      {
+        "region": "Asia-Pacific",
+        "age_bracket": "0-14",
+        "population": 864559654.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.0014.TO, 2023, sum of country aggregates EAS (East Asia & Pacific) + SAS (South Asia), matching the Asia-Pacific definition used in the Global Market Distribution panel.",
+        "share_pct": 21.4
+      },
+      {
+        "region": "Asia-Pacific",
+        "age_bracket": "15-64",
+        "population": 2750059270.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.1564.TO, 2023, sum of EAS + SAS.",
+        "share_pct": 68.0
+      },
+      {
+        "region": "Asia-Pacific",
+        "age_bracket": "65+",
+        "population": 432403139.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.65UP.TO, 2023, sum of EAS + SAS.",
+        "share_pct": 10.7
+      },
+      {
+        "region": "Latin America",
+        "age_bracket": "0-14",
+        "population": 150437427.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.0014.TO, 2023, country aggregate LCN (Latin America & Caribbean).",
+        "share_pct": 22.9
+      },
+      {
+        "region": "Latin America",
+        "age_bracket": "15-64",
+        "population": 444516718.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.1564.TO, 2023, country aggregate LCN (Latin America & Caribbean).",
+        "share_pct": 67.6
+      },
+      {
+        "region": "Latin America",
+        "age_bracket": "65+",
+        "population": 62662373.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.65UP.TO, 2023, country aggregate LCN (Latin America & Caribbean).",
+        "share_pct": 9.5
+      },
+      {
+        "region": "Middle East & Africa",
+        "age_bracket": "0-14",
+        "population": 776133474.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.0014.TO, 2023, sum of country aggregates MEA (Middle East, North Africa, Afghanistan & Pakistan) + SSF (Sub-Saharan Africa).",
+        "share_pct": 37.7
+      },
+      {
+        "region": "Middle East & Africa",
+        "age_bracket": "15-64",
+        "population": 1201341840.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.1564.TO, 2023, sum of MEA + SSF.",
+        "share_pct": 58.4
+      },
+      {
+        "region": "Middle East & Africa",
+        "age_bracket": "65+",
+        "population": 79135621.0,
+        "confidence": "real",
+        "basis": "World Bank SP.POP.65UP.TO, 2023, sum of MEA + SSF.",
+        "share_pct": 3.8
+      }
+    ],
+    "ice_cream_consumption_by_age": [
+      {
+        "age_bracket": "5-11 years",
+        "mean_g_per_day": 14.0,
+        "mean_sugar_g_per_day": 2.9,
+        "share_of_diet_sugar_pct": 5.8,
+        "portions_per_year": 69.0,
+        "confidence": "real",
+        "basis": "UK Health Security Agency (UKHSA), citing National Diet and Nutrition Survey (NDNS) years 5 & 6: mean ice cream consumption 14g/day (2.9g/day sugar from ice cream specifically), equivalent to ~69 ice creams/year; ice cream contributes 5.8% of total diet sugar and 11.3% of sugar from the snacks category for this age group."
+      }
+    ]
+  }
+}
