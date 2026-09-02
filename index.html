@@ -55,257 +55,312 @@
 
 <main id="dashboard-main" class="max-w-6xl mx-auto px-6 py-8 opacity-60 motion-safe:transition-opacity motion-safe:duration-500">
 
-  <section class="border border-brass/40 bg-panel rounded-lg p-6 mb-6">
-    <div class="flex items-start justify-between mb-4 gap-3">
+  <!-- ================= ACT 1 — PROBLEM ================= -->
+  <div class="mb-6">
+    <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">01 &middot; Problem</p>
+    <h2 class="font-display text-3xl text-ivory mt-1">What's going wrong</h2>
+    <p class="text-sm text-muted mt-1 max-w-2xl">The signal, then the market context that explains why it matters.</p>
+  </div>
+
+  <details open class="group border border-brass/40 bg-panel rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
         <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Executive Brief</p>
-        <h2 class="font-display text-xl text-ivory">What this cycle means</h2>
+        <h3 class="font-display text-xl text-ivory">What this cycle means</h3>
+        <p id="brief-summary" class="font-mono text-sm text-muted mt-1">—</p>
       </div>
       <div class="shrink-0 flex items-center gap-2">
-        <button id="brief-back" class="hidden font-mono text-[10px] text-brass underline">back to latest cycle</button>
         <span id="brief-label" class="font-mono text-[10px] text-muted uppercase tracking-wide">Auto-generated · rule-based</span>
+        <span class="font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
       </div>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60">
+      <button id="brief-back" class="hidden font-mono text-[10px] text-brass underline mb-3">back to latest cycle</button>
+      <div id="synthesis-flags" class="space-y-4"></div>
     </div>
-    <div id="synthesis-flags" class="space-y-4"></div>
-  </section>
+  </details>
 
-  <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <div class="flex items-start justify-between mb-4 gap-3">
+  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
-        <h2 class="font-display text-xl text-ivory">Production &amp; Sales Trend</h2>
-        <p id="trend-readout" class="font-mono text-sm text-muted mt-1">—</p>
-        <p class="font-mono text-xs text-muted mt-1">Eurostat, NACE C1052 (ice cream manufacture) &middot; Germany &mdash; the EU27 aggregate is confidentiality-suppressed at this level, so the largest reporting producer stands in for the EU trend.</p>
-        <p id="trend-interp-note" class="hidden font-mono text-xs text-muted mt-1">Illustrative — interpolated between quarterly data points, not independently measured. Click a point for that month's brief.</p>
+        <h3 class="font-display text-xl text-ivory">Nutrition &amp; Regulatory Exposure</h3>
+        <p id="nutrition-summary" class="font-mono text-sm text-muted mt-1">—</p>
       </div>
-      <div class="shrink-0 flex items-center gap-3">
-        <div id="trend-toggle" class="hidden font-mono text-[10px] flex gap-1">
-          <button id="btn-full-history" class="px-2 py-1 rounded border border-brass text-brass">Full History</button>
-          <button id="btn-recent-cycles" class="px-2 py-1 rounded border border-hairline text-muted">Recent Cycles</button>
+      <div class="shrink-0 flex items-center gap-2">
+        <div id="seal-nutrition" class="shrink-0"></div>
+        <span class="font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+      </div>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60 overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-muted border-b border-hairline">
+            <th class="pb-2 font-body font-medium">Item</th>
+            <th class="pb-2 font-body font-medium text-right">Cal</th>
+            <th class="pb-2 font-body font-medium text-right">Sugar g</th>
+            <th class="pb-2 font-body font-medium text-right">Fat g</th>
+            <th class="pb-2 font-body font-medium text-right">Protein g</th>
+            <th class="pb-2 font-body font-medium" title="UK FSA front-of-pack labelling: total sugar per 100g. Green <=5g, amber 5-22.5g, red >22.5g.">UK label&sup1;</th>
+            <th class="pb-2 font-body font-medium text-right" title="Share of WHO's free-sugar guideline for a reference adult (2000 kcal/day): <10% of energy (50g/day) is the core recommendation; a further reduction to <5% (25g/day) confers additional benefit.">WHO free sugar&sup2;</th>
+          </tr>
+        </thead>
+        <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
+      </table>
+      <p class="font-mono text-[10px] text-muted mt-2">&sup1; UK FSA front-of-pack labelling, total sugar per 100g (converted from per-serving using FDC's reported serving size). Blank where no gram serving size is reported.<br>
+      &sup2; One serving's share of WHO's 5% free-sugar guideline (25g/day) for a reference 2000 kcal adult diet. Uses FDC's "added sugar" as the closest available proxy for WHO's "free sugars"; blank where FDC doesn't report it for that item.</p>
+    </div>
+  </details>
+
+  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+      <div>
+        <h3 class="font-display text-xl text-ivory">Market Context</h3>
+        <p class="font-mono text-sm text-muted mt-1">Production trend, global share, sentiment, demographics, and competitor revenue — the backdrop the signals above sit against.</p>
+      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
+
+      <div class="bg-ink/30 border border-hairline rounded-lg p-6">
+        <div class="flex items-start justify-between mb-4 gap-3">
+          <div>
+            <h4 class="font-display text-lg text-ivory">Production &amp; Sales Trend</h4>
+            <p id="trend-readout" class="font-mono text-sm text-muted mt-1">—</p>
+            <p class="font-mono text-xs text-muted mt-1">Eurostat, NACE C1052 (ice cream manufacture) &middot; Germany &mdash; the EU27 aggregate is confidentiality-suppressed at this level, so the largest reporting producer stands in for the EU trend.</p>
+            <p id="trend-interp-note" class="hidden font-mono text-xs text-muted mt-1">Illustrative — interpolated between quarterly data points, not independently measured. Click a point for that month's brief.</p>
+          </div>
+          <div class="shrink-0 flex items-center gap-3">
+            <div id="trend-toggle" class="hidden font-mono text-[10px] flex gap-1">
+              <button id="btn-full-history" class="px-2 py-1 rounded border border-brass text-brass">Full History</button>
+              <button id="btn-recent-cycles" class="px-2 py-1 rounded border border-hairline text-muted">Recent Cycles</button>
+            </div>
+            <div id="seal-trend" class="shrink-0"></div>
+          </div>
         </div>
-        <div id="seal-trend" class="shrink-0"></div>
+        <div class="h-72"><canvas id="trendChart"></canvas></div>
       </div>
-    </div>
-    <div class="h-72"><canvas id="trendChart"></canvas></div>
-  </section>
 
-  <section id="volume-dollar-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <div class="flex items-start justify-between mb-4 gap-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div class="bg-ink/30 border border-hairline rounded-lg p-6">
+          <div class="flex items-start justify-between mb-4 gap-3">
+            <h4 class="font-display text-lg text-ivory leading-tight">Global Market<br>Distribution</h4>
+            <div id="regional-confidence" class="shrink-0 font-mono text-[10px] text-muted flex items-center gap-1"></div>
+          </div>
+          <div class="h-64"><canvas id="regionChart"></canvas></div>
+        </div>
+        <div class="bg-ink/30 border border-hairline rounded-lg p-6">
+          <div class="flex items-start justify-between mb-4 gap-3">
+            <div>
+              <h4 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h4>
+              <p class="font-mono text-[10px] text-muted mt-1">US consumer review sample &mdash; no equivalent UK/EU dataset found; kept as-is rather than implied to be UK data.</p>
+            </div>
+            <div id="seal-sentiment" class="shrink-0"></div>
+          </div>
+          <div id="sentiment-legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
+          <div class="h-72"><canvas id="sentimentChart"></canvas></div>
+        </div>
+      </div>
+
+      <div id="demographics-section" class="hidden bg-ink/30 border border-hairline rounded-lg p-6">
+        <div class="flex items-start justify-between mb-2 gap-3">
+          <div>
+            <h4 class="font-display text-lg text-ivory">Consumer &amp; Demographics</h4>
+            <p id="demographics-readout" class="font-mono text-sm text-muted mt-1">—</p>
+            <p class="font-mono text-xs text-muted mt-1">Population by age bracket &middot; World Bank 2023 &middot; United Kingdom (launch market) alongside the same continents as Global Market Distribution above (scale-up context)</p>
+          </div>
+        </div>
+        <div id="demographics-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4 mt-3"></div>
+        <div class="h-64"><canvas id="demographicsChart"></canvas></div>
+        <div id="consumption-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
+          <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-1">Ice cream consumption &middot; UK children &middot; UKHSA / National Diet and Nutrition Survey</p>
+          <p id="consumption-callout" class="text-sm text-muted mb-3"></p>
+          <div id="consumption-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+        </div>
+      </div>
+
+      <div id="revenue-section" class="hidden bg-ink/30 border border-hairline rounded-lg p-6">
+        <div class="flex items-start justify-between mb-2 gap-3">
+          <div>
+            <h4 class="font-display text-lg text-ivory">Company Revenue Comparison</h4>
+            <p class="font-mono text-sm text-muted mt-1">FY2025 vs FY2026 · log scale — company sizes span a very wide range</p>
+            <p class="font-mono text-xs text-muted mt-1">Shown in USD, the common denominator for comparing companies that report natively in EUR, GBP, and RMB — each conversion rate is cited per-row in the basis column.</p>
+          </div>
+          <div class="shrink-0 flex items-center gap-1 font-mono text-[10px]">
+            <button id="btn-revenue-chart" class="px-2 py-1 rounded border border-brass text-brass">Chart</button>
+            <button id="btn-revenue-table" class="px-2 py-1 rounded border border-hairline text-muted">Table</button>
+          </div>
+        </div>
+        <div id="revenue-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4"></div>
+        <div id="revenue-chart-wrap"><canvas id="revenueChart"></canvas></div>
+        <div id="revenue-table-wrap" class="hidden overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead>
+              <tr class="text-muted border-b border-hairline">
+                <th class="pb-2 font-body font-medium">Company</th>
+                <th class="pb-2 font-body font-medium">Owner</th>
+                <th class="pb-2 font-body font-medium text-right">FY2025 $M</th>
+                <th class="pb-2 font-body font-medium text-right">FY2026 $M</th>
+                <th class="pb-2 font-body font-medium text-right">&Delta;%</th>
+                <th class="pb-2 font-body font-medium">Confidence</th>
+                <th class="pb-2 font-body font-medium">Basis</th>
+              </tr>
+            </thead>
+            <tbody id="revenue-body" class="font-mono divide-y divide-hairline align-top"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ================= ACT 2 — ACTION ================= -->
+  <div class="mt-14 pt-8 border-t-2 border-brass/30 mb-6">
+    <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">02 &middot; Action</p>
+    <h2 class="font-display text-3xl text-ivory mt-1">Sense &middot; Prescribe &middot; Act</h2>
+    <p class="text-sm text-muted mt-1 max-w-2xl">
+      Actions auto-execute when impact is under &pound;75,000 and confidence is real or grounded-estimate;
+      maintenance dispatch always requires human approval regardless of size.
+    </p>
+  </div>
+
+  <details id="cc-demand-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
-        <h2 class="font-display text-xl text-ivory">Volume vs Revenue</h2>
+        <h3 class="font-display text-lg text-ivory">Demand Signal vs Production Plan</h3>
+        <p id="cc-demand-readout" class="font-mono text-sm text-muted mt-1">—</p>
+      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60">
+      <div id="cc-demand-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
+      <div class="h-64"><canvas id="ccDemandChart"></canvas></div>
+    </div>
+  </details>
+
+  <details id="cc-regional-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+      <div>
+        <h3 class="font-display text-lg text-ivory">Regional Inventory Risk</h3>
+        <p id="regional-summary" class="font-mono text-sm text-muted mt-1">—</p>
+      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60 overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-muted border-b border-hairline">
+            <th class="pb-2 pr-4 font-body font-medium">Region</th>
+            <th class="pb-2 pr-4 font-body font-medium text-right">Weeks on hand</th>
+            <th class="pb-2 pr-4 font-body font-medium text-right">Weeks to expiry</th>
+            <th class="pb-2 pr-4 font-body font-medium">Status</th>
+            <th class="pb-2 pr-4 font-body font-medium">Agent recommendation</th>
+            <th class="pb-2 font-body font-medium">Agent action taken</th>
+          </tr>
+        </thead>
+        <tbody id="cc-regional-body" class="font-mono divide-y divide-hairline align-top"></tbody>
+      </table>
+    </div>
+  </details>
+
+  <details id="cc-equipment-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+      <div>
+        <h3 class="font-display text-lg text-ivory">Equipment Risk</h3>
+        <p id="equipment-summary" class="font-mono text-sm text-muted mt-1">—</p>
+      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60 overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-muted border-b border-hairline">
+            <th class="pb-2 pr-4 font-body font-medium">Equipment</th>
+            <th class="pb-2 pr-4 font-body font-medium">Region</th>
+            <th class="pb-2 pr-4 font-body font-medium text-right">Failure risk</th>
+            <th class="pb-2 pr-4 font-body font-medium text-right">Days out</th>
+            <th class="pb-2 pr-4 font-body font-medium text-right">Exposure</th>
+            <th class="pb-2 font-body font-medium">Agent action taken</th>
+          </tr>
+        </thead>
+        <tbody id="cc-equipment-body" class="font-mono divide-y divide-hairline align-top"></tbody>
+      </table>
+    </div>
+  </details>
+
+  <!-- ================= ACT 3 — IMPACT ================= -->
+  <div class="mt-14 pt-8 border-t-2 border-brass/30 mb-6">
+    <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">03 &middot; Impact</p>
+    <h2 class="font-display text-3xl text-ivory mt-1">What it's worth</h2>
+    <p class="text-sm text-muted mt-1 max-w-2xl">The quantified payoff, this cycle, plus proof the underlying pattern is real money.</p>
+  </div>
+
+  <div id="cc-kpi-section" class="hidden mb-6">
+    <div id="cc-kpi-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+  </div>
+
+  <details id="volume-dollar-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+      <div>
+        <h3 class="font-display text-xl text-ivory">Volume vs Revenue</h3>
         <p id="vd-readout" class="font-mono text-sm text-muted mt-1">—</p>
       </div>
-      <div class="shrink-0 font-mono text-[10px] text-muted flex items-center gap-1">
-        <span id="vd-confidence-icon"></span><span id="vd-confidence-label"></span>
+      <div class="shrink-0 flex items-center gap-2">
+        <span class="font-mono text-[10px] text-muted flex items-center gap-1"><span id="vd-confidence-icon"></span><span id="vd-confidence-label"></span></span>
+        <span class="font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+      </div>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Volume (units)</p>
+          <div class="h-48"><canvas id="volumeChart"></canvas></div>
+        </div>
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Revenue (£)</p>
+          <div class="h-48"><canvas id="dollarChart"></canvas></div>
+        </div>
+      </div>
+      <div class="pt-4 border-t border-hairline/60">
+        <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-2">Indexed comparison &middot; first month = 100</p>
+        <div id="vd-index-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
+        <div class="h-48"><canvas id="vdIndexChart"></canvas></div>
       </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      <div>
-        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Volume (units)</p>
-        <div class="h-48"><canvas id="volumeChart"></canvas></div>
-      </div>
-      <div>
-        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Revenue (£)</p>
-        <div class="h-48"><canvas id="dollarChart"></canvas></div>
-      </div>
-    </div>
-    <div class="pt-4 border-t border-hairline/60">
-      <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-2">Indexed comparison &middot; first month = 100</p>
-      <div id="vd-index-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
-      <div class="h-48"><canvas id="vdIndexChart"></canvas></div>
-    </div>
-  </section>
+  </details>
 
-  <section id="magnum-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <div class="flex items-start justify-between mb-2 gap-3">
+  <details id="magnum-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
-        <h2 class="font-display text-xl text-ivory">Real-World Precedent &middot; Ice Cream Category</h2>
+        <h3 class="font-display text-xl text-ivory">Real-World Precedent &middot; Ice Cream Category</h3>
         <p id="magnum-readout" class="font-mono text-sm text-muted mt-1">—</p>
         <p class="font-mono text-xs text-muted mt-1">Unilever Ice Cream (FY2021&ndash;24) &rarr; The Magnum Ice Cream Company (FY2025, post-demerger) &middot; indexed to FY2020 = 100</p>
       </div>
-    </div>
-    <div id="magnum-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3 mt-3"></div>
-    <div class="h-56"><canvas id="magnumChart"></canvas></div>
-    <div class="overflow-x-auto mt-6">
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="text-muted border-b border-hairline">
-            <th class="pb-2 font-body font-medium">FY</th>
-            <th class="pb-2 font-body font-medium text-right">Total growth</th>
-            <th class="pb-2 font-body font-medium text-right">Volume</th>
-            <th class="pb-2 font-body font-medium text-right">Price</th>
-            <th class="pb-2 font-body font-medium">Confidence</th>
-            <th class="pb-2 font-body font-medium">Basis</th>
-          </tr>
-        </thead>
-        <tbody id="magnum-body" class="font-mono divide-y divide-hairline align-top"></tbody>
-      </table>
-    </div>
-    <div id="magnum-regional-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
-      <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-2">FY2025 growth by continent</p>
-      <div id="magnum-regional-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
-    </div>
-  </section>
-
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-
-    <div class="flex flex-col gap-6">
-
-      <div class="bg-panel border border-hairline rounded-lg p-6">
-        <div class="flex items-start justify-between mb-4 gap-3">
-          <h2 class="font-display text-lg text-ivory leading-tight">Global Market<br>Distribution</h2>
-          <div id="regional-confidence" class="shrink-0 font-mono text-[10px] text-muted flex items-center gap-1"></div>
-        </div>
-        <div class="h-64"><canvas id="regionChart"></canvas></div>
-      </div>
-
-      <div class="bg-panel border border-hairline rounded-lg p-6">
-        <div class="flex items-start justify-between mb-4 gap-3">
-          <div>
-            <h2 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h2>
-            <p class="font-mono text-[10px] text-muted mt-1">US consumer review sample &mdash; no equivalent UK/EU dataset found; kept as-is rather than implied to be UK data.</p>
-          </div>
-          <div id="seal-sentiment" class="shrink-0"></div>
-        </div>
-        <div id="sentiment-legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
-        <div class="h-72"><canvas id="sentimentChart"></canvas></div>
-      </div>
-
-    </div>
-
-    <div class="bg-panel border border-hairline rounded-lg p-6">
-      <div class="flex items-start justify-between mb-4 gap-3">
-        <h2 class="font-display text-lg text-ivory leading-tight">Nutrition<br>Profile</h2>
-        <div id="seal-nutrition" class="shrink-0"></div>
-      </div>
-      <div class="overflow-x-auto">
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60">
+      <div id="magnum-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
+      <div class="h-56"><canvas id="magnumChart"></canvas></div>
+      <div class="overflow-x-auto mt-6">
         <table class="w-full text-left text-sm">
           <thead>
             <tr class="text-muted border-b border-hairline">
-              <th class="pb-2 font-body font-medium">Item</th>
-              <th class="pb-2 font-body font-medium text-right">Cal</th>
-              <th class="pb-2 font-body font-medium text-right">Sugar g</th>
-              <th class="pb-2 font-body font-medium text-right">Fat g</th>
-              <th class="pb-2 font-body font-medium text-right">Protein g</th>
-              <th class="pb-2 font-body font-medium" title="UK FSA front-of-pack labelling: total sugar per 100g. Green <=5g, amber 5-22.5g, red >22.5g.">UK label&sup1;</th>
-              <th class="pb-2 font-body font-medium text-right" title="Share of WHO's free-sugar guideline for a reference adult (2000 kcal/day): <10% of energy (50g/day) is the core recommendation; a further reduction to <5% (25g/day) confers additional benefit.">WHO free sugar&sup2;</th>
+              <th class="pb-2 font-body font-medium">FY</th>
+              <th class="pb-2 font-body font-medium text-right">Total growth</th>
+              <th class="pb-2 font-body font-medium text-right">Volume</th>
+              <th class="pb-2 font-body font-medium text-right">Price</th>
+              <th class="pb-2 font-body font-medium">Confidence</th>
+              <th class="pb-2 font-body font-medium">Basis</th>
             </tr>
           </thead>
-          <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
-        </table>
-        <p class="font-mono text-[10px] text-muted mt-2">&sup1; UK FSA front-of-pack labelling, total sugar per 100g (converted from per-serving using FDC's reported serving size). Blank where no gram serving size is reported.<br>
-        &sup2; One serving's share of WHO's 5% free-sugar guideline (25g/day) for a reference 2000 kcal adult diet. Uses FDC's "added sugar" as the closest available proxy for WHO's "free sugars"; blank where FDC doesn't report it for that item.</p>
-      </div>
-    </div>
-
-  </section>
-
-  <section id="demographics-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mt-6">
-    <div class="flex items-start justify-between mb-2 gap-3">
-      <div>
-        <h2 class="font-display text-xl text-ivory">Consumer &amp; Demographics</h2>
-        <p id="demographics-readout" class="font-mono text-sm text-muted mt-1">—</p>
-        <p class="font-mono text-xs text-muted mt-1">Population by age bracket &middot; World Bank 2023 &middot; United Kingdom (launch market) alongside the same continents as Global Market Distribution above (scale-up context)</p>
-      </div>
-    </div>
-    <div id="demographics-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4 mt-3"></div>
-    <div class="h-64"><canvas id="demographicsChart"></canvas></div>
-
-    <div id="consumption-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
-      <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-1">Ice cream consumption &middot; UK children &middot; UKHSA / National Diet and Nutrition Survey</p>
-      <p id="consumption-callout" class="text-sm text-muted mb-3"></p>
-      <div id="consumption-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
-    </div>
-  </section>
-
-  <section id="revenue-section" class="hidden bg-panel border border-hairline rounded-lg p-6 mt-6">
-    <div class="flex items-start justify-between mb-2 gap-3">
-      <div>
-        <h2 class="font-display text-xl text-ivory">Company Revenue Comparison</h2>
-        <p class="font-mono text-sm text-muted mt-1">FY2025 vs FY2026 · log scale — company sizes span a very wide range</p>
-        <p class="font-mono text-xs text-muted mt-1">Shown in USD, the common denominator for comparing companies that report natively in EUR, GBP, and RMB — each conversion rate is cited per-row in the basis column.</p>
-      </div>
-      <div class="shrink-0 flex items-center gap-1 font-mono text-[10px]">
-        <button id="btn-revenue-chart" class="px-2 py-1 rounded border border-brass text-brass">Chart</button>
-        <button id="btn-revenue-table" class="px-2 py-1 rounded border border-hairline text-muted">Table</button>
-      </div>
-    </div>
-    <div id="revenue-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4"></div>
-    <div id="revenue-chart-wrap"><canvas id="revenueChart"></canvas></div>
-    <div id="revenue-table-wrap" class="hidden overflow-x-auto">
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="text-muted border-b border-hairline">
-            <th class="pb-2 font-body font-medium">Company</th>
-            <th class="pb-2 font-body font-medium">Owner</th>
-            <th class="pb-2 font-body font-medium text-right">FY2025 $M</th>
-            <th class="pb-2 font-body font-medium text-right">FY2026 $M</th>
-            <th class="pb-2 font-body font-medium text-right">&Delta;%</th>
-            <th class="pb-2 font-body font-medium">Confidence</th>
-            <th class="pb-2 font-body font-medium">Basis</th>
-          </tr>
-        </thead>
-        <tbody id="revenue-body" class="font-mono divide-y divide-hairline align-top"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="command-center-section" class="hidden mt-6">
-    <div class="mb-4">
-      <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Supply Chain Command Center</p>
-      <h2 class="font-display text-2xl text-ivory">Sense · Prescribe · Act</h2>
-    </div>
-
-    <div id="cc-kpi-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>
-
-    <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
-      <div class="flex items-start justify-between mb-2 gap-3">
-        <div>
-          <h3 class="font-display text-lg text-ivory">Demand Signal vs Production Plan</h3>
-          <p id="cc-demand-readout" class="font-mono text-sm text-muted mt-1">—</p>
-        </div>
-      </div>
-      <div id="cc-demand-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
-      <div class="h-64"><canvas id="ccDemandChart"></canvas></div>
-    </section>
-
-    <section class="bg-panel border border-hairline rounded-lg p-6 mb-6">
-      <h3 class="font-display text-lg text-ivory mb-4">Regional Inventory Risk</h3>
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm">
-          <thead>
-            <tr class="text-muted border-b border-hairline">
-              <th class="pb-2 pr-4 font-body font-medium">Region</th>
-              <th class="pb-2 pr-4 font-body font-medium text-right">Weeks on hand</th>
-              <th class="pb-2 pr-4 font-body font-medium text-right">Weeks to expiry</th>
-              <th class="pb-2 pr-4 font-body font-medium">Status</th>
-              <th class="pb-2 pr-4 font-body font-medium">Agent recommendation</th>
-              <th class="pb-2 font-body font-medium">Agent action taken</th>
-            </tr>
-          </thead>
-          <tbody id="cc-regional-body" class="font-mono divide-y divide-hairline align-top"></tbody>
+          <tbody id="magnum-body" class="font-mono divide-y divide-hairline align-top"></tbody>
         </table>
       </div>
-    </section>
-
-    <section class="bg-panel border border-hairline rounded-lg p-6">
-      <h3 class="font-display text-lg text-ivory mb-4">Equipment Risk</h3>
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm">
-          <thead>
-            <tr class="text-muted border-b border-hairline">
-              <th class="pb-2 pr-4 font-body font-medium">Equipment</th>
-              <th class="pb-2 pr-4 font-body font-medium">Region</th>
-              <th class="pb-2 pr-4 font-body font-medium text-right">Failure risk</th>
-              <th class="pb-2 pr-4 font-body font-medium text-right">Days out</th>
-              <th class="pb-2 pr-4 font-body font-medium text-right">Exposure</th>
-              <th class="pb-2 font-body font-medium">Agent action taken</th>
-            </tr>
-          </thead>
-          <tbody id="cc-equipment-body" class="font-mono divide-y divide-hairline align-top"></tbody>
-        </table>
+      <div id="magnum-regional-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
+        <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-2">FY2025 growth by continent</p>
+        <div id="magnum-regional-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
       </div>
-    </section>
-  </section>
+    </div>
+  </details>
 
   <div id="error-banner" class="hidden mt-6 border border-negative/40 bg-negative/10 text-ivory rounded-lg p-4 text-sm"></div>
 </main>
@@ -318,6 +373,15 @@
 let charts = {};
 let currentData = null;
 let trendView = 'history'; // 'history' | 'recent'
+
+// Chart.js sizes a canvas from its container's rendered width at creation
+// time; a canvas inside a collapsed <details> has zero width then, so every
+// chart needs a resize() once its panel is actually opened. The native
+// 'toggle' event doesn't bubble, but a capturing-phase listener on the
+// document still sees it on the way down to the <details> that fired it.
+document.addEventListener('toggle', () => {
+  Object.values(charts).forEach(c => { if (c && c.resize) c.resize(); });
+}, true);
 
 function sealBadge(isLive) {
   const ring = isLive ? 'border-brass text-brass' : 'border-muted/50 text-muted border-dashed';
@@ -408,10 +472,15 @@ function render(data) {
 function renderSynthesis(panel) {
   const container = document.getElementById('synthesis-flags');
   const flags = panel.flags || [];
+  const summary = document.getElementById('brief-summary');
 
   if (!flags.length) {
     container.innerHTML = '<p class="text-sm text-muted">No material signals this cycle.</p>';
+    if (summary) summary.textContent = 'No material signals this cycle';
     return;
+  }
+  if (summary) {
+    summary.textContent = `${flags.length} signal${flags.length === 1 ? '' : 's'} flagged this cycle — ${flags.map(f => f.headline).join(' · ')}`;
   }
 
   container.innerHTML = flags.map(flag => {
@@ -814,6 +883,17 @@ function renderNutrition(panel) {
   document.getElementById('seal-nutrition').innerHTML = sealBadge(panel.source === 'real');
   const body = document.getElementById('nutrition-body');
   body.innerHTML = '';
+
+  const items = panel.items || [];
+  const redCount = items.filter(i => i.uk_traffic_light === 'red').length;
+  const overWhoCount = items.filter(i => i.pct_of_who_5pct_limit !== null && i.pct_of_who_5pct_limit !== undefined && i.pct_of_who_5pct_limit >= 100).length;
+  const summary = document.getElementById('nutrition-summary');
+  if (summary) {
+    summary.textContent = items.length
+      ? `${redCount} of ${items.length} items red under UK FSA sugar rules · ${overWhoCount} exceed a full day's WHO 5% free-sugar guideline in one serving`
+      : '—';
+  }
+
   (panel.items || []).forEach(item => {
     const tl = UK_TRAFFIC_LIGHT[item.uk_traffic_light];
     const labelCell = tl
@@ -1166,6 +1246,15 @@ function ccActionCell(entry) {
 }
 
 function renderCcRegional(regions, activityLog) {
+  const stockout = regions.filter(r => r.status === 'Stockout risk').length;
+  const spoilage = regions.filter(r => r.status === 'Spoilage risk').length;
+  const summary = document.getElementById('regional-summary');
+  if (summary) {
+    summary.textContent = (stockout || spoilage)
+      ? `${stockout} region${stockout === 1 ? '' : 's'} at stockout risk · ${spoilage} at spoilage risk · ${regions.length - stockout - spoilage} balanced`
+      : `All ${regions.length} regions balanced`;
+  }
+
   const bySource = Object.fromEntries((activityLog || []).map(a => [a.source, a]));
   document.getElementById('cc-regional-body').innerHTML = regions.map(r => {
     const s = CC_STATUS[r.status] || { icon: '', color: '#C9AD93' };
@@ -1184,6 +1273,12 @@ function renderCcRegional(regions, activityLog) {
 }
 
 function renderCcEquipment(items, activityLog) {
+  const highRisk = items.filter(e => e.high_risk).length;
+  const summary = document.getElementById('equipment-summary');
+  if (summary) {
+    summary.textContent = `${highRisk} of ${items.length} assets flagged high failure risk`;
+  }
+
   const bySource = Object.fromEntries((activityLog || []).map(a => [a.source, a]));
   document.getElementById('cc-equipment-body').innerHTML = items.map(e => {
     const riskColor = e.failure_risk_pct >= 50 ? '#E2634F' : e.failure_risk_pct >= 30 ? '#E3A857' : '#83909C';
@@ -1202,12 +1297,12 @@ function renderCcEquipment(items, activityLog) {
 }
 
 function renderCommandCenter(cc) {
-  const section = document.getElementById('command-center-section');
+  const ids = ['cc-kpi-section', 'cc-demand-section', 'cc-regional-section', 'cc-equipment-section'];
   if (!cc) {
-    section.classList.add('hidden');
+    ids.forEach(id => document.getElementById(id).classList.add('hidden'));
     return;
   }
-  section.classList.remove('hidden');
+  ids.forEach(id => document.getElementById(id).classList.remove('hidden'));
 
   renderCcKpis(cc.kpis);
   renderCcDemand(cc.demand_vs_plan);
