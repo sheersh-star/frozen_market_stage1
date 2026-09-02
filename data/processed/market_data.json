@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-02 12:34:58",
+  "last_updated": "2026-09-02 12:44:27",
   "sales_trend": {
     "source": "real",
     "unit": "index (2021=100)",
@@ -1942,7 +1942,7 @@
     ]
   },
   "synthesis": {
-    "generated_at": "2026-09-02 12:34:58",
+    "generated_at": "2026-09-02 12:44:27",
     "mode": "rule-based",
     "flags": [
       {
@@ -2227,10 +2227,18 @@
   "command_center": {
     "kpis": {
       "spoilage_exposure_gbp": 659069.6,
+      "spoilage_exposure_logic": "Sum of units_on_hand \u00d7 unit_cost_gbp for every region with weeks_to_expiry < 2.5 (\"Spoilage risk\").",
+      "spoilage_exposure_contributors": "Contributing regions this cycle: Northern Ireland, North West.",
       "cash_tied_up_gbp": 1819354.6,
+      "cash_tied_up_logic": "Sum of units_on_hand \u00d7 unit_cost_gbp across all regions, regardless of status.",
+      "cash_tied_up_contributors": "All 6 regions: London, Scotland, Wales, South East, Northern Ireland, North West.",
       "equipment_exposure_gbp": 23572.5,
+      "equipment_exposure_logic": "Sum of units_at_risk \u00d7 unit_cost_gbp for every asset with failure_risk_pct \u2265 50.0%.",
+      "equipment_exposure_contributors": "Contributing equipment this cycle: COMP-LON-01, CASE-WAL-02, TRK-SCO-03.",
       "autonomous_actions_count": 2,
-      "autonomous_actions_impact_gbp": 56301.0
+      "autonomous_actions_impact_gbp": 56301.0,
+      "autonomous_actions_logic": "Count and \u00a3 impact of activity-log entries auto-executed under the policy: impact < \u00a375,000 AND confidence is real or grounded-estimate AND action type is not maintenance dispatch (that always requires human approval, regardless of size).",
+      "source": "Illustrative UK retail client scenario (equipment_health.csv / regional_inventory.csv / demand_vs_plan.csv) \u2014 no public dataset of a real company's cold-chain telemetry exists; this demonstrates what the system computes once connected to a real client's real systems."
     },
     "equipment": [
       {

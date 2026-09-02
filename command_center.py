@@ -324,23 +324,57 @@ def build_activity_log(equipment, regional):
 # 5. KPI aggregation
 # ---------------------------------------------------------------------------
 
+SCENARIO_SOURCE = (
+    "Illustrative UK retail client scenario (equipment_health.csv / "
+    "regional_inventory.csv / demand_vs_plan.csv) — no public dataset of a "
+    "real company's cold-chain telemetry exists; this demonstrates what the "
+    "system computes once connected to a real client's real systems."
+)
+
+
 def compute_kpis(equipment, regional, activity_log):
-    spoilage_exposure = sum(
-        r["inventory_value_gbp"] for r in (regional or []) if r["status"] == "Spoilage risk"
-    )
-    cash_tied_up = sum(r["inventory_value_gbp"] for r in (regional or []))
-    equipment_exposure = sum(e["exposure_gbp"] for e in (equipment or []) if e["high_risk"])
+    regional = regional or []
+    equipment = equipment or []
+
+    spoilage_regions = [r for r in regional if r["status"] == "Spoilage risk"]
+    spoilage_exposure = sum(r["inventory_value_gbp"] for r in spoilage_regions)
+    cash_tied_up = sum(r["inventory_value_gbp"] for r in regional)
+    high_risk_equipment = [e for e in equipment if e["high_risk"]]
+    equipment_exposure = sum(e["exposure_gbp"] for e in high_risk_equipment)
 
     auto_entries = [e for e in (activity_log or []) if e["status"] == "auto_executed"]
     autonomous_count = len(auto_entries)
     autonomous_impact = sum(e["impact_gbp"] or 0 for e in auto_entries)
 
+    spoilage_names = ", ".join(r["region"] for r in spoilage_regions) or "none this cycle"
+    equipment_names = ", ".join(e["equipment_id"] for e in high_risk_equipment) or "none this cycle"
+    all_region_names = ", ".join(r["region"] for r in regional)
+
     return {
         "spoilage_exposure_gbp": spoilage_exposure,
+        "spoilage_exposure_logic": (
+            f"Sum of units_on_hand × unit_cost_gbp for every region with "
+            f"weeks_to_expiry < {SPOILAGE_WEEKS_TO_EXPIRY} (\"Spoilage risk\")."
+        ),
+        "spoilage_exposure_contributors": f"Contributing regions this cycle: {spoilage_names}.",
         "cash_tied_up_gbp": cash_tied_up,
+        "cash_tied_up_logic": "Sum of units_on_hand × unit_cost_gbp across all regions, regardless of status.",
+        "cash_tied_up_contributors": f"All {len(regional)} regions: {all_region_names}.",
         "equipment_exposure_gbp": equipment_exposure,
+        "equipment_exposure_logic": (
+            f"Sum of units_at_risk × unit_cost_gbp for every asset with "
+            f"failure_risk_pct ≥ {EQUIPMENT_HIGH_RISK_PCT}%."
+        ),
+        "equipment_exposure_contributors": f"Contributing equipment this cycle: {equipment_names}.",
         "autonomous_actions_count": autonomous_count,
         "autonomous_actions_impact_gbp": autonomous_impact,
+        "autonomous_actions_logic": (
+            f"Count and £ impact of activity-log entries auto-executed under the "
+            f"policy: impact < £{AUTO_EXECUTE_MAX_IMPACT_GBP:,} AND confidence is "
+            f"real or grounded-estimate AND action type is not maintenance dispatch "
+            f"(that always requires human approval, regardless of size)."
+        ),
+        "source": SCENARIO_SOURCE,
     }
 
 
