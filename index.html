@@ -63,7 +63,7 @@
   <div class="mb-6">
     <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">01 &middot; Problem</p>
     <h2 class="font-display text-3xl text-ivory mt-1">What's going wrong</h2>
-    <p class="text-sm text-muted mt-1 max-w-2xl">The signal, then the market context that explains why it matters.</p>
+    <p class="text-sm text-muted mt-1 max-w-2xl">Signal, then context.</p>
   </div>
 
   <details open class="group border border-brass/40 bg-panel rounded-lg p-6 mb-6">
@@ -110,8 +110,7 @@
         </thead>
         <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
       </table>
-      <p class="font-mono text-[10px] text-muted mt-2">&sup1; UK FSA front-of-pack labelling, total sugar per 100g (converted from per-serving using FDC's reported serving size). Blank where no gram serving size is reported.<br>
-      &sup2; One serving's share of WHO's 5% free-sugar guideline (25g/day) for a reference 2000 kcal adult diet. Uses FDC's "added sugar" as the closest available proxy for WHO's "free sugars"; blank where FDC doesn't report it for that item.</p>
+      <p class="font-mono text-[10px] text-muted mt-2">&sup1; UK FSA, sugar per 100g. &sup2; % of WHO's 5% free-sugar limit (25g/day, adult). Blank = not reported.</p>
     </div>
   </details>
 
@@ -119,7 +118,7 @@
     <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
         <h3 class="font-display text-xl text-ivory">Market Context</h3>
-        <p class="font-mono text-sm text-muted mt-1">Production trend, global share, sentiment, demographics, and competitor revenue — the backdrop the signals above sit against.</p>
+        <p class="font-mono text-sm text-muted mt-1">Production &middot; global share &middot; sentiment &middot; demographics &middot; competitor revenue</p>
       </div>
       <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
     </summary>
@@ -130,7 +129,7 @@
           <div>
             <h4 class="font-display text-lg text-ivory">Production &amp; Sales Trend</h4>
             <p id="trend-readout" class="font-mono text-sm text-muted mt-1">—</p>
-            <p class="font-mono text-xs text-muted mt-1">Eurostat, NACE C1052 (ice cream manufacture) &middot; Germany &mdash; the EU27 aggregate is confidentiality-suppressed at this level, so the largest reporting producer stands in for the EU trend.</p>
+            <p class="font-mono text-xs text-muted mt-1">Eurostat NACE C1052 &middot; Germany &mdash; EU aggregate suppressed, largest producer stands in</p>
             <p id="trend-interp-note" class="hidden font-mono text-xs text-muted mt-1">Illustrative — interpolated between quarterly data points, not independently measured. Click a point for that month's brief.</p>
           </div>
           <div class="shrink-0 flex items-center gap-3">
@@ -156,7 +155,7 @@
           <div class="flex items-start justify-between mb-4 gap-3">
             <div>
               <h4 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h4>
-              <p class="font-mono text-[10px] text-muted mt-1">US consumer review sample &mdash; no equivalent UK/EU dataset found; kept as-is rather than implied to be UK data.</p>
+              <p class="font-mono text-[10px] text-muted mt-1">US sample &mdash; no UK/EU equivalent found</p>
             </div>
             <div id="seal-sentiment" class="shrink-0"></div>
           </div>
@@ -170,7 +169,7 @@
           <div>
             <h4 class="font-display text-lg text-ivory">Consumer &amp; Demographics</h4>
             <p id="demographics-readout" class="font-mono text-sm text-muted mt-1">—</p>
-            <p class="font-mono text-xs text-muted mt-1">Population by age bracket &middot; World Bank 2023 &middot; United Kingdom (launch market) alongside the same continents as Global Market Distribution above (scale-up context)</p>
+            <p class="font-mono text-xs text-muted mt-1">World Bank 2023 &middot; UK-led &middot; continents = scale-up context</p>
           </div>
         </div>
         <div id="demographics-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4 mt-3"></div>
@@ -186,8 +185,8 @@
         <div class="flex items-start justify-between mb-2 gap-3">
           <div>
             <h4 class="font-display text-lg text-ivory">Company Revenue Comparison</h4>
-            <p class="font-mono text-sm text-muted mt-1">FY2025 vs FY2026 · log scale — company sizes span a very wide range</p>
-            <p class="font-mono text-xs text-muted mt-1">Shown in USD, the common denominator for comparing companies that report natively in EUR, GBP, and RMB — each conversion rate is cited per-row in the basis column.</p>
+            <p class="font-mono text-sm text-muted mt-1">FY2025 vs FY2026 &middot; log scale</p>
+            <p class="font-mono text-xs text-muted mt-1">USD for cross-border comparison &middot; rate cited per row</p>
           </div>
           <div class="shrink-0 flex items-center gap-1 font-mono text-[10px]">
             <button id="btn-revenue-chart" class="px-2 py-1 rounded border border-brass text-brass">Chart</button>
@@ -222,8 +221,7 @@
     <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">02 &middot; Action</p>
     <h2 class="font-display text-3xl text-ivory mt-1">Sense &middot; Prescribe &middot; Act</h2>
     <p class="text-sm text-muted mt-1 max-w-2xl">
-      Actions auto-execute when impact is under &pound;75,000 and confidence is real or grounded-estimate;
-      maintenance dispatch always requires human approval regardless of size.
+      Auto-executes: &lt;&pound;75,000 &middot; real/grounded confidence. Maintenance dispatch always needs approval.
     </p>
   </div>
 
@@ -295,7 +293,7 @@
   <div class="mt-14 pt-8 border-t-2 border-brass/30 mb-6">
     <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">03 &middot; Impact</p>
     <h2 class="font-display text-3xl text-ivory mt-1">What it's worth</h2>
-    <p class="text-sm text-muted mt-1 max-w-2xl">The quantified payoff, this cycle, plus proof the underlying pattern is real money.</p>
+    <p class="text-sm text-muted mt-1 max-w-2xl">This cycle's payoff, plus proof it's real money.</p>
   </div>
 
   <div id="cc-kpi-section" class="hidden mb-6">
@@ -344,7 +342,7 @@
       <div>
         <h3 class="font-display text-xl text-ivory">Real-World Precedent &middot; Ice Cream Category</h3>
         <p id="magnum-readout" class="font-mono text-sm text-muted mt-1">—</p>
-        <p class="font-mono text-xs text-muted mt-1">Unilever Ice Cream (FY2021&ndash;24) &rarr; The Magnum Ice Cream Company (FY2025, post-demerger) &middot; indexed to FY2020 = 100</p>
+        <p class="font-mono text-xs text-muted mt-1">Unilever &rarr; Magnum Ice Cream Co. (FY2025 demerger) &middot; indexed to FY2020 = 100</p>
       </div>
       <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
     </summary>
