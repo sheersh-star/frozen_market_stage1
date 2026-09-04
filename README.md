@@ -199,3 +199,41 @@ and some structural gaps once real data enters the picture:
 - **Server hardening.** Reusable ports (no more restart friction),
   configurable port via env var, and a clear message if the data file is
   missing instead of a silent blank page.
+
+## Prototype vs. live — deliberate, not a limitation
+
+This build is a **static prototype by choice**, not by technical ceiling. The
+dashboard header says so explicitly. Here's the honest breakdown of what
+"going live" would actually mean, panel by panel:
+
+**Already free to run live, no cost decision needed:**
+Production Trend (Eurostat), Global Market Distribution basis data,
+Consumer & Demographics (World Bank, UKHSA), Nutrition (USDA FoodData
+Central) all sit behind free public APIs with no key or with a free `DEMO_KEY`.
+Re-running the `curl` commands already documented per-panel above and
+re-committing the output is the entire "live" step for these — no new
+infrastructure, no subscription.
+
+**The real cost driver — the Command Center:**
+Equipment Risk, Regional Inventory Risk, and Demand Signal vs Production
+Plan are illustrative because *no public dataset of a real company's
+cold-chain telemetry exists* — that's not a budget question, it's that the
+data is private by nature. A live version of this panel means one of two
+things, both genuinely paid:
+1. A real client's own IoT/ERP feed (freezer sensor readings, WMS
+   inventory levels, POS demand data) — free to the client, but requires
+   their systems access, not a public API.
+2. A third-party retail/IoT data subscription (e.g. cold-chain monitoring
+   platforms, syndicated POS data providers) — a genuine recurring cost,
+   which is the "API would cost me money" line this prototype is
+   deliberately avoiding for now.
+
+**What "flipping the switch" looks like when it's worth paying for:**
+Nothing architectural has to change. `data_pipeline.py`'s loaders already
+read from `data/raw/*.csv` — a live feed just means something upstream
+(a small script, a webhook, a scheduled job) writes fresh CSVs into that
+folder on a cadence, instead of a human re-pulling and committing them.
+`server.py`'s watcher already picks up any file change within
+`WATCH_INTERVAL_SECONDS` with no code change at all. The mechanism is
+already in place; only the upstream data source needs to change from
+"static file I refresh by hand" to "static file a paid feed refreshes for me."
