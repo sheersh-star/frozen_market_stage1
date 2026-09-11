@@ -136,7 +136,7 @@ def _extract_nutrients(food_nutrients):
 # ---------------------------------------------------------------------------
 
 def load_sales_trend():
-    real_file = RAW_DIR / "ice_cream_production.csv"
+    real_file = RAW_DIR / "production" / "ice_cream_production.csv"
     if real_file.exists():
         rows = _read_csv(real_file)
         out = []
@@ -169,8 +169,8 @@ def load_sales_trend():
 # ---------------------------------------------------------------------------
 
 def load_brand_sentiment():
-    reviews_file = RAW_DIR / "ice_cream_reviews.csv"
-    products_file = RAW_DIR / "ice_cream_products.csv"
+    reviews_file = RAW_DIR / "sentiment" / "ice_cream_reviews.csv"
+    products_file = RAW_DIR / "sentiment" / "ice_cream_products.csv"
 
     if reviews_file.exists():
         reviews = _read_csv(reviews_file)
@@ -232,7 +232,7 @@ def load_brand_sentiment():
 # ---------------------------------------------------------------------------
 
 def load_nutrition():
-    real_file = RAW_DIR / "usda_nutrition.json"
+    real_file = RAW_DIR / "nutrition" / "usda_nutrition.json"
     if real_file.exists():
         try:
             with open(real_file, encoding="utf-8") as f:
@@ -351,7 +351,7 @@ def load_nutrition():
 # confidence is grounded_estimate throughout, not real (see basis per row).
 
 def load_regional_distribution():
-    real_file = RAW_DIR / "global_market_regions.csv"
+    real_file = RAW_DIR / "market" / "global_market_regions.csv"
     out = []
     if real_file.exists():
         for row in _read_csv(real_file):
@@ -389,7 +389,7 @@ def load_company_revenue():
     disclose ice-cream-specific revenue, so a three-way honesty signal matters
     more here than elsewhere.
     """
-    real_file = RAW_DIR / "company_revenue.csv"
+    real_file = RAW_DIR / "market" / "company_revenue.csv"
     if not real_file.exists():
         return None
 
@@ -458,7 +458,7 @@ def load_volume_dollar_sales():
     end renders them as two independent charts plus one indexed-to-100
     comparison, which is the honest way to show whether they're diverging.
     """
-    real_file = RAW_DIR / "volume_dollar_sales.csv"
+    real_file = RAW_DIR / "market" / "volume_dollar_sales.csv"
     if not real_file.exists():
         return None
 
@@ -513,7 +513,7 @@ def load_magnum_annual():
     illustrative ones. FY2023 is the real-world instance of the pattern that
     panel was built to demonstrate: volume -6.0%, price +8.8%.
     """
-    real_file = RAW_DIR / "magnum_icecream_annual.csv"
+    real_file = RAW_DIR / "market" / "magnum_icecream_annual.csv"
     if not real_file.exists():
         return None
 
@@ -548,7 +548,7 @@ def load_magnum_annual():
         r["price_index"] = round(price_index, 1)
 
     regions = []
-    regional_file = RAW_DIR / "magnum_regional_fy2025.csv"
+    regional_file = RAW_DIR / "market" / "magnum_regional_fy2025.csv"
     if regional_file.exists():
         for row in _read_csv(regional_file):
             try:
@@ -595,7 +595,7 @@ WHO_FREE_SUGAR_5PCT_LIMIT_G = 25
 
 def load_consumer_demographics():
     population = []
-    pop_file = RAW_DIR / "population_by_age_region.csv"
+    pop_file = RAW_DIR / "demographics" / "population_by_age_region.csv"
     if pop_file.exists():
         for row in _read_csv(pop_file):
             try:
@@ -621,7 +621,7 @@ def load_consumer_demographics():
         row["share_pct"] = round(row["population"] / total * 100, 1)
 
     consumption = []
-    consumption_file = RAW_DIR / "ice_cream_consumption_by_age_uk.csv"
+    consumption_file = RAW_DIR / "demographics" / "ice_cream_consumption_by_age_uk.csv"
     if consumption_file.exists():
         for row in _read_csv(consumption_file):
             try:

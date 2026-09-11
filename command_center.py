@@ -78,7 +78,7 @@ def _read_csv(path):
 # ---------------------------------------------------------------------------
 
 def compute_equipment_risk(raw_dir):
-    path = Path(raw_dir) / "equipment_health.csv"
+    path = Path(raw_dir) / "command_center" / "equipment_health.csv"
     if not path.exists():
         return None
 
@@ -115,7 +115,7 @@ def compute_equipment_risk(raw_dir):
 # ---------------------------------------------------------------------------
 
 def compute_regional_inventory(raw_dir):
-    path = Path(raw_dir) / "regional_inventory.csv"
+    path = Path(raw_dir) / "command_center" / "regional_inventory.csv"
     if not path.exists():
         return None
 
@@ -211,7 +211,7 @@ def compute_regional_inventory(raw_dir):
 # ---------------------------------------------------------------------------
 
 def compute_demand_signal(raw_dir):
-    path = Path(raw_dir) / "demand_vs_plan.csv"
+    path = Path(raw_dir) / "command_center" / "demand_vs_plan.csv"
     if not path.exists():
         return None
 

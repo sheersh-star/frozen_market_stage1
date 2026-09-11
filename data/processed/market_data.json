@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-02 12:44:27",
+  "last_updated": "2026-09-11 10:10:54",
   "sales_trend": {
     "source": "real",
     "unit": "index (2021=100)",
@@ -1942,7 +1942,7 @@
     ]
   },
   "synthesis": {
-    "generated_at": "2026-09-02 12:44:27",
+    "generated_at": "2026-09-11 10:10:54",
     "mode": "rule-based",
     "flags": [
       {

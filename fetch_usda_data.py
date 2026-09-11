@@ -2,8 +2,8 @@
 fetch_usda_data.py
 -------------------
 Optional helper: pulls live nutrition data from USDA FoodData Central and
-saves it to data/raw/usda_nutrition.json, ready for data_pipeline.py to pick
-up on the next run.
+saves it to data/raw/nutrition/usda_nutrition.json, ready for
+data_pipeline.py to pick up on the next run.
 
 Get a free API key at https://fdc.nal.usda.gov/api-key-signup — the shared
 DEMO_KEY below works for light testing but is rate-limited, so swap in your
@@ -29,7 +29,7 @@ from pathlib import Path
 
 API_KEY = os.environ.get("USDA_API_KEY", "DEMO_KEY")
 QUERY = sys.argv[1] if len(sys.argv) > 1 else "ice cream"
-OUT_FILE = Path(__file__).resolve().parent / "data" / "raw" / "usda_nutrition.json"
+OUT_FILE = Path(__file__).resolve().parent / "data" / "raw" / "nutrition" / "usda_nutrition.json"
 
 
 def fetch():

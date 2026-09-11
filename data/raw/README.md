@@ -4,50 +4,63 @@ hypothetical UK retail client. Two files remain US-sourced where no real
 UK/EU equivalent was found (marked below) — labeled honestly, not implied
 to be UK data.
 
-Real datasets, by filename:
+Folders mirror the dashboard's own Problem/Action/Impact panels — if you
+know which panel a number is on, you know which folder its source is in:
 
-  ice_cream_production.csv       Eurostat NACE C1052 (ice cream manufacture), Germany,
-                                  live pull:
+  production/       Production & Sales Trend
+  market/           Global Market Distribution, Company Revenue,
+                     Real-World Precedent (Magnum), Volume vs Revenue
+  sentiment/        Brand & Flavor Sentiment
+  nutrition/        Nutrition & Regulatory Exposure
+  demographics/     Consumer & Demographics
+  command_center/   Demand Signal, Regional Inventory Risk, Equipment Risk
+
+Real datasets, by path:
+
+  production/ice_cream_production.csv       Eurostat NACE C1052 (ice cream manufacture),
+                                  Germany, live pull:
                                   curl "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/sts_inpr_m?format=JSON&nace_r2=C1052&geo=DE&s_adj=NSA&indic_bt=PRD&unit=I21"
                                   Germany stands in for the EU — Eurostat suppresses the
                                   EU27 aggregate at this 4-digit NACE level (confidentiality).
-  ice_cream_reviews.csv          US SAMPLE — Kaggle "Ice Cream Dataset" (tysonpo). No
-                                  equivalent UK/EU review dataset found.
-  ice_cream_products.csv         same dataset, optional companion file
-  usda_nutrition.json            US branded products — USDA FoodData Central (use
+  sentiment/ice_cream_reviews.csv           US SAMPLE — Kaggle "Ice Cream Dataset" (tysonpo).
+                                  No equivalent UK/EU review dataset found.
+  sentiment/ice_cream_products.csv          same dataset, optional companion file
+  nutrition/usda_nutrition.json             US branded products — USDA FoodData Central (use
                                   fetch_usda_data.py). Values are US; the regulatory
                                   judgment applied to them (UK FSA traffic-light, WHO
                                   free-sugar %) is UK/WHO — see data_pipeline.py constants
                                   UK_SUGAR_TRAFFIC_LIGHT_* and WHO_FREE_SUGAR_*_LIMIT_G.
-  global_market_regions.csv      Published market-research sizing (e.g. Fortune Business
-                                  Insights' Ice Cream Market Report) — global share by
-                                  continent. confidence=grounded_estimate throughout: no
+  market/global_market_regions.csv          Published market-research sizing (e.g. Fortune
+                                  Business Insights' Ice Cream Market Report) — global share
+                                  by continent. confidence=grounded_estimate throughout: no
                                   central body measures worldwide ice cream sales directly,
                                   so this is third-party estimation, not a primary disclosure.
-  company_revenue.csv            Mixed real/grounded_estimate/placeholder, per-row basis —
-                                  see the basis column for each company's citation. Leads
-                                  with TMICC and Froneri (both European/UK-linked) purely
-                                  by revenue magnitude; also includes Mackie's of Scotland,
-                                  a real UK independent with Companies House-filed accounts.
-  magnum_icecream_annual.csv     Unilever FY2021-24 + The Magnum Ice Cream Company FY2025
-                                  full-year results — real, cited volume/price growth splits.
-  magnum_regional_fy2025.csv     TMICC's FY2025 continent-level organic sales growth.
-  volume_dollar_sales.csv        Illustrative only (confidence=placeholder throughout) —
-                                  demonstrates the volume/price divergence pattern that
-                                  magnum_icecream_annual.csv then shows really happened.
-                                  Currency column is revenue_gbp.
-  population_by_age_region.csv   World Bank population-by-age-bracket indicators
+  market/company_revenue.csv                Mixed real/grounded_estimate/placeholder, per-row
+                                  basis — see the basis column for each company's citation.
+                                  Leads with TMICC and Froneri (both European/UK-linked)
+                                  purely by revenue magnitude; also includes Mackie's of
+                                  Scotland, a real UK independent with Companies
+                                  House-filed accounts.
+  market/magnum_icecream_annual.csv         Unilever FY2021-24 + The Magnum Ice Cream Company
+                                  FY2025 full-year results — real, cited volume/price
+                                  growth splits.
+  market/magnum_regional_fy2025.csv         TMICC's FY2025 continent-level organic sales growth.
+  market/volume_dollar_sales.csv            Illustrative only (confidence=placeholder
+                                  throughout) — demonstrates the volume/price divergence
+                                  pattern that magnum_icecream_annual.csv then shows really
+                                  happened. Currency column is revenue_gbp.
+  demographics/population_by_age_region.csv World Bank population-by-age-bracket indicators
                                   (SP.POP.0014.TO / .1564.TO / .65UP.TO), 2023. Leads with
                                   United Kingdom (the launch market), then the same 5
                                   continents as global_market_regions.csv as the scale-up
                                   context. The 5-continent split is a verified exact
                                   partition of the World Bank's own World totals.
-  ice_cream_consumption_by_age_uk.csv   UKHSA, citing the National Diet and Nutrition
-                                  Survey (NDNS) years 5 & 6 — real UK ice-cream-specific
-                                  consumption (g/day, sugar g/day, share of diet sugar,
-                                  portions/year) for ages 5-11.
+  demographics/ice_cream_consumption_by_age_uk.csv   UKHSA, citing the National Diet and
+                                  Nutrition Survey (NDNS) years 5 & 6 — real UK
+                                  ice-cream-specific consumption (g/day, sugar g/day, share
+                                  of diet sugar, portions/year) for ages 5-11.
 
-Command Center (equipment_health.csv, regional_inventory.csv, demand_vs_plan.csv):
+Command Center (command_center/equipment_health.csv, regional_inventory.csv, demand_vs_plan.csv):
   Intentionally NOT real — they simulate one hypothetical UK retail client's private
   cold-chain/inventory/demand telemetry, which by definition has no public dataset.
   Regions are UK statistical/constituent-country regions (London, South East, North
