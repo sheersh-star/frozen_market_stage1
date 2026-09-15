@@ -1,171 +1,67 @@
-# Frozen Dessert Market Console
+# TMICC Strategist Console
 
-A local, zero-dependency market-intelligence dashboard: a Python data pipeline
-writes a JSON file, a Python stdlib server serves it, and a plain HTML/JS
-front end renders it. No database, no npm install, no framework — just
-`python3`.
+Rebuilt from the ground up around one subject — **The Magnum Ice Cream Company (TMICC)** — rather than the generic "frozen dessert market" scope this repo started as. A local, zero-dependency dashboard: a Python data pipeline writes a JSON file, a Python stdlib server serves it, and a plain HTML/JS front end renders it. No database, no npm install, no framework — just `python3`.
 
-**Scope: UK launch market, scaling to a global initiative.** Regulatory and
-nutrition framing runs on UK FSA (front-of-pack sugar labelling) and WHO
-(free-sugar guideline) standards rather than US ones; currency throughout is
-GBP; the Command Center scenario is a hypothetical UK retail client (6 UK
-regions); population and consumption data lead with the UK, with global
-continents as the scale-up context. Two panels remain US-sourced where no
-real UK/EU equivalent exists — each is labeled as such rather than implied
-to be UK data (see the table below).
-
-It runs immediately on mock data. As you drop in real datasets, each panel
-switches from mock to live automatically — no code changes required, and no
-manual re-run required either: `server.py` watches `data/raw/` in the
-background and regenerates `market_data.json` on its own whenever a file
-there is added or changed (see "Self-updating" below).
-
-The Production & Sales Trend panel is already wired to real data — Eurostat
-NACE C1052 (ice cream manufacture), Germany — production volume index,
-live-pulled, lives at `data/raw/production/ice_cream_production.csv`. Germany stands in
-for an EU-wide trend because Eurostat suppresses the EU27 aggregate at this
-4-digit NACE level (confidentiality) — Germany, Italy, and Spain are the
-countries that do publish it. Re-pull it anytime with:
-
-```bash
-curl "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/sts_inpr_m?format=JSON&nace_r2=C1052&geo=DE&s_adj=NSA&indic_bt=PRD&unit=I21" -o /tmp/eurostat.json
-# then reshape {date, value} pairs from the JSON-stat payload into DATE,VALUE CSV rows
-```
+**The idea:** anything a TMICC strategist would want to know immediately — live news on TMICC and its named competitors, the real ecosystem TMICC sits inside (suppliers, joint ventures, shareholders, disclosed risks), a correlated timeline linking TMICC's own decisions to competitor moves and macro-commodity swings, and TMICC's real financial performance. **Zero API keys anywhere** — everything either fetched via free/keyless techniques (Google News RSS) or pulled by hand from real primary sources (TMICC's own Annual Report, Eurostat, USDA).
 
 ## Quickstart
 
 ```bash
-python3 server.py          # generates market_data.json, then opens http://localhost:8080
+python3 fetch_competitor_news.py   # one-off: fetch live news (run this on a schedule)
+python3 server.py                  # generates console_data.json, then opens http://localhost:8080
 ```
 
-That's it — `server.py` now runs the pipeline itself on startup and keeps
-watching for changes, so you don't need to run `data_pipeline.py` by hand
-unless you want a one-off regeneration without starting the server.
+`server.py` runs the pipeline itself on startup and keeps watching `data/raw/` (recursively) for changes, so you don't need to run `data_pipeline.py` by hand unless you want a one-off regeneration without starting the server. The news feed specifically needs `fetch_competitor_news.py` run separately, since fetching news is a live network operation with its own polite rate-limiting — the dashboard pipeline only reads its output.
 
-Every panel shows a small badge — a solid **LIVE** ring or a dashed **MOCK**
-ring — so you always know what you're looking at.
+Every panel shows a small badge — a solid **LIVE** ring or a dashed **MOCK** ring — so you always know what you're looking at. In this rebuild, only two panels (Production Trend, Nutrition) still have that badge at all; everything else is either real or simply absent (see "What's in each panel" below).
 
 ## Self-updating
 
-`server.py` runs a background thread (`watch_and_regenerate`) that polls the
-newest file-modification time in `data/raw/` every `WATCH_INTERVAL_SECONDS`
-(default 15s, override with `WATCH_INTERVAL_SECONDS=5 python3 server.py`).
-When that timestamp moves — a new file dropped in, an existing one edited —
-it re-runs `data_pipeline.generate_market_data()` in-process to rewrite
-`market_data.json`. The browser's own 30s poll (last line of `index.html`)
-then picks up the fresh file on its next tick. So end to end: drop/update a
-file in `data/raw/` → picked up within `WATCH_INTERVAL_SECONDS` → visible in
-the browser within another 30s at most. No server restart, no manual pipeline
-run.
+`server.py` runs a background thread (`watch_and_regenerate`) that polls the newest file-modification time across every file under `data/raw/` (recursively — this was a real bug fixed in this rebuild: it used to only scan the top level, silently missing `data/raw/news/raw_items.json` and everything else in a subfolder) every `WATCH_INTERVAL_SECONDS` (default 15s, override with `WATCH_INTERVAL_SECONDS=5 python3 server.py`). When that timestamp moves, it re-runs `data_pipeline.generate_market_data()` in-process to rewrite `console_data.json`. The browser's own 30s poll then picks up the fresh file on its next tick.
 
 ## Project structure
 
 ```
 frozen-dessert-dashboard/
-├── data_pipeline.py         # builds market_data.json (real data if present, else mock)
-├── synthesis.py             # cross-panel rule-based signal detection
-├── command_center.py        # supply-chain sense/prescribe/act logic
-├── fetch_usda_data.py       # optional: pulls live nutrition data from USDA's API
-├── server.py                # local web server (stdlib only)
-├── index.html               # the dashboard itself
+├── data_pipeline.py          # builds data/processed/console_data.json
+├── fetch_competitor_news.py  # live news feed — Google News RSS, zero API keys
+├── fetch_usda_data.py        # optional: pulls live nutrition data from USDA's API
+├── server.py                 # local web server (stdlib only) + self-updating watcher
+├── index.html                # the dashboard itself
 ├── data/
-│   ├── raw/                 # every real (or illustrative) input file, one folder per panel group:
-│   │   ├── production/      #   Production & Sales Trend
-│   │   ├── market/          #   Global Market Distribution, Company Revenue, Magnum, Volume vs Revenue
-│   │   ├── sentiment/       #   Brand & Flavor Sentiment
-│   │   ├── nutrition/       #   Nutrition & Regulatory Exposure
-│   │   ├── demographics/    #   Consumer & Demographics
-│   │   ├── command_center/  #   Demand Signal, Regional Inventory Risk, Equipment Risk
-│   │   └── README.md        #   what's real, what's illustrative, and why — per file
-│   └── processed/           # market_data.json lands here (generated by data_pipeline.py,
-│                             # committed so static hosts like Netlify have something to serve)
+│   ├── config/
+│   │   └── watchlist.json    # companies + topics fetch_competitor_news.py queries
+│   ├── raw/                  # every input file — see data/raw/README.md for what's
+│   │   │                     # currently used vs left as an honest unused archive
+│   │   ├── magnum_ecosystem.json            # real, extracted from TMICC's own Annual Report
+│   │   ├── magnum_correlated_timeline.json  # real, dated, cross-referenced
+│   │   ├── news/raw_items.json              # live, from fetch_competitor_news.py
+│   │   ├── production/       #   Production & Sales Trend (Eurostat)
+│   │   ├── nutrition/        #   Nutrition & Regulatory Exposure (USDA)
+│   │   ├── market/           #   TMICC Financial Performance (2 files used; 3 legacy)
+│   │   ├── sentiment/        #   legacy, unused — see data/raw/README.md
+│   │   ├── demographics/     #   legacy, unused
+│   │   └── command_center/   #   legacy, unused
+│   └── processed/            # console_data.json lands here (generated by data_pipeline.py,
+│                              # committed so static hosts like Netlify have something to serve)
+├── docs/
+│   ├── magnum_ecosystem.md              # narrative version of magnum_ecosystem.json
+│   └── magnum_correlated_timeline.md    # narrative version of magnum_correlated_timeline.json
 └── README.md
 ```
 
-## Adding your real datasets
+## What's in each panel
 
-Drop files into `data/raw/<folder>/` using these exact filenames — the
-folder tells you which panel group a file belongs to (see the project
-structure above). Nothing is required — any file that's missing just means
-that panel keeps running on mock data until you add it. Once it's there,
-the background watcher picks it up on its own — see "Self-updating" above.
+| Panel | Source | Confidence |
+|---|---|---|
+| Live News Feed | Google News RSS via `fetch_competitor_news.py` | real, live |
+| The Magnum Ecosystem | TMICC's own 2025 Annual Report (`146292742.pdf`, kept local — see `.gitignore`) | real, first-party |
+| Correlated Timeline | Cross-referenced from the ecosystem doc + targeted research | real, dated, sourced |
+| TMICC Financial Performance | Unilever/TMICC full-year results disclosures | real |
+| Nutrition & Regulatory Exposure | USDA FoodData Central | real (mock fallback if the file's missing) |
+| Production & Sales Trend | Eurostat NACE C1052, Germany | real (mock fallback if the file's missing) |
 
-| File | Folder | Source | Powers | Recommended size |
-|---|---|---|---|---|
-| `ice_cream_production.csv` | `production/` | Eurostat NACE C1052, Germany, live pull | Production & sales trend | Already provided — 426 real rows (1991–present), re-pull to extend |
-| `ice_cream_reviews.csv` + optional `ice_cream_products.csv` | `sentiment/` | Kaggle "Ice Cream Dataset" (tysonpo) — Ben & Jerry's, Häagen-Dazs, Breyers, Talenti reviews | Brand & flavor sentiment | **US sample** — no equivalent UK/EU dataset found; ~5 brands × ~20 reviews each (~100 rows in `ice_cream_reviews.csv`); 5 rows in `ice_cream_products.csv`, one per brand key |
-| `usda_nutrition.json` | `nutrition/` | USDA FoodData Central API | Nutrition profile (values) | **US branded products** — the values themselves are US, but the regulatory judgment applied to them (UK FSA traffic-light thresholds, WHO free-sugar %) is UK/WHO; ~12 items used |
-| `global_market_regions.csv` | `market/` | Published market-research sizing (e.g. Fortune Business Insights' Ice Cream Market Report) | Global market distribution | One row per continent, `region,share_pct,confidence,basis` — confidence is `grounded_estimate` throughout since no central body measures worldwide ice cream sales directly |
-| `population_by_age_region.csv` | `demographics/` | World Bank age-bracket population indicators | Consumer & demographics | United Kingdom (launch market) + 5 continents (scale-up context), 3 age brackets each |
-| `ice_cream_consumption_by_age_uk.csv` | `demographics/` | UKHSA / National Diet and Nutrition Survey (NDNS) | Consumer & demographics | Real UK ice-cream-specific consumption, ages 5-11 |
-
-Column names the loaders match (case-insensitive, several aliases each — see
-`_find_field` in `data_pipeline.py`):
-
-- **`production/ice_cream_production.csv`**: date column `DATE` or `month`; value column
-  `VALUE`, `IPN31152N`, `production`, or `units_sold`.
-- **`sentiment/ice_cream_reviews.csv`**: key column `key`, `product_key`, or `id`;
-  rating column `stars` or `rating` (1–5).
-- **`sentiment/ice_cream_products.csv`**: key column `key` or `id` (must match the
-  reviews file); brand column `brand` (falls back to `name`).
-- **`nutrition/usda_nutrition.json`**: USDA FoodData Central shape — a `foods` array of
-  objects with `description` and a `foodNutrients` list (either
-  `{"nutrientName": ..., "value": ...}` or the nested `{"nutrient": {"name":
-  ...}, "amount": ...}` form). Nutrient names read: `Energy`, `Sugars, total
-  including NLEA` (or `Total Sugars`), `Total lipid (fat)`.
-- **`market/global_market_regions.csv`**: `region`, `share_pct` (float), `confidence`
-  (`real`/`grounded_estimate`/`placeholder`), `basis` (citation text, shown
-  in the chart's tooltip).
-- **`demographics/population_by_age_region.csv`**: `region`, `age_bracket` (`0-14`,
-  `15-64`, `65+`), `population`, `confidence`, `basis`.
-- **`demographics/ice_cream_consumption_by_age_uk.csv`**: `age_bracket`,
-  `mean_g_per_day`, `mean_sugar_g_per_day`, `share_of_diet_sugar_pct`,
-  `portions_per_year`, `confidence`, `basis`.
-
-Notes on each, from checking the real sources while building this:
-
-- **Production/sales**: the real columns are literally `DATE` and `VALUE`
-  (index, 2021=100) — the loader looks for those first, so a straight
-  Eurostat pull should just work. Uses Germany specifically, not an EU27
-  aggregate (see the sourcing note above).
-- **Brand reviews**: confirmed to cover Ben & Jerry's, Häagen-Dazs, Breyers
-  and Talenti with 1–5 star ratings. Exact column names weren't
-  confirmable without downloading it myself, so the loader matches several
-  likely variants (`key`/`id`, `stars`/`rating`). If nothing loads, open the
-  CSV, check the header row, and add the real names to the alias lists near
-  the top of `data_pipeline.py` — one line each.
-- **USDA nutrition**: use `fetch_usda_data.py` (below) rather than hand
-  -downloading — it calls the API and saves the response in the shape the
-  pipeline expects. Branded-food nutrient values are usually per serving,
-  not per 100g — check `servingSize`/`servingSizeUnit` in the raw JSON if
-  the numbers look off.
-- **Regional distribution**: originally modeled on USDA's Sweetener Market
-  Data (SMD), which really did report by these US regions — but the SMD
-  program was discontinued around 2009–2010 and has no current public
-  version. Replaced with global continent-level market share from
-  published market research instead (see `global_market_regions.csv`
-  above); "Recent Cycles," the old interactive per-month timeline that
-  depended on a quarterly-cadence version of this same discontinued data
-  plus a fictional-brand sentiment file, is retired for the same reason —
-  no current real source exists at that grain, so it's disabled rather
-  than kept running on fabricated numbers.
-
-### Live USDA pull
-
-```bash
-python3 fetch_usda_data.py                    # searches "ice cream"
-python3 fetch_usda_data.py "gelato"            # or any query
-USDA_API_KEY=your_key python3 fetch_usda_data.py
-```
-
-Get a free key at fdc.nal.usda.gov/api-key-signup — the shared `DEMO_KEY`
-works for light testing but rate-limits quickly. This script needs real
-internet access, so it wasn't run as part of building this (network in this
-build environment is restricted); it's built directly against the
-documented API contract, but give it one real test run before depending on
-it.
-
-## Live news feed (Magnum ecosystem)
+## Live news feed
 
 `fetch_competitor_news.py` pulls real, live headlines for TMICC and its named competitors/topics — zero API keys, zero cost. Run it directly:
 
@@ -180,88 +76,47 @@ python3 fetch_competitor_news.py
 **Known, honest limitations:**
 - Google News RSS's `<link>` is a redirect through `news.google.com`, not the publisher's real URL — confirmed by testing, not just assumed: Google's redirect is a client-side hop, not a real HTTP 3xx, so a plain redirect-follow just returns the same URL with tracking parameters. It's still fully clickable for a human; resolving the true canonical URL would need a headless browser, out of scope for a keyless stdlib script.
 - No documented rate limit for this endpoint — the script is polite by design (a ~1.5s gap between each of the 11 queries per run) but this is a scraping-adjacent technique, not a stable API contract; if Google changes this endpoint's behavior, this script needs revisiting.
-- **This session's sandbox actually has real outbound network access** (confirmed: `curl` to `news.google.com` returns real data) — worth noting since an earlier README section on `fetch_usda_data.py` says network was restricted in this build environment; that may have been true in an earlier session, but isn't a blanket constraint going forward.
+- This session's sandbox actually has real outbound network access (confirmed: `curl` to `news.google.com` returns real data) — worth noting since network access can't be assumed constant across environments/sessions.
+
+## Live USDA pull (nutrition panel)
+
+```bash
+python3 fetch_usda_data.py                    # searches "ice cream"
+python3 fetch_usda_data.py "gelato"            # or any query
+USDA_API_KEY=your_key python3 fetch_usda_data.py
+```
+
+Get a free key at fdc.nal.usda.gov/api-key-signup — the shared `DEMO_KEY` works for light testing but rate-limits quickly.
 
 ## Customizing
 
 - **Port**: `DASHBOARD_PORT=8081 python3 server.py`
 - **Watch interval**: `WATCH_INTERVAL_SECONDS=5 python3 server.py`
 - **Front-end refresh interval**: last line of `index.html`, `setInterval(..., 30000)`
-- **Colors/type**: `tailwind.config` block near the top of `index.html` — the
-  palette is an ice-cream-parlor dark theme (deep cocoa background, vanilla-
-  cream text, strawberry-pink accent, mint/berry-red/slate status colors,
-  caramel for the regional chart), validated for colorblind-safe contrast
-  with the `dataviz` skill's palette checks. Swap the `colors` block for a
-  client's brand palette whenever this moves toward CPG-facing work.
-- **Reproducible mock data**: set `MOCK_SEED = 42` (or any int) near the
-  top of `data_pipeline.py`
+- **News query list**: `data/config/watchlist.json` — add/remove companies or topics
+- **Colors/type**: `tailwind.config` block near the top of `index.html` — the palette is an ice-cream-parlor dark theme, validated for colorblind-safe contrast with the `dataviz` skill's palette checks
+- **Reproducible mock data**: set `MOCK_SEED = 42` (or any int) near the top of `data_pipeline.py`
 
-## What changed from the original plan
+## The ground-up rebuild — what changed and why
 
-The plan this was built from was a solid skeleton but had a few real bugs
-and some structural gaps once real data enters the picture:
+This repo started as a generic "UK frozen dessert market" console (production trends, global market share, brand sentiment, a hypothetical UK retail client's Command Center). It's been rebuilt entirely around TMICC specifically, per the standing rule for this rebuild: **real data only**, and only what a TMICC strategist would actually need.
 
-- **Fixed broken CDN tags.** `<script src="https://jsdelivr.net">` and
-  the Tailwind equivalent pointed at bare domains, not actual asset files —
-  the dashboard would have loaded blank. Now pointed at the real Tailwind
-  Play CDN and Chart.js UMD bundle.
-- **Fixed a date-drift bug.** The mock generator built months with
-  `timedelta(days=i*30)`, which slips away from real calendar months over
-  time (12 steps of 30 days = 360 days, not a year). Replaced with proper
-  calendar-month stepping.
-- **Made the pipeline source-modular.** Originally the only way to use real
-  data was to rewrite the generator function. Now each panel has its own
-  loader that checks `data/raw/` first and only falls back to mock — so
-  dropping in a file is the entire integration step.
-- **Re-mapped every panel onto one of your four actual sources.** The
-  original invented categories ("Gelato", "Plant-Based Dairy") and regions
-  with no real dataset behind them. Panels now map 1:1 to your four named
-  sources, using their real schemas (confirmed while building this — see
-  the table above).
-- **Added live/mock provenance tags** on every panel, so it's never
-  ambiguous which numbers are real.
-- **Turned "Variation A" into working code.** `fetch_usda_data.py` does
-  the live API pull the original plan only described as a follow-up prompt.
-- **Smoother refresh.** The dashboard now polls every 30s and updates
-  charts in place (no full page reload, no flicker).
-- **Server hardening.** Reusable ports (no more restart friction),
-  configurable port via env var, and a clear message if the data file is
-  missing instead of a silent blank page.
+**Removed entirely:**
+- **Executive Brief / `synthesis.py`** — the auto-generated, rule-based "what this cycle means" panel. Deleted, not just hidden — the file is gone, and every reference to it in `index.html` and `data_pipeline.py` is gone too.
+- **Command Center / `command_center.py`** (Demand Signal, Regional Inventory Risk, Equipment Risk) — always illustrative by the project's own earlier admission, since no public dataset of a real company's cold-chain telemetry exists. File deleted.
+- **Brand & Flavor Sentiment** (US Kaggle sample, static not live), **Consumer & Demographics** (UK-launch-specific, not TMICC-specific), **Global Market Distribution** (generic worldwide category share), **Company Revenue Comparison** and **Volume vs Dollar Sales** (both mostly unsourced "placeholder" rows) — all out of scope for a company-specific strategist tool. Their raw data files are left on disk as an honest archive (see `data/raw/README.md`), not deleted — none of it was fake, it just doesn't fit this dashboard's new subject.
+
+**Added:**
+- **Live News Feed** — `fetch_competitor_news.py`, see above.
+- **The Magnum Ecosystem** — TMICC's real corporate structure, shareholders, brand portfolio, joint ventures, supply chain, competitors, governance cross-links, and disclosed risk factors, extracted directly from TMICC's own 2025 Annual Report.
+- **Correlated Timeline** — TMICC's own dated decisions laid against competitor moves and cocoa-price swings in the same window, with three flagged correlation patterns.
+
+**Kept, reframed:**
+- **TMICC Financial Performance** (was "Real-World Precedent (Magnum)") — the exact same real data, just renamed to reflect that TMICC is now the dashboard's actual subject, not a "precedent example" for a hypothetical client.
+- **Nutrition & Regulatory Exposure** and **Production & Sales Trend** — kept as-is; both are real, and both still serve the new scope (allergen/ingredient exposure, industry-context backdrop) even though neither is TMICC-specific.
 
 ## Prototype vs. live — deliberate, not a limitation
 
-This build is a **static prototype by choice**, not by technical ceiling. The
-dashboard header says so explicitly. Here's the honest breakdown of what
-"going live" would actually mean, panel by panel:
+**Already live, free:** the News Feed panel genuinely fetches on demand, no cost. Production Trend (Eurostat) and Nutrition (USDA) sit behind free public APIs and can be re-pulled anytime — see the commands above.
 
-**Already free to run live, no cost decision needed:**
-Production Trend (Eurostat), Global Market Distribution basis data,
-Consumer & Demographics (World Bank, UKHSA), Nutrition (USDA FoodData
-Central) all sit behind free public APIs with no key or with a free `DEMO_KEY`.
-Re-running the `curl` commands already documented per-panel above and
-re-committing the output is the entire "live" step for these — no new
-infrastructure, no subscription.
-
-**The real cost driver — the Command Center:**
-Equipment Risk, Regional Inventory Risk, and Demand Signal vs Production
-Plan are illustrative because *no public dataset of a real company's
-cold-chain telemetry exists* — that's not a budget question, it's that the
-data is private by nature. A live version of this panel means one of two
-things, both genuinely paid:
-1. A real client's own IoT/ERP feed (freezer sensor readings, WMS
-   inventory levels, POS demand data) — free to the client, but requires
-   their systems access, not a public API.
-2. A third-party retail/IoT data subscription (e.g. cold-chain monitoring
-   platforms, syndicated POS data providers) — a genuine recurring cost,
-   which is the "API would cost me money" line this prototype is
-   deliberately avoiding for now.
-
-**What "flipping the switch" looks like when it's worth paying for:**
-Nothing architectural has to change. `data_pipeline.py`'s loaders already
-read from `data/raw/*.csv` — a live feed just means something upstream
-(a small script, a webhook, a scheduled job) writes fresh CSVs into that
-folder on a cadence, instead of a human re-pulling and committing them.
-`server.py`'s watcher already picks up any file change within
-`WATCH_INTERVAL_SECONDS` with no code change at all. The mechanism is
-already in place; only the upstream data source needs to change from
-"static file I refresh by hand" to "static file a paid feed refreshes for me."
+**Periodic real-data snapshots, not continuous feeds:** The Magnum Ecosystem, Correlated Timeline, and TMICC Financial Performance are all real but hand-researched — refreshing them means re-reading TMICC's next filing or re-running the research pass that built them, not an automated pull. That's an honest description of what they are, not a shortcut that was skipped.

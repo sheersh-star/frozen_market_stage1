@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<title>Frozen Dessert Market Console</title>
+<title>TMICC Strategist Console</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,15 +43,15 @@
 <header class="border-b border-hairline">
   <div class="max-w-6xl mx-auto px-6 py-5 flex flex-wrap items-end justify-between gap-3">
     <div>
-      <p class="text-xs tracking-[0.2em] uppercase text-muted mb-1">Category Intelligence &middot; UK Launch &middot; EU/WHO Regulated</p>
-      <h1 class="font-display text-3xl md:text-4xl font-medium text-ivory">Frozen Dessert Market Console</h1>
+      <p class="text-xs tracking-[0.2em] uppercase text-muted mb-1">Company Intelligence &middot; The Magnum Ice Cream Company (TMICC)</p>
+      <h1 class="font-display text-3xl md:text-4xl font-medium text-ivory">TMICC Strategist Console</h1>
+      <p class="text-sm text-muted mt-1 max-w-2xl">Rebuilt from the ground up around one subject: real news, real ecosystem, real correlated timeline, real financials — anything a TMICC strategist would want to know immediately.</p>
     </div>
     <div class="text-right font-mono text-xs text-muted">
-      <div id="sync-time">Loading…</div>
-      <div id="provenance-summary" class="mt-1"></div>
-      <div class="mt-1 flex items-center justify-end gap-1" title="Static prototype — data is a generated snapshot, not a live feed. Going live means paying for a real-time retail/IoT data subscription; the public sources already in this build (Eurostat, World Bank, UKHSA, USDA) are free either way.">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-neutral"></span>
-        <span class="uppercase tracking-wide">Prototype &middot; static snapshot</span>
+      <div id="sync-time">Loading&hellip;</div>
+      <div class="mt-1 flex items-center justify-end gap-1" title="News is fetched live (run fetch_competitor_news.py on a schedule). Financial/nutrition/production panels are periodic real-data snapshots, not continuous feeds.">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-positive"></span>
+        <span class="uppercase tracking-wide">Live news + real snapshots &middot; no API keys</span>
       </div>
     </div>
   </div>
@@ -59,36 +59,126 @@
 
 <main id="dashboard-main" class="max-w-6xl mx-auto px-6 py-8 opacity-60 motion-safe:transition-opacity motion-safe:duration-500">
 
-  <!-- ================= ACT 1 — PROBLEM ================= -->
-  <div class="mb-6">
-    <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">01 &middot; Problem</p>
-    <h2 class="font-display text-3xl text-ivory mt-1">What's going wrong</h2>
-    <p class="text-sm text-muted mt-1 max-w-2xl">Signal, then context.</p>
-  </div>
+  <section id="error-banner" class="hidden bg-negative/10 border border-negative text-negative text-sm rounded-lg p-4 mb-6 font-mono"></section>
 
-  <details open class="group border border-brass/40 bg-panel rounded-lg p-6 mb-6">
+  <!-- ================= LIVE NEWS FEED ================= -->
+  <details open class="group bg-panel border border-brass/40 rounded-lg p-6 mb-6">
     <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
-        <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Executive Brief</p>
-        <h3 class="font-display text-xl text-ivory">What this cycle means</h3>
-        <p id="brief-summary" class="font-mono text-sm text-muted mt-1">—</p>
+        <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Live News Feed</p>
+        <h2 class="font-display text-2xl text-ivory">TMICC &amp; competitor ecosystem</h2>
+        <p id="news-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
       </div>
-      <div class="shrink-0 flex items-center gap-2">
-        <span id="brief-label" class="font-mono text-[10px] text-muted uppercase tracking-wide">Auto-generated · rule-based</span>
-        <span class="font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
-      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
     </summary>
     <div class="mt-4 pt-4 border-t border-hairline/60">
-      <button id="brief-back" class="hidden font-mono text-[10px] text-brass underline mb-3">back to latest cycle</button>
-      <div id="synthesis-flags" class="space-y-4"></div>
+      <p class="font-mono text-xs text-muted mb-3">Zero API keys &mdash; Google News RSS, tagged official/aggregator by matching each item's real source domain. Run <code class="text-caramel">python3 fetch_competitor_news.py</code> to refresh. Showing the most recent items.</p>
+      <div id="news-list" class="space-y-2 max-h-[32rem] overflow-y-auto pr-1"></div>
     </div>
   </details>
 
+  <!-- ================= THE MAGNUM ECOSYSTEM ================= -->
   <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
     <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
-        <h3 class="font-display text-xl text-ivory">Nutrition &amp; Regulatory Exposure</h3>
-        <p id="nutrition-summary" class="font-mono text-sm text-muted mt-1">—</p>
+        <h2 class="font-display text-2xl text-ivory">The Magnum Ecosystem</h2>
+        <p class="font-mono text-sm text-muted mt-1">Shareholders &middot; brands &middot; joint ventures &middot; supply chain &middot; competitors &middot; governance &middot; disclosed risks</p>
+      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
+      <p class="font-mono text-xs text-muted">Extracted directly from TMICC's own 2025 Annual Report (146292742.pdf, 238 pages) &mdash; a first-party primary source. Full narrative: <code class="text-caramel">docs/magnum_ecosystem.md</code>.</p>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Corporate facts</h3>
+        <div id="eco-corporate" class="font-mono text-sm text-muted grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Major shareholders</h3>
+        <div id="eco-shareholders" class="text-sm"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Brand portfolio</h3>
+        <div id="eco-brands" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Joint ventures &amp; subsidiaries</h3>
+        <div id="eco-jvs" class="space-y-2 text-sm"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Raw material supply chain</h3>
+        <div id="eco-supply" class="overflow-x-auto"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Competitors</h3>
+        <div id="eco-competitors" class="space-y-2 text-sm"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Governance cross-links <span class="text-muted text-xs font-mono normal-case">(needs individual verification &mdash; see gaps)</span></h3>
+        <div id="eco-governance" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Disclosed risk factors</h3>
+        <ul id="eco-risks" class="text-sm space-y-2 list-disc list-inside text-ivory"></ul>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Honest gaps &mdash; nothing found this pass</h3>
+        <ul id="eco-gaps" class="font-mono text-xs text-muted space-y-1 list-disc list-inside"></ul>
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= CORRELATED TIMELINE ================= -->
+  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+      <div>
+        <h2 class="font-display text-2xl text-ivory">Correlated Timeline</h2>
+        <p class="font-mono text-sm text-muted mt-1">TMICC's own decisions, laid against competitor moves and macro-commodity swings in the same window</p>
+      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Patterns worth attention</h3>
+        <div id="timeline-patterns" class="space-y-3"></div>
+      </div>
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Full dated timeline</h3>
+        <div id="timeline-events" class="overflow-x-auto"></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ================= TMICC FINANCIAL PERFORMANCE ================= -->
+  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+      <div>
+        <h2 class="font-display text-2xl text-ivory">TMICC Financial Performance</h2>
+        <p id="fin-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
+      </div>
+      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
+    </summary>
+    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
+      <p class="font-mono text-xs text-muted">Disclosed as annual volume/price growth %, not absolute units &mdash; compounded here into two indices (2020=100), the honest way to compare shape without inventing absolute numbers.</p>
+      <div class="h-64"><canvas id="finChart"></canvas></div>
+      <div id="fin-regions"></div>
+    </div>
+  </details>
+
+  <!-- ================= NUTRITION & REGULATORY EXPOSURE ================= -->
+  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
+    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+      <div>
+        <h2 class="font-display text-2xl text-ivory">Nutrition &amp; Regulatory Exposure</h2>
+        <p id="nutrition-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
       </div>
       <div class="shrink-0 flex items-center gap-2">
         <div id="seal-nutrition" class="shrink-0"></div>
@@ -105,7 +195,7 @@
             <th class="pb-2 font-body font-medium text-right">Fat g</th>
             <th class="pb-2 font-body font-medium text-right">Protein g</th>
             <th class="pb-2 font-body font-medium" title="UK FSA front-of-pack labelling: total sugar per 100g. Green <=5g, amber 5-22.5g, red >22.5g.">UK label&sup1;</th>
-            <th class="pb-2 font-body font-medium text-right" title="Share of WHO's free-sugar guideline for a reference adult (2000 kcal/day): <10% of energy (50g/day) is the core recommendation; a further reduction to <5% (25g/day) confers additional benefit.">WHO free sugar&sup2;</th>
+            <th class="pb-2 font-body font-medium text-right" title="Share of WHO's free-sugar guideline for a reference adult (2000 kcal/day): <10% of energy (50g/day) is the core recommendation.">WHO free sugar&sup2;</th>
           </tr>
         </thead>
         <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
@@ -114,329 +204,33 @@
     </div>
   </details>
 
+  <!-- ================= PRODUCTION & SALES TREND ================= -->
   <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
     <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
       <div>
-        <h3 class="font-display text-xl text-ivory">Market Context</h3>
-        <p class="font-mono text-sm text-muted mt-1">Production &middot; global share &middot; sentiment &middot; demographics &middot; competitor revenue</p>
+        <h2 class="font-display text-2xl text-ivory">Production &amp; Sales Trend</h2>
+        <p id="trend-readout" class="font-mono text-sm text-muted mt-1">&mdash;</p>
+        <p class="font-mono text-xs text-muted mt-1">Eurostat NACE C1052 &middot; Germany &mdash; industry-context backdrop, not TMICC-specific</p>
       </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
-
-      <div class="bg-ink/30 border border-hairline rounded-lg p-6">
-        <div class="flex items-start justify-between mb-4 gap-3">
-          <div>
-            <h4 class="font-display text-lg text-ivory">Production &amp; Sales Trend</h4>
-            <p id="trend-readout" class="font-mono text-sm text-muted mt-1">—</p>
-            <p class="font-mono text-xs text-muted mt-1">Eurostat NACE C1052 &middot; Germany &mdash; EU aggregate suppressed, largest producer stands in</p>
-            <p id="trend-interp-note" class="hidden font-mono text-xs text-muted mt-1">Illustrative — interpolated between quarterly data points, not independently measured. Click a point for that month's brief.</p>
-          </div>
-          <div class="shrink-0 flex items-center gap-3">
-            <div id="trend-toggle" class="hidden font-mono text-[10px] flex gap-1">
-              <button id="btn-full-history" class="px-2 py-1 rounded border border-brass text-brass">Full History</button>
-              <button id="btn-recent-cycles" class="px-2 py-1 rounded border border-hairline text-muted">Recent Cycles</button>
-            </div>
-            <div id="seal-trend" class="shrink-0"></div>
-          </div>
-        </div>
-        <div class="h-72"><canvas id="trendChart"></canvas></div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-        <div class="bg-ink/30 border border-hairline rounded-lg p-6">
-          <div class="flex items-start justify-between mb-4 gap-3">
-            <h4 class="font-display text-lg text-ivory leading-tight">Global Market<br>Distribution</h4>
-            <div id="regional-confidence" class="shrink-0 font-mono text-[10px] text-muted flex items-center gap-1"></div>
-          </div>
-          <div class="h-64"><canvas id="regionChart"></canvas></div>
-        </div>
-        <div class="bg-ink/30 border border-hairline rounded-lg p-6">
-          <div class="flex items-start justify-between mb-4 gap-3">
-            <div>
-              <h4 class="font-display text-lg text-ivory leading-tight">Brand &amp; Flavor<br>Sentiment</h4>
-              <p class="font-mono text-[10px] text-muted mt-1">US sample &mdash; no UK/EU equivalent found</p>
-            </div>
-            <div id="seal-sentiment" class="shrink-0"></div>
-          </div>
-          <div id="sentiment-legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
-          <div class="h-72"><canvas id="sentimentChart"></canvas></div>
-        </div>
-      </div>
-
-      <div id="demographics-section" class="hidden bg-ink/30 border border-hairline rounded-lg p-6">
-        <div class="flex items-start justify-between mb-2 gap-3">
-          <div>
-            <h4 class="font-display text-lg text-ivory">Consumer &amp; Demographics</h4>
-            <p id="demographics-readout" class="font-mono text-sm text-muted mt-1">—</p>
-            <p class="font-mono text-xs text-muted mt-1">World Bank 2023 &middot; UK-led &middot; continents = scale-up context</p>
-          </div>
-        </div>
-        <div id="demographics-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4 mt-3"></div>
-        <div class="h-64"><canvas id="demographicsChart"></canvas></div>
-        <div id="consumption-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
-          <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-1">Ice cream consumption &middot; UK children &middot; UKHSA / National Diet and Nutrition Survey</p>
-          <p id="consumption-callout" class="text-sm text-muted mb-3"></p>
-          <div id="consumption-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
-        </div>
-      </div>
-
-      <div id="revenue-section" class="hidden bg-ink/30 border border-hairline rounded-lg p-6">
-        <div class="flex items-start justify-between mb-2 gap-3">
-          <div>
-            <h4 class="font-display text-lg text-ivory">Company Revenue Comparison</h4>
-            <p class="font-mono text-sm text-muted mt-1">FY2025 vs FY2026 &middot; log scale</p>
-            <p class="font-mono text-xs text-muted mt-1">USD for cross-border comparison &middot; rate cited per row</p>
-          </div>
-          <div class="shrink-0 flex items-center gap-1 font-mono text-[10px]">
-            <button id="btn-revenue-chart" class="px-2 py-1 rounded border border-brass text-brass">Chart</button>
-            <button id="btn-revenue-table" class="px-2 py-1 rounded border border-hairline text-muted">Table</button>
-          </div>
-        </div>
-        <div id="revenue-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-4"></div>
-        <div id="revenue-chart-wrap"><canvas id="revenueChart"></canvas></div>
-        <div id="revenue-table-wrap" class="hidden overflow-x-auto">
-          <table class="w-full text-left text-sm">
-            <thead>
-              <tr class="text-muted border-b border-hairline">
-                <th class="pb-2 font-body font-medium">Company</th>
-                <th class="pb-2 font-body font-medium">Owner</th>
-                <th class="pb-2 font-body font-medium text-right">FY2025 $M</th>
-                <th class="pb-2 font-body font-medium text-right">FY2026 $M</th>
-                <th class="pb-2 font-body font-medium text-right">&Delta;%</th>
-                <th class="pb-2 font-body font-medium">Confidence</th>
-                <th class="pb-2 font-body font-medium">Basis</th>
-              </tr>
-            </thead>
-            <tbody id="revenue-body" class="font-mono divide-y divide-hairline align-top"></tbody>
-          </table>
-        </div>
-      </div>
-
-    </div>
-  </details>
-
-  <!-- ================= ACT 2 — ACTION ================= -->
-  <div class="mt-14 pt-8 border-t-2 border-brass/30 mb-6">
-    <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">02 &middot; Action</p>
-    <h2 class="font-display text-3xl text-ivory mt-1">Sense &middot; Prescribe &middot; Act</h2>
-    <p class="text-sm text-muted mt-1 max-w-2xl">
-      Auto-executes: &lt;&pound;75,000 &middot; real/grounded confidence. Maintenance dispatch always needs approval.
-    </p>
-  </div>
-
-  <details id="cc-demand-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h3 class="font-display text-lg text-ivory">Demand Signal vs Production Plan</h3>
-        <p id="cc-demand-readout" class="font-mono text-sm text-muted mt-1">—</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+      <div id="seal-trend" class="shrink-0"></div>
     </summary>
     <div class="mt-4 pt-4 border-t border-hairline/60">
-      <div id="cc-demand-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
-      <div class="h-64"><canvas id="ccDemandChart"></canvas></div>
+      <div class="h-64"><canvas id="trendChart"></canvas></div>
     </div>
   </details>
 
-  <details id="cc-regional-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h3 class="font-display text-lg text-ivory">Regional Inventory Risk</h3>
-        <p id="regional-summary" class="font-mono text-sm text-muted mt-1">—</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60 overflow-x-auto">
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="text-muted border-b border-hairline">
-            <th class="pb-2 pr-4 font-body font-medium">Region</th>
-            <th class="pb-2 pr-4 font-body font-medium text-right">Weeks on hand</th>
-            <th class="pb-2 pr-4 font-body font-medium text-right">Weeks to expiry</th>
-            <th class="pb-2 pr-4 font-body font-medium">Status</th>
-            <th class="pb-2 pr-4 font-body font-medium">Agent recommendation</th>
-            <th class="pb-2 font-body font-medium">Agent action taken</th>
-          </tr>
-        </thead>
-        <tbody id="cc-regional-body" class="font-mono divide-y divide-hairline align-top"></tbody>
-      </table>
-    </div>
-  </details>
-
-  <details id="cc-equipment-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h3 class="font-display text-lg text-ivory">Equipment Risk</h3>
-        <p id="equipment-summary" class="font-mono text-sm text-muted mt-1">—</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60 overflow-x-auto">
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="text-muted border-b border-hairline">
-            <th class="pb-2 pr-4 font-body font-medium">Equipment</th>
-            <th class="pb-2 pr-4 font-body font-medium">Region</th>
-            <th class="pb-2 pr-4 font-body font-medium text-right">Failure risk</th>
-            <th class="pb-2 pr-4 font-body font-medium text-right">Days out</th>
-            <th class="pb-2 pr-4 font-body font-medium text-right">Exposure</th>
-            <th class="pb-2 font-body font-medium">Agent action taken</th>
-          </tr>
-        </thead>
-        <tbody id="cc-equipment-body" class="font-mono divide-y divide-hairline align-top"></tbody>
-      </table>
-    </div>
-  </details>
-
-  <!-- ================= ACT 3 — IMPACT ================= -->
-  <div class="mt-14 pt-8 border-t-2 border-brass/30 mb-6">
-    <p class="font-mono text-xs tracking-[0.3em] uppercase text-brass">03 &middot; Impact</p>
-    <h2 class="font-display text-3xl text-ivory mt-1">What it's worth</h2>
-    <p class="text-sm text-muted mt-1 max-w-2xl">This cycle's payoff, plus proof it's real money.</p>
-  </div>
-
-  <div id="cc-kpi-section" class="hidden mb-6">
-    <div id="cc-kpi-row" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-  </div>
-
-  <details id="volume-dollar-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h3 class="font-display text-xl text-ivory">Volume vs Revenue</h3>
-        <p id="vd-readout" class="font-mono text-sm text-muted mt-1">—</p>
-      </div>
-      <div class="shrink-0 flex items-center gap-2">
-        <span class="font-mono text-[10px] text-muted flex items-center gap-1"><span id="vd-confidence-icon"></span><span id="vd-confidence-label"></span></span>
-        <span class="font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
-      </div>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60">
-      <details class="group/fig mb-4">
-        <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden font-mono text-[10px] text-caramel">click for logic &amp; source</summary>
-        <div class="mt-2 space-y-1.5">
-          <p class="font-mono text-[10px] text-muted"><span class="text-ivory">Logic:</span> Volume index = volume_units ÷ first month's volume_units × 100. Revenue index = revenue_gbp ÷ first month's revenue_gbp × 100 — indexed rather than plotted on a shared axis, since the two series have different units.</p>
-          <p class="font-mono text-[10px] text-muted"><span class="text-ivory">Source:</span> Manufactured demo data (confidence=placeholder throughout), built to demonstrate a volume-down/price-up pattern — see the Real-World Precedent panel below for the same pattern in Unilever's actual disclosed results.</p>
-        </div>
-      </details>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div>
-          <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Volume (units)</p>
-          <div class="h-48"><canvas id="volumeChart"></canvas></div>
-        </div>
-        <div>
-          <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">Revenue (£)</p>
-          <div class="h-48"><canvas id="dollarChart"></canvas></div>
-        </div>
-      </div>
-      <div class="pt-4 border-t border-hairline/60">
-        <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-2">Indexed comparison &middot; first month = 100</p>
-        <div id="vd-index-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
-        <div class="h-48"><canvas id="vdIndexChart"></canvas></div>
-      </div>
-    </div>
-  </details>
-
-  <details id="magnum-section" class="hidden group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h3 class="font-display text-xl text-ivory">Real-World Precedent &middot; Ice Cream Category</h3>
-        <p id="magnum-readout" class="font-mono text-sm text-muted mt-1">—</p>
-        <p class="font-mono text-xs text-muted mt-1">Unilever &rarr; Magnum Ice Cream Co. (FY2025 demerger) &middot; indexed to FY2020 = 100</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60">
-      <details class="group/fig mb-4">
-        <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden font-mono text-[10px] text-caramel">click for logic &amp; source</summary>
-        <div class="mt-2 space-y-1.5">
-          <p class="font-mono text-[10px] text-muted"><span class="text-ivory">Logic:</span> Volume index and price index each compound that year's real disclosed growth % onto the prior year's index, starting at FY2020 = 100 (e.g. FY2021 volume index = 100 × (1 + volume_growth_pct/100)).</p>
-          <p class="font-mono text-[10px] text-muted"><span class="text-ivory">Source:</span> Unilever FY2021&ndash;24 Full Year Results and The Magnum Ice Cream Company FY2025 Full Year Results — per-year citation in the Basis column below.</p>
-        </div>
-      </details>
-      <div id="magnum-legend" class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted mb-3"></div>
-      <div class="h-56"><canvas id="magnumChart"></canvas></div>
-      <div class="overflow-x-auto mt-6">
-        <table class="w-full text-left text-sm">
-          <thead>
-            <tr class="text-muted border-b border-hairline">
-              <th class="pb-2 font-body font-medium">FY</th>
-              <th class="pb-2 font-body font-medium text-right">Total growth</th>
-              <th class="pb-2 font-body font-medium text-right">Volume</th>
-              <th class="pb-2 font-body font-medium text-right">Price</th>
-              <th class="pb-2 font-body font-medium">Confidence</th>
-              <th class="pb-2 font-body font-medium">Basis</th>
-            </tr>
-          </thead>
-          <tbody id="magnum-body" class="font-mono divide-y divide-hairline align-top"></tbody>
-        </table>
-      </div>
-      <div id="magnum-regional-wrap" class="hidden mt-6 pt-4 border-t border-hairline/60">
-        <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-2">FY2025 growth by continent</p>
-        <div id="magnum-regional-row" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
-      </div>
-    </div>
-  </details>
-
-  <div id="error-banner" class="hidden mt-6 border border-negative/40 bg-negative/10 text-ivory rounded-lg p-4 text-sm"></div>
 </main>
 
-<footer class="max-w-6xl mx-auto px-6 pb-8 text-xs text-muted">
-  Local console — refreshes automatically every 30s from data/processed/market_data.json.
+<footer class="border-t border-hairline">
+  <div class="max-w-6xl mx-auto px-6 py-6 font-mono text-xs text-muted flex flex-wrap justify-between gap-2">
+    <span>Source: <a href="https://github.com/sheersh-star/frozen_market_stage1" target="_blank" rel="noopener" class="text-brass">GitHub</a></span>
+    <span>Removed in this rebuild: Executive Brief, Command Center, Brand Sentiment, Demographics, Global Market Distribution, Company Revenue, Volume vs Dollar Sales &mdash; see README.md</span>
+  </div>
 </footer>
 
 <script>
-let charts = {};
 let currentData = null;
-let trendView = 'history'; // 'history' | 'recent'
-
-// Chart.js sizes a canvas from its container's rendered width at creation
-// time; a canvas inside a collapsed <details> has zero width then, so every
-// chart needs a resize() once its panel is actually opened. The native
-// 'toggle' event doesn't bubble, but a capturing-phase listener on the
-// document still sees it on the way down to the <details> that fired it.
-document.addEventListener('toggle', () => {
-  Object.values(charts).forEach(c => { if (c && c.resize) c.resize(); });
-}, true);
-
-function sealBadge(isLive) {
-  const ring = isLive ? 'border-brass text-brass' : 'border-muted/50 text-muted border-dashed';
-  const label = isLive ? 'LIVE' : 'MOCK';
-  return `<span class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 ${ring} font-mono text-[9px] tracking-widest">${label}</span>`;
-}
-
-function valueLabelPlugin(formatter) {
-  return {
-    id: 'valueLabel',
-    afterDatasetsDraw(chart) {
-      const { ctx } = chart;
-      const meta = chart.getDatasetMeta(0);
-      ctx.save();
-      ctx.font = "10px 'IBM Plex Mono'";
-      ctx.fillStyle = '#C9AD93';
-      ctx.textBaseline = 'middle';
-      ctx.textAlign = 'left';
-      meta.data.forEach((bar, i) => {
-        const value = chart.data.datasets[0].data[i];
-        if (value === undefined || value === null) return;
-        ctx.fillText(formatter(value), bar.x + 6, bar.y);
-      });
-      ctx.restore();
-    },
-  };
-}
-
-function chartBaseOptions() {
-  return {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { grid: { color: '#4A362A' }, ticks: { color: '#C9AD93', font: { family: 'IBM Plex Mono', size: 10 } } },
-      y: { grid: { color: '#4A362A' }, ticks: { color: '#C9AD93', font: { family: 'IBM Plex Mono', size: 10 } } },
-    },
-  };
-}
+let charts = {};
 
 function showError(message) {
   const banner = document.getElementById('error-banner');
@@ -448,941 +242,247 @@ function hideError() {
   document.getElementById('error-banner').classList.add('hidden');
 }
 
-async function loadDashboardData(isFirstLoad) {
+function confidenceSeal(source) {
+  const el = document.createElement('span');
+  el.className = 'inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full border';
+  if (source === 'real') {
+    el.classList.add('border-positive', 'text-positive');
+    el.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-positive inline-block"></span> Live';
+  } else {
+    el.classList.add('border-neutral', 'text-neutral');
+    el.innerHTML = '<span class="w-1.5 h-1.5 rounded-full border border-neutral inline-block"></span> Mock';
+  }
+  return el;
+}
+
+// ---------------- News ----------------
+function renderNews(news) {
+  const listEl = document.getElementById('news-list');
+  const summaryEl = document.getElementById('news-summary');
+  if (!news || !news.items || !news.items.length) {
+    summaryEl.textContent = 'No news yet — run python3 fetch_competitor_news.py';
+    listEl.innerHTML = '';
+    return;
+  }
+  const items = news.items;
+  const officialCount = items.filter(i => i.source_type === 'official').length;
+  summaryEl.textContent = `${items.length} items (${officialCount} official) — fetched ${new Date(news.generated_at).toLocaleString()}`;
+
+  const SHOW = 60;
+  listEl.innerHTML = items.slice(0, SHOW).map(it => {
+    const badgeColor = it.source_type === 'official' ? 'border-positive text-positive' : 'border-hairline text-muted';
+    const tags = [...it.matched_entities, ...it.matched_topics];
+    const dateStr = it.published ? new Date(it.published).toLocaleString() : 'undated';
+    return `
+      <div class="border border-hairline rounded-lg p-3 hover:border-brass/50 transition-colors">
+        <div class="flex items-start justify-between gap-3">
+          <a href="${it.link}" target="_blank" rel="noopener" class="text-sm text-ivory hover:text-brass leading-snug">${it.title}</a>
+          <span class="shrink-0 font-mono text-[10px] uppercase px-2 py-0.5 rounded-full border ${badgeColor}">${it.source_type}</span>
+        </div>
+        <div class="font-mono text-[10px] text-muted mt-1 flex flex-wrap gap-x-3 gap-y-1">
+          <span>${it.source_name || 'unknown source'}</span>
+          <span>${dateStr}</span>
+          ${tags.map(t => `<span class="text-caramel">#${t}</span>`).join('')}
+        </div>
+      </div>`;
+  }).join('');
+  if (items.length > SHOW) {
+    listEl.innerHTML += `<p class="font-mono text-xs text-muted text-center pt-2">+ ${items.length - SHOW} more in data/raw/news/raw_items.json</p>`;
+  }
+}
+
+// ---------------- Ecosystem ----------------
+function renderEcosystem(eco) {
+  if (!eco) return;
+  const cf = eco.corporate_facts || {};
+  document.getElementById('eco-corporate').innerHTML = `
+    <div><span class="text-ivory">HQ:</span> ${cf.headquarters || '—'}</div>
+    <div><span class="text-ivory">Listing:</span> ${(cf.listing && cf.listing.ticker) || '—'} on ${(cf.listing && cf.listing.exchanges || []).join(', ')}</div>
+    <div><span class="text-ivory">Revenue FY2025:</span> €${(cf.scale_2025 && cf.scale_2025.revenue_eur_billion) || '—'}bn</div>
+    <div><span class="text-ivory">Employees:</span> ${(cf.scale_2025 && cf.scale_2025.employees) || '—'}</div>
+    <div><span class="text-ivory">Freezer cabinets:</span> ${(cf.scale_2025 && cf.scale_2025.freezer_cabinet_fleet || 0).toLocaleString()} (not owned by TMICC)</div>
+    <div><span class="text-ivory">Auditor:</span> ${(cf.auditor && cf.auditor.firm) || '—'}</div>
+  `;
+
+  document.getElementById('eco-shareholders').innerHTML = `
+    <table class="w-full text-left"><thead><tr class="text-muted border-b border-hairline">
+      <th class="pb-1 font-body font-medium">Holder</th><th class="pb-1 font-body font-medium">Position</th><th class="pb-1 font-body font-medium">As of</th>
+    </tr></thead><tbody class="divide-y divide-hairline font-mono text-xs">
+    ${(eco.major_shareholders || []).map(s => `<tr><td class="py-1.5 pr-2 text-ivory">${s.holder}</td><td class="py-1.5 pr-2 text-muted">${s.shares ? s.shares.toLocaleString() + ' shares' : (s.note || '—')}</td><td class="py-1.5 text-muted">${s.as_of}</td></tr>`).join('')}
+    </tbody></table>`;
+
+  document.getElementById('eco-brands').innerHTML = (eco.brand_portfolio || []).map(b =>
+    `<span class="font-mono text-xs px-2 py-1 rounded-full border border-caramel text-caramel" title="${b.note || ''}">${b.brand}${b.founded ? ' · ' + b.founded : ''}${b.acquired ? ' · acq. ' + b.acquired : ''}</span>`
+  ).join('');
+
+  document.getElementById('eco-jvs').innerHTML = (eco.joint_ventures_subsidiaries_associates || []).map(j => `
+    <div class="border-l-2 border-caramel pl-3">
+      <div class="text-ivory">${j.entity}${j.country ? ' — ' + j.country : ''}</div>
+      <div class="font-mono text-xs text-muted">${j.group_shareholding || ''} ${j.why_it_matters ? '— ' + j.why_it_matters : ''}</div>
+    </div>`).join('');
+
+  const supply = eco.raw_material_supply_chain || [];
+  document.getElementById('eco-supply').innerHTML = `
+    <table class="w-full text-left text-sm"><thead><tr class="text-muted border-b border-hairline">
+      <th class="pb-1 font-body font-medium">Material</th><th class="pb-1 font-body font-medium">Standard</th><th class="pb-1 font-body font-medium">Named partner(s)</th>
+    </tr></thead><tbody class="divide-y divide-hairline">
+    ${supply.map(s => `<tr><td class="py-1.5 pr-3 text-ivory">${s.material}</td><td class="py-1.5 pr-3 text-muted font-mono text-xs">${s.sourcing_standard || '—'}</td><td class="py-1.5 text-caramel font-mono text-xs">${s.named_supplier || s.named_partners || s.gap || '—'}</td></tr>`).join('')}
+    </tbody></table>`;
+
+  document.getElementById('eco-competitors').innerHTML = (eco.competitors || []).map(c => `
+    <div><span class="text-ivory">${c.name}</span> <span class="font-mono text-xs text-muted">— ${c.structure || c.flagship_brand || c.note || ''}</span></div>
+  `).join('');
+
+  const govNote = (eco.governance_cross_links && eco.governance_cross_links.companies_named_in_board_bios) || [];
+  document.getElementById('eco-governance').innerHTML = govNote.map(g => `<span class="font-mono text-xs px-2 py-1 rounded-full border border-hairline text-muted">${g}</span>`).join('');
+
+  document.getElementById('eco-risks').innerHTML = (eco.disclosed_risk_factors || []).map(r => `<li><span class="text-ivory">${r.risk}</span>${r.note ? ' — <span class="text-muted font-mono text-xs">' + r.note + '</span>' : ''}</li>`).join('');
+
+  document.getElementById('eco-gaps').innerHTML = (eco.gaps_not_found_this_pass || []).map(g => `<li>${g}</li>`).join('');
+}
+
+// ---------------- Correlated timeline ----------------
+function renderTimeline(tl) {
+  if (!tl) return;
+  document.getElementById('timeline-patterns').innerHTML = (tl.correlation_patterns || []).map(p => `
+    <div class="border border-brass/40 rounded-lg p-4">
+      <div class="text-ivory font-display text-lg">${p.title}</div>
+      <div class="font-mono text-xs text-muted mt-1">${p.strategist_note}</div>
+      <div class="mt-2 flex flex-wrap gap-1">${(p.related_event_ids || []).map(id => `<span class="font-mono text-[10px] px-1.5 py-0.5 rounded border border-hairline text-muted">${id}</span>`).join('')}</div>
+    </div>`).join('');
+
+  const events = tl.timeline || [];
+  document.getElementById('timeline-events').innerHTML = `
+    <table class="w-full text-left text-sm"><thead><tr class="text-muted border-b border-hairline">
+      <th class="pb-1 font-body font-medium">Date</th><th class="pb-1 font-body font-medium">Actor</th><th class="pb-1 font-body font-medium">Event</th>
+    </tr></thead><tbody class="divide-y divide-hairline">
+    ${events.map(e => `<tr id="${e.id}"><td class="py-1.5 pr-3 font-mono text-xs text-caramel whitespace-nowrap">${e.date}${e.date_precision !== 'day' ? ' (' + e.date_precision + ')' : ''}</td><td class="py-1.5 pr-3 text-ivory whitespace-nowrap">${e.actor}</td><td class="py-1.5 text-muted text-xs">${e.event}</td></tr>`).join('')}
+    </tbody></table>`;
+}
+
+// ---------------- Financials ----------------
+function renderFinancials(fin) {
+  const section = document.querySelector('#finChart').closest('details');
+  if (!fin) { section.classList.add('hidden'); return; }
+  section.classList.remove('hidden');
+
+  document.getElementById('fin-summary').textContent = `${fin.items.length} fiscal years, indexed volume/price (2020=100)`;
+
+  if (charts.fin) charts.fin.destroy();
+  charts.fin = new Chart(document.getElementById('finChart'), {
+    type: 'line',
+    data: {
+      labels: fin.items.map(r => 'FY' + r.fiscal_year),
+      datasets: [
+        { label: 'Volume index', data: fin.items.map(r => r.volume_index), borderColor: '#6FC796', backgroundColor: 'rgba(111,199,150,0.1)', tension: 0.25 },
+        { label: 'Price index', data: fin.items.map(r => r.price_index), borderColor: '#E3A857', backgroundColor: 'rgba(227,168,87,0.1)', tension: 0.25 },
+      ],
+    },
+    options: {
+      plugins: { legend: { labels: { color: '#C9AD93', font: { family: 'IBM Plex Mono' } } } },
+      scales: {
+        x: { ticks: { color: '#C9AD93' }, grid: { color: '#4A362A' } },
+        y: { ticks: { color: '#C9AD93' }, grid: { color: '#4A362A' } },
+      },
+    },
+  });
+
+  const regions = fin.regions_fy2025 || [];
+  document.getElementById('fin-regions').innerHTML = regions.length ? `
+    <h4 class="font-display text-base text-ivory mb-2">FY2025 organic sales growth by region</h4>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    ${regions.map(r => `<div class="border border-hairline rounded-lg p-3"><div class="text-ivory">${r.region}</div><div class="font-mono text-2xl text-caramel">${r.usg_pct > 0 ? '+' : ''}${r.usg_pct}%</div></div>`).join('')}
+    </div>` : '';
+}
+
+// ---------------- Nutrition (unchanged from before) ----------------
+function renderNutrition(panel) {
+  const seal = document.getElementById('seal-nutrition');
+  seal.innerHTML = '';
+  seal.appendChild(confidenceSeal(panel.source));
+  document.getElementById('nutrition-summary').textContent = `${panel.items.length} items shown`;
+  const rows = panel.items.map(item => {
+    const lightColor = { green: '#6FC796', amber: '#E3A857', red: '#E2634F' }[item.uk_traffic_light] || null;
+    const lightCell = lightColor
+      ? `<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:${lightColor}"></span>${item.sugar_per_100g}g/100g</span>`
+      : '<span class="text-muted">—</span>';
+    let pctCell = '—';
+    if (item.pct_of_who_10pct_limit != null) {
+      pctCell = `${item.pct_of_who_10pct_limit}% of 10% limit`;
+    }
+    return `<tr>
+      <td class="py-2 pr-4 font-body">${item.item}</td>
+      <td class="py-2 text-right">${item.calories ?? '—'}</td>
+      <td class="py-2 text-right">${item.sugar_g ?? '—'}</td>
+      <td class="py-2 text-right">${item.fat_g ?? '—'}</td>
+      <td class="py-2 text-right">${item.protein_g ?? '—'}</td>
+      <td class="py-2">${lightCell}</td>
+      <td class="py-2 text-right">${pctCell}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('nutrition-body').innerHTML = rows;
+}
+
+// ---------------- Production trend ----------------
+function renderTrend(panel) {
+  const seal = document.getElementById('seal-trend');
+  seal.innerHTML = '';
+  seal.appendChild(confidenceSeal(panel.source));
+  const series = panel.series;
+  const last = series[series.length - 1];
+  document.getElementById('trend-readout').textContent = `Latest: ${last.date} — index ${last.value}`;
+
+  if (charts.trend) charts.trend.destroy();
+  charts.trend = new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels: series.map(s => s.date),
+      datasets: [{
+        label: 'Production index',
+        data: series.map(s => s.value),
+        borderColor: '#F2839B',
+        backgroundColor: 'rgba(242,131,155,0.10)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: series.length > 60 ? 0 : 2,
+      }],
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#C9AD93', maxTicksLimit: 12 }, grid: { color: '#4A362A' } },
+        y: { ticks: { color: '#C9AD93' }, grid: { color: '#4A362A' } },
+      },
+    },
+  });
+}
+
+// ---------------- Load ----------------
+async function loadDashboardData() {
   try {
-    const res = await fetch('/data/processed/market_data.json', { cache: 'no-store' });
+    const res = await fetch('data/processed/console_data.json', { cache: 'no-store' });
     if (!res.ok) throw new Error(`Server responded ${res.status}`);
     const data = await res.json();
+    currentData = data;
     hideError();
-    render(data);
+
+    document.getElementById('sync-time').textContent = `Synced ${data.last_updated}`;
+    renderNews(data.news);
+    renderEcosystem(data.ecosystem);
+    renderTimeline(data.correlated_timeline);
+    renderFinancials(data.tmicc_financials);
+    renderNutrition(data.nutrition);
+    renderTrend(data.sales_trend);
+
     document.getElementById('dashboard-main').classList.remove('opacity-60');
   } catch (err) {
     console.error(err);
-    if (isFirstLoad) {
-      showError('Couldn\u2019t load market_data.json. Run `python3 data_pipeline.py`, then `python3 server.py`, and reload this page.');
-    }
-    // on later polls, fail quietly and keep showing the last good render
+    showError("Couldn't load console_data.json. Run `python3 data_pipeline.py`, then `python3 server.py`, and reload this page.");
   }
 }
 
-function render(data) {
-  currentData = data;
-  document.getElementById('sync-time').textContent = `Synced ${data.last_updated}`;
-
-  const panelKeys = ['sales_trend', 'brand_sentiment', 'nutrition', 'regional_distribution'];
-  const liveCount = panelKeys.filter(k => data[k] && data[k].source === 'real').length;
-  document.getElementById('provenance-summary').textContent = `${liveCount}/4 panels on live data`;
-
-  renderSynthesis(data.synthesis || {});
-  renderTrend(data.sales_trend || {});
-  renderVolumeDollar(data.volume_dollar_sales || null);
-  renderMagnum(data.magnum_real_precedent || null);
-  renderRegional(data.regional_distribution || {});
-  renderSentiment(data.brand_sentiment || {});
-  renderNutrition(data.nutrition || {});
-  renderDemographics(data.consumer_demographics || null);
-  renderRevenue(data.company_revenue || null);
-  renderCommandCenter(data.command_center || null);
-}
-
-function renderSynthesis(panel) {
-  const container = document.getElementById('synthesis-flags');
-  const flags = panel.flags || [];
-  const summary = document.getElementById('brief-summary');
-
-  if (!flags.length) {
-    container.innerHTML = '<p class="text-sm text-muted">No material signals this cycle.</p>';
-    if (summary) summary.textContent = 'No material signals this cycle';
-    return;
-  }
-  if (summary) {
-    summary.textContent = `${flags.length} signal${flags.length === 1 ? '' : 's'} flagged this cycle — ${flags.map(f => f.headline).join(' · ')}`;
-  }
-
-  container.innerHTML = flags.map(flag => {
-    const d = flag.dollar_estimate;
-    let badge = '';
-    if (d) {
-      const sign = d.amount_gbp < 0 ? '-' : '';
-      const amount = `${sign}£${Math.abs(d.amount_gbp).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-      const style = d.is_assumption
-        ? 'border-muted/50 border-dashed text-muted'
-        : 'border-positive text-positive';
-      const label = d.is_assumption ? `${amount} · assumption` : amount;
-      badge = `<span class="shrink-0 font-mono text-xs px-2 py-0.5 rounded border ${style}" title="${d.basis.replace(/"/g, '&quot;')}">${label}</span>`;
-    }
-    const steps = (flag.recommendation || []).map(step => `
-      <li class="text-xs text-muted"><span class="text-ivory font-medium">${step.stage}</span> — ${step.action}</li>
-    `).join('');
-    const recommendation = steps ? `
-      <div class="mt-3 pt-3 border-t border-hairline/60">
-        <p class="font-mono text-[10px] uppercase tracking-wide text-caramel mb-1.5">Suggested next steps</p>
-        <ol class="space-y-1">${steps}</ol>
-      </div>
-    ` : '';
-    return `
-      <div class="border-l-2 border-brass pl-4">
-        <div class="flex items-start justify-between gap-3 mb-1">
-          <h3 class="font-body font-semibold text-ivory">${flag.headline}</h3>
-          ${badge}
-        </div>
-        <p class="text-sm text-muted">${flag.body}</p>
-        ${recommendation}
-      </div>
-    `;
-  }).join('');
-}
-
-function renderTrend(panel) {
-  document.getElementById('seal-trend').innerHTML = sealBadge(panel.source === 'real');
-  applyTrendView();
-}
-
-function applyTrendView() {
-  if (!currentData) return;
-  const history = currentData.sales_trend || {};
-  const timeline = currentData.synthesis_timeline;
-  const toggle = document.getElementById('trend-toggle');
-  const note = document.getElementById('trend-interp-note');
-  const hasTimeline = !!(timeline && timeline.months && timeline.months.length);
-
-  if (hasTimeline) {
-    toggle.classList.remove('hidden');
-  } else {
-    toggle.classList.add('hidden');
-    trendView = 'history';
-  }
-
-  let labels, values;
-  const unit = history.unit || '';
-  if (trendView === 'recent' && hasTimeline) {
-    labels = timeline.months.map(m => m.date);
-    values = timeline.months.map(m => m.value);
-    note.classList.remove('hidden');
-  } else {
-    const series = history.series || [];
-    labels = series.map(s => s.date);
-    values = series.map(s => s.value);
-    note.classList.add('hidden');
-  }
-
-  const latest = values[values.length - 1];
-  const prev = values[values.length - 2];
-  const readout = document.getElementById('trend-readout');
-  if (latest !== undefined && prev) {
-    const pct = ((latest - prev) / prev * 100).toFixed(1);
-    const sign = pct >= 0 ? '+' : '';
-    readout.textContent = `${latest} ${unit} \u00b7 ${sign}${pct}% MoM`;
-  } else {
-    readout.textContent = '\u2014';
-  }
-
-  const pointRadius = trendView === 'recent' ? 4 : 0;
-  const pointHoverRadius = trendView === 'recent' ? 6 : 0;
-
-  if (charts.trend) {
-    charts.trend.data.labels = labels;
-    charts.trend.data.datasets[0].data = values;
-    charts.trend.data.datasets[0].pointRadius = pointRadius;
-    charts.trend.data.datasets[0].pointHoverRadius = pointHoverRadius;
-    charts.trend.update();
-  } else {
-    const opts = chartBaseOptions();
-    // 'index' mode snaps to the nearest data position along X — the
-    // crosshair-style hover/click a line chart calls for, vs. 'nearest'
-    // (point-proximity, appropriate for scatter) or bar-chart defaults.
-    opts.interaction = { mode: 'index', intersect: false };
-    opts.onClick = (evt, elements) => {
-      if (trendView === 'recent' && elements.length && currentData.synthesis_timeline) {
-        showMonthBrief(currentData.synthesis_timeline.months[elements[0].index]);
-      }
-    };
-    charts.trend = new Chart(document.getElementById('trendChart'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Production index',
-          data: values,
-          borderColor: '#F2839B',
-          backgroundColor: 'rgba(242, 131, 155, 0.10)',
-          fill: true,
-          tension: 0.3,
-          pointRadius,
-          pointHoverRadius,
-          pointBackgroundColor: '#F2839B',
-          pointBorderColor: '#241712',
-          pointBorderWidth: 2,
-          borderWidth: 2,
-        }],
-      },
-      options: opts,
-    });
-  }
-
-  const activeCls = ['border-brass', 'text-brass'];
-  const inactiveCls = ['border-hairline', 'text-muted'];
-  const fullBtn = document.getElementById('btn-full-history');
-  const recentBtn = document.getElementById('btn-recent-cycles');
-  fullBtn.classList.remove(...activeCls, ...inactiveCls);
-  fullBtn.classList.add(...(trendView === 'history' ? activeCls : inactiveCls));
-  recentBtn.classList.remove(...activeCls, ...inactiveCls);
-  recentBtn.classList.add(...(trendView === 'recent' ? activeCls : inactiveCls));
-}
-
-function showMonthBrief(monthEntry) {
-  document.getElementById('brief-back').classList.remove('hidden');
-  document.getElementById('brief-label').textContent = `Showing ${monthEntry.date} \u00b7 rule-based`;
-  renderSynthesis({ flags: monthEntry.flags });
-}
-
-function showLatestBrief() {
-  if (!currentData) return;
-  document.getElementById('brief-back').classList.add('hidden');
-  document.getElementById('brief-label').textContent = 'Auto-generated \u00b7 rule-based';
-  renderSynthesis(currentData.synthesis || {});
-}
-
-function renderVolumeDollar(panel) {
-  const section = document.getElementById('volume-dollar-section');
-  if (!panel || !panel.series || !panel.series.length) {
-    section.classList.add('hidden');
-    return;
-  }
-  section.classList.remove('hidden');
-
-  const series = panel.series;
-  const labels = series.map(s => s.date);
-  const volume = series.map(s => s.volume_units);
-  const revenue = series.map(s => s.revenue_gbp);
-  const volumeIdx = series.map(s => s.volume_index);
-  const revenueIdx = series.map(s => s.revenue_index);
-
-  const tiers = new Set(series.map(s => s.confidence));
-  const tier = tiers.has('real') ? 'real' : tiers.has('grounded_estimate') ? 'grounded_estimate' : 'placeholder';
-  document.getElementById('vd-confidence-icon').innerHTML = `<span class="text-brass">${CONFIDENCE_ICON[tier] || ''}</span>`;
-  document.getElementById('vd-confidence-label').textContent = CONFIDENCE_LABEL[tier] || tier;
-
-  const lastVolIdx = volumeIdx[volumeIdx.length - 1];
-  const lastRevIdx = revenueIdx[revenueIdx.length - 1];
-  const readout = document.getElementById('vd-readout');
-  if (lastVolIdx !== undefined) {
-    const volPct = (lastVolIdx - 100).toFixed(1);
-    const revPct = (lastRevIdx - 100).toFixed(1);
-    const gap = Math.abs(lastVolIdx - lastRevIdx).toFixed(1);
-    const direction = lastVolIdx - lastRevIdx > 0.5 ? `volume outpacing revenue by ${gap} pts — price/mix erosion`
-      : lastRevIdx - lastVolIdx > 0.5 ? `revenue outpacing volume by ${gap} pts — price/mix gain`
-      : 'volume and revenue moving together';
-    readout.textContent = `Volume ${volPct >= 0 ? '+' : ''}${volPct}% · Revenue ${revPct >= 0 ? '+' : ''}${revPct}% since ${labels[0]} — ${direction}`;
-  } else {
-    readout.textContent = '—';
-  }
-
-  if (charts.volume) {
-    charts.volume.data.labels = labels;
-    charts.volume.data.datasets[0].data = volume;
-    charts.volume.update();
-  } else {
-    charts.volume = new Chart(document.getElementById('volumeChart'), {
-      type: 'line',
-      data: { labels, datasets: [{
-        data: volume, borderColor: '#E3A857', backgroundColor: 'rgba(227, 168, 87, 0.10)',
-        fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
-      }] },
-      options: chartBaseOptions(),
-    });
-  }
-
-  if (charts.dollar) {
-    charts.dollar.data.labels = labels;
-    charts.dollar.data.datasets[0].data = revenue;
-    charts.dollar.update();
-  } else {
-    const revOpts = chartBaseOptions();
-    revOpts.plugins.tooltip = { callbacks: { label: (ctx) => `£${ctx.parsed.y.toLocaleString()}` } };
-    charts.dollar = new Chart(document.getElementById('dollarChart'), {
-      type: 'line',
-      data: { labels, datasets: [{
-        data: revenue, borderColor: '#F2839B', backgroundColor: 'rgba(242, 131, 155, 0.10)',
-        fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
-      }] },
-      options: revOpts,
-    });
-  }
-
-  document.getElementById('vd-index-legend').innerHTML = `
-    <span class="inline-flex items-center gap-1"><span style="color:#E3A857">──</span> Volume index</span>
-    <span class="inline-flex items-center gap-1"><span style="color:#83909C">- -</span> Revenue index</span>
-  `;
-
-  if (charts.vdIndex) {
-    charts.vdIndex.data.labels = labels;
-    charts.vdIndex.data.datasets[0].data = volumeIdx;
-    charts.vdIndex.data.datasets[1].data = revenueIdx;
-    charts.vdIndex.update();
-  } else {
-    charts.vdIndex = new Chart(document.getElementById('vdIndexChart'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          { label: 'Volume index', data: volumeIdx, borderColor: '#E3A857', tension: 0.3, pointRadius: 0, borderWidth: 2, fill: false },
-          { label: 'Revenue index', data: revenueIdx, borderColor: '#83909C', borderDash: [4, 3], tension: 0.3, pointRadius: 0, borderWidth: 2, fill: false },
-        ],
-      },
-      options: chartBaseOptions(),
-    });
-  }
-}
-
-function renderMagnum(panel) {
-  const section = document.getElementById('magnum-section');
-  if (!panel || !panel.items || !panel.items.length) {
-    section.classList.add('hidden');
-    return;
-  }
-  section.classList.remove('hidden');
-
-  const items = panel.items; // pre-sorted by fiscal_year ascending
-  const labels = items.map(i => `FY${i.fiscal_year}`);
-  const volumeIdx = items.map(i => i.volume_index);
-  const priceIdx = items.map(i => i.price_index);
-
-  const worst = items.reduce((a, b) => a.volume_growth_pct < b.volume_growth_pct ? a : b);
-  document.getElementById('magnum-readout').textContent =
-    `FY${worst.fiscal_year}: volume ${worst.volume_growth_pct >= 0 ? '+' : ''}${worst.volume_growth_pct.toFixed(1)}% while price ${worst.price_growth_pct >= 0 ? '+' : ''}${worst.price_growth_pct.toFixed(1)}% — the real-world instance of the pattern above.`;
-
-  document.getElementById('magnum-legend').innerHTML = `
-    <span class="inline-flex items-center gap-1"><span style="color:#E3A857">──</span> Volume index</span>
-    <span class="inline-flex items-center gap-1"><span style="color:#83909C">- -</span> Price index</span>
-    <span class="inline-flex items-center gap-1 ml-2"><span class="text-brass">${CONFIDENCE_ICON.real}</span> Real disclosed</span>
-    <span class="inline-flex items-center gap-1"><span class="text-brass">${CONFIDENCE_ICON.grounded_estimate}</span> Grounded estimate</span>
-  `;
-
-  if (charts.magnum) charts.magnum.destroy();
-  const opts = chartBaseOptions();
-  opts.plugins.tooltip = {
-    callbacks: {
-      label: (ctx) => {
-        const item = items[ctx.dataIndex];
-        return ctx.dataset.label === 'Volume index'
-          ? `Volume: ${item.volume_growth_pct >= 0 ? '+' : ''}${item.volume_growth_pct.toFixed(1)}% this year`
-          : `Price: ${item.price_growth_pct >= 0 ? '+' : ''}${item.price_growth_pct.toFixed(1)}% this year`;
-      },
-    },
-  };
-  charts.magnum = new Chart(document.getElementById('magnumChart'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        { label: 'Volume index', data: volumeIdx, borderColor: '#E3A857', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#E3A857', borderWidth: 2, fill: false },
-        { label: 'Price index', data: priceIdx, borderColor: '#83909C', borderDash: [4, 3], tension: 0.3, pointRadius: 4, pointBackgroundColor: '#83909C', borderWidth: 2, fill: false },
-      ],
-    },
-    options: opts,
-  });
-
-  document.getElementById('magnum-body').innerHTML = items.map(i => {
-    const volColor = i.volume_growth_pct < 0 ? '#E2634F' : '#6FC796';
-    const priceColor = i.price_growth_pct < 0 ? '#E2634F' : '#6FC796';
-    return `
-      <tr>
-        <td class="py-2 font-body">FY${i.fiscal_year}</td>
-        <td class="py-2 text-right">${i.usg_pct >= 0 ? '+' : ''}${i.usg_pct.toFixed(1)}%</td>
-        <td class="py-2 text-right" style="color:${volColor}">${i.volume_growth_pct >= 0 ? '+' : ''}${i.volume_growth_pct.toFixed(1)}%</td>
-        <td class="py-2 text-right" style="color:${priceColor}">${i.price_growth_pct >= 0 ? '+' : ''}${i.price_growth_pct.toFixed(1)}%</td>
-        <td class="py-2 font-body">${CONFIDENCE_ICON[i.confidence] || ''} ${CONFIDENCE_LABEL[i.confidence] || i.confidence}</td>
-        <td class="py-2 font-body text-muted text-xs max-w-md">${i.basis}</td>
-      </tr>
-    `;
-  }).join('');
-
-  const regions = panel.regions_fy2025 || [];
-  const regionalWrap = document.getElementById('magnum-regional-wrap');
-  if (regions.length) {
-    regionalWrap.classList.remove('hidden');
-    document.getElementById('magnum-regional-row').innerHTML = regions.map(r => {
-      const color = r.usg_pct >= 0 ? '#6FC796' : '#E2634F';
-      return `
-        <details class="group bg-ink/40 border border-hairline rounded-lg p-4">
-          <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden">
-            <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-1">${r.region}</p>
-            <p class="font-display text-xl" style="color:${color}">${r.usg_pct >= 0 ? '+' : ''}${r.usg_pct.toFixed(1)}%</p>
-            <p class="font-mono text-[10px] text-muted mt-1">${CONFIDENCE_ICON[r.confidence] || ''} ${CONFIDENCE_LABEL[r.confidence] || r.confidence}</p>
-            <p class="font-mono text-[10px] text-caramel mt-1 group-open:hidden">click for source</p>
-          </summary>
-          <p class="font-mono text-[10px] text-muted mt-2 pt-2 border-t border-hairline/60">${r.basis}</p>
-        </details>
-      `;
-    }).join('');
-  } else {
-    regionalWrap.classList.add('hidden');
-  }
-}
-
-function renderRegional(panel) {
-  const items = panel.items || [];
-  const tiers = new Set(items.map(i => i.confidence));
-  const tier = tiers.has('real') ? 'real' : tiers.has('grounded_estimate') ? 'grounded_estimate' : 'placeholder';
-  document.getElementById('regional-confidence').innerHTML = items.length
-    ? `<span class="text-brass">${CONFIDENCE_ICON[tier] || ''}</span> ${CONFIDENCE_LABEL[tier] || tier}`
-    : '';
-  const labels = items.map(i => i.region);
-  const values = items.map(i => i.share);
-
-  if (charts.regional) {
-    charts.regional.data.labels = labels;
-    charts.regional.data.datasets[0].data = values;
-    charts.regional.update();
-    return;
-  }
-
-  const opts = chartBaseOptions();
-  opts.indexAxis = 'y';
-  opts.layout = { padding: { right: 34 } };
-  opts.plugins.tooltip = {
-    callbacks: {
-      label: (ctx) => {
-        const item = items[ctx.dataIndex];
-        const basis = (item.basis || '').match(/.{1,60}(\s|$)/g) || [];
-        return [`${item.share}% share`, ...basis.map(l => l.trim())];
-      },
-    },
-  };
-  charts.regional = new Chart(document.getElementById('regionChart'), {
-    type: 'bar',
-    data: { labels, datasets: [{ data: values, backgroundColor: '#E3A857', borderRadius: 4, maxBarThickness: 24 }] },
-    options: opts,
-    plugins: [valueLabelPlugin(v => `${v.toFixed(1)}%`)],
-  });
-}
-
-const STATUS_ICON = { 'Trending Up': '▲', 'Declining': '▼', 'Stable': '●' };
-const STATUS_COLOR = { 'Trending Up': '#6FC796', 'Declining': '#E2634F', 'Stable': '#83909C' };
-
-function renderSentiment(panel) {
-  document.getElementById('seal-sentiment').innerHTML = sealBadge(panel.source === 'real');
-  document.getElementById('sentiment-legend').innerHTML = Object.entries(STATUS_ICON).map(([status, icon]) => `
-    <span class="inline-flex items-center gap-1"><span style="color:${STATUS_COLOR[status]}">${icon}</span>${status}</span>
-  `).join('');
-
-  const items = (panel.items || []).slice(0, 10);
-  const labels = items.map(i => `${STATUS_ICON[i.status] || ''} ${i.flavor}`);
-  const values = items.map(i => i.sentiment_score);
-  const colors = items.map(i => STATUS_COLOR[i.status] || '#83909C');
-
-  if (charts.sentiment) {
-    charts.sentiment.data.labels = labels;
-    charts.sentiment.data.datasets[0].data = values;
-    charts.sentiment.data.datasets[0].backgroundColor = colors;
-    charts.sentiment.update();
-    return;
-  }
-
-  const opts = chartBaseOptions();
-  opts.indexAxis = 'y';
-  opts.scales.x.min = 0;
-  opts.scales.x.max = 5;
-  opts.layout = { padding: { right: 34 } };
-  charts.sentiment = new Chart(document.getElementById('sentimentChart'), {
-    type: 'bar',
-    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 4, maxBarThickness: 24 }] },
-    options: opts,
-    plugins: [valueLabelPlugin(v => v.toFixed(2))],
-  });
-}
-
-const UK_TRAFFIC_LIGHT = {
-  green: { icon: '\u25cf', color: '#6FC796', label: 'Green' },
-  amber: { icon: '\u25cf', color: '#E3A857', label: 'Amber' },
-  red: { icon: '\u25cf', color: '#E2634F', label: 'Red' },
-};
-
-function renderNutrition(panel) {
-  document.getElementById('seal-nutrition').innerHTML = sealBadge(panel.source === 'real');
-  const body = document.getElementById('nutrition-body');
-  body.innerHTML = '';
-
-  const items = panel.items || [];
-  const redCount = items.filter(i => i.uk_traffic_light === 'red').length;
-  const overWhoCount = items.filter(i => i.pct_of_who_5pct_limit !== null && i.pct_of_who_5pct_limit !== undefined && i.pct_of_who_5pct_limit >= 100).length;
-  const summary = document.getElementById('nutrition-summary');
-  if (summary) {
-    summary.textContent = items.length
-      ? `${redCount} of ${items.length} items red under UK FSA sugar rules · ${overWhoCount} exceed a full day's WHO 5% free-sugar guideline in one serving`
-      : '—';
-  }
-
-  (panel.items || []).forEach(item => {
-    const tl = UK_TRAFFIC_LIGHT[item.uk_traffic_light];
-    const labelCell = tl
-      ? `<span style="color:${tl.color}">${tl.icon}</span> ${tl.label}`
-      : '<span class="text-muted">\u2014</span>';
-
-    const pct = item.pct_of_who_5pct_limit;
-    let pctCell = '\u2014';
-    if (pct !== null && pct !== undefined) {
-      const over = pct >= 100;
-      const color = over ? '#E2634F' : pct >= 60 ? '#E3A857' : '#83909C';
-      const icon = over ? '\u26a0 ' : '';
-      pctCell = `<span style="color:${color}" title="${item.pct_of_who_10pct_limit}% of the 10% guideline (50g)">${icon}${pct}%</span>`;
-    }
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td class="py-2 font-body">${item.item ?? ''}</td>
-      <td class="py-2 text-right">${item.calories ?? '\u2014'}</td>
-      <td class="py-2 text-right">${item.sugar_g ?? '\u2014'}</td>
-      <td class="py-2 text-right">${item.fat_g ?? '\u2014'}</td>
-      <td class="py-2 text-right">${item.protein_g ?? '\u2014'}</td>
-      <td class="py-2 font-body" title="${item.sugar_per_100g !== null && item.sugar_per_100g !== undefined ? item.sugar_per_100g + 'g sugar per 100g' : ''}">${labelCell}</td>
-      <td class="py-2 text-right">${pctCell}</td>
-    `;
-    body.appendChild(row);
-  });
-}
-
-const CONFIDENCE_ICON = { real: '●', grounded_estimate: '◐', placeholder: '○' };
-const CONFIDENCE_LABEL = { real: 'Real disclosed', grounded_estimate: 'Grounded estimate', placeholder: 'Placeholder — illustrative' };
-
-const AGE_BRACKETS = ['0-14', '15-64', '65+'];
-const AGE_BRACKET_COLORS = { '0-14': '#F3D9A8', '15-64': '#E3A857', '65+': '#8B6423' };
-
-function renderDemographics(panel) {
-  const section = document.getElementById('demographics-section');
-  const population = (panel && panel.population_by_region) || [];
-  if (!population.length) {
-    section.classList.add('hidden');
-    return;
-  }
-  section.classList.remove('hidden');
-
-  const byRegion = {};
-  population.forEach(r => {
-    (byRegion[r.region] = byRegion[r.region] || {})[r.age_bracket] = r;
-  });
-  // United Kingdom pinned first — the launch market this initiative starts
-  // in — everything else (the "scale to global" context) sorts by youth
-  // share behind it.
-  const regions = Object.keys(byRegion).sort((a, b) => {
-    if (a === 'United Kingdom') return -1;
-    if (b === 'United Kingdom') return 1;
-    return byRegion[b]['0-14'].share_pct - byRegion[a]['0-14'].share_pct;
-  });
-
-  const youngest = [...regions].sort((a, b) => byRegion[b]['0-14'].share_pct - byRegion[a]['0-14'].share_pct)[0];
-  const oldest = [...regions].sort((a, b) => byRegion[b]['65+'].share_pct - byRegion[a]['65+'].share_pct)[0];
-  const ukLine = byRegion['United Kingdom']
-    ? `UK: ${byRegion['United Kingdom']['0-14'].share_pct}% under 14, ${byRegion['United Kingdom']['65+'].share_pct}% over 65 · `
-    : '';
-  document.getElementById('demographics-readout').textContent =
-    `${ukLine}${youngest}: youngest overall (${byRegion[youngest]['0-14'].share_pct}% under 14) · ${oldest}: oldest (${byRegion[oldest]['65+'].share_pct}% 65+)`;
-
-  document.getElementById('demographics-legend').innerHTML =
-    `<span class="text-brass">${CONFIDENCE_ICON.real}</span> Real disclosed (World Bank)` +
-    AGE_BRACKETS.map(b => `<span class="inline-flex items-center gap-1"><span style="color:${AGE_BRACKET_COLORS[b]}">●</span> Ages ${b}</span>`).join('');
-
-  const opts = chartBaseOptions();
-  opts.indexAxis = 'y';
-  opts.scales.x.stacked = true;
-  opts.scales.y.stacked = true;
-  opts.scales.x.max = 100;
-  opts.plugins.tooltip = {
-    callbacks: {
-      label: (ctx) => {
-        const region = ctx.label;
-        const bracket = ctx.dataset.label;
-        const row = byRegion[region][bracket];
-        return `Ages ${bracket}: ${row.share_pct}% (${(row.population / 1e6).toFixed(0)}M people)`;
-      },
-    },
-  };
-
-  if (charts.demographics) charts.demographics.destroy();
-  charts.demographics = new Chart(document.getElementById('demographicsChart'), {
-    type: 'bar',
-    data: {
-      labels: regions,
-      datasets: AGE_BRACKETS.map(bracket => ({
-        label: bracket,
-        data: regions.map(r => byRegion[r][bracket].share_pct),
-        backgroundColor: AGE_BRACKET_COLORS[bracket],
-        borderRadius: 2,
-        maxBarThickness: 32,
-      })),
-    },
-    options: opts,
-  });
-
-  const consumption = panel.ice_cream_consumption_by_age || [];
-  const wrap = document.getElementById('consumption-wrap');
-  if (consumption.length) {
-    wrap.classList.remove('hidden');
-    const c0 = consumption[0];
-    document.getElementById('consumption-callout').innerHTML =
-      `Real, ice-cream-specific — not a general "sweet foods" proxy.` +
-      `<br><span class="font-mono text-[10px] text-muted">${c0.basis}</span>`;
-    document.getElementById('consumption-row').innerHTML = consumption.map(c => `
-      <div class="bg-ink/40 border border-hairline rounded-lg p-4">
-        <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-1">Ages ${c.age_bracket}</p>
-        <p class="font-display text-xl text-ivory">${c.mean_g_per_day}g<span class="text-sm text-muted">/day</span></p>
-        <p class="font-mono text-[10px] text-muted mt-1">${c.mean_sugar_g_per_day}g sugar/day from ice cream &middot; ${c.portions_per_year} ice creams/year &middot; ${c.share_of_diet_sugar_pct}% of total diet sugar</p>
-      </div>
-    `).join('');
-  } else {
-    wrap.classList.add('hidden');
-  }
-}
-
-let revenueView = 'chart'; // 'chart' | 'table'
-
-function dumbbellPlugin(items) {
-  return {
-    id: 'dumbbell',
-    afterDatasetsDraw(chart) {
-      const { ctx, scales } = chart;
-      const xScale = scales.x;
-      const meta = chart.getDatasetMeta(0);
-      ctx.save();
-      meta.data.forEach((bar, i) => {
-        const item = items[i];
-        if (!item) return;
-        const y = bar.y;
-        const x2025 = xScale.getPixelForValue(item.fy2025);
-        const x2026 = xScale.getPixelForValue(item.fy2026);
-
-        [[x2025, '#F8B9C7'], [x2026, '#F2839B']].forEach(([x, color]) => {
-          ctx.beginPath();
-          ctx.arc(x, y, 5, 0, Math.PI * 2);
-          ctx.fillStyle = color;
-          ctx.fill();
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = '#241712';
-          ctx.stroke();
-        });
-
-        const rightX = Math.max(x2025, x2026) + 10;
-        const delta = item.delta_pct ?? 0;
-        const deltaColor = delta >= 0 ? '#6FC796' : '#E2634F';
-        const deltaSign = delta >= 0 ? '+' : '';
-        ctx.textBaseline = 'middle';
-        ctx.textAlign = 'left';
-        ctx.font = "10px 'IBM Plex Mono'";
-        ctx.fillStyle = '#C9AD93';
-        ctx.fillText(`$${item.fy2026.toLocaleString(undefined, { maximumFractionDigits: 0 })}M`, rightX, y - 6);
-        ctx.fillStyle = deltaColor;
-        ctx.fillText(`${deltaSign}${delta.toFixed(1)}%`, rightX, y + 6);
-      });
-      ctx.restore();
-    },
-  };
-}
-
-function renderRevenue(panel) {
-  const section = document.getElementById('revenue-section');
-  if (!panel || !panel.items || !panel.items.length) {
-    section.classList.add('hidden');
-    return;
-  }
-  section.classList.remove('hidden');
-
-  const items = panel.items; // pre-sorted by FY2026 descending
-
-  document.getElementById('revenue-legend').innerHTML = `
-    <span class="inline-flex items-center gap-1"><span class="text-brass">●</span> Real disclosed</span>
-    <span class="inline-flex items-center gap-1"><span class="text-brass">◐</span> Grounded estimate</span>
-    <span class="inline-flex items-center gap-1"><span class="text-brass">○</span> Placeholder — illustrative</span>
-    <span class="inline-flex items-center gap-1" style="color:#F8B9C7">●</span> FY2025
-    <span class="inline-flex items-center gap-1 text-brass">●</span> FY2026
-  `;
-
-  const labels = items.map(i => `${CONFIDENCE_ICON[i.confidence] || ''} ${i.company}`);
-  document.getElementById('revenue-chart-wrap').style.height = `${items.length * 30 + 20}px`;
-
-  if (charts.revenue) charts.revenue.destroy();
-
-  const opts = chartBaseOptions();
-  opts.indexAxis = 'y';
-  opts.layout = { padding: { right: 80 } };
-  opts.scales.x.type = 'logarithmic';
-  opts.scales.x.min = 40;
-  opts.plugins.tooltip = {
-    callbacks: {
-      label: (ctx) => {
-        const item = items[ctx.dataIndex];
-        return [
-          `FY2025: $${item.fy2025.toLocaleString()}M`,
-          `FY2026: $${item.fy2026.toLocaleString()}M`,
-          CONFIDENCE_LABEL[item.confidence] || item.confidence,
-        ];
-      },
-    },
-  };
-
-  charts.revenue = new Chart(document.getElementById('revenueChart'), {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [{
-        data: items.map(i => [i.fy2025, i.fy2026]),
-        backgroundColor: 'rgba(201, 173, 147, 0.35)',
-        borderRadius: 2,
-        barThickness: 4,
-      }],
-    },
-    options: opts,
-    plugins: [dumbbellPlugin(items)],
-  });
-
-  document.getElementById('revenue-body').innerHTML = items.map(i => {
-    const delta = i.delta_pct ?? 0;
-    return `
-      <tr>
-        <td class="py-2 font-body">${CONFIDENCE_ICON[i.confidence] || ''} ${i.company}</td>
-        <td class="py-2 font-body text-muted">${i.ultimate_owner}</td>
-        <td class="py-2 text-right">${i.fy2025.toLocaleString()}</td>
-        <td class="py-2 text-right">${i.fy2026.toLocaleString()}</td>
-        <td class="py-2 text-right" style="color:${delta >= 0 ? '#6FC796' : '#E2634F'}">${delta >= 0 ? '+' : ''}${delta.toFixed(1)}%</td>
-        <td class="py-2 font-body">${CONFIDENCE_LABEL[i.confidence] || i.confidence}</td>
-        <td class="py-2 font-body text-muted text-xs max-w-md">${i.basis_2025}<br><br>${i.basis_2026}</td>
-      </tr>
-    `;
-  }).join('');
-}
-
-function updateRevenueToggleStyles() {
-  const activeCls = ['border-brass', 'text-brass'];
-  const inactiveCls = ['border-hairline', 'text-muted'];
-  const chartBtn = document.getElementById('btn-revenue-chart');
-  const tableBtn = document.getElementById('btn-revenue-table');
-  chartBtn.classList.remove(...activeCls, ...inactiveCls);
-  chartBtn.classList.add(...(revenueView === 'chart' ? activeCls : inactiveCls));
-  tableBtn.classList.remove(...activeCls, ...inactiveCls);
-  tableBtn.classList.add(...(revenueView === 'table' ? activeCls : inactiveCls));
-}
-
-const CC_STATUS = {
-  'Stockout risk': { icon: '▼', color: '#E2634F' },
-  'Spoilage risk': { icon: '⚠', color: '#E3A857' },
-  'Balanced': { icon: '●', color: '#6FC796' },
-};
-
-function ccFmtGbp(amount) {
-  const sign = amount < 0 ? '-' : '';
-  return `${sign}£${Math.abs(amount).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-}
-
-function ccKpiCard(label, value, sub, detail) {
-  const body = `
-    <p class="font-mono text-[10px] uppercase tracking-wide text-muted mb-2">${label}</p>
-    <p class="font-display text-2xl text-ivory">${value}</p>
-    ${sub ? `<p class="font-mono text-xs text-muted mt-1">${sub}</p>` : ''}
-  `;
-  if (!detail) {
-    return `<div class="bg-panel border border-hairline rounded-lg p-5">${body}</div>`;
-  }
-  return `
-    <details class="group bg-panel border border-hairline rounded-lg p-5">
-      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden">
-        ${body}
-        <p class="font-mono text-[10px] text-caramel mt-2 group-open:hidden">click for logic &amp; source</p>
-      </summary>
-      <div class="mt-3 pt-3 border-t border-hairline/60 space-y-1.5">
-        <p class="font-mono text-[10px] text-muted"><span class="text-ivory">Logic:</span> ${detail.logic}</p>
-        ${detail.contributors ? `<p class="font-mono text-[10px] text-muted"><span class="text-ivory">Detail:</span> ${detail.contributors}</p>` : ''}
-        <p class="font-mono text-[10px] text-muted"><span class="text-ivory">Source:</span> ${detail.source}</p>
-      </div>
-    </details>
-  `;
-}
-
-function renderCcKpis(kpis) {
-  document.getElementById('cc-kpi-row').innerHTML = [
-    ccKpiCard('Spoilage exposure, this cycle', ccFmtGbp(kpis.spoilage_exposure_gbp), null, {
-      logic: kpis.spoilage_exposure_logic,
-      contributors: kpis.spoilage_exposure_contributors,
-      source: kpis.source,
-    }),
-    ccKpiCard('Cash tied up, frozen inventory', ccFmtGbp(kpis.cash_tied_up_gbp), null, {
-      logic: kpis.cash_tied_up_logic,
-      contributors: kpis.cash_tied_up_contributors,
-      source: kpis.source,
-    }),
-    ccKpiCard('Equipment exposure', ccFmtGbp(kpis.equipment_exposure_gbp), null, {
-      logic: kpis.equipment_exposure_logic,
-      contributors: kpis.equipment_exposure_contributors,
-      source: kpis.source,
-    }),
-    ccKpiCard(
-      'Autonomous actions, this cycle',
-      kpis.autonomous_actions_count,
-      `${ccFmtGbp(kpis.autonomous_actions_impact_gbp)} impact protected`,
-      { logic: kpis.autonomous_actions_logic, source: kpis.source }
-    ),
-  ].join('');
-}
-
-function renderCcDemand(demand) {
-  if (!demand) return;
-  const readout = document.getElementById('cc-demand-readout');
-  readout.textContent = `${demand.featured_region} · peak gap ${demand.gap_pct}%` +
-    (demand.event_note ? ` · ${demand.event_note} (${demand.event_date})` : '');
-
-  document.getElementById('cc-demand-legend').innerHTML = `
-    <span class="inline-flex items-center gap-1"><span style="color:#F2839B">●</span> Agentic demand sensing</span>
-    <span class="inline-flex items-center gap-1"><span style="color:#83909C">●</span> Legacy production plan</span>
-  `;
-
-  const labels = demand.series.map(p => p.date);
-  const sensed = demand.series.map(p => p.sensed_demand_units);
-  const plan = demand.series.map(p => p.production_plan_units);
-
-  if (charts.ccDemand) charts.ccDemand.destroy();
-
-  const opts = chartBaseOptions();
-  charts.ccDemand = new Chart(document.getElementById('ccDemandChart'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Agentic demand sensing',
-          data: sensed,
-          borderColor: '#F2839B',
-          backgroundColor: 'rgba(242, 131, 155, 0.10)',
-          tension: 0.3,
-          pointRadius: 0,
-          borderWidth: 2,
-          fill: true,
-        },
-        {
-          label: 'Legacy production plan',
-          data: plan,
-          borderColor: '#83909C',
-          borderDash: [4, 3],
-          tension: 0.3,
-          pointRadius: 0,
-          borderWidth: 2,
-          fill: false,
-        },
-      ],
-    },
-    options: opts,
-  });
-}
-
-function ccActionCell(entry) {
-  // Every equipment row and every non-"Balanced" region maps to at most one
-  // activity-log entry via its `source` field (command_center.py's
-  // build_activity_log) — this cell is that mapping made visible, so the
-  // risk and the response to it read in the same row instead of a separate
-  // disconnected log table.
-  if (!entry) {
-    return '<span class="text-muted">No action needed</span>';
-  }
-  const auto = entry.status === 'auto_executed';
-  const badge = auto
-    ? '<span style="color:#6FC796">✓ Auto-executed</span>'
-    : '<span style="color:#E3A857">⏳ Pending approval</span>';
-  return `
-    <div title="${entry.impact_basis}">${entry.action}</div>
-    <div class="mt-1 flex items-center gap-2 text-xs">
-      ${badge}<span class="text-muted">${ccFmtGbp(entry.impact_gbp)}</span>
-    </div>
-  `;
-}
-
-function renderCcRegional(regions, activityLog) {
-  const stockout = regions.filter(r => r.status === 'Stockout risk').length;
-  const spoilage = regions.filter(r => r.status === 'Spoilage risk').length;
-  const summary = document.getElementById('regional-summary');
-  if (summary) {
-    summary.textContent = (stockout || spoilage)
-      ? `${stockout} region${stockout === 1 ? '' : 's'} at stockout risk · ${spoilage} at spoilage risk · ${regions.length - stockout - spoilage} balanced`
-      : `All ${regions.length} regions balanced`;
-  }
-
-  const bySource = Object.fromEntries((activityLog || []).map(a => [a.source, a]));
-  document.getElementById('cc-regional-body').innerHTML = regions.map(r => {
-    const s = CC_STATUS[r.status] || { icon: '', color: '#C9AD93' };
-    const entry = bySource[`regional:${r.region}`];
-    return `
-      <tr>
-        <td class="py-2 pr-4 font-body">${r.region}</td>
-        <td class="py-2 pr-4 text-right">${r.weeks_on_hand.toFixed(1)}</td>
-        <td class="py-2 pr-4 text-right">${r.weeks_to_expiry.toFixed(1)}</td>
-        <td class="py-2 pr-4"><span style="color:${s.color}">${s.icon}</span> ${r.status}</td>
-        <td class="py-2 pr-4 font-body text-muted">${r.recommendation}</td>
-        <td class="py-2 font-body">${ccActionCell(entry)}</td>
-      </tr>
-    `;
-  }).join('');
-}
-
-function renderCcEquipment(items, activityLog) {
-  const highRisk = items.filter(e => e.high_risk).length;
-  const summary = document.getElementById('equipment-summary');
-  if (summary) {
-    summary.textContent = `${highRisk} of ${items.length} assets flagged high failure risk`;
-  }
-
-  const bySource = Object.fromEntries((activityLog || []).map(a => [a.source, a]));
-  document.getElementById('cc-equipment-body').innerHTML = items.map(e => {
-    const riskColor = e.failure_risk_pct >= 50 ? '#E2634F' : e.failure_risk_pct >= 30 ? '#E3A857' : '#83909C';
-    const entry = bySource[`equipment:${e.equipment_id}`];
-    return `
-      <tr>
-        <td class="py-2 pr-4 font-body">${e.equipment_id} <span class="text-muted">(${e.asset_type})</span></td>
-        <td class="py-2 pr-4 font-body text-muted">${e.region}</td>
-        <td class="py-2 pr-4 text-right" style="color:${riskColor}">${e.failure_risk_pct.toFixed(1)}%</td>
-        <td class="py-2 pr-4 text-right">${e.days_to_predicted_failure}</td>
-        <td class="py-2 pr-4 text-right" title="${e.exposure_basis}">${ccFmtGbp(e.exposure_gbp)}</td>
-        <td class="py-2 font-body">${ccActionCell(entry)}</td>
-      </tr>
-    `;
-  }).join('');
-}
-
-function renderCommandCenter(cc) {
-  const ids = ['cc-kpi-section', 'cc-demand-section', 'cc-regional-section', 'cc-equipment-section'];
-  if (!cc) {
-    ids.forEach(id => document.getElementById(id).classList.add('hidden'));
-    return;
-  }
-  ids.forEach(id => document.getElementById(id).classList.remove('hidden'));
-
-  renderCcKpis(cc.kpis);
-  renderCcDemand(cc.demand_vs_plan);
-  renderCcRegional(cc.regional_inventory, cc.activity_log);
-  renderCcEquipment(cc.equipment, cc.activity_log);
-}
-
-document.getElementById('btn-revenue-chart').addEventListener('click', () => {
-  revenueView = 'chart';
-  document.getElementById('revenue-chart-wrap').classList.remove('hidden');
-  document.getElementById('revenue-table-wrap').classList.add('hidden');
-  updateRevenueToggleStyles();
-});
-document.getElementById('btn-revenue-table').addEventListener('click', () => {
-  revenueView = 'table';
-  document.getElementById('revenue-chart-wrap').classList.add('hidden');
-  document.getElementById('revenue-table-wrap').classList.remove('hidden');
-  updateRevenueToggleStyles();
-});
-
-document.getElementById('btn-full-history').addEventListener('click', () => {
-  trendView = 'history';
-  applyTrendView();
-  showLatestBrief();
-});
-document.getElementById('btn-recent-cycles').addEventListener('click', () => {
-  trendView = 'recent';
-  applyTrendView();
-});
-document.getElementById('brief-back').addEventListener('click', showLatestBrief);
-
-loadDashboardData(true);
-setInterval(() => loadDashboardData(false), 30000);
+loadDashboardData();
+setInterval(loadDashboardData, 30000);
 </script>
 </body>
 </html>

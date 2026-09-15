@@ -53,10 +53,15 @@ class ReusableTCPServer(socketserver.TCPServer):
 
 
 def _raw_snapshot():
-    """Newest mtime across files in data/raw/, or 0.0 if the folder is empty/missing."""
+    """Newest mtime across every file under data/raw/, recursively, or 0.0 if
+    empty/missing. Was RAW_DIR.iterdir() (top-level only) before this rebuild —
+    that silently missed data/raw/news/raw_items.json and every other
+    subfolder file (production/, nutrition/, market/), so the watcher never
+    noticed when fetch_competitor_news.py updated the news feed. rglob fixes
+    that."""
     if not RAW_DIR.exists():
         return 0.0
-    mtimes = [p.stat().st_mtime for p in RAW_DIR.iterdir() if p.is_file()]
+    mtimes = [p.stat().st_mtime for p in RAW_DIR.rglob("*") if p.is_file()]
     return max(mtimes) if mtimes else 0.0
 
 
