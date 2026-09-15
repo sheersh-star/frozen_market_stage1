@@ -1,0 +1,171 @@
+{
+  "company": "The Magnum Ice Cream Company N.V. (TMICC)",
+  "generated_date": "2026-09-15",
+  "primary_source": {
+    "file": "146292742.pdf",
+    "type": "TMICC 2025 Annual Report",
+    "fiscal_year": 2025,
+    "pages": 238,
+    "extraction_method": "direct text extraction from the PDF's own content streams — a first-party primary source, not web-summarized",
+    "note": "Extraction is a working proof-of-concept (custom script, no PDF library available this pass) — legible but with irregular spacing; every fact below was manually verified by reading its extracted context before being recorded here"
+  },
+  "corporate_facts": {
+    "headquarters": "Reguliersdwarsstraat 63, 1017 BK, Amsterdam, Netherlands",
+    "legal_form": "naamloze vennootschap (N.V.) — Dutch public limited liability company",
+    "listing": {
+      "ticker": "MICC",
+      "exchanges": ["Euronext Amsterdam", "London Stock Exchange", "New York Stock Exchange"],
+      "trading_commenced": "2026-12-08",
+      "demerger_completed": "2025-12-06",
+      "demerged_from": "Unilever PLC"
+    },
+    "scale_2025": {
+      "revenue_eur_billion": 7.9,
+      "employees": 16500,
+      "factories": 30,
+      "rd_centres": 12,
+      "freezer_cabinet_fleet": 3000000,
+      "freezer_cabinets_owned_by_tmicc": false
+    },
+    "auditor": {
+      "firm": "KPMG Accountants N.V.",
+      "signed_location": "Amstelveen",
+      "signed_date": "2026-03-18",
+      "engagement_partner": "C.M.L. Priem RA"
+    }
+  },
+  "major_shareholders": [
+    {"holder": "Unilever PLC", "as_of": "2025-12-08", "note": "residual post-demerger stake — a strategist should watch for further disposal announcements"},
+    {"holder": "BlackRock Inc.", "shares": 25965010, "as_of": "2025-12-17"},
+    {"holder": "Goldman Sachs Group Inc.", "shares": 20026031, "as_of": "2025-12-23"},
+    {"holder": "FIL Limited (Fidelity)", "shares": 19894021, "as_of": "2025-12-10"},
+    {"holder": "Allan & Gill Gray Foundation", "shares": 19674251, "as_of": "2026-02-13"}
+  ],
+  "brand_portfolio": [
+    {"brand": "Wall's", "founded": 1922, "region_note": "core Europe/global heritage brand"},
+    {"brand": "Cornetto", "founded": 1959},
+    {"brand": "Twister", "founded": 1982},
+    {"brand": "Ben & Jerry's", "founded": 1978, "note": "US-specific 'Milk with Dignity' migrant dairy worker programme applies to this brand specifically; carrying value ~€111m (2025)"},
+    {"brand": "Magnum", "founded": 1989, "note": "flagship brand; regional variants found: Magnum Dubai, Volcano, Plombir (Turkiye)"},
+    {"brand": "Talenti", "acquired": 2014, "note": "carrying value ~€132m (2025)"},
+    {"brand": "Yasso", "acquired": 2023, "note": "positioned as a 'Better-For-You' line — relevant to the GLP-1/weight-loss-drug risk factor below; carrying value ~€362m (2025)"},
+    {"brand": "Breyers", "region": "Americas", "note": "'Breyers Carb Smart' also positioned as Better-For-You; 'Breyers S'mores' range launched across tubs/sticks/sandwiches"},
+    {"brand": "Popsicle", "region": "Americas", "note": "relaunch effort described internally as 'rebuilding the yellow door'"},
+    {"brand": "Carte d'Or", "region_note": "seen paired with 'Chunkies' variant in Turkiye market commentary"}
+  ],
+  "joint_ventures_subsidiaries_associates": [
+    {
+      "entity": "Magnum RFM Ice Cream Inc.",
+      "former_name": "Unilever RFM Ice Cream, Inc.",
+      "country": "Philippines",
+      "group_shareholding": "50%+1 share",
+      "control_basis": "Group controls via majority of Board seats and voting rights",
+      "why_it_matters": "implies RFM Corporation (a real, major Filipino food/beverage conglomerate) as the JV partner — worth confirming directly"
+    },
+    {
+      "entity": "Selecta Wall's Land Corporation",
+      "via": "WS Holding, Inc.",
+      "country": "Philippines",
+      "group_shareholding": "40% direct + 10% indirect via WS Holding",
+      "control_basis": "significant influence, not consolidated control — held as non-current investment",
+      "why_it_matters": "Selecta is a well-known, real Philippine ice cream brand — a second Philippines structure alongside Magnum RFM"
+    },
+    {
+      "entity": "The Magnum Ice Cream Company Pakistan Limited",
+      "country": "Pakistan",
+      "group_shareholding": "99.35%",
+      "control_basis": "consolidated subsidiary"
+    },
+    {
+      "entity": "Magnum ICC US SpinCo, LLC / Magnum ICC US Holdco, LLC / Magnum ICC US, LLC / Ben & Jerry's Holdco, LLC / Yasso Inc",
+      "country": "US",
+      "note": "the US corporate entity structure created specifically for the demerger"
+    }
+  ],
+  "raw_material_supply_chain": [
+    {
+      "material": "Dairy",
+      "sourcing_standard": "Caring Dairy (TMICC's own supplier standard: pasture access, free grazing, third-party-audited animal welfare)",
+      "named_supplier": "Lakeland Dairies (Ireland) — confirmed by you as a direct milk supplier",
+      "brand_specific_programme": "Ben & Jerry's US: 'Milk with Dignity' — enforceable migrant dairy worker protections",
+      "why_it_matters": "any dairy price shock, animal-welfare controversy, or Lakeland-specific news is a direct-cost/reputational signal"
+    },
+    {
+      "material": "Cocoa",
+      "sourcing_standard": "Fairtrade + Rainforest Alliance certified",
+      "industry_body": "International Cocoa Initiative — TMICC participates in its Forced Labour Working Group",
+      "gap": "no specific cocoa trading house (e.g. Barry Callebaut, Cargill, Olam) confirmed as a named supplier in this pass — TMICC's disclosure names certification schemes, not trading partners",
+      "why_it_matters": "West African cocoa price volatility (real, well-documented 2024-2025 surge) is a direct commodity-cost risk"
+    },
+    {
+      "material": "Vanilla",
+      "sourcing_standard": "Fairtrade + Rainforest Alliance certified",
+      "named_programme": "Vanilla for Change — Sava region, Madagascar",
+      "named_partners": ["Save the Children", "Symrise"],
+      "industry_body": "Sustainable Vanilla Charter",
+      "why_it_matters": "Symrise is a real, major German flavor/fragrance company — a genuine named ingredient partner; Madagascar vanilla is a famously volatile commodity market"
+    },
+    {
+      "material": "Palm oil",
+      "sourcing_standard": "100% RSPO-certified",
+      "why_it_matters": "directly overlaps with the EUDR (EU Deforestation Regulation) already tracked in the ESG Meets CPG console — same commodity, same regulation"
+    },
+    {
+      "material": "Cane sugar",
+      "sourcing_standard": "Bonsucro credits (real sustainable-sugarcane certification body)",
+      "gap": "specific trading partner not named"
+    },
+    {
+      "material": "Packaging materials",
+      "gap": "no specific packaging supplier (e.g. Huhtamaki, Amcor, Sonoco) found in this pass — the report discusses packaging sustainability as a stated risk factor (see below) but doesn't name suppliers"
+    }
+  ],
+  "competitors": [
+    {"name": "Froneri", "structure": "50/50 JV, Nestlé + PAI Partners", "flagship_brand": "Häagen-Dazs (international)", "market_position": "world's #2 ice cream producer by retail sales; #1 and #2 (TMICC + Froneri) together ~32% of global retail sales"},
+    {"name": "Nestlé", "note": "reported (Feb 2026 trade press) to be reviewing/exiting its remaining ice cream exposure, including its Froneri stake"},
+    {"name": "General Mills", "flagship_brand": "Häagen-Dazs (US & Canada only)"},
+    {"name": "Ferrero / Wells Enterprises", "flagship_brands": ["Blue Bunny", "Halo Top", "Bomb Pop"], "note": "Ferrero acquired Wells Enterprises in 2023"}
+  ],
+  "governance_cross_links": {
+    "note": "TMICC board member bios (found via PDF extraction) show real cross-directorships at other major companies — the exact person-to-appointment mapping needs direct verification since this pass's extraction interleaved adjacent bios and could not cleanly separate them by name",
+    "companies_named_in_board_bios": [
+      "Koninklijke Ahold Delhaize N.V. (major European retailer)",
+      "FrieslandCampina N.V. (major Dutch dairy cooperative — directly relevant to TMICC's own dairy sourcing)",
+      "Wolters Kluwer N.V.",
+      "Heineken N.V. (former CFO & Executive Board Member, 13 years)",
+      "Exor N.V.",
+      "Tesco PLC (already tracked in the ESG Meets CPG console)",
+      "Atairos (Senior Advisor)",
+      "Bain Capital (Managing Director & Head, Technology/Telecom/Media, 18+ years)",
+      "Goldman Sachs & Co. (Capital Markets)",
+      "Samsonite, Worldpay, Atento"
+    ]
+  },
+  "remuneration_peer_group": ["Chocoladefabriken Lindt & Sprüngli", "Coca-Cola Europacific Partners", "Conagra", "Danone", "General Mills", "Lotus Bakeries", "Mondelez International"],
+  "tsr_peer_group_partial": ["Barry Callebaut", "Emmi", "Glanbia", "Orkla"],
+  "industry_and_regulatory_bodies": [
+    "International Cocoa Initiative",
+    "Sustainable Vanilla Charter",
+    "RSPO (Roundtable on Sustainable Palm Oil)",
+    "Fairtrade International",
+    "Rainforest Alliance",
+    "Bonsucro",
+    "Global Animal Partnership (GAP)",
+    "EU Taxonomy Regulation (Article 8) / CSRD-ESRS reporting regime"
+  ],
+  "disclosed_risk_factors": [
+    {"risk": "Reliance on Unilever", "note": "explicit post-demerger transition-dependency risk named in the report's own forward-looking statements"},
+    {"risk": "Packaging sustainability capability", "note": "named as a risk to the company's ability to find sustainable packaging solutions"},
+    {"risk": "Customer relationship deterioration"},
+    {"risk": "Raw material / commodity cost volatility"},
+    {"risk": "Cold-chain distribution disruption", "note": "named alongside climate-driven extreme weather (floods, hurricanes, droughts) as a disruption vector"},
+    {"risk": "Carbon taxes / freezer cabinet emissions", "note": "the 3-million-unit freezer cabinet fleet — not owned by TMICC, placed in retail outlets — is explicitly named as the single largest emissions category and the focus of planned carbon-tax mitigation"},
+    {"risk": "GLP-1 / weight-loss medication impact on demand", "note": "explicitly named: 'largely a US issue but increasing globally' — Better-For-You lines (Yasso, Breyers Carb Smart) are positioned as the company's hedge against this trend"}
+  ],
+  "gaps_not_found_this_pass": [
+    "No named cocoa/vanilla trading-house supplier (Cargill, Olam, Barry Callebaut appears only as an unrelated TSR peer)",
+    "No named packaging material supplier",
+    "Exact board-bio-to-name mapping for the governance cross-links above",
+    "ABN AMRO's exact role (appears near shareholder/AGM information — likely paying agent/registrar for the Amsterdam listing, not confirmed as IPO advisor)"
+  ]
+}

@@ -7,3 +7,8 @@ __pycache__/
 
 # secrets
 .env
+
+# large source filings — kept local, not in git history (42MB+ each);
+# derived facts live in data/raw/magnum_ecosystem.json + docs/magnum_ecosystem.md instead
+146292742.pdf
+data/raw/filings/
