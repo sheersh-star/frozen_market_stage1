@@ -323,14 +323,26 @@ function renderNewsColumn(containerId, countId, items, label) {
 
   container.innerHTML = sorted.slice(0, SHOW).map(it => {
     const isNew = lastSeenAnchor && it.published > lastSeenAnchor;
+    const tags = [...it.matched_entities, ...it.matched_topics];
+    const exactDate = it.published ? new Date(it.published).toLocaleString() : 'undated';
+    const badgeColor = it.source_type === 'official' ? 'border-positive text-positive' : 'border-hairline text-muted';
     return `
-      <a href="${it.link}" target="_blank" rel="noopener" class="block border border-hairline rounded-lg p-2.5 hover:border-brass/50 transition-colors">
-        <div class="flex items-start gap-2">
+      <details class="border border-hairline rounded-lg group open:border-brass/50">
+        <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-2.5 flex items-start gap-2">
           <span class="shrink-0 mt-1 w-1.5 h-1.5 rounded-full ${isNew ? 'bg-caramel' : 'bg-transparent'}" title="${isNew ? 'published since your last visit' : ''}"></span>
-          <span class="text-sm text-ivory leading-snug line-clamp-2">${it.title}</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-ivory leading-snug">${it.title}</div>
+            <div class="font-mono text-[10px] text-muted mt-1">${it.source_name || 'unknown'} &middot; ${timeAgo(it.published)}</div>
+          </div>
+          <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+        </summary>
+        <div class="px-2.5 pb-2.5 pt-2 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+          <div><span class="text-ivory">Published:</span> ${exactDate}</div>
+          <div><span class="text-ivory">Source:</span> ${it.source_name || 'unknown'} <span class="px-1.5 py-0.5 rounded-full border ${badgeColor} uppercase">${it.source_type}</span></div>
+          ${tags.length ? `<div class="flex flex-wrap gap-1.5">${tags.map(t => `<span class="text-caramel">#${t}</span>`).join('')}</div>` : ''}
+          <a href="${it.link}" target="_blank" rel="noopener" class="inline-block text-brass hover:underline pt-1">Open article &#8599;</a>
         </div>
-        <div class="font-mono text-[10px] text-muted mt-1 pl-3.5">${it.source_name || 'unknown'} &middot; ${timeAgo(it.published)}</div>
-      </a>`;
+      </details>`;
   }).join('');
   if (sorted.length > SHOW) {
     container.innerHTML += `<p class="font-mono text-[10px] text-muted text-center pt-1">+ ${sorted.length - SHOW} more</p>`;
