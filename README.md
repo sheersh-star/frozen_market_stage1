@@ -165,6 +165,23 @@ build environment is restricted); it's built directly against the
 documented API contract, but give it one real test run before depending on
 it.
 
+## Live news feed (Magnum ecosystem)
+
+`fetch_competitor_news.py` pulls real, live headlines for TMICC and its named competitors/topics — zero API keys, zero cost. Run it directly:
+
+```bash
+python3 fetch_competitor_news.py
+```
+
+**How it works:** reads `data/config/watchlist.json` (6 companies + 5 topics, built from the research in `docs/magnum_ecosystem.md`), queries [Google News RSS](https://news.google.com/rss/search) once per entry (free, keyless, no auth), and writes a deduplicated, normalized list to `data/raw/news/raw_items.json`. Each item is tagged `source_type: official` or `aggregator` by matching its real `<source url>` domain against each company's known domain — not by fetching a separate newsroom RSS feed, because both feed URLs guessed in the original spec (Nestlé, General Mills investor relations) turned out to be dead (HTTP 404) when actually checked. Meant to run on a schedule (cron/Task Scheduler/GitHub Action) every 30-60 minutes, not continuously — it's a single fetch-parse-write pass per run.
+
+**Real output from the first live run:** turned up news neither of this project's earlier research passes had — a £50m TMICC factory upgrade in Gloucester (Nov 2025) and a new TMICC Global Capability Centre in Pune (Sept 2026) — plus caught and fixed a real false positive (bare `MICC` in a query collided with a US Army acronym, "Mission and Installation Contracting Command," via a DVIDS military news item) before it shipped.
+
+**Known, honest limitations:**
+- Google News RSS's `<link>` is a redirect through `news.google.com`, not the publisher's real URL — confirmed by testing, not just assumed: Google's redirect is a client-side hop, not a real HTTP 3xx, so a plain redirect-follow just returns the same URL with tracking parameters. It's still fully clickable for a human; resolving the true canonical URL would need a headless browser, out of scope for a keyless stdlib script.
+- No documented rate limit for this endpoint — the script is polite by design (a ~1.5s gap between each of the 11 queries per run) but this is a scraping-adjacent technique, not a stable API contract; if Google changes this endpoint's behavior, this script needs revisiting.
+- **This session's sandbox actually has real outbound network access** (confirmed: `curl` to `news.google.com` returns real data) — worth noting since an earlier README section on `fetch_usda_data.py` says network was restricted in this build environment; that may have been true in an earlier session, but isn't a blanket constraint going forward.
+
 ## Customizing
 
 - **Port**: `DASHBOARD_PORT=8081 python3 server.py`

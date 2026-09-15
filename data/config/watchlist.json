@@ -1,0 +1,53 @@
+{
+  "_notes": [
+    "official_domains are used only to tag a result as 'official' vs 'aggregator' by matching the <source url> domain Google News RSS already returns — no separate official-newsroom RSS feed is fetched, because both guessed feed URLs from the original spec (Nestle, General Mills) were verified dead (HTTP 404) before this file was written. TMICC's own newsroom (news.magnumicecream.com) was confirmed real but has no RSS/Atom feed at all.",
+    "query is the exact string sent to Google News RSS's q parameter — kept deliberately specific (full name / ticker, not bare 'Magnum') to avoid matching unrelated uses of short/generic names.",
+    "confidence on official_domains: 'confirmed' means a real page was fetched and checked this session; 'likely' means a standard corporate-domain guess not independently checked."
+  ],
+  "companies": [
+    {
+      "name": "The Magnum Ice Cream Company",
+      "query": "\"The Magnum Ice Cream Company\" OR TMICC",
+      "query_note": "bare MICC was dropped — confirmed via a live run to collide with 'Mission and Installation Contracting Command' (US Army), an unrelated acronym",
+      "official_domains": ["magnumicecream.com"],
+      "official_domains_confidence": "confirmed"
+    },
+    {
+      "name": "Froneri",
+      "query": "Froneri",
+      "official_domains": ["froneri.com"],
+      "official_domains_confidence": "likely"
+    },
+    {
+      "name": "Nestle",
+      "query": "Nestle ice cream",
+      "official_domains": ["nestle.com"],
+      "official_domains_confidence": "likely"
+    },
+    {
+      "name": "General Mills",
+      "query": "\"General Mills\" ice cream",
+      "official_domains": ["generalmills.com"],
+      "official_domains_confidence": "likely"
+    },
+    {
+      "name": "Ferrero / Wells Enterprises",
+      "query": "\"Wells Enterprises\" OR \"Blue Bunny\"",
+      "official_domains": ["ferrero.com", "wellsenterprisesinc.com"],
+      "official_domains_confidence": "confirmed"
+    },
+    {
+      "name": "Lakeland Dairies",
+      "query": "\"Lakeland Dairies\"",
+      "official_domains": ["lakelanddairies.com"],
+      "official_domains_confidence": "likely"
+    }
+  ],
+  "topics": [
+    {"name": "Ice cream industry", "query": "ice cream industry"},
+    {"name": "Frozen dessert supply chain", "query": "frozen dessert supply chain"},
+    {"name": "Dairy supply chain", "query": "dairy supply chain"},
+    {"name": "Ice cream allergens", "query": "ice cream allergen recall"},
+    {"name": "Cocoa price", "query": "cocoa price"}
+  ]
+}
