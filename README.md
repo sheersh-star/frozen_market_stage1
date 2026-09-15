@@ -74,6 +74,13 @@ python3 fetch_competitor_news.py
 
 **Real output from the first live run:** turned up news neither of this project's earlier research passes had — a £50m TMICC factory upgrade in Gloucester (Nov 2025) and a new TMICC Global Capability Centre in Pune (Sept 2026) — plus caught and fixed a real false positive (bare `MICC` in a query collided with a US Army acronym, "Mission and Installation Contracting Command," via a DVIDS military news item) before it shipped.
 
+**The panel itself is condensed into 3 columns** (`index.html`'s `classify()`/`renderNewsColumn()`), designed for a strategist with no time to read details — stare, notice the dots, move on:
+- **TMICC** — anything matching "The Magnum Ice Cream Company" directly.
+- **Competitors** — Froneri, Nestlé, General Mills, Ferrero/Wells Enterprises.
+- **Ecosystem & partners** — Lakeland Dairies (a named supplier) plus every topic-only match (cocoa price, dairy supply chain, allergens, etc.) — both are ecosystem-level context rather than TMICC or a named rival. This is where a real, unplanned find landed on the very first classified run: "Lakeland fined £115,000 for Artigarvan pollution" — a real environmental fine against TMICC's own milk supplier, exactly the kind of signal this column exists to catch.
+
+Each column: newest-first, capped to 8 for a one-screen read, and a small dot marks anything published since your last visit (tracked via `localStorage`, anchored once per page load — not reset by the 30s auto-refresh, so "new" stays meaningful for the whole time a tab is open).
+
 **Known, honest limitations:**
 - Google News RSS's `<link>` is a redirect through `news.google.com`, not the publisher's real URL — confirmed by testing, not just assumed: Google's redirect is a client-side hop, not a real HTTP 3xx, so a plain redirect-follow just returns the same URL with tracking parameters. It's still fully clickable for a human; resolving the true canonical URL would need a headless browser, out of scope for a keyless stdlib script.
 - No documented rate limit for this endpoint — the script is polite by design (a ~1.5s gap between each of the 11 queries per run) but this is a scraping-adjacent technique, not a stable API contract; if Google changes this endpoint's behavior, this script needs revisiting.

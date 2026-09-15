@@ -72,8 +72,30 @@
       <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
     </summary>
     <div class="mt-4 pt-4 border-t border-hairline/60">
-      <p class="font-mono text-xs text-muted mb-3">Zero API keys &mdash; Google News RSS, tagged official/aggregator by matching each item's real source domain. Run <code class="text-caramel">python3 fetch_competitor_news.py</code> to refresh. Showing the most recent items.</p>
-      <div id="news-list" class="space-y-2 max-h-[32rem] overflow-y-auto pr-1"></div>
+      <p class="font-mono text-xs text-muted mb-3">Zero API keys &mdash; Google News RSS, tagged official/aggregator by matching each item's real source domain. Run <code class="text-caramel">python3 fetch_competitor_news.py</code> to refresh. <span class="text-caramel">&#9679;</span> marks anything published since your last visit &mdash; that's the express read: check the dots first.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-base text-ivory">TMICC</h3>
+            <span id="news-tmicc-count" class="font-mono text-[10px] text-muted"></span>
+          </div>
+          <div id="news-tmicc" class="space-y-2 max-h-[28rem] overflow-y-auto pr-1"></div>
+        </div>
+        <div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-base text-ivory">Competitors</h3>
+            <span id="news-competitor-count" class="font-mono text-[10px] text-muted"></span>
+          </div>
+          <div id="news-competitor" class="space-y-2 max-h-[28rem] overflow-y-auto pr-1"></div>
+        </div>
+        <div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-base text-ivory">Ecosystem &amp; partners</h3>
+            <span id="news-ecosystem-count" class="font-mono text-[10px] text-muted"></span>
+          </div>
+          <div id="news-ecosystem" class="space-y-2 max-h-[28rem] overflow-y-auto pr-1"></div>
+        </div>
+      </div>
     </div>
   </details>
 
@@ -247,39 +269,91 @@ function confidenceSeal(source) {
 }
 
 // ---------------- News ----------------
+// The 4 named rivals — everything else with a matched entity that isn't
+// TMICC itself falls here. Kept as a literal list (not read from
+// watchlist.json, which this page never loads) since it only needs to match
+// the "name" strings fetch_competitor_news.py already stamped onto each item.
+const COMPETITOR_NAMES = ['Froneri', 'Nestle', 'General Mills', 'Ferrero / Wells Enterprises'];
+const TMICC_NAME = 'The Magnum Ice Cream Company';
+
+// Anchored once per page load (not re-read on every 30s auto-refresh), so
+// "new since you looked" means since this tab was opened/reloaded — not since
+// 30 seconds ago on every poll. First-ever visit shows nothing as new rather
+// than flagging the entire backlog.
+let lastSeenAnchor = null;
+function initLastSeen() {
+  try {
+    lastSeenAnchor = localStorage.getItem('tmicc_news_last_seen');
+    localStorage.setItem('tmicc_news_last_seen', new Date().toISOString());
+  } catch (e) {
+    lastSeenAnchor = null; // private browsing / storage blocked — degrade to "nothing marked new," not a crash
+  }
+}
+
+function timeAgo(iso) {
+  if (!iso) return 'undated';
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const mins = Math.round(diffMs / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  return `${Math.round(hours / 24)}d ago`;
+}
+
+function classify(item) {
+  if (item.matched_entities.includes(TMICC_NAME)) return 'tmicc';
+  if (item.matched_entities.some(e => COMPETITOR_NAMES.includes(e))) return 'competitor';
+  return 'ecosystem'; // Lakeland Dairies (a named partner) + every topic-only match (cocoa, dairy supply chain, etc.) — both are ecosystem-level context, not TMICC or a named rival
+}
+
+function renderNewsColumn(containerId, countId, items, label) {
+  const container = document.getElementById(containerId);
+  const SHOW = 8; // express read: one screen's worth per column, not a scroll-everything list
+  const sorted = [...items].sort((a, b) => {
+    const aNew = lastSeenAnchor && a.published > lastSeenAnchor;
+    const bNew = lastSeenAnchor && b.published > lastSeenAnchor;
+    if (aNew !== bNew) return aNew ? -1 : 1; // new-since-last-visit always floats to the top
+    return (b.published || '').localeCompare(a.published || '');
+  });
+  const newCount = sorted.filter(it => lastSeenAnchor && it.published > lastSeenAnchor).length;
+  document.getElementById(countId).textContent = newCount
+    ? `${items.length} · ${newCount} new`
+    : `${items.length}`;
+
+  container.innerHTML = sorted.slice(0, SHOW).map(it => {
+    const isNew = lastSeenAnchor && it.published > lastSeenAnchor;
+    return `
+      <a href="${it.link}" target="_blank" rel="noopener" class="block border border-hairline rounded-lg p-2.5 hover:border-brass/50 transition-colors">
+        <div class="flex items-start gap-2">
+          <span class="shrink-0 mt-1 w-1.5 h-1.5 rounded-full ${isNew ? 'bg-caramel' : 'bg-transparent'}" title="${isNew ? 'published since your last visit' : ''}"></span>
+          <span class="text-sm text-ivory leading-snug line-clamp-2">${it.title}</span>
+        </div>
+        <div class="font-mono text-[10px] text-muted mt-1 pl-3.5">${it.source_name || 'unknown'} &middot; ${timeAgo(it.published)}</div>
+      </a>`;
+  }).join('');
+  if (sorted.length > SHOW) {
+    container.innerHTML += `<p class="font-mono text-[10px] text-muted text-center pt-1">+ ${sorted.length - SHOW} more</p>`;
+  }
+  if (!sorted.length) {
+    container.innerHTML = `<p class="font-mono text-xs text-muted">No ${label} items yet</p>`;
+  }
+}
+
 function renderNews(news) {
-  const listEl = document.getElementById('news-list');
   const summaryEl = document.getElementById('news-summary');
   if (!news || !news.items || !news.items.length) {
     summaryEl.textContent = 'No news yet — run python3 fetch_competitor_news.py';
-    listEl.innerHTML = '';
+    ['news-tmicc', 'news-competitor', 'news-ecosystem'].forEach(id => document.getElementById(id).innerHTML = '');
     return;
   }
-  const items = news.items;
-  const officialCount = items.filter(i => i.source_type === 'official').length;
-  summaryEl.textContent = `${items.length} items (${officialCount} official) — fetched ${new Date(news.generated_at).toLocaleString()}`;
+  const buckets = { tmicc: [], competitor: [], ecosystem: [] };
+  news.items.forEach(it => buckets[classify(it)].push(it));
 
-  const SHOW = 60;
-  listEl.innerHTML = items.slice(0, SHOW).map(it => {
-    const badgeColor = it.source_type === 'official' ? 'border-positive text-positive' : 'border-hairline text-muted';
-    const tags = [...it.matched_entities, ...it.matched_topics];
-    const dateStr = it.published ? new Date(it.published).toLocaleString() : 'undated';
-    return `
-      <div class="border border-hairline rounded-lg p-3 hover:border-brass/50 transition-colors">
-        <div class="flex items-start justify-between gap-3">
-          <a href="${it.link}" target="_blank" rel="noopener" class="text-sm text-ivory hover:text-brass leading-snug">${it.title}</a>
-          <span class="shrink-0 font-mono text-[10px] uppercase px-2 py-0.5 rounded-full border ${badgeColor}">${it.source_type}</span>
-        </div>
-        <div class="font-mono text-[10px] text-muted mt-1 flex flex-wrap gap-x-3 gap-y-1">
-          <span>${it.source_name || 'unknown source'}</span>
-          <span>${dateStr}</span>
-          ${tags.map(t => `<span class="text-caramel">#${t}</span>`).join('')}
-        </div>
-      </div>`;
-  }).join('');
-  if (items.length > SHOW) {
-    listEl.innerHTML += `<p class="font-mono text-xs text-muted text-center pt-2">+ ${items.length - SHOW} more in data/raw/news/raw_items.json</p>`;
-  }
+  summaryEl.textContent = `${news.items.length} items — fetched ${new Date(news.generated_at).toLocaleString()}`;
+  renderNewsColumn('news-tmicc', 'news-tmicc-count', buckets.tmicc, 'TMICC');
+  renderNewsColumn('news-competitor', 'news-competitor-count', buckets.competitor, 'competitor');
+  renderNewsColumn('news-ecosystem', 'news-ecosystem-count', buckets.ecosystem, 'ecosystem');
 }
 
 // ---------------- Ecosystem ----------------
@@ -441,6 +515,7 @@ async function loadDashboardData() {
   }
 }
 
+initLastSeen();
 loadDashboardData();
 setInterval(loadDashboardData, 30000);
 </script>
