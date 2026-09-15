@@ -1,5 +1,10 @@
 name: Refresh news + Deploy to GitHub Pages
 
+# DORMANT — moved out of .github/workflows/ on purpose, so GitHub Actions
+# can't see or run it (it only recognizes files directly under
+# .github/workflows/). Currently hosted on Vercel instead. To reactivate:
+# `git mv .github/dormant-workflows/pages.yml .github/workflows/pages.yml`.
+#
 # This is the piece Lovable structurally can't do: Lovable hosts React/Next.js
 # apps and doesn't run arbitrary Python, so the live news feed
 # (fetch_competitor_news.py) would just go stale there forever. GitHub Actions
