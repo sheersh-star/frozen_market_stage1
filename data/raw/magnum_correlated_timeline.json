@@ -1,0 +1,260 @@
+{
+  "generated_date": "2026-09-15",
+  "window_covered": "2022-12 to 2026-09",
+  "purpose": "Correlates TMICC's own disclosed strategic decisions against the same-window competitor and macro-commodity timeline, so a strategist sees not just what TMICC did but what happened around it",
+  "timeline": [
+    {
+      "id": "t01",
+      "date": "2022-12-07",
+      "actor": "Ferrero / Wells Enterprises",
+      "category": "competitor_move",
+      "event": "Ferrero Group agrees to acquire Wells Enterprises (Blue Bunny, Bomb Pop, Halo Top) \u2014 baseline context predating this window",
+      "source": "ferrero.com; prnewswire.com",
+      "date_precision": "day"
+    },
+    {
+      "id": "t02",
+      "date": "2024-06-13",
+      "actor": "Macro / Cocoa market",
+      "category": "commodity",
+      "event": "Cocoa futures hit an all-time high, briefly over $11,530/tonne in London \u2014 the peak of the 2024-2025 cocoa crisis",
+      "source": "Wikipedia 'Cocoa crisis (2024-present)'; barchart.com",
+      "date_precision": "day"
+    },
+    {
+      "id": "t03",
+      "date": "2025-02-06",
+      "actor": "General Mills / Unilever Ice Cream (pre-TMICC)",
+      "category": "competitor_move",
+      "event": "Unilever's ice cream division and General Mills reported discussing ice cream market trends together, months before the TMICC demerger",
+      "source": "dairyreporter.com",
+      "date_precision": "day"
+    },
+    {
+      "id": "t04",
+      "date": "2025-04-01",
+      "actor": "Macro / Cocoa market",
+      "category": "commodity",
+      "event": "Global cocoa grinding fell nearly 5% year-on-year (Asia down 16%) as consumers cut back or switched to lower-cocoa formulations under sustained high prices",
+      "source": "multiple cocoa-market coverage, see docs/magnum_correlated_timeline.md",
+      "date_precision": "quarter"
+    },
+    {
+      "id": "t05",
+      "date": "2025-08-22",
+      "actor": "Macro / Cocoa market",
+      "category": "commodity",
+      "event": "CNBC: chocolate prices still rising but 2026 outlook signalled as 'sweeter' \u2014 early sign of the price relief that materializes by late 2026",
+      "source": "cnbc.com",
+      "date_precision": "day"
+    },
+    {
+      "id": "t06",
+      "date": "2025-09-01",
+      "actor": "TMICC",
+      "category": "strategic_decision",
+      "event": "First Capital Markets Day \u2014 CEO/CFO engaged directly with the top 50 shareholders; announced a target dividend payout ratio of 40-60%; presented the sustainability framework later formalized in the listing Prospectus",
+      "source": "TMICC 2025 Annual Report (146292742.pdf)",
+      "date_precision": "month"
+    },
+    {
+      "id": "t07",
+      "date": "2025-09-26",
+      "actor": "TMICC",
+      "category": "governance",
+      "event": "Board member appointment date recorded in the Annual Report's governance section (appointee's exact identity needs verification \u2014 see docs/magnum_ecosystem.md gap)",
+      "source": "TMICC 2025 Annual Report (146292742.pdf)",
+      "date_precision": "day"
+    },
+    {
+      "id": "t08",
+      "date": "2025-10-27",
+      "actor": "Froneri",
+      "category": "competitor_move",
+      "event": "Trade press: 'Froneri's success shows why Unilever is right to spin off ice cream' \u2014 competitor strength cited as validating the demerger, a month before it closed",
+      "source": "dairyreporter.com",
+      "date_precision": "day"
+    },
+    {
+      "id": "t09",
+      "date": "2025-12-06",
+      "actor": "TMICC",
+      "category": "strategic_decision",
+      "event": "Demerger from Unilever completed",
+      "source": "unilever.com; foodingredientsfirst.com",
+      "date_precision": "day"
+    },
+    {
+      "id": "t10",
+      "date": "2025-12-08",
+      "actor": "TMICC",
+      "category": "strategic_decision",
+      "event": "MICC begins trading on Euronext Amsterdam, LSE, and NYSE; initial market value ~$9.1bn",
+      "source": "multiple, see docs",
+      "date_precision": "day"
+    },
+    {
+      "id": "t11",
+      "date": "2025-12-09",
+      "actor": "Market",
+      "category": "market_reaction",
+      "event": "First round of fresh analyst ratings and outlook commentary published on MICC post-listing",
+      "source": "ts2.tech",
+      "date_precision": "day"
+    },
+    {
+      "id": "t12",
+      "date": "2025-12-10",
+      "actor": "Shareholder / FIL Limited",
+      "category": "shareholder_filing",
+      "event": "FIL Limited (Fidelity) discloses a 19,894,021-share position",
+      "source": "TMICC 2025 Annual Report",
+      "date_precision": "day"
+    },
+    {
+      "id": "t13",
+      "date": "2025-12-15",
+      "actor": "General Mills / Industry",
+      "category": "competitor_move",
+      "event": "Trade roundup 'Major Dairy Industry Deals' names General Mills alongside Lactalis, Fonterra, Unilever, and Arla in the same wave of dairy-sector M&A activity around the TMICC demerger",
+      "source": "dairyreporter.com",
+      "date_precision": "day"
+    },
+    {
+      "id": "t14",
+      "date": "2025-12-17",
+      "actor": "Shareholder / BlackRock",
+      "category": "shareholder_filing",
+      "event": "BlackRock Inc. discloses a 25,965,010-share position",
+      "source": "TMICC 2025 Annual Report",
+      "date_precision": "day"
+    },
+    {
+      "id": "t15",
+      "date": "2025-12-23",
+      "actor": "Shareholder / Goldman Sachs",
+      "category": "shareholder_filing",
+      "event": "Goldman Sachs Group Inc. discloses a 20,026,031-share position",
+      "source": "TMICC 2025 Annual Report",
+      "date_precision": "day"
+    },
+    {
+      "id": "t16",
+      "date": "2026-02-11",
+      "actor": "Market",
+      "category": "market_reaction",
+      "event": "MICC closes at its all-time high of $19.87 \u2014 the day before its first maiden results as a standalone company",
+      "source": "macrotrends.net",
+      "date_precision": "day"
+    },
+    {
+      "id": "t17",
+      "date": "2026-02-12",
+      "actor": "TMICC",
+      "category": "strategic_decision",
+      "event": "First maiden full-year (FY2025) results as a standalone company: mixed and messy \u2014 sharp declines in annual earnings and cash flow, profit below forecast, driven partly by one-off separation costs. Underlying disclosed detail: 380bps of commodity/supply-chain cost inflation (cocoa + a stronger euro named specifically), offset by a productivity programme and select pricing actions; Italy performance 'below par' with an explicit business reset; capex up 11% YoY to 4.5% of revenue; restructuring: a net \u20ac40m provision release plus \u20ac50m of supply-chain-optimisation costs",
+      "source": "TMICC 2025 Annual Report (146292742.pdf); ajbell.co.uk 'Magnum's meltdown'",
+      "date_precision": "day"
+    },
+    {
+      "id": "t18",
+      "date": "2026-02-12",
+      "actor": "Market",
+      "category": "market_reaction",
+      "event": "Shares 'melt' on the maiden results \u2014 AJ Bell: 'Magnum's meltdown: can Unilever's ice cream spin-off recover from a bad start?'",
+      "source": "ajbell.co.uk",
+      "correlates_with": "t17",
+      "date_precision": "day"
+    },
+    {
+      "id": "t19",
+      "date": "2026-02-13",
+      "actor": "Shareholder / Allan & Gill Gray Foundation",
+      "category": "shareholder_filing",
+      "event": "Allan & Gill Gray Foundation discloses a 19,674,251-share position",
+      "source": "TMICC 2025 Annual Report",
+      "date_precision": "day"
+    },
+    {
+      "id": "t20",
+      "date": "2026-02-19",
+      "actor": "Nestl\u00e9",
+      "category": "competitor_move",
+      "event": "In its own FY2025 annual results, Nestl\u00e9 announces 'advanced negotiations' to sell its remaining ice cream businesses (Asia, Canada, parts of Latin America \u2014 ~SFr1bn/$1.2bn revenue) to Froneri, targeted to complete by early 2027. CEO Philipp Navratil calls ice cream 'a distraction' from Nestl\u00e9's pivot to coffee and petcare. No plan to exit the Froneri JV itself (Nestl\u00e9 keeps its 50% stake)",
+      "source": "dairyreporter.com; foodbev.com; just-food.com",
+      "correlates_with": "t17,t18",
+      "date_precision": "day"
+    },
+    {
+      "id": "t21",
+      "date": "2026-02-20",
+      "actor": "Analysts / Trade press",
+      "category": "market_reaction",
+      "event": "'Unilever-Magnum Ice Cream Company spin-off winner' retrospective published \u2014 framing the Nestl\u00e9 exit news against TMICC's own rocky week, one week after t17/t18",
+      "source": "dairyreporter.com",
+      "correlates_with": "t17,t18,t20",
+      "date_precision": "day"
+    },
+    {
+      "id": "t22",
+      "date": "2026-03-18",
+      "actor": "TMICC",
+      "category": "governance",
+      "event": "KPMG Accountants N.V. signs the audited FY2025 Annual Report in Amstelveen (engagement partner C.M.L. Priem RA) \u2014 the full, detailed disclosure document this ecosystem/timeline research is built from",
+      "source": "TMICC 2025 Annual Report (146292742.pdf)",
+      "date_precision": "day"
+    },
+    {
+      "id": "t23",
+      "date": "2026-06-01",
+      "actor": "General Mills",
+      "category": "competitor_move",
+      "event": "General Mills sells its H\u00e4agen-Dazs retail and gifting shop business in mainland China to an investor consortium including tea-chain operator Ningji, while retaining ownership of the H\u00e4agen-Dazs foodservice business there \u2014 a localization/control-ceding move in a complex market",
+      "source": "just-food.com; foodingredientsfirst.com",
+      "date_precision": "month"
+    },
+    {
+      "id": "t24",
+      "date": "2026-09-01",
+      "actor": "Macro / Cocoa market",
+      "category": "commodity",
+      "event": "Cocoa prices have retreated to roughly $4,000/tonne from the June 2024 peak of $11,530 \u2014 real relief on the exact commodity headwind TMICC's FY2025 results blamed for margin pressure. But early surveys of the 2026/27 West African crop (harvest begins October) show below-average cherelle formation \u2014 a weak-start signal that could reopen the same pressure",
+      "source": "cocoarunners.com; farmforce.com; thecooldown.com",
+      "correlates_with": "t17",
+      "date_precision": "month"
+    }
+  ],
+  "correlation_patterns": [
+    {
+      "id": "c1",
+      "title": "TMICC's rocky debut and Nestl\u00e9's exit announcement landed one week apart",
+      "related_event_ids": [
+        "t17",
+        "t18",
+        "t20",
+        "t21"
+      ],
+      "strategist_note": "TMICC's maiden results melted the stock on 12 Feb 2026; Nestl\u00e9's CEO called ice cream 'a distraction' and moved to exit further just 7 days later, on 19 Feb. Both are FY2025 annual-results announcements, so the timing overlap could simply be shared reporting season rather than one causing the other \u2014 but it's a real, dated coincidence worth watching: does a second major player's public retreat from the category further pressure how the market reads TMICC's own standalone story?"
+    },
+    {
+      "id": "c2",
+      "title": "Two competitors ceded direct local control within four months of each other",
+      "related_event_ids": [
+        "t20",
+        "t23"
+      ],
+      "strategist_note": "Nestl\u00e9 is exiting ice cream operations in Asia/Canada/Latin America to Froneri (Feb 2026), and General Mills sold its China retail/gifting shops to a local consortium while keeping foodservice (Jun 2026) \u2014 both are large multinationals ceding direct operational control of ice cream in complex markets while retaining brand/licensing value. TMICC runs the opposite structure in some of its own complex markets (majority-controlled JVs in the Philippines: Magnum RFM, Selecta) \u2014 worth tracking whether that full-control model outperforms or underperforms the peer trend toward local-partner handoff."
+    },
+    {
+      "id": "c3",
+      "title": "The exact commodity headwind TMICC blamed for FY2025 margin pressure is now easing",
+      "related_event_ids": [
+        "t02",
+        "t04",
+        "t17",
+        "t24"
+      ],
+      "strategist_note": "TMICC's FY2025 results explicitly named cocoa inflation (plus a stronger euro) as a driver of 380bps of cost inflation, offset by pricing actions and a productivity programme. Cocoa has since retreated from its 2024 peak to roughly a third of that level by Sept 2026 \u2014 the next thing to watch for is whether TMICC's FY2026 commentary shows margin recovery or a reversal of the pricing actions taken during the high-cost period. The 2026/27 crop-season risk flag (weak early crop signals) is the one thing that could reopen this pressure before it's resolved."
+    }
+  ]
+}
