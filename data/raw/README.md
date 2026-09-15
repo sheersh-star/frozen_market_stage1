@@ -14,12 +14,6 @@ account of what was cut and why.
   news/raw_items.json                Live news feed output — produced by the separate
                                       fetch_competitor_news.py (run that, not this file, to
                                       refresh it). Zero API keys — Google News RSS.
-  production/ice_cream_production.csv   Eurostat NACE C1052 (ice cream manufacture), Germany,
-                                      live pull:
-                                      curl "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/sts_inpr_m?format=JSON&nace_r2=C1052&geo=DE&s_adj=NSA&indic_bt=PRD&unit=I21"
-                                      Germany stands in for the EU — Eurostat suppresses the
-                                      EU27 aggregate at this 4-digit NACE level (confidentiality).
-                                      Kept as industry-context backdrop, not TMICC-specific.
   nutrition/usda_nutrition.json      USDA FoodData Central (use fetch_usda_data.py). Values
                                       are US; the regulatory judgment applied to them (UK FSA
                                       traffic-light, WHO free-sugar %) is UK/WHO.
@@ -35,6 +29,13 @@ relative to the "real data only" rule this rebuild follows. Nothing here was
 fake — see each file's own header/basis column — they're just out of scope now,
 not discredited.
 
+  production/ice_cream_production.csv   Eurostat NACE C1052 (ice cream manufacture), Germany —
+                             real, live-pullable:
+                             curl "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/sts_inpr_m?format=JSON&nace_r2=C1052&geo=DE&s_adj=NSA&indic_bt=PRD&unit=I21"
+                             Panel removed for now (too big/old/irrelevant as the full
+                             1991-present series) — kept untouched, `load_sales_trend()`
+                             still defined in data_pipeline.py, just not called. Revisit
+                             with a post-COVID-only (2020+) cut.
   sentiment/                US Kaggle sample (Ben & Jerry's, Häagen-Dazs, Breyers, Talenti
                              reviews) — a real dataset, but static (not live) and the
                              brands happen to map onto real ecosystem entities, so this

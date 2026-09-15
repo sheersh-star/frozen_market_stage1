@@ -359,8 +359,13 @@ def generate_market_data():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
+    # sales_trend deliberately excluded from output for now — the full
+    # 1991-present Eurostat series was too big/old/irrelevant as shown. The
+    # loader function below is left in place, untouched, and the real data
+    # at data/raw/production/ice_cream_production.csv is untouched too —
+    # this is a "remove from view for now," not a deletion. Revisit with a
+    # post-COVID-only cut (2020+) when that conversation happens.
     panels = {
-        "sales_trend": load_sales_trend(),
         "nutrition": load_nutrition(),
     }
 

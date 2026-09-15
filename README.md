@@ -36,7 +36,7 @@ frozen-dessert-dashboard/
 │   │   ├── magnum_ecosystem.json            # real, extracted from TMICC's own Annual Report
 │   │   ├── magnum_correlated_timeline.json  # real, dated, cross-referenced
 │   │   ├── news/raw_items.json              # live, from fetch_competitor_news.py
-│   │   ├── production/       #   Production & Sales Trend (Eurostat)
+│   │   ├── production/       #   Panel removed for now (see below) — data kept, untouched
 │   │   ├── nutrition/        #   Nutrition & Regulatory Exposure (USDA)
 │   │   ├── market/           #   TMICC Financial Performance (2 files used; 3 legacy)
 │   │   ├── sentiment/        #   legacy, unused — see data/raw/README.md
@@ -59,7 +59,8 @@ frozen-dessert-dashboard/
 | Correlated Timeline | Cross-referenced from the ecosystem doc + targeted research | real, dated, sourced |
 | TMICC Financial Performance | Unilever/TMICC full-year results disclosures | real |
 | Nutrition & Regulatory Exposure | USDA FoodData Central | real (mock fallback if the file's missing) |
-| Production & Sales Trend | Eurostat NACE C1052, Germany | real (mock fallback if the file's missing) |
+
+Production & Sales Trend (Eurostat NACE C1052, Germany) is **removed from view for now** — see "The ground-up rebuild" below.
 
 ## Live news feed
 
@@ -113,7 +114,10 @@ This repo started as a generic "UK frozen dessert market" console (production tr
 
 **Kept, reframed:**
 - **TMICC Financial Performance** (was "Real-World Precedent (Magnum)") — the exact same real data, just renamed to reflect that TMICC is now the dashboard's actual subject, not a "precedent example" for a hypothetical client.
-- **Nutrition & Regulatory Exposure** and **Production & Sales Trend** — kept as-is; both are real, and both still serve the new scope (allergen/ingredient exposure, industry-context backdrop) even though neither is TMICC-specific.
+- **Nutrition & Regulatory Exposure** — kept as-is; real, and still serves the new scope (allergen/ingredient exposure) even though it's not TMICC-specific.
+
+**Removed from view, data kept for later:**
+- **Production & Sales Trend** (Eurostat NACE C1052, Germany) — the full 1991-present series was too big, too old, and not relevant to show as-is. `load_sales_trend()` is still defined in `data_pipeline.py` and the real data is untouched at `data/raw/production/ice_cream_production.csv` — just not called or rendered right now. The plan is to bring it back filtered to post-COVID records only (2020+) once that's worth doing; not deleted, just parked.
 
 ## Prototype vs. live — deliberate, not a limitation
 

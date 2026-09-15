@@ -204,20 +204,11 @@
     </div>
   </details>
 
-  <!-- ================= PRODUCTION & SALES TREND ================= -->
-  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h2 class="font-display text-2xl text-ivory">Production &amp; Sales Trend</h2>
-        <p id="trend-readout" class="font-mono text-sm text-muted mt-1">&mdash;</p>
-        <p class="font-mono text-xs text-muted mt-1">Eurostat NACE C1052 &middot; Germany &mdash; industry-context backdrop, not TMICC-specific</p>
-      </div>
-      <div id="seal-trend" class="shrink-0"></div>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60">
-      <div class="h-64"><canvas id="trendChart"></canvas></div>
-    </div>
-  </details>
+  <!-- Production & Sales Trend panel removed for now, per request — the full
+       1991-present Eurostat series was too big/old/irrelevant to show as-is.
+       Real data untouched at data/raw/production/ice_cream_production.csv;
+       pipeline no longer loads it (see data_pipeline.py). Revisit with a
+       post-COVID-only cut when we get to it. -->
 
 </main>
 
@@ -424,38 +415,8 @@ function renderNutrition(panel) {
 }
 
 // ---------------- Production trend ----------------
-function renderTrend(panel) {
-  const seal = document.getElementById('seal-trend');
-  seal.innerHTML = '';
-  seal.appendChild(confidenceSeal(panel.source));
-  const series = panel.series;
-  const last = series[series.length - 1];
-  document.getElementById('trend-readout').textContent = `Latest: ${last.date} — index ${last.value}`;
-
-  if (charts.trend) charts.trend.destroy();
-  charts.trend = new Chart(document.getElementById('trendChart'), {
-    type: 'line',
-    data: {
-      labels: series.map(s => s.date),
-      datasets: [{
-        label: 'Production index',
-        data: series.map(s => s.value),
-        borderColor: '#F2839B',
-        backgroundColor: 'rgba(242,131,155,0.10)',
-        fill: true,
-        tension: 0.3,
-        pointRadius: series.length > 60 ? 0 : 2,
-      }],
-    },
-    options: {
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: '#C9AD93', maxTicksLimit: 12 }, grid: { color: '#4A362A' } },
-        y: { ticks: { color: '#C9AD93' }, grid: { color: '#4A362A' } },
-      },
-    },
-  });
-}
+// renderTrend() removed along with the Production & Sales Trend panel — see
+// the comment where that panel used to be in the HTML above.
 
 // ---------------- Load ----------------
 async function loadDashboardData() {
@@ -472,7 +433,6 @@ async function loadDashboardData() {
     renderTimeline(data.correlated_timeline);
     renderFinancials(data.tmicc_financials);
     renderNutrition(data.nutrition);
-    renderTrend(data.sales_trend);
 
     document.getElementById('dashboard-main').classList.remove('opacity-60');
   } catch (err) {
