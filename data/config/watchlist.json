@@ -49,5 +49,18 @@
     {"name": "Dairy supply chain", "query": "dairy supply chain"},
     {"name": "Ice cream allergens", "query": "ice cream allergen recall"},
     {"name": "Cocoa price", "query": "cocoa price"}
-  ]
+  ],
+  "press_sources": [
+    {"name": "Financial Times", "domains": ["ft.com"]},
+    {"name": "BBC News", "domains": ["bbc.com", "bbc.co.uk"]},
+    {"name": "Reuters", "domains": ["reuters.com"]},
+    {"name": "The Associated Press", "domains": ["apnews.com"]},
+    {"name": "The New York Times", "domains": ["nytimes.com"]},
+    {"name": "The Guardian", "domains": ["theguardian.com"]},
+    {"name": "Al Jazeera English", "domains": ["aljazeera.com"]},
+    {"name": "Bloomberg News", "domains": ["bloomberg.com"]},
+    {"name": "Deutsche Welle", "domains": ["dw.com"]},
+    {"name": "CNN International", "domains": ["cnn.com", "edition.cnn.com"]}
+  ],
+  "_press_notes": "For every existing company/topic query, fetch_competitor_news.py also runs a second, press-restricted variant appending a Google site: OR-group across every domain above (e.g. '<query> (site:ft.com OR site:bbc.com OR ...)'). Live-tested before building this: Google News RSS genuinely honors the parenthesized multi-site OR syntax — confirmed by fetching a real query and checking every returned <source> was actually one of the 3 test domains and actually about TMICC, not generic noise. Items matching one of these domains are tagged source_type='press' (a tier above 'aggregator', below nothing — it's not 'official' since none of these are TMICC/competitor-owned, but it's not generic aggregator noise either)."
 }

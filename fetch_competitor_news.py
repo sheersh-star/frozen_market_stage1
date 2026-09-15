@@ -15,6 +15,15 @@ Designed to be run on a schedule (cron / Task Scheduler / GitHub Action)
 every 30-60 minutes — not continuously. It's a single pass: fetch, parse,
 dedupe, write, exit.
 
+Also runs a second, press-restricted variant of every company/topic query,
+appending a Google `(site:X OR site:Y OR ...)` group across the 10 outlets
+in watchlist.json's press_sources (FT, BBC, Reuters, AP, NYT, Guardian,
+Al Jazeera English, Bloomberg, Deutsche Welle, CNN International). This
+syntax was live-tested before being built in — confirmed Google News RSS
+genuinely honors the parenthesized multi-site OR group rather than treating
+it as noise or ignoring the site: restriction. Items matching one of these
+domains are tagged source_type="press" (see tag_source_type below).
+
 Known, honest limitations (see README section this script is documented
 under for the full list):
   - Google News RSS's <link> is a Google redirect URL, not the publisher's
@@ -149,11 +158,22 @@ def dedupe_and_merge(all_items):
     return list(by_guid.values())
 
 
-def tag_source_type(item, companies):
-    """official if this item's source_domain matches a known official_domain
-    for ANY matched entity; aggregator otherwise. Independent of whether the
-    item was found via a company query or a topic query — a topic-query hit
-    from a company's own domain is still 'official'."""
+def build_press_clause(press_sources):
+    """One Google `(site:X OR site:Y OR ...)` group across every domain in
+    every press source — live-tested (see module docstring) to genuinely
+    restrict results, not just get ignored."""
+    domains = [d for src in press_sources for d in src.get("domains", [])]
+    return "(" + " OR ".join(f"site:{d}" for d in domains) + ")"
+
+
+def tag_source_type(item, companies, press_sources):
+    """official > press > aggregator, checked in that order (no real overlap
+    expected between a company's own domain and a named press outlet, but
+    order matters for clarity if that ever changed). official: matches a
+    known official_domain for ANY matched entity. press: matches one of the
+    10 named outlets in watchlist.json's press_sources. aggregator:
+    everything else. Independent of which query actually surfaced the item —
+    a topic-query hit from Reuters is still 'press', not just 'aggregator'."""
     if not item["source_domain"]:
         item["source_type"] = "unknown"
         return
@@ -162,6 +182,11 @@ def tag_source_type(item, companies):
             if od in item["source_domain"]:
                 item["source_type"] = "official"
                 return
+    for src in press_sources:
+        for d in src.get("domains", []):
+            if d in item["source_domain"]:
+                item["source_type"] = "press"
+                return
     item["source_type"] = "aggregator"
 
 
@@ -169,12 +194,29 @@ def main():
     watchlist = load_watchlist()
     companies = watchlist["companies"]
     topics = watchlist["topics"]
+    press_sources = watchlist.get("press_sources", [])
 
     all_items = []
     errors = []
 
-    queries = [(c["name"], c["query"], "company") for c in companies] + \
-              [(t["name"], t["query"], "topic") for t in topics]
+    base_queries = [(c["name"], c["query"], "company") for c in companies] + \
+                   [(t["name"], t["query"], "topic") for t in topics]
+
+    # Press-restricted pass: companies only, not topics. Live-tested both:
+    # a specific proper-noun query (company name) + a major-outlet site:
+    # restriction reliably returns genuinely relevant results. A broad
+    # generic topic phrase (e.g. "cocoa price") + the same restriction does
+    # not — with results narrowed to ~10 high-volume domains, Google News
+    # falls back to loosely-related/trending content from those outlets
+    # rather than returning few or no results, which is worse than not
+    # running the query at all. Confirmed empirically: real output included
+    # NATO/Ukraine and Trump-AI headlines tagged "Cocoa price" before this
+    # was scoped down to companies.
+    press_clause = build_press_clause(press_sources) if press_sources else None
+    company_queries = [(c["name"], c["query"], "company") for c in companies]
+    press_queries = [(label, f"{query} {press_clause}", qtype) for label, query, qtype in company_queries] if press_clause else []
+
+    queries = base_queries + press_queries
 
     for label, query, qtype in queries:
         url = build_query_url(query)
@@ -190,7 +232,7 @@ def main():
 
     merged = dedupe_and_merge(all_items)
     for item in merged:
-        tag_source_type(item, companies)
+        tag_source_type(item, companies, press_sources)
 
     merged.sort(key=lambda it: it["published"] or "", reverse=True)
 
@@ -199,6 +241,7 @@ def main():
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "watchlist_companies": [c["name"] for c in companies],
         "watchlist_topics": [t["name"] for t in topics],
+        "press_sources": [s["name"] for s in press_sources],
         "query_errors": errors,
         "items": merged,
     }
@@ -206,8 +249,9 @@ def main():
         json.dump(output, f, indent=2)
 
     official_count = sum(1 for it in merged if it["source_type"] == "official")
+    press_count = sum(1 for it in merged if it["source_type"] == "press")
     print(f"Wrote {OUT_PATH}")
-    print(f"  {len(merged)} unique items ({official_count} from official domains)")
+    print(f"  {len(merged)} unique items ({official_count} official, {press_count} from named press outlets)")
     print(f"  {len(errors)} query errors" + (f": {errors}" if errors else ""))
 
 

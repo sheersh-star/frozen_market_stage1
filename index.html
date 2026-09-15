@@ -325,14 +325,21 @@ function renderNewsColumn(containerId, countId, items, label) {
     const isNew = lastSeenAnchor && it.published > lastSeenAnchor;
     const tags = [...it.matched_entities, ...it.matched_topics];
     const exactDate = it.published ? new Date(it.published).toLocaleString() : 'undated';
-    const badgeColor = it.source_type === 'official' ? 'border-positive text-positive' : 'border-hairline text-muted';
+    // official = TMICC/competitor's own domain (highest trust, direct statement).
+    // press = one of the 10 named outlets (FT/BBC/Reuters/AP/NYT/Guardian/Al
+    // Jazeera/Bloomberg/DW/CNN) — independent, high-credibility coverage.
+    // aggregator = everything else. Colored in the collapsed row too, not just
+    // expanded — the whole point of naming specific outlets is so they're
+    // visible at a glance, not just on click.
+    const tierColor = { official: 'text-positive', press: 'text-brass', aggregator: 'text-muted' }[it.source_type] || 'text-muted';
+    const badgeColor = { official: 'border-positive text-positive', press: 'border-brass text-brass', aggregator: 'border-hairline text-muted' }[it.source_type] || 'border-hairline text-muted';
     return `
       <details class="border border-hairline rounded-lg group open:border-brass/50">
         <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-2.5 flex items-start gap-2">
           <span class="shrink-0 mt-1 w-1.5 h-1.5 rounded-full ${isNew ? 'bg-caramel' : 'bg-transparent'}" title="${isNew ? 'published since your last visit' : ''}"></span>
           <div class="flex-1 min-w-0">
             <div class="text-sm text-ivory leading-snug">${it.title}</div>
-            <div class="font-mono text-[10px] text-muted mt-1">${it.source_name || 'unknown'} &middot; ${timeAgo(it.published)}</div>
+            <div class="font-mono text-[10px] mt-1"><span class="${tierColor}">${it.source_name || 'unknown'}</span> <span class="text-muted">&middot; ${timeAgo(it.published)}</span></div>
           </div>
           <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
         </summary>
