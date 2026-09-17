@@ -1,0 +1,5 @@
+date,price_usd,market_cap_usd_billions,note,confidence,source
+2025-12-08,,9.1,"IPO day — initial market value ~$9.1bn as MICC began trading on Euronext Amsterdam/LSE/NYSE.",real,"multiple, see docs/magnum_correlated_timeline.md"
+2026-02-11,19.87,,"All-time high closing price — the day before the maiden FY2025 results.",real,macrotrends.net
+2026-02-12,,,"Maiden FY2025 results 'melt' the stock (AJ Bell: 'Magnum's meltdown') — see correlated timeline t17/t18.",real,ajbell.co.uk
+2026-09-08,19.50,11.99,"52-week range $12.94-$20.69 — the stock has fully recovered from the Feb 2026 low and sits near its all-time high, with market cap up ~32% from the IPO's $9.1bn.",real,"stockanalysis.com; macrotrends.net (52-week range)"

@@ -39,7 +39,7 @@ frozen-dessert-dashboard/
 │   │   ├── news/raw_items.json                # live, from fetch_competitor_news.py
 │   │   ├── production/       #   Panel removed for now (see below) — data kept, untouched
 │   │   ├── nutrition/        #   Nutrition & Regulatory Exposure (USDA)
-│   │   ├── market/           #   TMICC Financial Performance (2 files used; 3 legacy)
+│   │   ├── market/           #   TMICC Financial Performance (6 files used; 3 legacy)
 │   │   ├── sentiment/        #   legacy, unused — see data/raw/README.md
 │   │   ├── demographics/     #   legacy, unused
 │   │   └── command_center/   #   legacy, unused
@@ -120,6 +120,15 @@ The point of this tab: back-trace from a stated number to the named initiative a
 **Not just messaging** — all four feed directly into CEO/CFO bonus calculation (a Financial Performance Factor scored on these same metrics, multiplied by a separate Strategic Priorities Performance Multiplier), which is real structural evidence they're taken seriously internally, not just investor-day language.
 
 **The "where this creates room to help" section is the actual payoff** — 6 named initiatives back-traced from the commitments above (e.g. "US end-to-end supply chain reset," "Digitally-led demand creation model" — named independently in 3 separate places), each with a `partner_angle` naming the category of external help it implies. These are read off what TMICC itself named as specific, not a generic CPG-consulting checklist — see `docs/magnum_strategic_commitments.md` for the full reasoning behind each one.
+
+Also carries a second, separate incentive layer beyond the annual bonus: a **Performance Share Plan** (long-term, evenly weighted 25/25/25/25 across OSG / margin / Free Cash Flow / market share, CEO target 120% of salary, CFO 100%) — found in the same research pass that closed a real gap from the ecosystem tab: TMICC's CEO (**Peter ter Kulve**) and CFO (**Abhijit Bhattacharya**) names.
+
+## Financials and Timeline — deepened with real H1 2026 results and a major governance dispute
+
+Both tabs were substantially deepened in a later pass, following the same back-tracing discipline as the Strategy tab:
+
+- **Financials** now includes FY2025 Adjusted EBITDA margin by region (AMEA's 22.9% dwarfs Europe & ANZ's 13.1% and Americas' 14.1% — both fastest-growing and most profitable), real H1 2026 results (announced 30 Jul 2026: +4.7% OSG, full-year guidance reaffirmed), and dated share-price snapshots (IPO $9.1bn market cap → Feb 2026 "meltdown" low of $12.94 → Sept 2026 recovery to $19.50/$11.99bn, up ~32% from IPO).
+- **Timeline** grew from 24 to 42 events and from 3 to 6 correlation patterns, adding a real, ongoing governance dispute between TMICC and Ben & Jerry's independent board — litigation running from Nov 2024 to the present, including a defamation suit and a consumer boycott threat. Handled with careful neutral sourcing given its sensitivity (it touches statements on Israel/Gaza) — every claim is attributed to whoever made it, none presented as settled fact. See `docs/magnum_correlated_timeline.md`'s dedicated section.
 
 ## Customizing
 

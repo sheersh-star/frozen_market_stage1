@@ -41,6 +41,21 @@
     "overall_bonus_cap": "200% of target",
     "gap": "The exact named list making up the 'Strategic Priorities Performance Multiplier' itself wasn't found in this pass — only that it exists, applies to both the CEO and CFO, and has a defined scoring range"
   },
+  "long_term_incentive_plan": {
+    "name": "Performance Share Plan (PSP)",
+    "note": "A second, separate incentive layer on top of the annual bonus above — multi-year share awards, evenly weighted across the same four metrics rather than skewed toward any one",
+    "performance_measures": [
+      {"measure": "Organic Sales Growth", "weight_pct": 25},
+      {"measure": "Adjusted EBITDA margin improvement", "weight_pct": 25},
+      {"measure": "Free Cash Flow", "weight_pct": 25},
+      {"measure": "Market share gains", "weight_pct": 25}
+    ],
+    "target_opportunity": {
+      "Peter ter Kulve (CEO)": "120% of salary",
+      "Abhijit Bhattacharya (CFO)": "100% of salary"
+    },
+    "legacy_reference_found": "A separate, differently-weighted set (30% Underlying Sales Growth / 30% Underlying Operating Profit growth / 30% Cash contribution) also appears in the same section of the report, most likely shown as a comparison to the prior Unilever-era LTIP structure rather than TMICC's current one — flagged as uncertain rather than stated as fact, since the surrounding context needed to confirm which plan it belongs to was lost in extraction"
+  },
   "group_strategy_pillars": {
     "note": "TMICC's own 3-part framework, stated at Group level and then repeated with region-specific tactics below",
     "growth": [

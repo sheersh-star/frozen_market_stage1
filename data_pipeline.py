@@ -315,7 +315,91 @@ def load_tmicc_financials():
             })
         regions.sort(key=lambda r: -r["usg_pct"])
 
-    return {"source": "real", "items": rows, "regions_fy2025": regions}
+    # Regional Adjusted EBITDA margins, FY2025 — same primary source, new file
+    margins = []
+    margins_file = RAW_DIR / "market" / "magnum_regional_margins_fy2025.csv"
+    if margins_file.exists():
+        for row in _read_csv(margins_file):
+            try:
+                margin = float(row["adjusted_ebitda_margin_pct"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            region = row.get("region")
+            if not region:
+                continue
+            margins.append({
+                "region": region,
+                "adjusted_ebitda_margin_pct": margin,
+                "confidence": row.get("confidence", "placeholder"),
+                "basis": row.get("basis", ""),
+            })
+        margins.sort(key=lambda r: -r["adjusted_ebitda_margin_pct"])
+
+    # H1 2026 results — bridges FY2025 (above) to the present
+    h1_group = {}
+    h1_file = RAW_DIR / "market" / "magnum_h1_2026.csv"
+    if h1_file.exists():
+        for row in _read_csv(h1_file):
+            metric = row.get("metric")
+            if not metric:
+                continue
+            try:
+                value = float(row["value"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            h1_group[metric] = {
+                "value": value, "unit": row.get("unit", ""),
+                "confidence": row.get("confidence", "placeholder"), "basis": row.get("basis", ""),
+            }
+
+    h1_regional = []
+    h1_regional_file = RAW_DIR / "market" / "magnum_h1_2026_regional.csv"
+    if h1_regional_file.exists():
+        for row in _read_csv(h1_regional_file):
+            region = row.get("region")
+            try:
+                osg = float(row["osg_pct"])
+                fy2025_comp = float(row["fy2025_osg_pct_for_comparison"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            if not region:
+                continue
+            h1_regional.append({
+                "region": region, "osg_pct": osg, "fy2025_osg_pct": fy2025_comp,
+                "confidence": row.get("confidence", "placeholder"), "basis": row.get("basis", ""),
+            })
+        h1_regional.sort(key=lambda r: -r["osg_pct"])
+
+    # Share price snapshots — dated points, not a continuous series (no live
+    # market-data feed here), each independently sourced and confidence-tagged
+    share_price = []
+    price_file = RAW_DIR / "market" / "magnum_share_price_snapshots.csv"
+    if price_file.exists():
+        for row in _read_csv(price_file):
+            date = row.get("date")
+            if not date:
+                continue
+            price = row.get("price_usd") or None
+            mcap = row.get("market_cap_usd_billions") or None
+            share_price.append({
+                "date": date,
+                "price_usd": float(price) if price else None,
+                "market_cap_usd_billions": float(mcap) if mcap else None,
+                "note": row.get("note", ""),
+                "confidence": row.get("confidence", "placeholder"),
+                "source": row.get("source", ""),
+            })
+        share_price.sort(key=lambda r: r["date"])
+
+    return {
+        "source": "real",
+        "items": rows,
+        "regions_fy2025": regions,
+        "regional_margins_fy2025": margins,
+        "h1_2026": h1_group,
+        "h1_2026_regional": h1_regional,
+        "share_price_snapshots": share_price,
+    }
 
 
 # ---------------------------------------------------------------------------

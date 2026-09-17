@@ -25,6 +25,20 @@ account of what was cut and why.
   market/magnum_icecream_annual.csv  Unilever FY2021-24 + TMICC FY2025 full-year results —
                                       real, cited volume/price growth splits. TMICC-specific.
   market/magnum_regional_fy2025.csv  TMICC's FY2025 continent-level organic sales growth.
+  market/magnum_regional_margins_fy2025.csv  FY2025 Adjusted EBITDA margin by region — real, from the
+                                      same Annual Report. AMEA's 22.9% (vs 13.1%/14.1% for the other
+                                      two regions) is the standout: both fastest-growing AND most
+                                      profitable — see the Timeline tab's AMEA correlation pattern.
+  market/magnum_h1_2026.csv          Real H1 2026 group results (revenue, OSG, volume/price growth),
+                                      announced 30 Jul 2026 — bridges FY2025 to the present and
+                                      confirms full-year guidance was reaffirmed, not walked back.
+  market/magnum_h1_2026_regional.csv  Real H1 2026 OSG by region, paired with the FY2025 figure for
+                                      each region for direct comparison (e.g. Americas accelerated
+                                      from +0.8% to +3.2%).
+  market/magnum_share_price_snapshots.csv  Real, dated MICC price/market-cap snapshots (not a
+                                      continuous series — no live market-data feed here): IPO,
+                                      all-time-high, the "meltdown," and the current (Sept 2026)
+                                      recovered position.
 
 ## No longer used by the pipeline (left on disk as an honest archive, not deleted)
 

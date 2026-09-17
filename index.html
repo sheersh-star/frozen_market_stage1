@@ -156,6 +156,11 @@
         <ul id="eco-risks" class="text-sm space-y-2 list-disc list-inside text-ivory"></ul>
       </div>
 
+      <div id="eco-developments-wrap" class="hidden">
+        <h3 class="font-display text-lg text-ivory mb-2">Material developments since the first pass</h3>
+        <ul id="eco-developments" class="text-sm space-y-2 list-disc list-inside text-ivory"></ul>
+      </div>
+
       <div>
         <h3 class="font-display text-lg text-ivory mb-2">Honest gaps &mdash; nothing found this pass</h3>
         <ul id="eco-gaps" class="font-mono text-xs text-muted space-y-1 list-disc list-inside"></ul>
@@ -227,7 +232,21 @@
     <div class="space-y-6">
       <p class="font-mono text-xs text-muted">Disclosed as annual volume/price growth %, not absolute units &mdash; compounded here into two indices (2020=100), the honest way to compare shape without inventing absolute numbers.</p>
       <div class="h-64"><canvas id="finChart"></canvas></div>
-      <div id="fin-regions"></div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Region matrix &mdash; growth, margin, and momentum</h3>
+        <div id="fin-regions"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">H1 2026 &mdash; tracking the medium-term commitment</h3>
+        <div id="fin-h1" class="font-mono text-sm"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Share price since listing</h3>
+        <div id="fin-price" class="space-y-2"></div>
+      </div>
     </div>
   </section>
 
@@ -432,6 +451,7 @@ function renderNews(news) {
 function renderEcosystem(eco) {
   if (!eco) return;
   const cf = eco.corporate_facts || {};
+  const lead = eco.leadership;
   document.getElementById('eco-corporate').innerHTML = `
     <div><span class="text-ivory">HQ:</span> ${cf.headquarters || '—'}</div>
     <div><span class="text-ivory">Listing:</span> ${(cf.listing && cf.listing.ticker) || '—'} on ${(cf.listing && cf.listing.exchanges || []).join(', ')}</div>
@@ -439,6 +459,7 @@ function renderEcosystem(eco) {
     <div><span class="text-ivory">Employees:</span> ${(cf.scale_2025 && cf.scale_2025.employees) || '—'}</div>
     <div><span class="text-ivory">Freezer cabinets:</span> ${(cf.scale_2025 && cf.scale_2025.freezer_cabinet_fleet || 0).toLocaleString()} (not owned by TMICC)</div>
     <div><span class="text-ivory">Auditor:</span> ${(cf.auditor && cf.auditor.firm) || '—'}</div>
+    ${lead ? `<div><span class="text-ivory">CEO:</span> ${lead.ceo}</div><div><span class="text-ivory">CFO:</span> ${lead.cfo}</div>` : ''}
   `;
 
   document.getElementById('eco-shareholders').innerHTML = `
@@ -476,6 +497,12 @@ function renderEcosystem(eco) {
   document.getElementById('eco-risks').innerHTML = (eco.disclosed_risk_factors || []).map(r => `<li><span class="text-ivory">${r.risk}</span>${r.note ? ' — <span class="text-muted font-mono text-xs">' + r.note + '</span>' : ''}</li>`).join('');
 
   document.getElementById('eco-gaps').innerHTML = (eco.gaps_not_found_this_pass || []).map(g => `<li>${g}</li>`).join('');
+
+  const devs = eco.material_developments_since_first_pass || [];
+  if (devs.length) {
+    document.getElementById('eco-developments-wrap').classList.remove('hidden');
+    document.getElementById('eco-developments').innerHTML = devs.map(d => `<li>${d}</li>`).join('');
+  }
 }
 
 // ---------------- Strategic commitments ----------------
@@ -503,12 +530,21 @@ function renderStrategy(strat) {
     </details>`).join('');
 
   const inc = strat.incentive_alignment;
-  document.getElementById('strat-incentive').innerHTML = inc ? `
+  const ltip = strat.long_term_incentive_plan;
+  document.getElementById('strat-incentive').innerHTML = `
+    ${inc ? `
+    <p class="mb-2 text-ivory">Annual bonus</p>
     <p class="mb-2">${inc.note}</p>
     <div class="flex flex-wrap gap-1.5 mb-2">${(inc.financial_metrics_used || []).map(m => `<span class="text-caramel">#${m}</span>`).join('')}</div>
     <div>Financial Performance Factor: <span class="text-ivory">${inc.financial_performance_factor_range}</span> &middot; Strategic Priorities Multiplier: <span class="text-ivory">${inc.strategic_priorities_performance_multiplier_range}</span> &middot; Cap: <span class="text-ivory">${inc.overall_bonus_cap}</span></div>
-    ${inc.gap ? `<p class="mt-2 text-muted/80">Gap: ${inc.gap}</p>` : ''}
-  ` : '';
+    ${inc.gap ? `<p class="mt-2 text-muted/80">Gap: ${inc.gap}</p>` : ''}` : ''}
+    ${ltip ? `
+    <p class="mb-2 mt-4 text-ivory">${ltip.name} (long-term)</p>
+    <p class="mb-2">${ltip.note}</p>
+    <div class="flex flex-wrap gap-1.5 mb-2">${(ltip.performance_measures || []).map(m => `<span class="text-caramel">${m.measure} (${m.weight_pct}%)</span>`).join('')}</div>
+    <div>Target opportunity: ${Object.entries(ltip.target_opportunity || {}).map(([name, val]) => `<span class="text-ivory">${name}: ${val}</span>`).join(' &middot; ')}</div>
+    ${ltip.legacy_reference_found ? `<p class="mt-2 text-muted/80">Gap: ${ltip.legacy_reference_found}</p>` : ''}` : ''}
+  `;
 
   document.getElementById('strat-initiatives').innerHTML = (strat.cross_cutting_initiatives || []).map(i => `
     <details class="border border-hairline rounded-lg group open:border-caramel/60">
@@ -593,12 +629,48 @@ function renderFinancials(fin) {
     },
   });
 
-  const regions = fin.regions_fy2025 || [];
-  document.getElementById('fin-regions').innerHTML = regions.length ? `
-    <h4 class="font-display text-base text-ivory mb-2">FY2025 organic sales growth by region</h4>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-    ${regions.map(r => `<div class="border border-hairline rounded-lg p-3"><div class="text-ivory">${r.region}</div><div class="font-mono text-2xl text-caramel">${r.usg_pct > 0 ? '+' : ''}${r.usg_pct}%</div></div>`).join('')}
-    </div>` : '';
+  // Merge FY2025 OSG + FY2025 margin + H1 2026 OSG into one region-keyed matrix —
+  // three real, separately-sourced CSVs, joined here rather than duplicated in each.
+  const byRegion = {};
+  (fin.regions_fy2025 || []).forEach(r => { byRegion[r.region] = { region: r.region, fy25_osg: r.usg_pct }; });
+  (fin.regional_margins_fy2025 || []).forEach(r => { byRegion[r.region] = { ...(byRegion[r.region] || { region: r.region }), fy25_margin: r.adjusted_ebitda_margin_pct }; });
+  (fin.h1_2026_regional || []).forEach(r => { byRegion[r.region] = { ...(byRegion[r.region] || { region: r.region }), h1_26_osg: r.osg_pct }; });
+  const regionRows = Object.values(byRegion).sort((a, b) => (b.fy25_margin || 0) - (a.fy25_margin || 0));
+
+  document.getElementById('fin-regions').innerHTML = regionRows.length ? `
+    <table class="w-full text-left text-sm"><thead><tr class="text-muted border-b border-hairline">
+      <th class="pb-1 font-body font-medium">Region</th>
+      <th class="pb-1 font-body font-medium text-right">FY2025 OSG</th>
+      <th class="pb-1 font-body font-medium text-right">H1 2026 OSG</th>
+      <th class="pb-1 font-body font-medium text-right">FY2025 Adj. EBITDA margin</th>
+    </tr></thead><tbody class="divide-y divide-hairline font-mono text-xs">
+    ${regionRows.map(r => `<tr>
+      <td class="py-2 pr-3 text-ivory font-body">${r.region}</td>
+      <td class="py-2 pr-3 text-right">${r.fy25_osg != null ? (r.fy25_osg > 0 ? '+' : '') + r.fy25_osg + '%' : '—'}</td>
+      <td class="py-2 pr-3 text-right">${r.h1_26_osg != null ? (r.h1_26_osg > 0 ? '+' : '') + r.h1_26_osg + '%' : '—'}</td>
+      <td class="py-2 text-right ${r.fy25_margin >= 20 ? 'text-caramel' : ''}">${r.fy25_margin != null ? r.fy25_margin + '%' : '—'}</td>
+    </tr>`).join('')}
+    </tbody></table>
+    <p class="font-mono text-[10px] text-muted mt-2">AMEA's 22.9% margin (highlighted) is both the highest of the three regions and paired with the fastest growth in both periods — see the Timeline tab's "AMEA" correlation pattern.</p>` : '<p class="font-mono text-xs text-muted">Not present.</p>';
+
+  const h1 = fin.h1_2026 || {};
+  if (h1.organic_sales_growth) {
+    document.getElementById('fin-h1').innerHTML = `
+      <p class="text-muted mb-2">H1 2026 revenue <span class="text-ivory">&euro;${h1.revenue?.value}bn</span> (H1 2025: &euro;4.5bn) &middot; organic sales growth <span class="text-ivory">+${h1.organic_sales_growth.value}%</span> (volume +${h1.volume_growth?.value}%, price +${h1.price_growth?.value}%)</p>
+      <p class="text-caramel">Full-year guidance reaffirmed: 3-5% OSG, 40-60bps margin improvement — H1's +${h1.organic_sales_growth.value}% sits inside that range, on track so far.</p>`;
+  } else {
+    document.getElementById('fin-h1').innerHTML = '<p class="text-muted">Not present.</p>';
+  }
+
+  const prices = fin.share_price_snapshots || [];
+  document.getElementById('fin-price').innerHTML = prices.length ? prices.map(p => `
+    <div class="flex items-start gap-3 border-l-2 border-caramel pl-3">
+      <div class="font-mono text-xs text-caramel whitespace-nowrap">${p.date}</div>
+      <div class="text-sm">
+        ${p.price_usd ? `<span class="text-ivory">$${p.price_usd}</span> ` : ''}${p.market_cap_usd_billions ? `<span class="text-ivory">$${p.market_cap_usd_billions}bn mkt cap</span> ` : ''}
+        <div class="font-mono text-[10px] text-muted mt-0.5">${p.note}</div>
+      </div>
+    </div>`).join('') : '<p class="font-mono text-xs text-muted">Not present.</p>';
 }
 
 // ---------------- Nutrition (unchanged from before) ----------------

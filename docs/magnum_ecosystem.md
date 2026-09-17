@@ -19,7 +19,7 @@ Almost everything below comes directly out of `146292742.pdf` — TMICC's own 20
 ## Major shareholders (real, dated)
 | Holder | Position | As of |
 |---|---|---|
-| Unilever PLC | residual post-demerger stake | 8 Dec 2025 |
+| Unilever PLC | residual post-demerger stake — **19.9%**, confirmed via governance-dispute coverage in `docs/magnum_correlated_timeline.md` | 8 Dec 2025 |
 | BlackRock Inc. | 25,965,010 shares | 17 Dec 2025 |
 | Goldman Sachs Group Inc. | 20,026,031 shares | 23 Dec 2025 |
 | FIL Limited (Fidelity) | 19,894,021 shares | 10 Dec 2025 |
@@ -58,6 +58,10 @@ Two brands are explicitly positioned as the company's **GLP-1/weight-loss-drug h
 TMICC board member biographies (as extracted) show real cross-directorships at: **Koninklijke Ahold Delhaize N.V.** (major European retailer), **FrieslandCampina N.V.** (major Dutch dairy cooperative — directly relevant to TMICC's own dairy sourcing), **Wolters Kluwer N.V.**, **Heineken N.V.** (former CFO & Executive Board Member, 13 years), **Exor N.V.**, **Tesco PLC** (already tracked in the ESG Meets CPG console), **Atairos**, **Bain Capital**, **Goldman Sachs & Co. Capital Markets**, **Samsonite**, **Worldpay**, **Atento**.
 
 **Flagged honestly:** the extraction appears to interleave at least two different board members' biography text (the PDF likely laid them out in side-by-side columns). The companies above are real and really appear in TMICC's board bios section — but which specific director holds which specific appointment needs a direct look at the report's governance pages before being stated as fact person-by-person.
+
+**A real gap this pass closes:** the CEO and CFO names weren't found in the first pass. A later research pass (see `docs/magnum_strategic_commitments.md`) found both: **Peter ter Kulve** (CEO) and **Abhijit Bhattacharya** (CFO).
+
+**Also relevant here, found in the same later pass:** a real, ongoing governance dispute between TMICC and Ben & Jerry's independent board — TMICC removed the entire board on 1 Jan 2026, triggering active litigation, a defamation suit, and a consumer boycott threat that's still unresolved as of Sept 2026. Full detail, with careful neutral sourcing given the dispute's sensitivity, lives in `docs/magnum_correlated_timeline.md`'s dedicated "Governance dispute" section.
 
 ## Peer groups TMICC uses about itself
 - **Remuneration benchmarking peer group:** Chocoladefabriken Lindt & Sprüngli, Coca-Cola Europacific Partners, Conagra, Danone, General Mills, Lotus Bakeries, Mondelez International.

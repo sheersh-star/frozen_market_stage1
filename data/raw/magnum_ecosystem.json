@@ -15,7 +15,7 @@
     "listing": {
       "ticker": "MICC",
       "exchanges": ["Euronext Amsterdam", "London Stock Exchange", "New York Stock Exchange"],
-      "trading_commenced": "2026-12-08",
+      "trading_commenced": "2025-12-08",
       "demerger_completed": "2025-12-06",
       "demerged_from": "Unilever PLC"
     },
@@ -35,7 +35,7 @@
     }
   },
   "major_shareholders": [
-    {"holder": "Unilever PLC", "as_of": "2025-12-08", "note": "residual post-demerger stake — a strategist should watch for further disposal announcements"},
+    {"holder": "Unilever PLC", "as_of": "2025-12-08", "note": "residual post-demerger stake, confirmed 19.9% via governance-dispute coverage (see magnum_correlated_timeline.json) — a strategist should watch for further disposal announcements"},
     {"holder": "BlackRock Inc.", "shares": 25965010, "as_of": "2025-12-17"},
     {"holder": "Goldman Sachs Group Inc.", "shares": 20026031, "as_of": "2025-12-23"},
     {"holder": "FIL Limited (Fidelity)", "shares": 19894021, "as_of": "2025-12-10"},
@@ -161,6 +161,14 @@
     {"risk": "Cold-chain distribution disruption", "note": "named alongside climate-driven extreme weather (floods, hurricanes, droughts) as a disruption vector"},
     {"risk": "Carbon taxes / freezer cabinet emissions", "note": "the 3-million-unit freezer cabinet fleet — not owned by TMICC, placed in retail outlets — is explicitly named as the single largest emissions category and the focus of planned carbon-tax mitigation"},
     {"risk": "GLP-1 / weight-loss medication impact on demand", "note": "explicitly named: 'largely a US issue but increasing globally' — Better-For-You lines (Yasso, Breyers Carb Smart) are positioned as the company's hedge against this trend"}
+  ],
+  "leadership": {
+    "ceo": "Peter ter Kulve",
+    "cfo": "Abhijit Bhattacharya",
+    "note": "Not found in the first research pass — closed via a later, deeper pass into the same Annual Report's remuneration section (see docs/magnum_strategic_commitments.md)"
+  },
+  "material_developments_since_first_pass": [
+    "A real, ongoing governance dispute between TMICC and Ben & Jerry's independent board (board removed 1 Jan 2026, active litigation, a defamation suit, and a consumer boycott threat) — full detail with careful neutral sourcing in docs/magnum_correlated_timeline.md, since it involves a genuinely sensitive underlying issue (statements on Israel/Gaza) and is unresolved, contested litigation"
   ],
   "gaps_not_found_this_pass": [
     "No named cocoa/vanilla trading-house supplier (Cargill, Olam, Barry Callebaut appears only as an unrelated TSR peer)",

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-17 12:41:36",
+  "last_updated": "2026-09-17 13:09:56",
   "nutrition": {
     "source": "real",
     "items": [
@@ -209,6 +209,109 @@
         "usg_pct": 0.8,
         "confidence": "real",
         "basis": "The Magnum Ice Cream Company 2025 Full Year Results: Americas organic sales growth +0.8%."
+      }
+    ],
+    "regional_margins_fy2025": [
+      {
+        "region": "AMEA (Asia/Middle East/Africa)",
+        "adjusted_ebitda_margin_pct": 22.9,
+        "confidence": "real",
+        "basis": "TMICC 2025 Annual Report: AMEA delivered an Adjusted EBITDA margin of 22.9% \u2014 both the fastest-growing region (+10.9% OSG FY2025) and by far the most profitable."
+      },
+      {
+        "region": "Americas",
+        "adjusted_ebitda_margin_pct": 14.1,
+        "confidence": "real",
+        "basis": "TMICC 2025 Annual Report: Americas delivered an Adjusted EBITDA margin of 14.1%."
+      },
+      {
+        "region": "Europe & ANZ",
+        "adjusted_ebitda_margin_pct": 13.1,
+        "confidence": "real",
+        "basis": "TMICC 2025 Annual Report: Europe & ANZ delivered an Adjusted EBITDA margin of 13.1%."
+      }
+    ],
+    "h1_2026": {
+      "revenue": {
+        "value": 4.7,
+        "unit": "EUR billion",
+        "confidence": "real",
+        "basis": "TMICC 2026 Half Year Results (announced 30 Jul 2026): H1 2026 revenue EUR4.7bn vs H1 2025 EUR4.5bn."
+      },
+      "organic_sales_growth": {
+        "value": 4.7,
+        "unit": "pct",
+        "confidence": "real",
+        "basis": "TMICC 2026 Half Year Results: H1 2026 organic sales growth +4.7%, within the reaffirmed 3-5% full-year guidance range."
+      },
+      "volume_growth": {
+        "value": 2.5,
+        "unit": "pct",
+        "confidence": "real",
+        "basis": "TMICC 2026 Half Year Results: volume +2.5%."
+      },
+      "price_growth": {
+        "value": 2.2,
+        "unit": "pct",
+        "confidence": "real",
+        "basis": "TMICC 2026 Half Year Results: price +2.2%."
+      }
+    },
+    "h1_2026_regional": [
+      {
+        "region": "AMEA (Asia/Middle East/Africa)",
+        "osg_pct": 7.6,
+        "fy2025_osg_pct": 10.9,
+        "confidence": "real",
+        "basis": "TMICC 2026 Half Year Results: AMEA organic sales growth +7.6% \u2014 still the fastest-growing region by a wide margin, though a deceleration from +10.9% FY2025."
+      },
+      {
+        "region": "Europe & ANZ",
+        "osg_pct": 4.1,
+        "fy2025_osg_pct": 3.3,
+        "confidence": "real",
+        "basis": "TMICC 2026 Half Year Results: Europe & ANZ organic sales growth +4.1% (up from +3.3% FY2025)."
+      },
+      {
+        "region": "Americas",
+        "osg_pct": 3.2,
+        "fy2025_osg_pct": 0.8,
+        "confidence": "real",
+        "basis": "TMICC 2026 Half Year Results: Americas organic sales growth +3.2% \u2014 a real acceleration from +0.8% FY2025, plausibly the earliest sign the 'Turnaround Brazil' and 'US end-to-end supply chain reset' initiatives are gaining traction, though the report does not explicitly attribute the improvement to those programmes."
+      }
+    ],
+    "share_price_snapshots": [
+      {
+        "date": "2025-12-08",
+        "price_usd": null,
+        "market_cap_usd_billions": 9.1,
+        "note": "IPO day \u2014 initial market value ~$9.1bn as MICC began trading on Euronext Amsterdam/LSE/NYSE.",
+        "confidence": "real",
+        "source": "multiple, see docs/magnum_correlated_timeline.md"
+      },
+      {
+        "date": "2026-02-11",
+        "price_usd": 19.87,
+        "market_cap_usd_billions": null,
+        "note": "All-time high closing price \u2014 the day before the maiden FY2025 results.",
+        "confidence": "real",
+        "source": "macrotrends.net"
+      },
+      {
+        "date": "2026-02-12",
+        "price_usd": null,
+        "market_cap_usd_billions": null,
+        "note": "Maiden FY2025 results 'melt' the stock (AJ Bell: 'Magnum's meltdown') \u2014 see correlated timeline t17/t18.",
+        "confidence": "real",
+        "source": "ajbell.co.uk"
+      },
+      {
+        "date": "2026-09-08",
+        "price_usd": 19.5,
+        "market_cap_usd_billions": 11.99,
+        "note": "52-week range $12.94-$20.69 \u2014 the stock has fully recovered from the Feb 2026 low and sits near its all-time high, with market cap up ~32% from the IPO's $9.1bn.",
+        "confidence": "real",
+        "source": "stockanalysis.com; macrotrends.net (52-week range)"
       }
     ]
   },
@@ -19103,7 +19206,7 @@
           "London Stock Exchange",
           "New York Stock Exchange"
         ],
-        "trading_commenced": "2026-12-08",
+        "trading_commenced": "2025-12-08",
         "demerger_completed": "2025-12-06",
         "demerged_from": "Unilever PLC"
       },
@@ -19126,7 +19229,7 @@
       {
         "holder": "Unilever PLC",
         "as_of": "2025-12-08",
-        "note": "residual post-demerger stake \u2014 a strategist should watch for further disposal announcements"
+        "note": "residual post-demerger stake, confirmed 19.9% via governance-dispute coverage (see magnum_correlated_timeline.json) \u2014 a strategist should watch for further disposal announcements"
       },
       {
         "holder": "BlackRock Inc.",
@@ -19361,6 +19464,14 @@
         "note": "explicitly named: 'largely a US issue but increasing globally' \u2014 Better-For-You lines (Yasso, Breyers Carb Smart) are positioned as the company's hedge against this trend"
       }
     ],
+    "leadership": {
+      "ceo": "Peter ter Kulve",
+      "cfo": "Abhijit Bhattacharya",
+      "note": "Not found in the first research pass \u2014 closed via a later, deeper pass into the same Annual Report's remuneration section (see docs/magnum_strategic_commitments.md)"
+    },
+    "material_developments_since_first_pass": [
+      "A real, ongoing governance dispute between TMICC and Ben & Jerry's independent board (board removed 1 Jan 2026, active litigation, a defamation suit, and a consumer boycott threat) \u2014 full detail with careful neutral sourcing in docs/magnum_correlated_timeline.md, since it involves a genuinely sensitive underlying issue (statements on Israel/Gaza) and is unresolved, contested litigation"
+    ],
     "gaps_not_found_this_pass": [
       "No named cocoa/vanilla trading-house supplier (Cargill, Olam, Barry Callebaut appears only as an unrelated TSR peer)",
       "No named packaging material supplier",
@@ -19369,7 +19480,7 @@
     ]
   },
   "correlated_timeline": {
-    "generated_date": "2026-09-15",
+    "generated_date": "2026-09-17",
     "window_covered": "2022-12 to 2026-09",
     "purpose": "Correlates TMICC's own disclosed strategic decisions against the same-window competitor and macro-commodity timeline, so a strategist sees not just what TMICC did but what happened around it",
     "timeline": [
@@ -19392,6 +19503,24 @@
         "date_precision": "day"
       },
       {
+        "id": "t42",
+        "date": "2024-11-13",
+        "actor": "Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "Ben & Jerry's Homemade, Inc. files suit against Conopco, Inc. (Unilever's US subsidiary) in the Southern District of New York, alleging Unilever silenced the brand's public statements calling for a Gaza ceasefire \u2014 the opening move in a governance dispute that continues past TMICC's own demerger a year later.",
+        "source": "moneywise.com; foodnavigator.com"
+      },
+      {
+        "id": "t43",
+        "date": "2025-02-01",
+        "actor": "Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "month",
+        "event": "Ben & Jerry's publicly states Unilever has \"muzzled\" the brand over statements on Trump and other contentious political topics, extending the dispute beyond the original Gaza-ceasefire claim.",
+        "source": "dairyreporter.com governance-dispute timeline"
+      },
+      {
         "id": "t03",
         "date": "2025-02-06",
         "actor": "General Mills / Unilever Ice Cream (pre-TMICC)",
@@ -19401,6 +19530,15 @@
         "date_precision": "day"
       },
       {
+        "id": "t44",
+        "date": "2025-03-01",
+        "actor": "Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "month",
+        "event": "CEO David Stever departs. Ben & Jerry's alleges he was ousted for supporting the brand's independent board; Unilever frames the departure as part of a broader restructuring.",
+        "source": "dairyreporter.com governance-dispute timeline"
+      },
+      {
         "id": "t04",
         "date": "2025-04-01",
         "actor": "Macro / Cocoa market",
@@ -19408,6 +19546,15 @@
         "event": "Global cocoa grinding fell nearly 5% year-on-year (Asia down 16%) as consumers cut back or switched to lower-cocoa formulations under sustained high prices",
         "source": "multiple cocoa-market coverage, see docs/magnum_correlated_timeline.md",
         "date_precision": "quarter"
+      },
+      {
+        "id": "t45",
+        "date": "2025-07-01",
+        "actor": "Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "month",
+        "event": "Jochanan Senf appointed Ben & Jerry's new CEO.",
+        "source": "dairyreporter.com governance-dispute timeline"
       },
       {
         "id": "t05",
@@ -19428,6 +19575,15 @@
         "date_precision": "month"
       },
       {
+        "id": "t46",
+        "date": "2025-09-01",
+        "actor": "Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "month",
+        "event": "Co-founder Jerry Greenfield steps down, stating Unilever has \"silenced\" the brand's social mission. Separately, Ben & Jerry's co-founders write to the Board of the soon-to-launch TMICC asking that the brand be made fully independent.",
+        "source": "dairyreporter.com governance-dispute timeline"
+      },
+      {
         "id": "t07",
         "date": "2025-09-26",
         "actor": "TMICC",
@@ -19435,6 +19591,15 @@
         "event": "Board member appointment date recorded in the Annual Report's governance section (appointee's exact identity needs verification \u2014 see docs/magnum_ecosystem.md gap)",
         "source": "TMICC 2025 Annual Report (146292742.pdf)",
         "date_precision": "day"
+      },
+      {
+        "id": "t47",
+        "date": "2025-10-01",
+        "actor": "Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "month",
+        "event": "A pro-Gaza-themed ice cream flavor is blocked by leadership, per Ben & Jerry's own account of events.",
+        "source": "dairyreporter.com governance-dispute timeline"
       },
       {
         "id": "t08",
@@ -19509,6 +19674,25 @@
         "date_precision": "day"
       },
       {
+        "id": "t48",
+        "date": "2026-01-01",
+        "actor": "TMICC",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "TMICC removes all independent directors from Ben & Jerry's board \u2014 chair Anuradha Mittal plus Jennifer Henderson and Daryn Dodson among those forced off, applying retroactive term limits and a new code of conduct introduced after the demerger.",
+        "source": "marketscreener.com; moneywise.com",
+        "correlates_with": "t17,t18"
+      },
+      {
+        "id": "t49",
+        "date": "2026-01-15",
+        "actor": "TMICC / Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "month",
+        "event": "TMICC files a Memorandum in Opposition arguing the removed directors had become \"ineligible\" to serve under the new rules; Ben & Jerry's seeks a court injunction to halt the board restructuring.",
+        "source": "dairyreporter.com governance-dispute timeline"
+      },
+      {
         "id": "t16",
         "date": "2026-02-11",
         "actor": "Market",
@@ -19575,6 +19759,33 @@
         "date_precision": "day"
       },
       {
+        "id": "t50",
+        "date": "2026-03-23",
+        "actor": "Ben & Jerry's Foundation",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "The Ben & Jerry's Foundation wins a court ruling allowing it to join the lawsuit against Unilever/TMICC over the company's contractual obligations to the brand's independence.",
+        "source": "vermontbiz.com; spokesman.com"
+      },
+      {
+        "id": "t51",
+        "date": "2026-03-27",
+        "actor": "Anuradha Mittal (former chair)",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "Former Ben & Jerry's independent board chair Anuradha Mittal files a defamation lawsuit against Unilever/TMICC.",
+        "source": "foodnavigator.com; globalbankingandfinance.com"
+      },
+      {
+        "id": "t52",
+        "date": "2026-05-09",
+        "actor": "Consumers / Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "A consumer boycott threat tied to the governance dispute puts TMICC on the defensive \u2014 real reputational-risk materialization for one of its most values-driven, activist consumer-base brands.",
+        "source": "rollingout.com"
+      },
+      {
         "id": "t23",
         "date": "2026-06-01",
         "actor": "General Mills",
@@ -19582,6 +19793,42 @@
         "event": "General Mills sells its H\u00e4agen-Dazs retail and gifting shop business in mainland China to an investor consortium including tea-chain operator Ningji, while retaining ownership of the H\u00e4agen-Dazs foodservice business there \u2014 a localization/control-ceding move in a complex market",
         "source": "just-food.com; foodingredientsfirst.com",
         "date_precision": "month"
+      },
+      {
+        "id": "t53",
+        "date": "2026-07-01",
+        "actor": "TMICC / Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "The lawsuit reaches what trade press describes as a \"crucial stage.\"",
+        "source": "dairyreporter.com"
+      },
+      {
+        "id": "t54",
+        "date": "2026-07-30",
+        "actor": "TMICC",
+        "category": "strategic_decision",
+        "date_precision": "day",
+        "event": "H1 2026 results announced: revenue EUR4.7bn (H1 2025: EUR4.5bn), organic sales growth +4.7% (volume +2.5%, price +2.2%). All three regions contributed \u2014 Europe & ANZ +4.1%, Americas +3.2% (a real acceleration from FY2025's +0.8%), AMEA +7.6% (still fastest-growing, though decelerating from FY2025's +10.9%). Management reaffirms full-year guidance of 3-5% OSG and 40-60bps margin improvement.",
+        "source": "globenewswire.com; investing.com; news.magnumicecream.com"
+      },
+      {
+        "id": "t55",
+        "date": "2026-08-16",
+        "actor": "Froneri (Dreyer's Grand Ice Cream)",
+        "category": "competitor_move",
+        "date_precision": "day",
+        "event": "Dreyer's Grand Ice Cream, Inc. \u2014 Froneri's real US entity, the business Froneri bought from Nestle in the 2019 deal already noted in the ecosystem doc \u2014 voluntarily recalls select lots of Outshine frozen fruit bars (Strawberry, Watermelon, Grape, Tangerine, Black Cherry) over possible glass contamination, distributed nationwide.",
+        "source": "cnn.com; consumerreports.org; foodpoisoningbulletin.com"
+      },
+      {
+        "id": "t56",
+        "date": "2026-08-27",
+        "actor": "TMICC / Ben & Jerry's",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "The board lawsuit is narrowed by the court, and TMICC formally replaces Unilever as the named defendant/responsible party for the matters at issue \u2014 consistent with TMICC having assumed this liability from Unilever as part of the demerger.",
+        "source": "dairyreporter.com"
       },
       {
         "id": "t24",
@@ -19592,6 +19839,34 @@
         "source": "cocoarunners.com; farmforce.com; thecooldown.com",
         "correlates_with": "t17",
         "date_precision": "month"
+      },
+      {
+        "id": "t57",
+        "date": "2026-09-08",
+        "actor": "Market",
+        "category": "market_reaction",
+        "date_precision": "day",
+        "event": "MICC trades at $19.50, market cap $11.99bn \u2014 up roughly 32% from the $9.1bn IPO valuation and back near its all-time high, a full recovery from the Feb 2026 \"meltdown\" low of $12.94 (52-week range: $12.94-$20.69).",
+        "source": "stockanalysis.com; macrotrends.net",
+        "correlates_with": "t16,t17,t18"
+      },
+      {
+        "id": "t58",
+        "date": "2026-09-14",
+        "actor": "Lakeland Dairies",
+        "category": "ecosystem_partner",
+        "date_precision": "day",
+        "event": "Lakeland Dairies \u2014 TMICC's own named milk supplier under the Caring Dairy standard \u2014 is fined GBP115,000 for pollution at its Artigarvan site, a real environmental-compliance incident against a direct TMICC supplier.",
+        "source": "surfaced via fetch_competitor_news.py, Ecosystem & partners column"
+      },
+      {
+        "id": "t59",
+        "date": "2026-09-15",
+        "actor": "TMICC / Anuradha Mittal",
+        "category": "governance_dispute",
+        "date_precision": "day",
+        "event": "TMICC's court filing alleges former chair Anuradha Mittal was \"abusive, discriminatory and unprofessional,\" fostered a toxic board culture, appointed personal contacts over independent candidates, and directed roughly $350,000 from the Ben & Jerry's Foundation to the Oakland Institute, a nonprofit she founded. Mittal's camp responds that this is a retaliatory \"campaign to intimidate, threaten, and character assassinate\" her over her advocacy for Palestinian human rights, naming activist investor Nelson Peltz as displeased by that advocacy specifically. Both sides' claims are disputed and unresolved as of this pass \u2014 presented here exactly as each side has filed/stated it, not as established fact either way.",
+        "source": "insurancejournal.com; nwaonline.com; arkansasonline.com"
       }
     ],
     "correlation_patterns": [
@@ -19625,6 +19900,36 @@
           "t24"
         ],
         "strategist_note": "TMICC's FY2025 results explicitly named cocoa inflation (plus a stronger euro) as a driver of 380bps of cost inflation, offset by pricing actions and a productivity programme. Cocoa has since retreated from its 2024 peak to roughly a third of that level by Sept 2026 \u2014 the next thing to watch for is whether TMICC's FY2026 commentary shows margin recovery or a reversal of the pricing actions taken during the high-cost period. The 2026/27 crop-season risk flag (weak early crop signals) is the one thing that could reopen this pressure before it's resolved."
+      },
+      {
+        "id": "c4",
+        "title": "Board upheaval and the market meltdown landed five weeks apart",
+        "related_event_ids": [
+          "t48",
+          "t17",
+          "t18"
+        ],
+        "strategist_note": "TMICC stripped Ben & Jerry's entire independent board on 1 Jan 2026; five weeks later, on 12 Feb 2026, TMICC's own maiden results melted the stock. No source ties the two together directly, and reporting-season timing is a genuine alternative explanation for the market reaction \u2014 but a strategist should still ask whether governance turmoil contributed to investor unease in that specific window, since both were real, dated, and close together."
+      },
+      {
+        "id": "c5",
+        "title": "The stock fully recovered; the governance dispute never did",
+        "related_event_ids": [
+          "t57",
+          "t51",
+          "t52",
+          "t56",
+          "t59"
+        ],
+        "strategist_note": "By Sept 2026 MICC sits near its all-time high, market cap up ~32% from IPO \u2014 yet the Ben & Jerry's dispute escalated the entire time: a defamation suit (Mar), a boycott threat (May), the lawsuit narrowing with TMICC taking over as defendant (Aug), and a fresh \"toxic culture\" filing (Sept). Worth asking directly: is the market rationally judging Ben & Jerry's as immaterial to group earnings, or under-pricing a real brand/reputational risk that hasn't yet shown up in the numbers?"
+      },
+      {
+        "id": "c6",
+        "title": "AMEA is both the fastest-growing and by far the most profitable region",
+        "related_event_ids": [
+          "t54"
+        ],
+        "strategist_note": "FY2025 Adjusted EBITDA margin: AMEA 22.9% vs Europe & ANZ 13.1% and Americas 14.1% \u2014 while AMEA also posted the fastest organic sales growth both in FY2025 (+10.9%) and H1 2026 (+7.6%, still far ahead of the other two regions even as it decelerates). This directly validates the Group strategy's specific 'Accelerate share growth in China' initiative (see the Strategy tab) \u2014 the numbers make a real case for weighting future capital allocation toward AMEA even more heavily than the current strategy documents suggest."
       }
     ]
   },
@@ -19678,6 +19983,33 @@
       "strategic_priorities_performance_multiplier_range": "0% to 150% of target",
       "overall_bonus_cap": "200% of target",
       "gap": "The exact named list making up the 'Strategic Priorities Performance Multiplier' itself wasn't found in this pass \u2014 only that it exists, applies to both the CEO and CFO, and has a defined scoring range"
+    },
+    "long_term_incentive_plan": {
+      "name": "Performance Share Plan (PSP)",
+      "note": "A second, separate incentive layer on top of the annual bonus above \u2014 multi-year share awards, evenly weighted across the same four metrics rather than skewed toward any one",
+      "performance_measures": [
+        {
+          "measure": "Organic Sales Growth",
+          "weight_pct": 25
+        },
+        {
+          "measure": "Adjusted EBITDA margin improvement",
+          "weight_pct": 25
+        },
+        {
+          "measure": "Free Cash Flow",
+          "weight_pct": 25
+        },
+        {
+          "measure": "Market share gains",
+          "weight_pct": 25
+        }
+      ],
+      "target_opportunity": {
+        "Peter ter Kulve (CEO)": "120% of salary",
+        "Abhijit Bhattacharya (CFO)": "100% of salary"
+      },
+      "legacy_reference_found": "A separate, differently-weighted set (30% Underlying Sales Growth / 30% Underlying Operating Profit growth / 30% Cash contribution) also appears in the same section of the report, most likely shown as a comparison to the prior Unilever-era LTIP structure rather than TMICC's current one \u2014 flagged as uncertain rather than stated as fact, since the surrounding context needed to confirm which plan it belongs to was lost in extraction"
     },
     "group_strategy_pillars": {
       "note": "TMICC's own 3-part framework, stated at Group level and then repeated with region-specific tactics below",
