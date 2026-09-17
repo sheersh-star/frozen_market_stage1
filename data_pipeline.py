@@ -348,6 +348,11 @@ def load_correlated_timeline():
     return _read_json(real_file) if real_file.exists() else None
 
 
+def load_strategic_commitments():
+    real_file = RAW_DIR / "magnum_strategic_commitments.json"
+    return _read_json(real_file) if real_file.exists() else None
+
+
 # ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
@@ -390,6 +395,10 @@ def generate_market_data():
     if timeline:
         payload["correlated_timeline"] = timeline
 
+    strategy = load_strategic_commitments()
+    if strategy:
+        payload["strategic_commitments"] = strategy
+
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
 
@@ -414,6 +423,10 @@ def generate_market_data():
         print(f"  - correlated_timeline    {len(timeline.get('timeline', []))} events, {len(timeline.get('correlation_patterns', []))} patterns")
     else:
         print("  - correlated_timeline    not present (data/raw/magnum_correlated_timeline.json missing)")
+    if strategy:
+        print(f"  - strategic_commitments  {len(strategy.get('headline_commitments', []))} commitments, {len(strategy.get('cross_cutting_initiatives', []))} back-traced initiatives")
+    else:
+        print("  - strategic_commitments  not present (data/raw/magnum_strategic_commitments.json missing)")
 
 
 if __name__ == "__main__":

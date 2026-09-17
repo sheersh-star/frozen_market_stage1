@@ -57,22 +57,30 @@
   </div>
 </header>
 
+<nav class="sticky top-0 z-10 bg-ink/95 backdrop-blur border-b border-hairline">
+  <div class="max-w-6xl mx-auto px-6 flex gap-1 overflow-x-auto">
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="news">News</button>
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="ecosystem">Ecosystem</button>
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="strategy">Strategy</button>
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="timeline">Timeline</button>
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="financials">Financials</button>
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="nutrition">Nutrition</button>
+  </div>
+</nav>
+
 <main id="dashboard-main" class="max-w-6xl mx-auto px-6 py-8 opacity-60 motion-safe:transition-opacity motion-safe:duration-500">
 
   <section id="error-banner" class="hidden bg-negative/10 border border-negative text-negative text-sm rounded-lg p-4 mb-6 font-mono"></section>
 
   <!-- ================= LIVE NEWS FEED ================= -->
-  <details open class="group bg-panel border border-brass/40 rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Live News Feed</p>
-        <h2 class="font-display text-2xl text-ivory">TMICC &amp; competitor ecosystem</h2>
-        <p id="news-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60">
-      <p class="font-mono text-xs text-muted mb-3">Zero API keys &mdash; Google News RSS, tagged official/aggregator by matching each item's real source domain. Run <code class="text-caramel">python3 fetch_competitor_news.py</code> to refresh. <span class="text-caramel">&#9679;</span> marks anything published since your last visit &mdash; that's the express read: check the dots first.</p>
+  <section id="tab-news" data-tab="news" class="bg-panel border border-brass/40 rounded-lg p-6">
+    <div class="mb-4">
+      <p class="text-xs tracking-[0.2em] uppercase text-brass mb-1">Live News Feed</p>
+      <h2 class="font-display text-2xl text-ivory">TMICC &amp; competitor ecosystem</h2>
+      <p id="news-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
+    </div>
+    <div>
+      <p class="font-mono text-xs text-muted mb-3">Zero API keys &mdash; Google News RSS, tagged official/aggregator/press by matching each item's real source domain. Run <code class="text-caramel">python3 fetch_competitor_news.py</code> to refresh. <span class="text-caramel">&#9679;</span> marks anything published since your last visit &mdash; that's the express read: check the dots first, click a row to expand it.</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <div class="flex items-baseline justify-between mb-2">
@@ -97,18 +105,15 @@
         </div>
       </div>
     </div>
-  </details>
+  </section>
 
   <!-- ================= THE MAGNUM ECOSYSTEM ================= -->
-  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h2 class="font-display text-2xl text-ivory">The Magnum Ecosystem</h2>
-        <p class="font-mono text-sm text-muted mt-1">Shareholders &middot; brands &middot; joint ventures &middot; supply chain &middot; competitors &middot; governance &middot; disclosed risks</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
+  <section id="tab-ecosystem" data-tab="ecosystem" hidden class="bg-panel border border-hairline rounded-lg p-6">
+    <div class="mb-4">
+      <h2 class="font-display text-2xl text-ivory">The Magnum Ecosystem</h2>
+      <p class="font-mono text-sm text-muted mt-1">Shareholders &middot; brands &middot; joint ventures &middot; supply chain &middot; competitors &middot; governance &middot; disclosed risks</p>
+    </div>
+    <div class="space-y-6">
       <p class="font-mono text-xs text-muted">Extracted directly from TMICC's own 2025 Annual Report (146292742.pdf, 238 pages) &mdash; a first-party primary source. Full narrative: <code class="text-caramel">docs/magnum_ecosystem.md</code>.</p>
 
       <div>
@@ -156,18 +161,52 @@
         <ul id="eco-gaps" class="font-mono text-xs text-muted space-y-1 list-disc list-inside"></ul>
       </div>
     </div>
-  </details>
+  </section>
+
+  <!-- ================= STRATEGIC COMMITMENTS ================= -->
+  <section id="tab-strategy" data-tab="strategy" hidden class="bg-panel border border-hairline rounded-lg p-6">
+    <div class="mb-4">
+      <h2 class="font-display text-2xl text-ivory">Strategic Priorities &amp; Commitments</h2>
+      <p class="font-mono text-sm text-muted mt-1">Back-traced: the decision &rarr; the number behind it &rarr; the named initiative actually delivering it</p>
+    </div>
+    <div class="space-y-6">
+      <p class="font-mono text-xs text-muted">Extracted directly from TMICC's own 2025 Annual Report's "Our strategy" and remuneration sections. Full narrative: <code class="text-caramel">docs/magnum_strategic_commitments.md</code>.</p>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">The four headline commitments</h3>
+        <div id="strat-commitments" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Not just messaging &mdash; tied to executive pay</h3>
+        <div id="strat-incentive" class="font-mono text-xs text-muted"></div>
+      </div>
+
+      <div class="border border-caramel/50 rounded-lg p-4">
+        <h3 class="font-display text-lg text-ivory mb-1">Where this creates room to help</h3>
+        <p class="font-mono text-xs text-muted mb-3">Named initiatives, back-traced from the commitments above &mdash; not a generic "where CPG companies usually need help" list.</p>
+        <div id="strat-initiatives" class="space-y-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">The strategy behind the numbers &mdash; click a region to expand</h3>
+        <div id="strat-pillars" class="space-y-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Honest gaps &mdash; nothing found this pass</h3>
+        <ul id="strat-gaps" class="font-mono text-xs text-muted space-y-1 list-disc list-inside"></ul>
+      </div>
+    </div>
+  </section>
 
   <!-- ================= CORRELATED TIMELINE ================= -->
-  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h2 class="font-display text-2xl text-ivory">Correlated Timeline</h2>
-        <p class="font-mono text-sm text-muted mt-1">TMICC's own decisions, laid against competitor moves and macro-commodity swings in the same window</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
+  <section id="tab-timeline" data-tab="timeline" hidden class="bg-panel border border-hairline rounded-lg p-6">
+    <div class="mb-4">
+      <h2 class="font-display text-2xl text-ivory">Correlated Timeline</h2>
+      <p class="font-mono text-sm text-muted mt-1">TMICC's own decisions, laid against competitor moves and macro-commodity swings in the same window</p>
+    </div>
+    <div class="space-y-6">
       <div>
         <h3 class="font-display text-lg text-ivory mb-2">Patterns worth attention</h3>
         <div id="timeline-patterns" class="space-y-3"></div>
@@ -177,37 +216,31 @@
         <div id="timeline-events" class="overflow-x-auto"></div>
       </div>
     </div>
-  </details>
+  </section>
 
   <!-- ================= TMICC FINANCIAL PERFORMANCE ================= -->
-  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
-      <div>
-        <h2 class="font-display text-2xl text-ivory">TMICC Financial Performance</h2>
-        <p id="fin-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
-      </div>
-      <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-1">&#8964;</span>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60 space-y-6">
+  <section id="tab-financials" data-tab="financials" hidden class="bg-panel border border-hairline rounded-lg p-6">
+    <div class="mb-4">
+      <h2 class="font-display text-2xl text-ivory">TMICC Financial Performance</h2>
+      <p id="fin-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
+    </div>
+    <div class="space-y-6">
       <p class="font-mono text-xs text-muted">Disclosed as annual volume/price growth %, not absolute units &mdash; compounded here into two indices (2020=100), the honest way to compare shape without inventing absolute numbers.</p>
       <div class="h-64"><canvas id="finChart"></canvas></div>
       <div id="fin-regions"></div>
     </div>
-  </details>
+  </section>
 
   <!-- ================= NUTRITION & REGULATORY EXPOSURE ================= -->
-  <details class="group bg-panel border border-hairline rounded-lg p-6 mb-6">
-    <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden flex items-start justify-between gap-3">
+  <section id="tab-nutrition" data-tab="nutrition" hidden class="bg-panel border border-hairline rounded-lg p-6">
+    <div class="mb-4 flex items-start justify-between gap-3">
       <div>
         <h2 class="font-display text-2xl text-ivory">Nutrition &amp; Regulatory Exposure</h2>
         <p id="nutrition-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
       </div>
-      <div class="shrink-0 flex items-center gap-2">
-        <div id="seal-nutrition" class="shrink-0"></div>
-        <span class="font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
-      </div>
-    </summary>
-    <div class="mt-4 pt-4 border-t border-hairline/60 overflow-x-auto">
+      <div id="seal-nutrition" class="shrink-0"></div>
+    </div>
+    <div class="overflow-x-auto">
       <table class="w-full text-left text-sm">
         <thead>
           <tr class="text-muted border-b border-hairline">
@@ -224,7 +257,7 @@
       </table>
       <p class="font-mono text-[10px] text-muted mt-2">&sup1; UK FSA, sugar per 100g. &sup2; % of WHO's 5% free-sugar limit (25g/day, adult). Blank = not reported.</p>
     </div>
-  </details>
+  </section>
 
   <!-- Production & Sales Trend panel removed for now, per request — the full
        1991-present Eurostat series was too big/old/irrelevant to show as-is.
@@ -254,6 +287,26 @@ function showError(message) {
 function hideError() {
   document.getElementById('error-banner').classList.add('hidden');
 }
+
+// ---------------- Tabs ----------------
+const TAB_NAMES = ['news', 'ecosystem', 'strategy', 'timeline', 'financials', 'nutrition'];
+function switchTab(name) {
+  TAB_NAMES.forEach(t => {
+    document.getElementById(`tab-${t}`).hidden = t !== name;
+    const btn = document.querySelector(`.tab-btn[data-tab="${t}"]`);
+    if (t === name) {
+      btn.classList.add('border-brass', 'text-ivory');
+      btn.classList.remove('border-transparent', 'text-muted');
+    } else {
+      btn.classList.add('border-transparent', 'text-muted');
+      btn.classList.remove('border-brass', 'text-ivory');
+    }
+  });
+  try { localStorage.setItem('tmicc_active_tab', name); } catch (e) { /* fine to lose this across sessions */ }
+}
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
 
 function confidenceSeal(source) {
   const el = document.createElement('span');
@@ -425,6 +478,77 @@ function renderEcosystem(eco) {
   document.getElementById('eco-gaps').innerHTML = (eco.gaps_not_found_this_pass || []).map(g => `<li>${g}</li>`).join('');
 }
 
+// ---------------- Strategic commitments ----------------
+function renderStrategy(strat) {
+  if (!strat) return;
+
+  document.getElementById('strat-commitments').innerHTML = (strat.headline_commitments || []).map(c => `
+    <details class="border border-hairline rounded-lg group open:border-brass/50">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+        <div>
+          <div class="font-mono text-[10px] uppercase tracking-wide text-caramel">${c.label}</div>
+          <div class="text-ivory text-sm mt-1 leading-snug">${c.commitment}</div>
+        </div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+        ${c.quote ? `<div class="italic">&ldquo;${c.quote}&rdquo;</div>` : ''}
+        ${c.sub_target ? `<div><span class="text-ivory">Sub-target:</span> ${c.sub_target}</div>` : ''}
+        ${c.attributed_to ? `<div><span class="text-ivory">Attributed to:</span> ${c.attributed_to}</div>` : ''}
+        ${c.source_event ? `<div><span class="text-ivory">Source event:</span> ${c.source_event}</div>` : ''}
+        ${c.governance ? `<div><span class="text-ivory">Governance:</span> ${c.governance}</div>` : ''}
+        ${c.named_risk ? `<div><span class="text-ivory">Named risk:</span> ${c.named_risk}</div>` : ''}
+        ${c.note ? `<div>${c.note}</div>` : ''}
+      </div>
+    </details>`).join('');
+
+  const inc = strat.incentive_alignment;
+  document.getElementById('strat-incentive').innerHTML = inc ? `
+    <p class="mb-2">${inc.note}</p>
+    <div class="flex flex-wrap gap-1.5 mb-2">${(inc.financial_metrics_used || []).map(m => `<span class="text-caramel">#${m}</span>`).join('')}</div>
+    <div>Financial Performance Factor: <span class="text-ivory">${inc.financial_performance_factor_range}</span> &middot; Strategic Priorities Multiplier: <span class="text-ivory">${inc.strategic_priorities_performance_multiplier_range}</span> &middot; Cap: <span class="text-ivory">${inc.overall_bonus_cap}</span></div>
+    ${inc.gap ? `<p class="mt-2 text-muted/80">Gap: ${inc.gap}</p>` : ''}
+  ` : '';
+
+  document.getElementById('strat-initiatives').innerHTML = (strat.cross_cutting_initiatives || []).map(i => `
+    <details class="border border-hairline rounded-lg group open:border-caramel/60">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+        <div class="text-sm text-ivory leading-snug">${i.initiative}</div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+        <div class="flex flex-wrap gap-1.5">${(i.appears_in || []).map(a => `<span class="text-caramel">#${a}</span>`).join('')}</div>
+        <div>${i.why_it_stands_out}</div>
+        <div class="text-ivory">&rarr; ${i.partner_angle}</div>
+      </div>
+    </details>`).join('');
+
+  const pillarBlock = (title, pillars) => `
+    <details class="border border-hairline rounded-lg group">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-center justify-between gap-2">
+        <div class="text-sm text-ivory">${title}</div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-2">
+        ${pillars.headline_initiative ? `<div class="text-caramel">Headline: ${pillars.headline_initiative}</div>` : ''}
+        ${['growth', 'productivity', 'reinvestment'].map(key => pillars[key] ? `
+          <div>
+            <div class="text-ivory uppercase tracking-wide">${key}</div>
+            <ul class="list-disc list-inside">${pillars[key].map(p => `<li>${p}</li>`).join('')}</ul>
+          </div>` : '').join('')}
+      </div>
+    </details>`;
+
+  let pillarsHtml = pillarBlock('Group strategy', strat.group_strategy_pillars || {});
+  const regional = strat.regional_strategy || {};
+  Object.keys(regional).forEach(region => {
+    pillarsHtml += pillarBlock(region, regional[region]);
+  });
+  document.getElementById('strat-pillars').innerHTML = pillarsHtml;
+
+  document.getElementById('strat-gaps').innerHTML = (strat.gaps_not_found_this_pass || []).map(g => `<li>${g}</li>`).join('');
+}
+
 // ---------------- Correlated timeline ----------------
 function renderTimeline(tl) {
   if (!tl) return;
@@ -446,9 +570,7 @@ function renderTimeline(tl) {
 
 // ---------------- Financials ----------------
 function renderFinancials(fin) {
-  const section = document.querySelector('#finChart').closest('details');
-  if (!fin) { section.classList.add('hidden'); return; }
-  section.classList.remove('hidden');
+  if (!fin) return; // tab stays selectable but shows no chart — no data isn't the same as "hide the tab"
 
   document.getElementById('fin-summary').textContent = `${fin.items.length} fiscal years, indexed volume/price (2020=100)`;
 
@@ -523,6 +645,7 @@ async function loadDashboardData() {
     document.getElementById('sync-time').textContent = `Synced ${data.last_updated}`;
     renderNews(data.news);
     renderEcosystem(data.ecosystem);
+    renderStrategy(data.strategic_commitments);
     renderTimeline(data.correlated_timeline);
     renderFinancials(data.tmicc_financials);
     renderNutrition(data.nutrition);
@@ -533,6 +656,13 @@ async function loadDashboardData() {
     showError("Couldn't load console_data.json. Run `python3 data_pipeline.py`, then `python3 server.py`, and reload this page.");
   }
 }
+
+let initialTab = 'news';
+try {
+  const saved = localStorage.getItem('tmicc_active_tab');
+  if (saved && TAB_NAMES.includes(saved)) initialTab = saved;
+} catch (e) { /* default to news */ }
+switchTab(initialTab);
 
 initLastSeen();
 loadDashboardData();

@@ -11,6 +11,11 @@ account of what was cut and why.
                                       git — see .gitignore). Real, first-party, cited.
   magnum_correlated_timeline.json    TMICC's own decisions vs competitor moves vs macro
                                       commodity swings, dated and correlated. Real, cited.
+  magnum_strategic_commitments.json  Back-traced: each headline commitment (growth, margin,
+                                      cost savings, capital allocation) -> the named strategic
+                                      initiative actually delivering it, by region where TMICC
+                                      discloses regional detail. Same source PDF, "Our strategy"
+                                      and remuneration sections specifically. Real, cited.
   news/raw_items.json                Live news feed output — produced by the separate
                                       fetch_competitor_news.py (run that, not this file, to
                                       refresh it). Zero API keys — Google News RSS.

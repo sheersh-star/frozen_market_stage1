@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-15 16:34:05",
+  "last_updated": "2026-09-17 12:41:36",
   "nutrition": {
     "source": "real",
     "items": [
@@ -19626,6 +19626,177 @@
         ],
         "strategist_note": "TMICC's FY2025 results explicitly named cocoa inflation (plus a stronger euro) as a driver of 380bps of cost inflation, offset by pricing actions and a productivity programme. Cocoa has since retreated from its 2024 peak to roughly a third of that level by Sept 2026 \u2014 the next thing to watch for is whether TMICC's FY2026 commentary shows margin recovery or a reversal of the pricing actions taken during the high-cost period. The 2026/27 crop-season risk flag (weak early crop signals) is the one thing that could reopen this pressure before it's resolved."
       }
+    ]
+  },
+  "strategic_commitments": {
+    "generated_date": "2026-09-17",
+    "primary_source": "TMICC 2025 Annual Report (146292742.pdf) \u2014 'Our strategy' and remuneration sections",
+    "leadership": {
+      "ceo": "Peter ter Kulve",
+      "cfo": "Abhijit Bhattacharya"
+    },
+    "headline_commitments": [
+      {
+        "id": "commit-osg",
+        "label": "Growth",
+        "commitment": "Grow Organic Sales on average by 3% to 5% from 2026, in the medium term",
+        "quote": "We are positioning TMICC to grow Organic Sales on average by 3% to 5% from 2026, with an average annual Adjusted EBITDA margin improvement of 40 to 60 basis points in the medium term.",
+        "attributed_to": "CEO Peter ter Kulve, framed as establishing TMICC as a 'hard currency compounder'"
+      },
+      {
+        "id": "commit-margin",
+        "label": "Margin",
+        "commitment": "Average annual Adjusted EBITDA margin improvement of 40 to 60 basis points, medium term",
+        "note": "Explicitly stated to not apply to any individual year \u2014 it's a medium-term average, so a single soft year doesn't necessarily break the commitment"
+      },
+      {
+        "id": "commit-savings",
+        "label": "Cost / Separation Savings",
+        "commitment": "500 million productivity programme, medium-term savings (launched 2024)",
+        "sub_target": "350 to 380 million of that in run-rate savings specifically from the Supply Chain Transformation pillar",
+        "quote": "In 2024, we launched a productivity programme targeting 500 million savings in the medium term. A key pillar of the productivity programme is Supply Chain transformation that is designed to create a lean, agile, and customer-focused network and deliver 350 to 380 million in run-rate savings.",
+        "governance": "A Transformation Steering Committee was established with clear accountability to drive delivery",
+        "named_risk": "Workforce adaptation through new structures, skill upgrades and effective change management \u2014 failure to manage this could result in cost overruns and operational disruption"
+      },
+      {
+        "id": "commit-dividend",
+        "label": "Capital Allocation",
+        "commitment": "Dividend payout ratio target of 40% to 60%",
+        "source_event": "First Capital Markets Day, September 2025",
+        "note": "The Board has established a balanced capital allocation framework designed to deliver consistent returns while funding organic growth"
+      }
+    ],
+    "incentive_alignment": {
+      "note": "These aren't just stated ambitions \u2014 they're the literal formula behind executive bonus payouts, which is a real, structural signal that they're taken seriously internally.",
+      "financial_metrics_used": [
+        "Organic Sales Growth",
+        "Market share gains",
+        "Adjusted EBITDA margin improvement",
+        "Free Cash Flow"
+      ],
+      "financial_performance_factor_range": "0% to 200% of target",
+      "strategic_priorities_performance_multiplier_range": "0% to 150% of target",
+      "overall_bonus_cap": "200% of target",
+      "gap": "The exact named list making up the 'Strategic Priorities Performance Multiplier' itself wasn't found in this pass \u2014 only that it exists, applies to both the CEO and CFO, and has a defined scoring range"
+    },
+    "group_strategy_pillars": {
+      "note": "TMICC's own 3-part framework, stated at Group level and then repeated with region-specific tactics below",
+      "growth": [
+        "Drive distribution and penetration in low per-capita-consumption countries (Pakistan named specifically)",
+        "Build an attractive portfolio at core snacking and refreshment 'coinage' price points",
+        "Further premiumise the portfolio in both indulgence and wellness",
+        "Build ice cream occasions with TMICC's demand generation model",
+        "Accelerate share growth in China"
+      ],
+      "productivity": [
+        "Optimise supply chain end-to-end to improve capacity utilisation, service, and cost",
+        "Lead through digitalisation, automation and new technologies"
+      ],
+      "reinvestment": [
+        "Digitalise cabinets and frontline operations",
+        "De-bottleneck capacity and invest in quality and safety",
+        "Build cutting-edge capabilities"
+      ]
+    },
+    "regional_strategy": {
+      "Americas": {
+        "headline_initiative": "Turnaround Brazil",
+        "growth": [
+          "Double down on the fastest-growing (+5%) single-serve ice cream segment",
+          "Expand the portfolio of calorie-control and high-protein offerings",
+          "Rebuild the business in club, dollar store, and Away-from-Home channels",
+          "Pivot towards a digitally-led demand creation model",
+          "Turnaround Brazil"
+        ],
+        "productivity": [
+          "US end-to-end supply chain reset",
+          "Latin America direct sales distribution system revamp"
+        ],
+        "reinvestment": [
+          "Capacity expansion",
+          "Away-from-Home cabinet expansion",
+          "Media investment"
+        ]
+      },
+      "Europe": {
+        "headline_initiative": "Turnaround Italy",
+        "growth": [
+          "Rebuild the European Away-from-Home channel",
+          "Grow the ice cream category through innovation and retail partnerships",
+          "Move to a digitally-led demand creation model",
+          "Turnaround Italy"
+        ],
+        "productivity": [
+          "Supply chain transformation",
+          "Overhead reduction",
+          "Volume growth for higher asset utilisation"
+        ],
+        "reinvestment": [
+          "Brands and portfolio investment",
+          "Away-from-Home cabinet expansion",
+          "Supply chain network optimisation"
+        ]
+      }
+    },
+    "cross_cutting_initiatives": [
+      {
+        "initiative": "Digitally-led demand creation model",
+        "appears_in": [
+          "Group strategy",
+          "Americas",
+          "Europe"
+        ],
+        "why_it_stands_out": "Named as a distinct initiative in three separate places (Group, Americas, Europe) \u2014 a genuine cross-regional priority, not a one-off regional idea",
+        "partner_angle": "Marketing technology, demand-generation platforms, data & analytics \u2014 TMICC is explicitly moving away from a traditional demand model toward a digital one across its whole footprint"
+      },
+      {
+        "initiative": "Cabinet and frontline digitalisation",
+        "appears_in": [
+          "Group strategy (Re-investment)",
+          "Americas (Away-from-Home cabinet expansion)",
+          "Europe (Away-from-Home cabinet expansion)"
+        ],
+        "why_it_stands_out": "Directly connects to a real disclosed risk factor already in the ecosystem doc: the 3-million-unit freezer cabinet fleet is TMICC's single largest emissions category, and isn't even owned by TMICC (placed in retail outlets). Digitalising and expanding this fleet is a named priority in every region.",
+        "partner_angle": "IoT/smart-cabinet technology, real-time inventory tracking, predictive replenishment, energy-efficiency retrofits"
+      },
+      {
+        "initiative": "US end-to-end supply chain reset",
+        "appears_in": [
+          "Americas"
+        ],
+        "why_it_stands_out": "Named specifically, not folded into generic 'productivity' language \u2014 a real, targeted program in TMICC's largest single market",
+        "partner_angle": "Supply chain consulting, logistics/network optimisation technology"
+      },
+      {
+        "initiative": "Latin America direct sales distribution system revamp",
+        "appears_in": [
+          "Americas"
+        ],
+        "why_it_stands_out": "A named, specific distribution-system overhaul distinct from the US supply chain reset \u2014 two separate Americas-region productivity initiatives, not one",
+        "partner_angle": "Route-to-market technology, distribution/DSD (direct store delivery) systems, sales-force enablement"
+      },
+      {
+        "initiative": "Turnaround Brazil / Turnaround Italy",
+        "appears_in": [
+          "Americas",
+          "Europe"
+        ],
+        "why_it_stands_out": "Both are named explicitly as underperforming markets requiring a distinct turnaround plan, not just routine optimisation \u2014 matches the Italy 'below par, resetting the business' language already found in the FY2025 results commentary",
+        "partner_angle": "Market-specific commercial/operational turnaround advisory"
+      },
+      {
+        "initiative": "Calorie-control and high-protein product expansion (Americas)",
+        "appears_in": [
+          "Americas"
+        ],
+        "why_it_stands_out": "Directly connects to the GLP-1/weight-loss-drug demand risk already flagged in the ecosystem doc \u2014 Yasso and Breyers Carb Smart are the named 'Better-For-You' hedge, and this growth pillar is the commercial strategy built around that same risk",
+        "partner_angle": "Product development, ingredient/formulation partners for low-calorie/high-protein frozen desserts"
+      }
+    ],
+    "gaps_not_found_this_pass": [
+      "AMEA (Asia/Middle East/Africa) region's own Growth/Productivity/Re-investment breakdown was not found distinctly in this pass \u2014 only its financial performance figures (from the correlated timeline: +10.9% organic sales growth, the fastest-growing region)",
+      "The exact named list making up the 'Strategic Priorities Performance Multiplier' \u2014 confirmed it exists and its scoring range, not its actual contents",
+      "Exact revenue/colleague figures per region were garbled in extraction (shown as isolated numbers like '2.8' and '7,000' without confirmed units) \u2014 not included here rather than guessed"
     ]
   }
 }
