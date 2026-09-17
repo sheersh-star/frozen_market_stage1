@@ -69,6 +69,10 @@ The page is a tab-based single-pager, not a stacked scroll of every panel — cl
 
 Production & Sales Trend (Eurostat NACE C1052, Germany) is **removed from view for now** — see "The ground-up rebuild" below.
 
+## Keeping the research current
+
+`.claude/skills/refresh-tmicc-dashboard/SKILL.md` packages the deep-research methodology used to build the Ecosystem/Strategy/Timeline/Financials tabs — reading the current data first, searching the web for what's changed since the last pass, updating the JSON/CSV files and narrative docs with the same real-data/honest-gaps/neutral-sourcing discipline used throughout, then regenerating and verifying. Invoke it with `/refresh-tmicc-dashboard` in Claude Code from this repo. It's on-demand by default — to actually run it periodically, use the `schedule` skill to set up a recurring cloud routine (a skill alone doesn't self-schedule).
+
 ## Live news feed
 
 `fetch_competitor_news.py` pulls real, live headlines for TMICC and its named competitors/topics — zero API keys, zero cost. Run it directly:
