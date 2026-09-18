@@ -71,7 +71,9 @@ Production & Sales Trend (Eurostat NACE C1052, Germany) is **removed from view f
 
 ## Keeping the research current
 
-`.claude/skills/refresh-tmicc-dashboard/SKILL.md` packages the deep-research methodology used to build the Ecosystem/Strategy/Timeline/Financials tabs — reading the current data first, searching the web for what's changed since the last pass, updating the JSON/CSV files and narrative docs with the same real-data/honest-gaps/neutral-sourcing discipline used throughout, then regenerating and verifying. Invoke it with `/refresh-tmicc-dashboard` in Claude Code from this repo. It's on-demand by default — to actually run it periodically, use the `schedule` skill to set up a recurring cloud routine (a skill alone doesn't self-schedule).
+`.claude/skills/refresh-tmicc-dashboard/SKILL.md` packages the deep-research methodology used to build the Ecosystem/Strategy/Timeline/Financials tabs — reading the current data first, searching the web for what's changed since the last pass, updating the JSON/CSV files and narrative docs with the same real-data/honest-gaps/neutral-sourcing discipline used throughout, then regenerating and verifying. Invoke it with `/refresh-tmicc-dashboard` in Claude Code from this repo.
+
+**Manual, on-demand only, by choice** — run it yourself (e.g., weekly, or after noticing TMICC has posted results) rather than a scheduled cloud routine. A recurring cloud agent draws on the account's usage/billing the same way any session does; running this by hand avoids that being a standing, unexamined cost.
 
 ## Live news feed
 

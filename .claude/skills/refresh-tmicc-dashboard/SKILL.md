@@ -71,9 +71,11 @@ Then verify end-to-end, the same way every prior change in this repo has been ve
 
 Follow this repo's existing commit-message convention: a clear summary line, then a body explaining what was found and why it matters, organized by area, closing with an honest note on what's still a gap. Do not push without the user's go-ahead unless they've told you otherwise.
 
-## Running this periodically
+## Running this
 
-This skill is invokable on demand (`/refresh-tmicc-dashboard`), but "periodically" needs a scheduler — a skill alone doesn't run itself. Use the `schedule` skill to set up a recurring cloud routine (e.g. weekly, or timed around TMICC's known reporting dates: results tend to land in Feb, Jul/Aug) that runs this skill's instructions. Confirm the cadence with the user before setting one up — a scheduled cloud agent is a standing, recurring commitment, not a one-off action.
+**Decided: manual, on-demand only** — invoke with `/refresh-tmicc-dashboard` whenever a refresh is wanted (e.g., weekly, or right after noticing TMICC has posted results — FY results have landed in Feb, half-year in Jul/Aug so far). Runs on the regular interactive session, no separate billing/usage question to think about.
+
+A scheduled cloud routine (via the `schedule` skill) was considered and explicitly declined — a recurring cloud agent draws on the account's usage/billing the same way any session does, and running this by hand avoids that being a standing, unexamined cost. Revisit only if that calculus changes.
 
 ## What this skill deliberately does not do
 
