@@ -43,6 +43,9 @@ Check for: new TMICC strategic decisions, competitor moves, macro-commodity swin
 ### Financials (`data/raw/market/*.csv`)
 Check for: the next quarterly/half-year/annual results release, updated share price/market cap, any new regional breakdown. Add new dated rows to the existing CSVs (e.g. `magnum_share_price_snapshots.csv`) or new CSV files following the same one-dataset-per-file convention already established — don't overwrite historical rows.
 
+### Consultant's Brief (`data/raw/magnum_consultant_brief.json`) — revisit last, and only after the four above are updated
+This file is different in kind from the other four: it's analysis and judgment, not TMICC-disclosed fact. After updating Ecosystem/Strategy/Timeline/Financials, re-read this file and ask: does any new fact close a listed gap, add a new connected dot, or change whether a recommendation still makes sense? Update it to match — but never let a fact leak in here disguised as analysis, and never let an opinion leak into the other four files disguised as fact. The separation is the entire point of this file existing on its own.
+
 ## The non-negotiable discipline
 
 - **Every fact needs a real source.** Cite it (outlet name, or the primary document) in the same field-naming pattern already used throughout (`source`, `basis`, `confidence`). Never write a number you found nowhere.

@@ -437,6 +437,14 @@ def load_strategic_commitments():
     return _read_json(real_file) if real_file.exists() else None
 
 
+def load_consultant_brief():
+    """The one deliberately non-fact panel — analysis and judgment built on
+    top of everything else, not TMICC's own disclosed position. Kept in its
+    own file specifically so it can never be confused with a sourced fact."""
+    real_file = RAW_DIR / "magnum_consultant_brief.json"
+    return _read_json(real_file) if real_file.exists() else None
+
+
 # ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
@@ -483,6 +491,10 @@ def generate_market_data():
     if strategy:
         payload["strategic_commitments"] = strategy
 
+    brief = load_consultant_brief()
+    if brief:
+        payload["consultant_brief"] = brief
+
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
 
@@ -511,6 +523,10 @@ def generate_market_data():
         print(f"  - strategic_commitments  {len(strategy.get('headline_commitments', []))} commitments, {len(strategy.get('cross_cutting_initiatives', []))} back-traced initiatives")
     else:
         print("  - strategic_commitments  not present (data/raw/magnum_strategic_commitments.json missing)")
+    if brief:
+        print(f"  - consultant_brief       {len(brief.get('top_gaps', []))} gaps, {len(brief.get('connected_dots', []))} connected dots, {len(brief.get('recommendations', []))} recommendations")
+    else:
+        print("  - consultant_brief       not present (data/raw/magnum_consultant_brief.json missing)")
 
 
 if __name__ == "__main__":

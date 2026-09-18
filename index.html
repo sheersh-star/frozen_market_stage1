@@ -65,6 +65,7 @@
     <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="timeline">Timeline</button>
     <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="financials">Financials</button>
     <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="nutrition">Nutrition</button>
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="brief">Brief</button>
   </div>
 </nav>
 
@@ -278,6 +279,33 @@
     </div>
   </section>
 
+  <!-- ================= CONSULTANT'S BRIEF ================= -->
+  <section id="tab-brief" data-tab="brief" hidden class="bg-panel border border-caramel/50 rounded-lg p-6">
+    <div class="mb-4">
+      <h2 class="font-display text-2xl text-ivory">Consultant's Brief</h2>
+      <p class="font-mono text-sm text-muted mt-1">Analysis, not fact — built entirely on the real data in the other tabs, but this page is judgment, never confuse the two</p>
+    </div>
+    <div class="space-y-6">
+      <p class="font-mono text-xs text-caramel border border-caramel/40 rounded-lg p-3">Everything on this page is this project's own synthesis — gaps, connections, and recommendations built from the real, sourced facts in News/Ecosystem/Strategy/Timeline/Financials. None of it is TMICC's own stated position. Full reasoning: <code class="text-caramel">docs/magnum_consultant_brief.md</code>.</p>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Top gaps &mdash; what's not known, and why it matters</h3>
+        <div id="brief-gaps" class="space-y-2"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Connected dots</h3>
+        <div id="brief-dots" class="space-y-2"></div>
+      </div>
+
+      <div class="border border-caramel/50 rounded-lg p-4">
+        <h3 class="font-display text-lg text-ivory mb-1">Recommendations &mdash; what to aim for</h3>
+        <p class="font-mono text-xs text-muted mb-3">Each tied to the gap/dot it's built on, plus the category of partner that could plausibly help.</p>
+        <div id="brief-recs" class="space-y-2"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Production & Sales Trend panel removed for now, per request — the full
        1991-present Eurostat series was too big/old/irrelevant to show as-is.
        Real data untouched at data/raw/production/ice_cream_production.csv;
@@ -308,7 +336,7 @@ function hideError() {
 }
 
 // ---------------- Tabs ----------------
-const TAB_NAMES = ['news', 'ecosystem', 'strategy', 'timeline', 'financials', 'nutrition'];
+const TAB_NAMES = ['news', 'ecosystem', 'strategy', 'timeline', 'financials', 'nutrition', 'brief'];
 function switchTab(name) {
   TAB_NAMES.forEach(t => {
     document.getElementById(`tab-${t}`).hidden = t !== name;
@@ -705,6 +733,46 @@ function renderNutrition(panel) {
 // renderTrend() removed along with the Production & Sales Trend panel — see
 // the comment where that panel used to be in the HTML above.
 
+// ---------------- Consultant's Brief ----------------
+function renderConsultantBrief(brief) {
+  if (!brief) return;
+
+  document.getElementById('brief-gaps').innerHTML = (brief.top_gaps || []).map(g => `
+    <details class="border border-hairline rounded-lg group">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+        <div class="text-sm text-ivory leading-snug">${g.gap}</div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted">
+        <span class="text-ivory">Why it matters:</span> ${g.why_it_matters}
+      </div>
+    </details>`).join('');
+
+  document.getElementById('brief-dots').innerHTML = (brief.connected_dots || []).map(d => `
+    <details class="border border-hairline rounded-lg group open:border-brass/50">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+        <div class="text-sm text-ivory leading-snug">${d.title}</div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+        <div class="flex flex-wrap gap-1.5">${(d.connects || []).map(c => `<span class="text-caramel">${c}</span>`).join('')}</div>
+        <div>${d.insight}</div>
+      </div>
+    </details>`).join('');
+
+  document.getElementById('brief-recs').innerHTML = (brief.recommendations || []).map(r => `
+    <details class="border border-caramel/40 rounded-lg group open:border-caramel">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+        <div class="text-sm text-ivory leading-snug">${r.recommendation}</div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+        <div>${r.why}</div>
+        <div class="text-ivory">&rarr; ${r.partner_angle}</div>
+      </div>
+    </details>`).join('');
+}
+
 // ---------------- Load ----------------
 async function loadDashboardData() {
   try {
@@ -721,6 +789,7 @@ async function loadDashboardData() {
     renderTimeline(data.correlated_timeline);
     renderFinancials(data.tmicc_financials);
     renderNutrition(data.nutrition);
+    renderConsultantBrief(data.consultant_brief);
 
     document.getElementById('dashboard-main').classList.remove('opacity-60');
   } catch (err) {

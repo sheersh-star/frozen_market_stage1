@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-17 13:09:56",
+  "last_updated": "2026-09-18 11:06:00",
   "nutrition": {
     "source": "real",
     "items": [
@@ -19187,7 +19187,7 @@
   },
   "ecosystem": {
     "company": "The Magnum Ice Cream Company N.V. (TMICC)",
-    "generated_date": "2026-09-15",
+    "generated_date": "2026-09-18",
     "primary_source": {
       "file": "146292742.pdf",
       "type": "TMICC 2025 Annual Report",
@@ -19299,6 +19299,11 @@
       {
         "brand": "Carte d'Or",
         "region_note": "seen paired with 'Chunkies' variant in Turkiye market commentary"
+      },
+      {
+        "brand": "Kwality Wall's",
+        "acquired": 2026,
+        "note": "India \u2014 acquisition completed 30 Mar 2026, entered TMICC's reporting perimeter Q2 2026; TMICC building 4 new factories there after sales growth exceeded 50%. See docs/magnum_strategic_commitments.md's AMEA section for the full India build-out detail."
       }
     ],
     "joint_ventures_subsidiaries_associates": [
@@ -19470,7 +19475,10 @@
       "note": "Not found in the first research pass \u2014 closed via a later, deeper pass into the same Annual Report's remuneration section (see docs/magnum_strategic_commitments.md)"
     },
     "material_developments_since_first_pass": [
-      "A real, ongoing governance dispute between TMICC and Ben & Jerry's independent board (board removed 1 Jan 2026, active litigation, a defamation suit, and a consumer boycott threat) \u2014 full detail with careful neutral sourcing in docs/magnum_correlated_timeline.md, since it involves a genuinely sensitive underlying issue (statements on Israel/Gaza) and is unresolved, contested litigation"
+      "A real, ongoing governance dispute between TMICC and Ben & Jerry's independent board (board removed 1 Jan 2026, active litigation, a defamation suit, and a consumer boycott threat) \u2014 full detail with careful neutral sourcing in docs/magnum_correlated_timeline.md, since it involves a genuinely sensitive underlying issue (statements on Israel/Gaza) and is unresolved, contested litigation",
+      "22 Aug 2026: a US federal judge dismissed 7 of 10 claims in the Ben & Jerry's board lawsuit, but let stand claims over two missed $2.5m payments tied to a 2022 Palestinian-territories trademark licensing settlement \u2014 see docs/magnum_correlated_timeline.md",
+      "30 Mar 2026: TMICC completed its acquisition of Kwality Wall's in India, entering the reporting perimeter from Q2 2026 and now building 4 new factories there \u2014 see docs/magnum_strategic_commitments.md's AMEA section",
+      "7 May 2026: a new executive incentive structure ('Foundation Plan for Growth') passed at AGM with 22.63% shareholder opposition \u2014 a real governance-friction signal separate from the Ben & Jerry's dispute \u2014 see docs/magnum_strategic_commitments.md"
     ],
     "gaps_not_found_this_pass": [
       "No named cocoa/vanilla trading-house supplier (Cargill, Olam, Barry Callebaut appears only as an unrelated TSR peer)",
@@ -19480,7 +19488,7 @@
     ]
   },
   "correlated_timeline": {
-    "generated_date": "2026-09-17",
+    "generated_date": "2026-09-18",
     "window_covered": "2022-12 to 2026-09",
     "purpose": "Correlates TMICC's own disclosed strategic decisions against the same-window competitor and macro-commodity timeline, so a strategist sees not just what TMICC did but what happened around it",
     "timeline": [
@@ -19777,6 +19785,35 @@
         "source": "foodnavigator.com; globalbankingandfinance.com"
       },
       {
+        "id": "t60",
+        "date": "2026-03-30",
+        "actor": "TMICC",
+        "category": "strategic_decision",
+        "date_precision": "day",
+        "event": "TMICC completes its acquisition of Kwality Wall's in India (plus a Portugal marketing/sales entity, 1 Apr 2026) \u2014 India enters TMICC's reporting perimeter from Q2 2026. A real, closed acquisition, not a stated ambition.",
+        "source": "manilatimes.net Q1 2026 Trading Update; whalesbook.com",
+        "correlates_with": "t61"
+      },
+      {
+        "id": "t61",
+        "date": "2026-04-30",
+        "actor": "TMICC",
+        "category": "strategic_decision",
+        "date_precision": "day",
+        "event": "Q1 2026 Trading Update: AMEA delivers +7.9% organic sales growth (volume and price both contributing); Turkiye and Pakistan post double-digit growth; China posts high-single-digit growth. 'Frontline First' execution model cited as delivering across At-Home and Away-from-Home channels; Digital Commerce maintains double-digit growth.",
+        "source": "globenewswire.com Q1 2026 Trading Update; investegate.co.uk"
+      },
+      {
+        "id": "t62",
+        "date": "2026-05-07",
+        "actor": "TMICC shareholders",
+        "category": "governance",
+        "date_precision": "day",
+        "event": "AGM: Resolution 5, adopting a new executive incentive structure ('Foundation Plan for Growth' \u2014 personal co-investment by senior leaders with real downside risk, not a broad growth-strategy document despite the name), passes with 77.37% in favour but 22.63% against \u2014 over the UK Corporate Governance Code's 20% threshold that legally requires a public update statement on shareholder engagement, which followed on 17 Sept 2026 (see below). A real, dated proxy-governance friction signal, separate from the Ben & Jerry's dispute but in the same broad category: governance scrutiny of TMICC's leadership.",
+        "source": "stocktitan.net Result of AGM; globenewswire.com",
+        "correlates_with": "t65"
+      },
+      {
         "id": "t52",
         "date": "2026-05-09",
         "actor": "Consumers / Ben & Jerry's",
@@ -19813,6 +19850,16 @@
         "source": "globenewswire.com; investing.com; news.magnumicecream.com"
       },
       {
+        "id": "t63",
+        "date": "2026-07-30",
+        "actor": "TMICC",
+        "category": "strategic_decision",
+        "date_precision": "day",
+        "event": "Within the H1 2026 results (see t54): the productivity programme delivered EUR90m of savings in H1 2026 alone (EUR70m supply chain, EUR20m overheads) - 18% of the EUR500m medium-term target reached in a single half-year, management says the programme 'remains on track.' This is the first real progress figure disclosed against that target since it was set in 2024.",
+        "source": "stocktitan.net H1 2026 results",
+        "correlates_with": "t54"
+      },
+      {
         "id": "t55",
         "date": "2026-08-16",
         "actor": "Froneri (Dreyer's Grand Ice Cream)",
@@ -19827,8 +19874,8 @@
         "actor": "TMICC / Ben & Jerry's",
         "category": "governance_dispute",
         "date_precision": "day",
-        "event": "The board lawsuit is narrowed by the court, and TMICC formally replaces Unilever as the named defendant/responsible party for the matters at issue \u2014 consistent with TMICC having assumed this liability from Unilever as part of the demerger.",
-        "source": "dairyreporter.com"
+        "event": "Judge P. Kevin Castel (Southern District of NY) rules on the Ben & Jerry's board lawsuit: dismisses 7 of 10 claims (plus part of an 8th) \u2014 mostly the claims about Ben & Jerry's speech, board composition, and director appointment/removal. Two claims survive in full: missed payments under a 2022 settlement, where Unilever had agreed to pay Ben & Jerry's two installments of $2.5m each (arising from licensing the Ben & Jerry's trademark in the Occupied Palestinian Territories without the Independent Board's approval) and allegedly didn't. TMICC formally replaces Unilever as defendant for the surviving claims.",
+        "source": "foodnavigator.com; lawnews.co.uk"
       },
       {
         "id": "t24",
@@ -19839,6 +19886,16 @@
         "source": "cocoarunners.com; farmforce.com; thecooldown.com",
         "correlates_with": "t17",
         "date_precision": "month"
+      },
+      {
+        "id": "t64",
+        "date": "2026-09-01",
+        "actor": "Ben & Jerry's Foundation",
+        "category": "governance_dispute",
+        "date_precision": "month",
+        "event": "The Ben & Jerry's Foundation states its operations are at risk of suspension unless funding is restored - a real operational-continuity consequence of the same funding dispute underlying TMICC's 15 Sept 2026 'toxic culture' filing (t59), not just a reputational or legal matter anymore.",
+        "source": "just-food.com; foodbev.com",
+        "correlates_with": "t59"
       },
       {
         "id": "t57",
@@ -19867,6 +19924,15 @@
         "date_precision": "day",
         "event": "TMICC's court filing alleges former chair Anuradha Mittal was \"abusive, discriminatory and unprofessional,\" fostered a toxic board culture, appointed personal contacts over independent candidates, and directed roughly $350,000 from the Ben & Jerry's Foundation to the Oakland Institute, a nonprofit she founded. Mittal's camp responds that this is a retaliatory \"campaign to intimidate, threaten, and character assassinate\" her over her advocacy for Palestinian human rights, naming activist investor Nelson Peltz as displeased by that advocacy specifically. Both sides' claims are disputed and unresolved as of this pass \u2014 presented here exactly as each side has filed/stated it, not as established fact either way.",
         "source": "insurancejournal.com; nwaonline.com; arkansasonline.com"
+      },
+      {
+        "id": "t65",
+        "date": "2026-09-17",
+        "actor": "TMICC",
+        "category": "governance",
+        "date_precision": "day",
+        "event": "TMICC publishes its required shareholder-engagement update statement following the May 2026 AGM's 22.63% dissent on the executive incentive resolution (t62), as mandated by the UK Corporate Governance Code.",
+        "source": "globenewswire.com AGM Update Statement Resolution 5"
       }
     ],
     "correlation_patterns": [
@@ -19930,11 +19996,38 @@
           "t54"
         ],
         "strategist_note": "FY2025 Adjusted EBITDA margin: AMEA 22.9% vs Europe & ANZ 13.1% and Americas 14.1% \u2014 while AMEA also posted the fastest organic sales growth both in FY2025 (+10.9%) and H1 2026 (+7.6%, still far ahead of the other two regions even as it decelerates). This directly validates the Group strategy's specific 'Accelerate share growth in China' initiative (see the Strategy tab) \u2014 the numbers make a real case for weighting future capital allocation toward AMEA even more heavily than the current strategy documents suggest."
+      },
+      {
+        "id": "c7",
+        "title": "India is TMICC's fastest volume growth story and its clearest near-term margin drag, at the same time",
+        "related_event_ids": [
+          "t60",
+          "t61"
+        ],
+        "strategist_note": "TMICC is building 4 new factories in India after sales growth exceeded 50%, and CEO Peter ter Kulve has openly attributed 'current weak profitability' there to cold-chain and freezer-cabinet investment in a developing market. That's a real, disclosed trade-off, not a hidden one - but it sits directly underneath the Group's medium-term 40-60bps margin-improvement commitment. Worth watching whether India's margin drag has a stated end-date, or whether it's open-ended as long as volume growth continues."
+      },
+      {
+        "id": "c8",
+        "title": "The EUR500m savings target is running well ahead of a simple straight-line pace",
+        "related_event_ids": [
+          "t63"
+        ],
+        "strategist_note": "EUR90m in one half-year is 18% of the full multi-year EUR500m target already. A simple annualized read (EUR90m x roughly 5-6 half-years to reach EUR500m) would land TMICC ahead of its own 'medium-term' framing - though half-year progress rarely stays linear (early wins are often the easiest), so this is a pace worth re-checking next half-year, not a number to extrapolate confidently yet."
+      },
+      {
+        "id": "c9",
+        "title": "Two separate governance-scrutiny threads ran in parallel through 2026, and both are about the same underlying question: who actually controls TMICC's decisions",
+        "related_event_ids": [
+          "t62",
+          "t59",
+          "t64"
+        ],
+        "strategist_note": "The Ben & Jerry's board dispute (independence from TMICC) and the 22.63% AGM dissent on the executive incentive plan (alignment between TMICC's leadership and its shareholders) are legally and factually unrelated - but both are real, dated instances of a governance stakeholder pushing back on how TMICC's leadership exercises control, in the same year. A strategist tracking 'is TMICC's governance under more scrutiny than peers' should treat these as two data points on the same question, not two unrelated footnotes."
       }
     ]
   },
   "strategic_commitments": {
-    "generated_date": "2026-09-17",
+    "generated_date": "2026-09-18",
     "primary_source": "TMICC 2025 Annual Report (146292742.pdf) \u2014 'Our strategy' and remuneration sections",
     "leadership": {
       "ceo": "Peter ter Kulve",
@@ -19961,7 +20054,8 @@
         "sub_target": "350 to 380 million of that in run-rate savings specifically from the Supply Chain Transformation pillar",
         "quote": "In 2024, we launched a productivity programme targeting 500 million savings in the medium term. A key pillar of the productivity programme is Supply Chain transformation that is designed to create a lean, agile, and customer-focused network and deliver 350 to 380 million in run-rate savings.",
         "governance": "A Transformation Steering Committee was established with clear accountability to drive delivery",
-        "named_risk": "Workforce adaptation through new structures, skill upgrades and effective change management \u2014 failure to manage this could result in cost overruns and operational disruption"
+        "named_risk": "Workforce adaptation through new structures, skill upgrades and effective change management \u2014 failure to manage this could result in cost overruns and operational disruption",
+        "progress_h1_2026": "EUR90m delivered in H1 2026 alone (EUR70m supply chain, EUR20m overheads) \u2014 18% of the full EUR500m target reached in a single half-year; management says the programme 'remains on track.' First real progress figure disclosed against this target since 2024. A simple pace read (EUR90m/half-year) would land ahead of the medium-term framing if sustained \u2014 worth re-checking next half-year rather than extrapolating confidently from one data point."
       },
       {
         "id": "commit-dividend",
@@ -20010,6 +20104,14 @@
         "Abhijit Bhattacharya (CFO)": "100% of salary"
       },
       "legacy_reference_found": "A separate, differently-weighted set (30% Underlying Sales Growth / 30% Underlying Operating Profit growth / 30% Cash contribution) also appears in the same section of the report, most likely shown as a comparison to the prior Unilever-era LTIP structure rather than TMICC's current one \u2014 flagged as uncertain rather than stated as fact, since the surrounding context needed to confirm which plan it belongs to was lost in extraction"
+    },
+    "foundation_plan_for_growth": {
+      "name": "Foundation Plan for Growth",
+      "note": "Despite the name, this is a new executive incentive structure, not a growth-strategy document \u2014 built around personal co-investment by senior leaders with real downside risk, intended to align an 'ownership mindset' with shareholder interests.",
+      "adopted_via": "AGM Resolution 5, 7 May 2026",
+      "vote_result": "77.37% in favour, 22.63% against",
+      "governance_flag": "Crossed the UK Corporate Governance Code's 20% dissent threshold, legally requiring a public shareholder-engagement update statement \u2014 published 17 Sep 2026",
+      "source": "stocktitan.net Result of AGM; globenewswire.com AGM Update Statement Resolution 5"
     },
     "group_strategy_pillars": {
       "note": "TMICC's own 3-part framework, stated at Group level and then repeated with region-specific tactics below",
@@ -20068,6 +20170,25 @@
           "Away-from-Home cabinet expansion",
           "Supply chain network optimisation"
         ]
+      },
+      "AMEA": {
+        "headline_initiative": "India expansion (Kwality Wall's acquisition) + China portfolio relaunch",
+        "growth": [
+          "India: acquired Kwality Wall's, completed 30 Mar 2026, entering the reporting perimeter from Q2 2026 \u2014 building 4 new factories after sales growth exceeded 50%",
+          "China: rolled out a full 2026 product portfolio (~30 new products across Magnum, Cornetto, Wall's, Layers) \u2014 TMICC's first major China move since its Dec 2025 listing",
+          "Turkiye and Pakistan: double-digit growth in Q1 2026, both volume and price contributing",
+          "Accelerate share growth in China (also stated at Group level, see above)"
+        ],
+        "productivity": [
+          "'Frontline First' execution model \u2014 cited specifically in AMEA's Q1 2026 update as delivering across At-Home and Away-from-Home channels",
+          "Digital Commerce \u2014 maintained double-digit growth"
+        ],
+        "reinvestment": [
+          "Cold-chain and freezer-cabinet infrastructure investment in India specifically \u2014 CEO Peter ter Kulve directly attributes India's 'current weak profitability' to this build-out",
+          "Cabinet fleet expansion named specifically across India, Pakistan, China, and Mexico"
+        ],
+        "named_risk": "China growth was impacted by unfavourable weather late in Q1 2026 \u2014 a real, disclosed near-term headwind, not a structural one",
+        "note": "Unlike Americas/Europe, no single 'our strategy' bullet list for AMEA was found in the original Annual Report \u2014 this is assembled from separate real disclosures (the Q1 2026 Trading Update, H1 2026 results, the India acquisition announcement), not quoted from one source document. This closes most of the AMEA gap flagged in the first pass, though not in the identical single-source format the other two regions have."
       }
     },
     "cross_cutting_initiatives": [
@@ -20123,12 +20244,168 @@
         ],
         "why_it_stands_out": "Directly connects to the GLP-1/weight-loss-drug demand risk already flagged in the ecosystem doc \u2014 Yasso and Breyers Carb Smart are the named 'Better-For-You' hedge, and this growth pillar is the commercial strategy built around that same risk",
         "partner_angle": "Product development, ingredient/formulation partners for low-calorie/high-protein frozen desserts"
+      },
+      {
+        "initiative": "'Frontline First' execution model",
+        "appears_in": [
+          "AMEA (named specifically in the Q1 2026 Trading Update)"
+        ],
+        "why_it_stands_out": "A newly-found named operating model not present in the original 2025 Annual Report \u2014 surfaced only in the Q1 2026 update. Not yet confirmed whether it's AMEA-specific or a broader Group model being rolled out region by region; worth watching for it appearing in Americas/Europe commentary too.",
+        "partner_angle": "Field-execution/frontline sales technology, retail execution monitoring"
+      },
+      {
+        "initiative": "India cold-chain and freezer-cabinet build-out",
+        "appears_in": [
+          "AMEA"
+        ],
+        "why_it_stands_out": "The CEO has personally, publicly attributed India's 'current weak profitability' to this specific investment \u2014 a rare case of a named initiative being directly and candidly tied to a near-term margin cost by leadership itself, not inferred by outside analysis",
+        "partner_angle": "Cold-chain infrastructure, refrigeration/freezer-cabinet manufacturing and financing, last-mile distribution in a developing market"
       }
     ],
     "gaps_not_found_this_pass": [
-      "AMEA (Asia/Middle East/Africa) region's own Growth/Productivity/Re-investment breakdown was not found distinctly in this pass \u2014 only its financial performance figures (from the correlated timeline: +10.9% organic sales growth, the fastest-growing region)",
+      "AMEA's regional strategy is now substantially covered (see regional_strategy.AMEA above) but assembled from separate disclosures rather than one clean source list, unlike Americas/Europe",
       "The exact named list making up the 'Strategic Priorities Performance Multiplier' \u2014 confirmed it exists and its scoring range, not its actual contents",
-      "Exact revenue/colleague figures per region were garbled in extraction (shown as isolated numbers like '2.8' and '7,000' without confirmed units) \u2014 not included here rather than guessed"
+      "Exact revenue/colleague figures per region were garbled in extraction (shown as isolated numbers like '2.8' and '7,000' without confirmed units) \u2014 not included here rather than guessed",
+      "Whether 'Frontline First' is an AMEA-specific model or a broader Group initiative \u2014 only found named in one AMEA-specific update so far",
+      "The India factories' exact locations, timeline, or capital cost were not disclosed in what was found this pass"
+    ]
+  },
+  "consultant_brief": {
+    "generated_date": "2026-09-18",
+    "framing_note": "Everything in this file is analysis and judgment, not a restatement of TMICC's own disclosed facts. Every item cites the real facts it's built on (event/commitment ids, cross-referenced against the ecosystem/strategy/timeline/financials data) \u2014 but the gaps flagged, the connections drawn, and the recommendations made are this project's own synthesis, not TMICC's stated position. Never confuse the two.",
+    "top_gaps": [
+      {
+        "id": "gap-1",
+        "gap": "The exact contents of the 'Strategic Priorities Performance Multiplier' (0-150% of bonus target) are still unknown \u2014 only that it exists and applies to both CEO and CFO.",
+        "why_it_matters": "This determines up to 150% of a real bonus component, on top of the financial factor \u2014 meaning it's a genuine second lever on how leadership is incentivized, and right now no outside party can verify whether it rewards the things that matter most (resolving the Ben & Jerry's dispute cleanly, executing the India build-out safely) or something else entirely."
+      },
+      {
+        "id": "gap-2",
+        "gap": "India's new factories have no disclosed locations, timeline, or capital cost.",
+        "why_it_matters": "CEO Peter ter Kulve has openly attributed India's 'weak profitability' to this exact build-out \u2014 but without a timeline, there's no way to model when that margin drag actually ends, which is a real blind spot given India's sales growth already exceeds 50%."
+      },
+      {
+        "id": "gap-3",
+        "gap": "No disclosed financial exposure figure for the Ben & Jerry's litigation \u2014 not even a 'not material' statement with a number attached.",
+        "why_it_matters": "Two claims survived in full, concerning two missed $2.5m payments ($5m total) plus whatever ongoing legal costs and Foundation-funding exposure exist. Against TMICC's ~EUR8bn revenue scale this is probably immaterial \u2014 but 'probably' isn't the same as a disclosed number, and the dispute's real reputational dimension (an active boycott threat) isn't captured by the legal claim's dollar value alone."
+      },
+      {
+        "id": "gap-4",
+        "gap": "Whether 'Frontline First' is an AMEA-specific initiative or a Group-wide model being tested for wider rollout.",
+        "why_it_matters": "It's cited as a real driver of AMEA's Q1 2026 results, but has appeared in exactly one source so far. If it's headed to Americas/Europe, that's a genuine near-term catalyst worth tracking before it's confirmed publicly."
+      },
+      {
+        "id": "gap-5",
+        "gap": "No named cocoa, vanilla, or packaging-material trading-house supplier anywhere in this research (carried over from the ecosystem doc).",
+        "why_it_matters": "TMICC discloses sourcing standards (Fairtrade, RSPO, Rainforest Alliance) but not the actual trading partners \u2014 a real limit on assessing concentration risk or identifying where a sourcing/logistics partner could plausibly help."
+      }
+    ],
+    "connected_dots": [
+      {
+        "id": "dot-1",
+        "title": "AMEA's headline numbers likely hide two very different businesses inside one region",
+        "connects": [
+          "AMEA's 22.9% FY2025 Adjusted EBITDA margin (highest of the three regions)",
+          "CEO's admission that India specifically has 'weak profitability' from cold-chain capex",
+          "India only entered the reporting perimeter in Q2 2026, so its drag isn't even fully reflected in the FY2025 22.9% figure yet"
+        ],
+        "insight": "The 22.9% figure almost certainly describes a mature 'core AMEA' (Turkiye, Pakistan, established China operations) blended with a nascent, currently-dilutive India business that wasn't even in the numbers for all of FY2025. As India scales inside AMEA's reporting, the region's blended margin could compress even while the underlying mature business stays strong \u2014 a real risk that the market reads as 'AMEA weakening' when it may just be 'AMEA absorbing a new growth market.'"
+      },
+      {
+        "id": "dot-2",
+        "title": "The productivity programme's mature-market savings are plausibly funding growth-market capex",
+        "connects": [
+          "EUR90m H1 2026 savings, EUR70m of it from supply chain",
+          "the named 'US end-to-end supply chain reset' (a mature-market productivity initiative)",
+          "India's cold-chain/freezer-cabinet build-out (a growth-market capex initiative)"
+        ],
+        "insight": "TMICC doesn't explicitly say savings from one region fund investment in another \u2014 but the same productivity programme is extracting cost out of mature supply chains while capex flows into new cold-chain infrastructure in India. Whether or not this is formally how capital allocation works internally, it's the practical effect, and it's a real story for how the 'medium-term margin improvement' commitment can hold even while a specific growth market drags on margin."
+      },
+      {
+        "id": "dot-3",
+        "title": "Two unrelated governance-friction events in 2026 are really the same underlying question",
+        "connects": [
+          "Ben & Jerry's independent board dispute (independence from TMICC)",
+          "22.63% AGM dissent on the new executive incentive plan (alignment between leadership and shareholders)"
+        ],
+        "insight": "Legally and factually these are unconnected. But both are real, dated 2026 instances of a governance stakeholder pushing back on how TMICC's leadership exercises control \u2014 one from a subsidiary brand's board, one from public shareholders. Treated as a single composite 'governance scrutiny' signal rather than two footnotes, this reads as a leadership team facing real oversight friction on two fronts in its first full year as an independent company."
+      },
+      {
+        "id": "dot-4",
+        "title": "TMICC's fastest growth is structurally expanding its own largest emissions source",
+        "connects": [
+          "The 3-million-unit freezer cabinet fleet, already TMICC's single largest disclosed emissions category and not even TMICC-owned",
+          "cabinet fleet expansion explicitly named across India, Pakistan, China, and Mexico \u2014 the same markets driving AMEA's growth",
+          "TMICC's stated Net Zero by 2050 ambition, with an already-disclosed absence of a TNFD-aligned transition plan"
+        ],
+        "insight": "Every unit of real growth in TMICC's best-performing region adds to the exact liability its own sustainability disclosures flag as the biggest emissions problem. This tension isn't reconciled anywhere in what TMICC has disclosed \u2014 the growth strategy and the climate ambition are being pursued in parallel without a visible bridge between them."
+      },
+      {
+        "id": "dot-5",
+        "title": "The GLP-1 demand-risk hedge is real but geographically incomplete",
+        "connects": [
+          "Yasso and Breyers Carb Smart named specifically as the 'Better-For-You' hedge against weight-loss drugs",
+          "this hedge is named only in Americas strategy, where GLP-1 adoption is real and disclosed as 'largely a US issue but increasing globally'"
+        ],
+        "insight": "No equivalent hedge is named for Europe or AMEA. That may be a reasonable reflection of lower current GLP-1 penetration outside the US \u2014 or it may be an unaddressed gap in markets where adoption is starting to rise. Worth watching for whether a Better-For-You push shows up in Europe/AMEA commentary as GLP-1 usage spreads."
+      }
+    ],
+    "recommendations": [
+      {
+        "id": "rec-1",
+        "recommendation": "Report a like-for-like 'core AMEA' margin figure that excludes India's build-out phase, alongside the blended regional number.",
+        "built_on": [
+          "dot-1"
+        ],
+        "why": "Protects the market from misreading a deliberate, temporary investment drag as underlying regional weakness \u2014 directly addresses the real risk in dot-1.",
+        "partner_angle": "Financial reporting / segment-disclosure advisory."
+      },
+      {
+        "id": "rec-2",
+        "recommendation": "Attach a stated end-date or capital cap to the India cold-chain build-out the next time results are discussed.",
+        "built_on": [
+          "gap-2",
+          "dot-1"
+        ],
+        "why": "The CEO has already candidly named the cause of India's weak profitability \u2014 the natural next step for credibility is naming when it resolves, which materially de-risks the medium-term margin commitment.",
+        "partner_angle": "Cold-chain infrastructure planning, capex financing/leasing structures for a developing-market freezer-cabinet rollout."
+      },
+      {
+        "id": "rec-3",
+        "recommendation": "Engage the top named shareholders (BlackRock, Goldman Sachs, Fidelity, Allan & Gill Gray Foundation) on governance directly and proactively, treating the Ben & Jerry's dispute and the AGM pay-dissent as one governance narrative rather than two separate issues.",
+        "built_on": [
+          "dot-3"
+        ],
+        "why": "A unified governance-reassurance engagement ahead of the next AGM is a stronger position than responding to each issue in isolation, especially with a second AGM vote on the horizon.",
+        "partner_angle": "Shareholder/investor-relations advisory, governance consulting."
+      },
+      {
+        "id": "rec-4",
+        "recommendation": "Disclose a real financial exposure estimate for the Ben & Jerry's litigation, even if the headline is 'not expected to be material.'",
+        "built_on": [
+          "gap-3"
+        ],
+        "why": "Removes a currently-invisible modeling risk for anyone valuing the stock, and is a low-cost way to draw a line under the legal (though not reputational) dimension of the dispute.",
+        "partner_angle": "Legal/financial disclosure advisory."
+      },
+      {
+        "id": "rec-5",
+        "recommendation": "Publish a credible bridge between the growth strategy's cabinet-fleet expansion and the Net Zero 2050 ambition \u2014 even a stated transition-plan timeline would close a real, currently-visible gap.",
+        "built_on": [
+          "dot-4"
+        ],
+        "why": "TMICC's own sustainability disclosures already name the freezer cabinet fleet as the top emissions source and admit no TNFD-aligned transition plan exists yet \u2014 leaving this unreconciled while actively expanding the fleet is a real, growing credibility gap, not a future problem.",
+        "partner_angle": "Sustainability/decarbonization consulting, low-carbon refrigeration technology, carbon transition planning."
+      },
+      {
+        "id": "rec-6",
+        "recommendation": "Confirm and communicate whether 'Frontline First' is being tested for Americas/Europe rollout.",
+        "built_on": [
+          "gap-4"
+        ],
+        "why": "If it's genuinely driving AMEA's results, clarity on wider rollout is a real near-term catalyst worth getting ahead of rather than leaving as an open question analysts have to piece together themselves.",
+        "partner_angle": "Field-execution/retail-execution technology, sales-force enablement."
+      }
     ]
   }
 }

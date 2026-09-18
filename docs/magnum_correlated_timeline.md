@@ -1,12 +1,14 @@
 # The Magnum Correlated Timeline
 
-TMICC's own disclosed strategic decisions, laid against the competitor moves and macro-commodity swings happening around them in the same window (Nov 2024 – Sept 2026, with one baseline event from Dec 2022). Structured data lives in `data/raw/magnum_correlated_timeline.json` (42 dated events, 6 flagged correlation patterns); this is the narrative read.
+TMICC's own disclosed strategic decisions, laid against the competitor moves and macro-commodity swings happening around them in the same window (Nov 2024 – Sept 2026, with one baseline event from Dec 2022). Structured data lives in `data/raw/magnum_correlated_timeline.json` (**48 dated events, 9 flagged correlation patterns** as of 18 Sep 2026); this is the narrative read.
 
 **Deepened in a second pass** to add the real Ben & Jerry's/TMICC governance dispute (18 new events, Nov 2024 – Sept 2026), the H1 2026 results, the Froneri/Dreyer's product recall, the Lakeland Dairies pollution fine, and the current share-price picture — see "The governance dispute" section below, and patterns 4-6.
 
+**Deepened again, 18 Sep 2026** (6 more events, patterns 7-9): refined the vague Aug 2026 "lawsuit narrowed" entry with the real ruling detail (Judge P. Kevin Castel dismissed 7 of 10 claims; the 2 that survived concern $5m in missed payments tied to a 2022 Palestinian-territories trademark settlement); added TMICC's India acquisition (Kwality Wall's), the Q1 2026 Trading Update, the real €90m/€500m productivity-programme progress figure, the new executive incentive plan's 22.63% shareholder dissent, and the Ben & Jerry's Foundation's funding-suspension risk. The table below still reflects the pre-18-Sep-2026 42-event state — the JSON is the current source of truth going forward rather than re-generating this table every pass; see `docs/magnum_consultant_brief.md` for what this new material adds up to.
+
 This is the second layer on top of `docs/magnum_ecosystem.md` — that document answered *who TMICC is connected to*; this one answers *when things actually happened, and what happened at the same time*.
 
-## The six patterns worth a strategist's attention
+## The nine patterns worth a strategist's attention
 
 ### 1. TMICC's rocky debut and Nestlé's exit announcement landed exactly one week apart
 - **12 Feb 2026** — TMICC's first maiden full-year results as a standalone company. Messy: sharp declines in earnings and cash flow, profit below forecast, driven partly by one-off separation costs. The stock had closed at an all-time high of $19.87 the day before — then "melted" (AJ Bell's own word) on the results.
@@ -46,6 +48,23 @@ Worth asking directly: is the market rationally judging Ben & Jerry's as immater
 
 This directly validates the Group strategy's specific "Accelerate share growth in China" initiative (see `docs/magnum_strategic_commitments.md`) — the numbers make a real case for weighting future capital allocation toward AMEA even more heavily than the current strategy documents suggest.
 
+### 7. India is TMICC's fastest volume story and its clearest near-term margin drag, at the same time
+- TMICC is building 4 new factories in India after sales growth exceeded 50%.
+- CEO Peter ter Kulve has openly attributed India's "current weak profitability" to cold-chain and freezer-cabinet investment there.
+
+A real, disclosed trade-off sitting directly underneath the Group's medium-term margin-improvement commitment — worth watching for a stated end-date.
+
+### 8. The €500m savings target is running well ahead of a simple straight-line pace
+- €90m delivered in H1 2026 alone — 18% of the full multi-year target in one half-year.
+
+A pace worth re-checking next half-year, not a number to extrapolate confidently from yet — but a genuinely strong start.
+
+### 9. Two separate governance-scrutiny threads in 2026 are really about the same underlying question
+- The Ben & Jerry's board dispute (independence from TMICC) and the 22.63% AGM dissent on the new executive incentive plan (alignment between TMICC's leadership and its shareholders) are legally unrelated.
+- Both are real, dated 2026 instances of a stakeholder pushing back on how TMICC's leadership exercises control.
+
+See `docs/magnum_consultant_brief.md` for where these nine patterns (plus the ecosystem and strategy data) add up to actual recommendations.
+
 ## The governance dispute — Ben & Jerry's vs TMICC
 
 The single richest thread found in this pass, running from November 2024 through the date this was written, and still unresolved. Presented here exactly as each side has filed or stated it — this is a real, contested dispute with an active defamation suit in progress, not a settled matter, and it touches a genuinely sensitive underlying issue (statements on Israel/Gaza). Every claim below is attributed to whoever made it; none is presented as established fact.
@@ -62,7 +81,8 @@ The single richest thread found in this pass, running from November 2024 through
 - **27 Mar 2026** — Former chair Anuradha Mittal files her own defamation suit.
 - **9 May 2026** — A consumer boycott threat puts TMICC on the defensive.
 - **1 Jul 2026** — The suit reaches a "crucial stage," per trade press.
-- **27 Aug 2026** — The suit is narrowed; TMICC formally takes over Unilever's role as defendant.
+- **22 Aug 2026** — Judge P. Kevin Castel (Southern District of NY) dismisses 7 of 10 claims (plus part of an 8th) — mostly the claims about Ben & Jerry's speech, board composition, and director appointment/removal. Two claims survive in full: missed payments under a 2022 settlement, where Unilever had agreed to pay Ben & Jerry's two installments of $2.5m each (arising from licensing the Ben & Jerry's trademark in the Occupied Palestinian Territories without the Independent Board's approval) and allegedly didn't. TMICC formally replaces Unilever as defendant for the surviving claims.
+- **1 Sep 2026** — The Ben & Jerry's Foundation states its operations are at risk of suspension unless funding is restored — a real operational-continuity consequence of the same dispute, not just a legal or reputational matter.
 - **15 Sept 2026** — TMICC's filing calls Mittal "abusive, discriminatory and unprofessional," alleges she fostered a toxic culture and misdirected ~$350,000 in Foundation funds to a nonprofit she founded (the Oakland Institute). Mittal's side calls this retaliation for her Palestinian-rights advocacy, and names activist investor **Nelson Peltz** as displeased by that advocacy specifically.
 
 **Why a strategist should care beyond the headlines:** Ben & Jerry's is one of TMICC's most values-driven brands with an unusually activist consumer base — real litigation costs, an active boycott threat, and a named activist investor (Peltz) all sit on top of TMICC's own "brands and portfolio investment" reinvestment pillar and its broader premiumisation strategy. This is a live, material brand-risk thread, not a resolved footnote.

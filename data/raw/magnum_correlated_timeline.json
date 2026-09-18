@@ -1,5 +1,5 @@
 {
-  "generated_date": "2026-09-17",
+  "generated_date": "2026-09-18",
   "window_covered": "2022-12 to 2026-09",
   "purpose": "Correlates TMICC's own disclosed strategic decisions against the same-window competitor and macro-commodity timeline, so a strategist sees not just what TMICC did but what happened around it",
   "timeline": [
@@ -296,6 +296,35 @@
       "source": "foodnavigator.com; globalbankingandfinance.com"
     },
     {
+      "id": "t60",
+      "date": "2026-03-30",
+      "actor": "TMICC",
+      "category": "strategic_decision",
+      "date_precision": "day",
+      "event": "TMICC completes its acquisition of Kwality Wall's in India (plus a Portugal marketing/sales entity, 1 Apr 2026) \u2014 India enters TMICC's reporting perimeter from Q2 2026. A real, closed acquisition, not a stated ambition.",
+      "source": "manilatimes.net Q1 2026 Trading Update; whalesbook.com",
+      "correlates_with": "t61"
+    },
+    {
+      "id": "t61",
+      "date": "2026-04-30",
+      "actor": "TMICC",
+      "category": "strategic_decision",
+      "date_precision": "day",
+      "event": "Q1 2026 Trading Update: AMEA delivers +7.9% organic sales growth (volume and price both contributing); Turkiye and Pakistan post double-digit growth; China posts high-single-digit growth. 'Frontline First' execution model cited as delivering across At-Home and Away-from-Home channels; Digital Commerce maintains double-digit growth.",
+      "source": "globenewswire.com Q1 2026 Trading Update; investegate.co.uk"
+    },
+    {
+      "id": "t62",
+      "date": "2026-05-07",
+      "actor": "TMICC shareholders",
+      "category": "governance",
+      "date_precision": "day",
+      "event": "AGM: Resolution 5, adopting a new executive incentive structure ('Foundation Plan for Growth' \u2014 personal co-investment by senior leaders with real downside risk, not a broad growth-strategy document despite the name), passes with 77.37% in favour but 22.63% against \u2014 over the UK Corporate Governance Code's 20% threshold that legally requires a public update statement on shareholder engagement, which followed on 17 Sept 2026 (see below). A real, dated proxy-governance friction signal, separate from the Ben & Jerry's dispute but in the same broad category: governance scrutiny of TMICC's leadership.",
+      "source": "stocktitan.net Result of AGM; globenewswire.com",
+      "correlates_with": "t65"
+    },
+    {
       "id": "t52",
       "date": "2026-05-09",
       "actor": "Consumers / Ben & Jerry's",
@@ -332,6 +361,16 @@
       "source": "globenewswire.com; investing.com; news.magnumicecream.com"
     },
     {
+      "id": "t63",
+      "date": "2026-07-30",
+      "actor": "TMICC",
+      "category": "strategic_decision",
+      "date_precision": "day",
+      "event": "Within the H1 2026 results (see t54): the productivity programme delivered EUR90m of savings in H1 2026 alone (EUR70m supply chain, EUR20m overheads) - 18% of the EUR500m medium-term target reached in a single half-year, management says the programme 'remains on track.' This is the first real progress figure disclosed against that target since it was set in 2024.",
+      "source": "stocktitan.net H1 2026 results",
+      "correlates_with": "t54"
+    },
+    {
       "id": "t55",
       "date": "2026-08-16",
       "actor": "Froneri (Dreyer's Grand Ice Cream)",
@@ -346,8 +385,8 @@
       "actor": "TMICC / Ben & Jerry's",
       "category": "governance_dispute",
       "date_precision": "day",
-      "event": "The board lawsuit is narrowed by the court, and TMICC formally replaces Unilever as the named defendant/responsible party for the matters at issue \u2014 consistent with TMICC having assumed this liability from Unilever as part of the demerger.",
-      "source": "dairyreporter.com"
+      "event": "Judge P. Kevin Castel (Southern District of NY) rules on the Ben & Jerry's board lawsuit: dismisses 7 of 10 claims (plus part of an 8th) \u2014 mostly the claims about Ben & Jerry's speech, board composition, and director appointment/removal. Two claims survive in full: missed payments under a 2022 settlement, where Unilever had agreed to pay Ben & Jerry's two installments of $2.5m each (arising from licensing the Ben & Jerry's trademark in the Occupied Palestinian Territories without the Independent Board's approval) and allegedly didn't. TMICC formally replaces Unilever as defendant for the surviving claims.",
+      "source": "foodnavigator.com; lawnews.co.uk"
     },
     {
       "id": "t24",
@@ -358,6 +397,16 @@
       "source": "cocoarunners.com; farmforce.com; thecooldown.com",
       "correlates_with": "t17",
       "date_precision": "month"
+    },
+    {
+      "id": "t64",
+      "date": "2026-09-01",
+      "actor": "Ben & Jerry's Foundation",
+      "category": "governance_dispute",
+      "date_precision": "month",
+      "event": "The Ben & Jerry's Foundation states its operations are at risk of suspension unless funding is restored - a real operational-continuity consequence of the same funding dispute underlying TMICC's 15 Sept 2026 'toxic culture' filing (t59), not just a reputational or legal matter anymore.",
+      "source": "just-food.com; foodbev.com",
+      "correlates_with": "t59"
     },
     {
       "id": "t57",
@@ -386,6 +435,15 @@
       "date_precision": "day",
       "event": "TMICC's court filing alleges former chair Anuradha Mittal was \"abusive, discriminatory and unprofessional,\" fostered a toxic board culture, appointed personal contacts over independent candidates, and directed roughly $350,000 from the Ben & Jerry's Foundation to the Oakland Institute, a nonprofit she founded. Mittal's camp responds that this is a retaliatory \"campaign to intimidate, threaten, and character assassinate\" her over her advocacy for Palestinian human rights, naming activist investor Nelson Peltz as displeased by that advocacy specifically. Both sides' claims are disputed and unresolved as of this pass \u2014 presented here exactly as each side has filed/stated it, not as established fact either way.",
       "source": "insurancejournal.com; nwaonline.com; arkansasonline.com"
+    },
+    {
+      "id": "t65",
+      "date": "2026-09-17",
+      "actor": "TMICC",
+      "category": "governance",
+      "date_precision": "day",
+      "event": "TMICC publishes its required shareholder-engagement update statement following the May 2026 AGM's 22.63% dissent on the executive incentive resolution (t62), as mandated by the UK Corporate Governance Code.",
+      "source": "globenewswire.com AGM Update Statement Resolution 5"
     }
   ],
   "correlation_patterns": [
@@ -449,6 +507,33 @@
         "t54"
       ],
       "strategist_note": "FY2025 Adjusted EBITDA margin: AMEA 22.9% vs Europe & ANZ 13.1% and Americas 14.1% \u2014 while AMEA also posted the fastest organic sales growth both in FY2025 (+10.9%) and H1 2026 (+7.6%, still far ahead of the other two regions even as it decelerates). This directly validates the Group strategy's specific 'Accelerate share growth in China' initiative (see the Strategy tab) \u2014 the numbers make a real case for weighting future capital allocation toward AMEA even more heavily than the current strategy documents suggest."
+    },
+    {
+      "id": "c7",
+      "title": "India is TMICC's fastest volume growth story and its clearest near-term margin drag, at the same time",
+      "related_event_ids": [
+        "t60",
+        "t61"
+      ],
+      "strategist_note": "TMICC is building 4 new factories in India after sales growth exceeded 50%, and CEO Peter ter Kulve has openly attributed 'current weak profitability' there to cold-chain and freezer-cabinet investment in a developing market. That's a real, disclosed trade-off, not a hidden one - but it sits directly underneath the Group's medium-term 40-60bps margin-improvement commitment. Worth watching whether India's margin drag has a stated end-date, or whether it's open-ended as long as volume growth continues."
+    },
+    {
+      "id": "c8",
+      "title": "The EUR500m savings target is running well ahead of a simple straight-line pace",
+      "related_event_ids": [
+        "t63"
+      ],
+      "strategist_note": "EUR90m in one half-year is 18% of the full multi-year EUR500m target already. A simple annualized read (EUR90m x roughly 5-6 half-years to reach EUR500m) would land TMICC ahead of its own 'medium-term' framing - though half-year progress rarely stays linear (early wins are often the easiest), so this is a pace worth re-checking next half-year, not a number to extrapolate confidently yet."
+    },
+    {
+      "id": "c9",
+      "title": "Two separate governance-scrutiny threads ran in parallel through 2026, and both are about the same underlying question: who actually controls TMICC's decisions",
+      "related_event_ids": [
+        "t62",
+        "t59",
+        "t64"
+      ],
+      "strategist_note": "The Ben & Jerry's board dispute (independence from TMICC) and the 22.63% AGM dissent on the executive incentive plan (alignment between TMICC's leadership and its shareholders) are legally and factually unrelated - but both are real, dated instances of a governance stakeholder pushing back on how TMICC's leadership exercises control, in the same year. A strategist tracking 'is TMICC's governance under more scrutiny than peers' should treat these as two data points on the same question, not two unrelated footnotes."
     }
   ]
 }

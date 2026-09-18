@@ -36,6 +36,7 @@ frozen-dessert-dashboard/
 │   │   ├── magnum_ecosystem.json              # real, extracted from TMICC's own Annual Report
 │   │   ├── magnum_correlated_timeline.json    # real, dated, cross-referenced
 │   │   ├── magnum_strategic_commitments.json  # real, back-traced decision -> strategy -> initiative
+│   │   ├── magnum_consultant_brief.json       # ANALYSIS, not fact — gaps/dots/recommendations
 │   │   ├── news/raw_items.json                # live, from fetch_competitor_news.py
 │   │   ├── production/       #   Panel removed for now (see below) — data kept, untouched
 │   │   ├── nutrition/        #   Nutrition & Regulatory Exposure (USDA)
@@ -48,7 +49,8 @@ frozen-dessert-dashboard/
 ├── docs/
 │   ├── magnum_ecosystem.md               # narrative version of magnum_ecosystem.json
 │   ├── magnum_correlated_timeline.md     # narrative version of magnum_correlated_timeline.json
-│   └── magnum_strategic_commitments.md   # narrative version of magnum_strategic_commitments.json
+│   ├── magnum_strategic_commitments.md   # narrative version of magnum_strategic_commitments.json
+│   └── magnum_consultant_brief.md        # narrative version of magnum_consultant_brief.json
 └── README.md
 ```
 
@@ -66,6 +68,7 @@ The page is a tab-based single-pager, not a stacked scroll of every panel — cl
 | Timeline | Cross-referenced from the ecosystem doc + targeted research | real, dated, sourced |
 | Financials | Unilever/TMICC full-year results disclosures | real |
 | Nutrition | USDA FoodData Central | real (mock fallback if the file's missing) |
+| Brief | This project's own synthesis, built on all of the above | **analysis/judgment — not a TMICC fact, deliberately kept in its own file so it's never confused with one** |
 
 Production & Sales Trend (Eurostat NACE C1052, Germany) is **removed from view for now** — see "The ground-up rebuild" below.
 
@@ -135,6 +138,14 @@ Both tabs were substantially deepened in a later pass, following the same back-t
 
 - **Financials** now includes FY2025 Adjusted EBITDA margin by region (AMEA's 22.9% dwarfs Europe & ANZ's 13.1% and Americas' 14.1% — both fastest-growing and most profitable), real H1 2026 results (announced 30 Jul 2026: +4.7% OSG, full-year guidance reaffirmed), and dated share-price snapshots (IPO $9.1bn market cap → Feb 2026 "meltdown" low of $12.94 → Sept 2026 recovery to $19.50/$11.99bn, up ~32% from IPO).
 - **Timeline** grew from 24 to 42 events and from 3 to 6 correlation patterns, adding a real, ongoing governance dispute between TMICC and Ben & Jerry's independent board — litigation running from Nov 2024 to the present, including a defamation suit and a consumer boycott threat. Handled with careful neutral sourcing given its sensitivity (it touches statements on Israel/Gaza) — every claim is attributed to whoever made it, none presented as settled fact. See `docs/magnum_correlated_timeline.md`'s dedicated section.
+
+## Deepened again (18 Sep 2026): India/AMEA closed, a real court ruling, and a new Consultant's Brief tab
+
+- **AMEA's standing gap is closed**: TMICC's real India acquisition (Kwality Wall's, 4 new factories after 50%+ sales growth), China's 2026 portfolio relaunch, and a newly-found "Frontline First" execution model. CEO Peter ter Kulve has personally attributed India's weak profitability to its cold-chain build-out — a real, disclosed margin/growth trade-off.
+- **The €500m savings target got its first real progress figure**: €90m in H1 2026 alone (18% of the target in one half-year).
+- **A new executive incentive plan drew real shareholder pushback**: the "Foundation Plan for Growth" passed at the May 2026 AGM with 22.63% against — over the UK Corporate Governance Code's 20% dissent threshold.
+- **The Ben & Jerry's ruling got precise**: the vague "lawsuit narrowed" entry was refined with the actual 22 Aug 2026 ruling (Judge Castel dismissed 7 of 10 claims; 2 survive concerning $5m in missed payments tied to a 2022 Palestinian-territories trademark settlement) — timeline grew to 48 events, 9 patterns.
+- **New: the Consultant's Brief tab.** Everything above is real fact; this tab is deliberately different — analysis and judgment built on top of it (top gaps, connected dots across all four research tabs, and concrete recommendations), kept in its own file (`magnum_consultant_brief.json`) specifically so it's never confused with a TMICC-stated fact. See `docs/magnum_consultant_brief.md`.
 
 ## Customizing
 

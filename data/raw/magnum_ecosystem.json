@@ -1,6 +1,6 @@
 {
   "company": "The Magnum Ice Cream Company N.V. (TMICC)",
-  "generated_date": "2026-09-15",
+  "generated_date": "2026-09-18",
   "primary_source": {
     "file": "146292742.pdf",
     "type": "TMICC 2025 Annual Report",
@@ -51,7 +51,8 @@
     {"brand": "Yasso", "acquired": 2023, "note": "positioned as a 'Better-For-You' line — relevant to the GLP-1/weight-loss-drug risk factor below; carrying value ~€362m (2025)"},
     {"brand": "Breyers", "region": "Americas", "note": "'Breyers Carb Smart' also positioned as Better-For-You; 'Breyers S'mores' range launched across tubs/sticks/sandwiches"},
     {"brand": "Popsicle", "region": "Americas", "note": "relaunch effort described internally as 'rebuilding the yellow door'"},
-    {"brand": "Carte d'Or", "region_note": "seen paired with 'Chunkies' variant in Turkiye market commentary"}
+    {"brand": "Carte d'Or", "region_note": "seen paired with 'Chunkies' variant in Turkiye market commentary"},
+    {"brand": "Kwality Wall's", "acquired": 2026, "note": "India — acquisition completed 30 Mar 2026, entered TMICC's reporting perimeter Q2 2026; TMICC building 4 new factories there after sales growth exceeded 50%. See docs/magnum_strategic_commitments.md's AMEA section for the full India build-out detail."}
   ],
   "joint_ventures_subsidiaries_associates": [
     {
@@ -168,7 +169,10 @@
     "note": "Not found in the first research pass — closed via a later, deeper pass into the same Annual Report's remuneration section (see docs/magnum_strategic_commitments.md)"
   },
   "material_developments_since_first_pass": [
-    "A real, ongoing governance dispute between TMICC and Ben & Jerry's independent board (board removed 1 Jan 2026, active litigation, a defamation suit, and a consumer boycott threat) — full detail with careful neutral sourcing in docs/magnum_correlated_timeline.md, since it involves a genuinely sensitive underlying issue (statements on Israel/Gaza) and is unresolved, contested litigation"
+    "A real, ongoing governance dispute between TMICC and Ben & Jerry's independent board (board removed 1 Jan 2026, active litigation, a defamation suit, and a consumer boycott threat) — full detail with careful neutral sourcing in docs/magnum_correlated_timeline.md, since it involves a genuinely sensitive underlying issue (statements on Israel/Gaza) and is unresolved, contested litigation",
+    "22 Aug 2026: a US federal judge dismissed 7 of 10 claims in the Ben & Jerry's board lawsuit, but let stand claims over two missed $2.5m payments tied to a 2022 Palestinian-territories trademark licensing settlement — see docs/magnum_correlated_timeline.md",
+    "30 Mar 2026: TMICC completed its acquisition of Kwality Wall's in India, entering the reporting perimeter from Q2 2026 and now building 4 new factories there — see docs/magnum_strategic_commitments.md's AMEA section",
+    "7 May 2026: a new executive incentive structure ('Foundation Plan for Growth') passed at AGM with 22.63% shareholder opposition — a real governance-friction signal separate from the Ben & Jerry's dispute — see docs/magnum_strategic_commitments.md"
   ],
   "gaps_not_found_this_pass": [
     "No named cocoa/vanilla trading-house supplier (Cargill, Olam, Barry Callebaut appears only as an unrelated TSR peer)",

@@ -4,6 +4,8 @@ Where `docs/magnum_ecosystem.md` maps *who* TMICC is connected to, this maps *wh
 
 All of it comes from the same primary source as the ecosystem doc: TMICC's own 2025 Annual Report (`146292742.pdf`), specifically the "Our strategy" and remuneration sections — extracted directly from the PDF's text, not summarized from a secondary source.
 
+**Update, 18 Sep 2026:** a second research pass closed the standing AMEA gap and added real, dated developments beyond the Annual Report — TMICC's India acquisition (Kwality Wall's, completed 30 Mar 2026, 4 new factories underway after 50%+ sales growth), China's full 2026 portfolio rollout, the newly-named "Frontline First" execution model, real progress against the €500m productivity target (€90m delivered in H1 2026 alone), and a new executive incentive structure ("Foundation Plan for Growth") that drew real 22.63% shareholder dissent at the May 2026 AGM. See the AMEA section under Regional Strategy and the new "Foundation Plan for Growth" entry below. **This same pass also produced `docs/magnum_consultant_brief.md`** — the actionable synthesis layer built on top of everything in this document.
+
 ## The four headline commitments
 
 | Commitment | Number | Note |
@@ -34,11 +36,19 @@ TMICC states one Group-level framework — Growth / Productivity / Re-investment
 - Productivity: supply chain transformation, overhead reduction, volume growth for higher asset utilisation.
 - Re-investment: brands/portfolio investment, Away-from-Home cabinet expansion, supply chain network optimisation.
 
-**AMEA is a real gap** — its own regional breakdown wasn't found in this pass, only its financial results (from the correlated timeline: +10.9% organic sales growth, the fastest-growing region). Worth a targeted follow-up pass.
+**AMEA** (headline: **India expansion + China portfolio relaunch** — closed in the 18 Sep 2026 pass, assembled from real disclosures rather than one clean source list the way Americas/Europe are):
+- Growth: India — acquired Kwality Wall's (completed 30 Mar 2026), entering the reporting perimeter from Q2 2026, building 4 new factories after sales growth exceeded 50%; China — rolled out a full 2026 product portfolio (~30 new products, 4 brands), TMICC's first major China move since listing; Turkiye and Pakistan posted double-digit Q1 2026 growth.
+- Productivity: the newly-named **"Frontline First"** execution model (found only in AMEA's Q1 2026 update so far — not yet confirmed as Group-wide); Digital Commerce maintaining double-digit growth.
+- Re-investment: cold-chain and freezer-cabinet infrastructure in India specifically — CEO Peter ter Kulve has directly attributed India's "current weak profitability" to this build-out; cabinet fleet expansion named across India, Pakistan, China, and Mexico.
+- Named risk: China growth was hit by unfavourable weather late in Q1 2026.
+
+**Real progress against the €500m savings target, first time disclosed:** H1 2026 delivered **€90m** in savings (€70m supply chain, €20m overheads) — 18% of the full target in one half-year. Management says the programme "remains on track." Worth re-checking next half-year before treating this pace as a reliable run-rate.
+
+**A new executive incentive structure, and real shareholder pushback:** the "Foundation Plan for Growth" (despite the name, an incentive structure built around personal co-investment by senior leaders with real downside risk, not a growth-strategy document) passed at the 7 May 2026 AGM with 77.37% in favour — but 22.63% against, crossing the UK Corporate Governance Code's 20% dissent threshold and forcing a public shareholder-engagement update statement (published 17 Sep 2026). A real, dated governance-friction signal distinct from the Ben & Jerry's dispute.
 
 ## Where this creates room to help — the back-traced initiatives
 
-Six named initiatives stood out as genuinely specific (not generic "we will optimise" language) and structurally connected to something real elsewhere in this project's research:
+Eight named initiatives stood out as genuinely specific (not generic "we will optimise" language) and structurally connected to something real elsewhere in this project's research:
 
 1. **Digitally-led demand creation model** — named in Group strategy *and* Americas *and* Europe independently. Three separate mentions of the same specific shift is a real cross-regional priority, not a one-off. → marketing technology, demand-gen platforms, data & analytics.
 2. **Cabinet and frontline digitalisation** — named in every region's Re-investment pillar, and connects directly to a real disclosed risk already in the ecosystem doc: the 3-million-unit freezer cabinet fleet is TMICC's single largest emissions source, and TMICC doesn't even own it. → IoT/smart-cabinet tech, real-time inventory tracking, predictive replenishment, energy-efficiency retrofits.
@@ -46,11 +56,15 @@ Six named initiatives stood out as genuinely specific (not generic "we will opti
 4. **Latin America direct sales distribution system revamp** — a second, distinct Americas productivity initiative, separate from the US supply chain reset. → route-to-market technology, DSD systems, sales-force enablement.
 5. **Turnaround Brazil / Turnaround Italy** — both named explicitly as underperforming markets needing a distinct plan, consistent with the "Italy below par, resetting the business" language already found in the FY2025 results commentary. → market-specific commercial/operational turnaround advisory.
 6. **Calorie-control and high-protein expansion (Americas)** — connects directly to the GLP-1/weight-loss-drug demand risk already flagged in the ecosystem doc, where Yasso and Breyers Carb Smart are named as the "Better-For-You" hedge. This growth pillar is the commercial strategy built around that same risk. → product development, ingredient/formulation partners for low-calorie/high-protein frozen desserts.
+7. **"Frontline First" execution model** — newly found, AMEA-specific so far. → field-execution/retail-execution technology.
+8. **India cold-chain and freezer-cabinet build-out** — the CEO has personally, publicly tied this to a near-term margin cost, a rare case of leadership directly naming the trade-off itself. → cold-chain infrastructure, refrigeration/freezer-cabinet manufacturing and financing.
 
-These are read off what TMICC itself named as specific — not a generic "here's where CPG companies usually need help" list. Whether any of them actually fit what your own company does is a judgment only you can make; this is the map, not the pitch.
+These are read off what TMICC itself named as specific — not a generic "here's where CPG companies usually need help" list. Whether any of them actually fit what your own company does is a judgment only you can make; this is the map, not the pitch. **For the actual "so what" synthesis across all of this plus the ecosystem/timeline/financials data, see `docs/magnum_consultant_brief.md`.**
 
 ## Honest gaps in this pass
 
-- AMEA's own regional strategy breakdown (see above).
+- AMEA's regional strategy is now substantially covered (see above), but assembled from separate disclosures rather than one clean source list, unlike Americas/Europe.
 - The actual contents of the "Strategic Priorities Performance Multiplier."
 - Per-region revenue/colleague figures were garbled in extraction (isolated numbers with no confirmed units) — left out entirely rather than guessed at.
+- Whether "Frontline First" is AMEA-specific or headed for wider rollout.
+- India's factory locations, timeline, and capital cost.

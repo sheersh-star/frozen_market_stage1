@@ -1,0 +1,107 @@
+{
+  "generated_date": "2026-09-18",
+  "framing_note": "Everything in this file is analysis and judgment, not a restatement of TMICC's own disclosed facts. Every item cites the real facts it's built on (event/commitment ids, cross-referenced against the ecosystem/strategy/timeline/financials data) — but the gaps flagged, the connections drawn, and the recommendations made are this project's own synthesis, not TMICC's stated position. Never confuse the two.",
+  "top_gaps": [
+    {
+      "id": "gap-1",
+      "gap": "The exact contents of the 'Strategic Priorities Performance Multiplier' (0-150% of bonus target) are still unknown — only that it exists and applies to both CEO and CFO.",
+      "why_it_matters": "This determines up to 150% of a real bonus component, on top of the financial factor — meaning it's a genuine second lever on how leadership is incentivized, and right now no outside party can verify whether it rewards the things that matter most (resolving the Ben & Jerry's dispute cleanly, executing the India build-out safely) or something else entirely."
+    },
+    {
+      "id": "gap-2",
+      "gap": "India's new factories have no disclosed locations, timeline, or capital cost.",
+      "why_it_matters": "CEO Peter ter Kulve has openly attributed India's 'weak profitability' to this exact build-out — but without a timeline, there's no way to model when that margin drag actually ends, which is a real blind spot given India's sales growth already exceeds 50%."
+    },
+    {
+      "id": "gap-3",
+      "gap": "No disclosed financial exposure figure for the Ben & Jerry's litigation — not even a 'not material' statement with a number attached.",
+      "why_it_matters": "Two claims survived in full, concerning two missed $2.5m payments ($5m total) plus whatever ongoing legal costs and Foundation-funding exposure exist. Against TMICC's ~EUR8bn revenue scale this is probably immaterial — but 'probably' isn't the same as a disclosed number, and the dispute's real reputational dimension (an active boycott threat) isn't captured by the legal claim's dollar value alone."
+    },
+    {
+      "id": "gap-4",
+      "gap": "Whether 'Frontline First' is an AMEA-specific initiative or a Group-wide model being tested for wider rollout.",
+      "why_it_matters": "It's cited as a real driver of AMEA's Q1 2026 results, but has appeared in exactly one source so far. If it's headed to Americas/Europe, that's a genuine near-term catalyst worth tracking before it's confirmed publicly."
+    },
+    {
+      "id": "gap-5",
+      "gap": "No named cocoa, vanilla, or packaging-material trading-house supplier anywhere in this research (carried over from the ecosystem doc).",
+      "why_it_matters": "TMICC discloses sourcing standards (Fairtrade, RSPO, Rainforest Alliance) but not the actual trading partners — a real limit on assessing concentration risk or identifying where a sourcing/logistics partner could plausibly help."
+    }
+  ],
+  "connected_dots": [
+    {
+      "id": "dot-1",
+      "title": "AMEA's headline numbers likely hide two very different businesses inside one region",
+      "connects": ["AMEA's 22.9% FY2025 Adjusted EBITDA margin (highest of the three regions)", "CEO's admission that India specifically has 'weak profitability' from cold-chain capex", "India only entered the reporting perimeter in Q2 2026, so its drag isn't even fully reflected in the FY2025 22.9% figure yet"],
+      "insight": "The 22.9% figure almost certainly describes a mature 'core AMEA' (Turkiye, Pakistan, established China operations) blended with a nascent, currently-dilutive India business that wasn't even in the numbers for all of FY2025. As India scales inside AMEA's reporting, the region's blended margin could compress even while the underlying mature business stays strong — a real risk that the market reads as 'AMEA weakening' when it may just be 'AMEA absorbing a new growth market.'"
+    },
+    {
+      "id": "dot-2",
+      "title": "The productivity programme's mature-market savings are plausibly funding growth-market capex",
+      "connects": ["EUR90m H1 2026 savings, EUR70m of it from supply chain", "the named 'US end-to-end supply chain reset' (a mature-market productivity initiative)", "India's cold-chain/freezer-cabinet build-out (a growth-market capex initiative)"],
+      "insight": "TMICC doesn't explicitly say savings from one region fund investment in another — but the same productivity programme is extracting cost out of mature supply chains while capex flows into new cold-chain infrastructure in India. Whether or not this is formally how capital allocation works internally, it's the practical effect, and it's a real story for how the 'medium-term margin improvement' commitment can hold even while a specific growth market drags on margin."
+    },
+    {
+      "id": "dot-3",
+      "title": "Two unrelated governance-friction events in 2026 are really the same underlying question",
+      "connects": ["Ben & Jerry's independent board dispute (independence from TMICC)", "22.63% AGM dissent on the new executive incentive plan (alignment between leadership and shareholders)"],
+      "insight": "Legally and factually these are unconnected. But both are real, dated 2026 instances of a governance stakeholder pushing back on how TMICC's leadership exercises control — one from a subsidiary brand's board, one from public shareholders. Treated as a single composite 'governance scrutiny' signal rather than two footnotes, this reads as a leadership team facing real oversight friction on two fronts in its first full year as an independent company."
+    },
+    {
+      "id": "dot-4",
+      "title": "TMICC's fastest growth is structurally expanding its own largest emissions source",
+      "connects": ["The 3-million-unit freezer cabinet fleet, already TMICC's single largest disclosed emissions category and not even TMICC-owned", "cabinet fleet expansion explicitly named across India, Pakistan, China, and Mexico — the same markets driving AMEA's growth", "TMICC's stated Net Zero by 2050 ambition, with an already-disclosed absence of a TNFD-aligned transition plan"],
+      "insight": "Every unit of real growth in TMICC's best-performing region adds to the exact liability its own sustainability disclosures flag as the biggest emissions problem. This tension isn't reconciled anywhere in what TMICC has disclosed — the growth strategy and the climate ambition are being pursued in parallel without a visible bridge between them."
+    },
+    {
+      "id": "dot-5",
+      "title": "The GLP-1 demand-risk hedge is real but geographically incomplete",
+      "connects": ["Yasso and Breyers Carb Smart named specifically as the 'Better-For-You' hedge against weight-loss drugs", "this hedge is named only in Americas strategy, where GLP-1 adoption is real and disclosed as 'largely a US issue but increasing globally'"],
+      "insight": "No equivalent hedge is named for Europe or AMEA. That may be a reasonable reflection of lower current GLP-1 penetration outside the US — or it may be an unaddressed gap in markets where adoption is starting to rise. Worth watching for whether a Better-For-You push shows up in Europe/AMEA commentary as GLP-1 usage spreads."
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "rec-1",
+      "recommendation": "Report a like-for-like 'core AMEA' margin figure that excludes India's build-out phase, alongside the blended regional number.",
+      "built_on": ["dot-1"],
+      "why": "Protects the market from misreading a deliberate, temporary investment drag as underlying regional weakness — directly addresses the real risk in dot-1.",
+      "partner_angle": "Financial reporting / segment-disclosure advisory."
+    },
+    {
+      "id": "rec-2",
+      "recommendation": "Attach a stated end-date or capital cap to the India cold-chain build-out the next time results are discussed.",
+      "built_on": ["gap-2", "dot-1"],
+      "why": "The CEO has already candidly named the cause of India's weak profitability — the natural next step for credibility is naming when it resolves, which materially de-risks the medium-term margin commitment.",
+      "partner_angle": "Cold-chain infrastructure planning, capex financing/leasing structures for a developing-market freezer-cabinet rollout."
+    },
+    {
+      "id": "rec-3",
+      "recommendation": "Engage the top named shareholders (BlackRock, Goldman Sachs, Fidelity, Allan & Gill Gray Foundation) on governance directly and proactively, treating the Ben & Jerry's dispute and the AGM pay-dissent as one governance narrative rather than two separate issues.",
+      "built_on": ["dot-3"],
+      "why": "A unified governance-reassurance engagement ahead of the next AGM is a stronger position than responding to each issue in isolation, especially with a second AGM vote on the horizon.",
+      "partner_angle": "Shareholder/investor-relations advisory, governance consulting."
+    },
+    {
+      "id": "rec-4",
+      "recommendation": "Disclose a real financial exposure estimate for the Ben & Jerry's litigation, even if the headline is 'not expected to be material.'",
+      "built_on": ["gap-3"],
+      "why": "Removes a currently-invisible modeling risk for anyone valuing the stock, and is a low-cost way to draw a line under the legal (though not reputational) dimension of the dispute.",
+      "partner_angle": "Legal/financial disclosure advisory."
+    },
+    {
+      "id": "rec-5",
+      "recommendation": "Publish a credible bridge between the growth strategy's cabinet-fleet expansion and the Net Zero 2050 ambition — even a stated transition-plan timeline would close a real, currently-visible gap.",
+      "built_on": ["dot-4"],
+      "why": "TMICC's own sustainability disclosures already name the freezer cabinet fleet as the top emissions source and admit no TNFD-aligned transition plan exists yet — leaving this unreconciled while actively expanding the fleet is a real, growing credibility gap, not a future problem.",
+      "partner_angle": "Sustainability/decarbonization consulting, low-carbon refrigeration technology, carbon transition planning."
+    },
+    {
+      "id": "rec-6",
+      "recommendation": "Confirm and communicate whether 'Frontline First' is being tested for Americas/Europe rollout.",
+      "built_on": ["gap-4"],
+      "why": "If it's genuinely driving AMEA's results, clarity on wider rollout is a real near-term catalyst worth getting ahead of rather than leaving as an open question analysts have to piece together themselves.",
+      "partner_angle": "Field-execution/retail-execution technology, sales-force enablement."
+    }
+  ]
+}

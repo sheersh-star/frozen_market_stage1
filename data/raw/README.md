@@ -16,6 +16,11 @@ account of what was cut and why.
                                       initiative actually delivering it, by region where TMICC
                                       discloses regional detail. Same source PDF, "Our strategy"
                                       and remuneration sections specifically. Real, cited.
+  magnum_consultant_brief.json       ANALYSIS, not fact — top gaps, connected dots across all
+                                      other files, and consultant-style recommendations. Every
+                                      item cites the real fact it's built on; the synthesis
+                                      itself is judgment, kept in its own file on purpose so it's
+                                      never confused with a TMICC-disclosed fact.
   news/raw_items.json                Live news feed output — produced by the separate
                                       fetch_competitor_news.py (run that, not this file, to
                                       refresh it). Zero API keys — Google News RSS.

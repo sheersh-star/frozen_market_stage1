@@ -1,5 +1,5 @@
 {
-  "generated_date": "2026-09-17",
+  "generated_date": "2026-09-18",
   "primary_source": "TMICC 2025 Annual Report (146292742.pdf) — 'Our strategy' and remuneration sections",
   "leadership": {"ceo": "Peter ter Kulve", "cfo": "Abhijit Bhattacharya"},
   "headline_commitments": [
@@ -23,7 +23,8 @@
       "sub_target": "350 to 380 million of that in run-rate savings specifically from the Supply Chain Transformation pillar",
       "quote": "In 2024, we launched a productivity programme targeting 500 million savings in the medium term. A key pillar of the productivity programme is Supply Chain transformation that is designed to create a lean, agile, and customer-focused network and deliver 350 to 380 million in run-rate savings.",
       "governance": "A Transformation Steering Committee was established with clear accountability to drive delivery",
-      "named_risk": "Workforce adaptation through new structures, skill upgrades and effective change management — failure to manage this could result in cost overruns and operational disruption"
+      "named_risk": "Workforce adaptation through new structures, skill upgrades and effective change management — failure to manage this could result in cost overruns and operational disruption",
+      "progress_h1_2026": "EUR90m delivered in H1 2026 alone (EUR70m supply chain, EUR20m overheads) — 18% of the full EUR500m target reached in a single half-year; management says the programme 'remains on track.' First real progress figure disclosed against this target since 2024. A simple pace read (EUR90m/half-year) would land ahead of the medium-term framing if sustained — worth re-checking next half-year rather than extrapolating confidently from one data point."
     },
     {
       "id": "commit-dividend",
@@ -55,6 +56,14 @@
       "Abhijit Bhattacharya (CFO)": "100% of salary"
     },
     "legacy_reference_found": "A separate, differently-weighted set (30% Underlying Sales Growth / 30% Underlying Operating Profit growth / 30% Cash contribution) also appears in the same section of the report, most likely shown as a comparison to the prior Unilever-era LTIP structure rather than TMICC's current one — flagged as uncertain rather than stated as fact, since the surrounding context needed to confirm which plan it belongs to was lost in extraction"
+  },
+  "foundation_plan_for_growth": {
+    "name": "Foundation Plan for Growth",
+    "note": "Despite the name, this is a new executive incentive structure, not a growth-strategy document — built around personal co-investment by senior leaders with real downside risk, intended to align an 'ownership mindset' with shareholder interests.",
+    "adopted_via": "AGM Resolution 5, 7 May 2026",
+    "vote_result": "77.37% in favour, 22.63% against",
+    "governance_flag": "Crossed the UK Corporate Governance Code's 20% dissent threshold, legally requiring a public shareholder-engagement update statement — published 17 Sep 2026",
+    "source": "stocktitan.net Result of AGM; globenewswire.com AGM Update Statement Resolution 5"
   },
   "group_strategy_pillars": {
     "note": "TMICC's own 3-part framework, stated at Group level and then repeated with region-specific tactics below",
@@ -113,6 +122,25 @@
         "Away-from-Home cabinet expansion",
         "Supply chain network optimisation"
       ]
+    },
+    "AMEA": {
+      "headline_initiative": "India expansion (Kwality Wall's acquisition) + China portfolio relaunch",
+      "growth": [
+        "India: acquired Kwality Wall's, completed 30 Mar 2026, entering the reporting perimeter from Q2 2026 — building 4 new factories after sales growth exceeded 50%",
+        "China: rolled out a full 2026 product portfolio (~30 new products across Magnum, Cornetto, Wall's, Layers) — TMICC's first major China move since its Dec 2025 listing",
+        "Turkiye and Pakistan: double-digit growth in Q1 2026, both volume and price contributing",
+        "Accelerate share growth in China (also stated at Group level, see above)"
+      ],
+      "productivity": [
+        "'Frontline First' execution model — cited specifically in AMEA's Q1 2026 update as delivering across At-Home and Away-from-Home channels",
+        "Digital Commerce — maintained double-digit growth"
+      ],
+      "reinvestment": [
+        "Cold-chain and freezer-cabinet infrastructure investment in India specifically — CEO Peter ter Kulve directly attributes India's 'current weak profitability' to this build-out",
+        "Cabinet fleet expansion named specifically across India, Pakistan, China, and Mexico"
+      ],
+      "named_risk": "China growth was impacted by unfavourable weather late in Q1 2026 — a real, disclosed near-term headwind, not a structural one",
+      "note": "Unlike Americas/Europe, no single 'our strategy' bullet list for AMEA was found in the original Annual Report — this is assembled from separate real disclosures (the Q1 2026 Trading Update, H1 2026 results, the India acquisition announcement), not quoted from one source document. This closes most of the AMEA gap flagged in the first pass, though not in the identical single-source format the other two regions have."
     }
   },
   "cross_cutting_initiatives": [
@@ -151,11 +179,25 @@
       "appears_in": ["Americas"],
       "why_it_stands_out": "Directly connects to the GLP-1/weight-loss-drug demand risk already flagged in the ecosystem doc — Yasso and Breyers Carb Smart are the named 'Better-For-You' hedge, and this growth pillar is the commercial strategy built around that same risk",
       "partner_angle": "Product development, ingredient/formulation partners for low-calorie/high-protein frozen desserts"
+    },
+    {
+      "initiative": "'Frontline First' execution model",
+      "appears_in": ["AMEA (named specifically in the Q1 2026 Trading Update)"],
+      "why_it_stands_out": "A newly-found named operating model not present in the original 2025 Annual Report — surfaced only in the Q1 2026 update. Not yet confirmed whether it's AMEA-specific or a broader Group model being rolled out region by region; worth watching for it appearing in Americas/Europe commentary too.",
+      "partner_angle": "Field-execution/frontline sales technology, retail execution monitoring"
+    },
+    {
+      "initiative": "India cold-chain and freezer-cabinet build-out",
+      "appears_in": ["AMEA"],
+      "why_it_stands_out": "The CEO has personally, publicly attributed India's 'current weak profitability' to this specific investment — a rare case of a named initiative being directly and candidly tied to a near-term margin cost by leadership itself, not inferred by outside analysis",
+      "partner_angle": "Cold-chain infrastructure, refrigeration/freezer-cabinet manufacturing and financing, last-mile distribution in a developing market"
     }
   ],
   "gaps_not_found_this_pass": [
-    "AMEA (Asia/Middle East/Africa) region's own Growth/Productivity/Re-investment breakdown was not found distinctly in this pass — only its financial performance figures (from the correlated timeline: +10.9% organic sales growth, the fastest-growing region)",
+    "AMEA's regional strategy is now substantially covered (see regional_strategy.AMEA above) but assembled from separate disclosures rather than one clean source list, unlike Americas/Europe",
     "The exact named list making up the 'Strategic Priorities Performance Multiplier' — confirmed it exists and its scoring range, not its actual contents",
-    "Exact revenue/colleague figures per region were garbled in extraction (shown as isolated numbers like '2.8' and '7,000' without confirmed units) — not included here rather than guessed"
+    "Exact revenue/colleague figures per region were garbled in extraction (shown as isolated numbers like '2.8' and '7,000' without confirmed units) — not included here rather than guessed",
+    "Whether 'Frontline First' is an AMEA-specific model or a broader Group initiative — only found named in one AMEA-specific update so far",
+    "The India factories' exact locations, timeline, or capital cost were not disclosed in what was found this pass"
   ]
 }
