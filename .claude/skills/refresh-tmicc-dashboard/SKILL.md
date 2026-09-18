@@ -76,9 +76,9 @@ Follow this repo's existing commit-message convention: a clear summary line, the
 
 ## Running this
 
-**Decided: manual, on-demand only** — invoke with `/refresh-tmicc-dashboard` whenever a refresh is wanted (e.g., weekly, or right after noticing TMICC has posted results — FY results have landed in Feb, half-year in Jul/Aug so far). Runs on the regular interactive session, no separate billing/usage question to think about.
+**Decided: manual, on-demand only, by explicit organizational choice** — invoke with `/refresh-tmicc-dashboard` whenever a refresh is wanted (e.g., weekly, or right after noticing TMICC has posted results — FY results have landed in Feb, half-year in Jul/Aug so far). Runs on the regular interactive session, no separate billing/usage question to think about.
 
-A scheduled cloud routine (via the `schedule` skill) was considered and explicitly declined — a recurring cloud agent draws on the account's usage/billing the same way any session does, and running this by hand avoids that being a standing, unexamined cost. Revisit only if that calculus changes.
+A scheduled cloud routine (via the `schedule` skill) was built, tested against the real API, and then intentionally not activated — GitHub was never connected to unblock it. It draws on the account's usage/billing the same way any session does, which is the kind of recurring commitment that needs sign-off beyond one person's call. **The routine gets activated only once that sign-off happens** — connect GitHub (`/web-setup` or https://claude.ai/connect-github) and the exact same creation call is ready to run again at that point, not before.
 
 ## What this skill deliberately does not do
 
