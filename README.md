@@ -40,9 +40,8 @@ frozen-dessert-dashboard/
 │   │   ├── magnum_strategic_commitments.json  # real, back-traced decision -> strategy -> initiative
 │   │   ├── magnum_consultant_brief.json       # ANALYSIS, not fact — gaps/dots/recommendations
 │   │   ├── magnum_innovation_signals.json     # competitor "better-for-you" intel — replaces Nutrition tab
-│   │   ├── magnum_annual_report_analysis.json # 10-K Analyzer: 2 documents (FY2025 Annual Report +
-│   │   │                                       # pre-listing registration statement), each with a
-│   │   │                                       # report map + dated, page-cited checkpoints
+│   │   ├── magnum_annual_report_analysis.json # 10-K Analyzer: one entry per fiscal year (FY2025 down
+│   │   │                                       # to FY2022), each with real dated checkpoints/figures
 │   │   ├── news/raw_items.json                # live, from fetch_competitor_news.py
 │   │   ├── production/       #   Panel removed for now (see below) — data kept, untouched
 │   │   ├── nutrition/        #   legacy, unused — superseded by magnum_innovation_signals.json
@@ -74,7 +73,7 @@ The page is a tab-based single-pager, not a stacked scroll of every panel — cl
 | Strategy | Same Annual Report — "Our strategy" and remuneration sections specifically | real, first-party |
 | Timeline | Cross-referenced from the ecosystem doc + targeted research | real, dated, sourced |
 | Financials | Unilever/TMICC full-year results disclosures | real |
-| 10-K Analyzer | TMICC's Annual Report (Form 20-F) + pre-listing registration statement, dropdown-selectable — report map + dated, page-cited strategic checkpoints per document | real, first-party |
+| 10-K Analyzer | FY2025 down to FY2022, dropdown-selectable by year — FY2025 from the real Annual Report (Form 20-F), FY2022-2024 from combined carve-out financials in the pre-listing registration statement | real, first-party |
 | Brief | This project's own synthesis, built on all of the above | **analysis/judgment — not a TMICC fact, deliberately kept in its own file so it's never confused with one** |
 
 Production & Sales Trend (Eurostat NACE C1052, Germany) is **removed from view for now** — see "The ground-up rebuild" below.
@@ -185,6 +184,24 @@ Both tabs were substantially deepened in a later pass, following the same back-t
 - **Fonts**: Fraunces (a genuinely variable/"dynamic" font — optical-size axis 9-144pt plus a weight axis) back for headings, paired with Inter for body, replacing Round 2/3's system-font stack. Reintroduces the Google Fonts load Round 2 had deliberately dropped — a direct trade of "zero external request" for real typographic character, per explicit request.
 - **Dark mode recolored**: chocolate (deep cocoa page/panel, real layering between the two), rose (replacing the previous berry-toned accent), and gold (replacing the previous bronze/amber accent) — re-verified at >=4.5:1 contrast throughout. Light mode untouched.
 - **Viewer-facing copy stripped of build/process narration.** The console's UI previously explained its own construction to visitors — "Rebuilt from the ground up," "Zero API keys," a footer listing every panel removed in past rebuilds, tooltips describing the refresh pipeline's internals, `docs/*.md`/`python3 *.py` references. All of that is now gone from what a visitor actually sees; it still lives here in README.md and in `docs/`, which are for whoever maintains this repo, not for a strategist reading the live dashboard. The underlying data/analysis itself is untouched — gap-labeling and fact/analysis separation inside the actual research content stayed exactly as rigorous as before, since that's business-relevant intelligence, not development history.
+
+## Round 5 (22 Sep 2026): 10-K Analyzer restructured by fiscal year
+
+Previous rounds organized this panel by *document* (Annual Report vs registration statement). Restructured by **fiscal year** instead — FY2025 down to FY2022, most recent first — which is the mental model a strategist actually wants ("show me this year"), sourced honestly underneath regardless of which filing each year's data came from.
+
+This required going back into the pre-listing registration statement (6.9MB/76,000-line SEC HTML filing) and actually extracting its Combined Carve-Out Income Statement tables directly — the specific gap flagged in Round 3 ("FY2022/23/24 figures weren't extracted this pass"). Found and used real, precise figures:
+
+| Year | Revenue | Operating profit | Margin | Net profit |
+|---|---|---|---|---|
+| FY2022 | €7,506m | €737m | 9.8% | €527m |
+| FY2023 | €7,618m | €742m | 9.7% | €509m |
+| FY2024 | €7,947m | €764m | 9.6% | €595m |
+
+Two genuinely non-obvious findings surfaced by actually computing year-over-year change rather than just listing raw figures: **FY2023's net profit fell 3.4% despite revenue growth** (a real hyperinflation monetary loss plus higher taxation ate the gain), and **goodwill/intangibles roughly doubled between FY2022 and FY2024** (€272m→€585m goodwill, €381m→€793m intangibles) — consistent with a real acquisition in that window that wasn't specifically identified, flagged as an honest gap rather than guessed at. Also pulled FY2024's regional revenue split (Europe/ANZ 39%, Americas 36%) and a real H1 2025 vs H1 2024 interim comparison (revenue +2.5%, but operating profit *down* 6.4% — real margin compression) into the FY2025 entry.
+
+The previous "pre-listing registration statement" document entry's Deferred Territories/reorganisation checkpoints (India, Portugal, TSA transitional period, pro forma capitalisation) were merged into the FY2025 entry, since they're all real events from the same 2025 demerger window — the year-based structure doesn't need a separate bucket for them.
+
+`documents` in the JSON is still the schema going forward — one entry per year now instead of per filing — so an actual FY2026 Annual Report (expected ~Feb 2027) becomes a new entry with zero `index.html` changes needed, same as before.
 
 ## Customizing
 

@@ -1,10 +1,10 @@
 {
   "generated_date": "2026-09-22",
-  "framing_note": "A document-native read of TMICC's own filings — a report map and a chronological list of dated strategic checkpoints each document itself states, with page/item citations. Distinct from the Strategy tab (which back-traces commitments to initiatives) and the Timeline tab (which correlates TMICC against competitors/macro events) — this panel stays inside what a single document says, in the order it says it. Multiple documents, selectable via dropdown: TMICC itself has only ever filed ONE true Annual Report (FY2025, since it only began independent existence in Dec 2025) — the second entry here is its pre-listing SEC registration statement, the real document that carries the ice cream business's history before that, honestly labeled as what it actually is rather than mislabeled as a second 'annual report'.",
+  "framing_note": "A document-native read of TMICC's own filings, organized by fiscal year rather than by document — one entry per year, each showing that year's real dated checkpoints and financial figures, with page/item citations back to whichever filing actually covers it. Distinct from the Strategy tab (which back-traces commitments to initiatives) and the Timeline tab (which correlates TMICC against competitors/macro events). Honesty note: TMICC itself has only ever filed one true Annual Report (FY2025) — it only began independent existence in Dec 2025. FY2022-2024 are not separate 'annual reports'; they're combined carve-out financial statements for the Ice Cream Business, extracted from TMICC's own pre-listing SEC registration statement (Form 20FR12B, filed 4 Nov 2025), which is the real document that carries this history. Labeled by year for the strategist's mental model, sourced honestly underneath.",
   "documents": [
     {
-      "id": "fy2025-20f",
-      "label": "FY2025 Annual Report (Form 20-F)",
+      "id": "fy2025",
+      "label": "FY2025",
       "source_document": {
         "title": "The Magnum Ice Cream Company N.V. — Annual Report 2025",
         "filing_type": "Form 20-F (Annual Report), filed with the U.S. SEC — the SEC's annual-report equivalent for a foreign private issuer. TMICC is Netherlands-incorporated and listed on NYSE, LSE, and Euronext Amsterdam, so it files a 20-F rather than a US-domestic 10-K; functionally the same disclosure role, which is why this panel is framed as a 10-K-style analyzer.",
@@ -13,7 +13,7 @@
         "fiscal_year_covered": "FY2025 (year ended 31 December 2025)",
         "filed_with_sec": "18 March 2026",
         "sec_source": "https://www.sec.gov/Archives/edgar/data/2071668/000110465926029805/micc-20251231x20f.htm",
-        "checked_for_newer_reports": "Checked TMICC's investor relations site (corporate.magnumicecream.com/en/investors) and SEC EDGAR, 22 Sep 2026 — this FY2025 report remains the current, latest Annual Report; the FY2026 Annual Report isn't expected until early 2027. Two 2026 Form 6-K filings exist (interim/current disclosures, e.g. AGM results) but are not yet incorporated into this panel — gap, revisit next refresh."
+        "checked_for_newer_reports": "Checked TMICC's investor relations site and SEC EDGAR, 22 Sep 2026 — this FY2025 report remains the current, latest Annual Report; FY2026's isn't expected until early 2027. Two 2026 Form 6-K filings exist but aren't incorporated into this panel yet."
       },
       "report_map": [
         {"chapter": "Management Report", "sections": [
@@ -43,8 +43,28 @@
       ],
       "strategic_checkpoints": [
         {
-          "date": "2024",
-          "checkpoint": "€500 million productivity programme launched",
+          "date": "1 July 2025",
+          "checkpoint": "Reorganisation anchor date — the ice cream business's internal restructuring within Unilever, ahead of the demerger",
+          "detail": "The base date the standalone-group reorganisation is anchored to.",
+          "page": null,
+          "cross_reference": "Registration statement, Item 4"
+        },
+        {
+          "date": "30 June 2025",
+          "checkpoint": "Pro forma capitalisation at listing: €587m cash, €4,049m total indebtedness, €2,143m share capital",
+          "detail": "The balance-sheet snapshot used to size TMICC's opening capital structure ahead of listing — compare against year-end's actual €3,416m financial liabilities below.",
+          "page": null
+        },
+        {
+          "date": "H1 2025 (Jan-Jun)",
+          "checkpoint": "Interim combined carve-out results: revenue €4,503m (H1 2024: €4,394m), operating profit €569m (H1 2024: €608m), net profit €464m",
+          "detail": "Revenue grew +2.5% year-on-year but operating profit fell -6.4% — margin compression in the run-up to listing, worth watching against the full FY2025 figures once available.",
+          "page": null,
+          "cross_reference": "Registration statement, Combined Carve-Out Income Statement"
+        },
+        {
+          "date": "2024 (programme launched)",
+          "checkpoint": "€500 million productivity programme",
           "detail": "Three levers named explicitly: supply chain transformation, overhead reduction, and technology-enabled operations. Designed to deliver savings over the medium term.",
           "page": 17,
           "cross_reference": "Strategy tab — headline commitment 'Cost / separation savings'"
@@ -58,26 +78,39 @@
         {
           "date": "November 2025",
           "checkpoint": "€3 billion debut bond issuance across four tranches (2029, 2031, 2034, 2037)",
-          "detail": "Euro Medium Term Note programme, interest rate range 2.75%-4%, order book oversubscribed more than 7x. Financial liabilities rose to €3,416m (2024: €333m); average debt maturity 7.5 years. This is TMICC's real debt-maturity wall — worth tracking against future refinancing risk.",
+          "detail": "Euro Medium Term Note programme, interest rate range 2.75%-4%, order book oversubscribed more than 7x. Financial liabilities rose to €3,416m (2024: €333m); average debt maturity 7.5 years — TMICC's real debt-maturity wall.",
           "page": 28
+        },
+        {
+          "date": "By January 2026",
+          "checkpoint": "India demerger expected effective; Kwality Wall's India expected to start trading by April 2026",
+          "detail": "India was a Deferred Territory — not part of the main December 2025 demerger, following its own separate timeline. (For comparison: the actual completion tracked in Ecosystem/Strategy was 30 March 2026 — close to, but later than, this original expectation.)",
+          "page": null,
+          "cross_reference": "Ecosystem/Strategy tabs — Kwality Wall's, AMEA / India expansion"
+        },
+        {
+          "date": "Q1 2026",
+          "checkpoint": "Portugal demerger expected effective; Portugal asset sale has up to 3 years from the share sale to complete",
+          "detail": "Portugal was the other named Deferred Territory alongside India — two separate milestones for the same territory.",
+          "page": null
         },
         {
           "date": "2026 (to be drawn)",
           "checkpoint": "€300 million credit facility earmarked for the Indian ice cream business acquisition",
-          "detail": "Financing detail behind the Kwality Wall's transaction (completed 30 Mar 2026, already tracked in the Ecosystem tab) — this is the specific facility funding it, not previously captured.",
+          "detail": "Financing detail behind the Kwality Wall's transaction — the specific facility funding it.",
           "page": 28,
           "cross_reference": "Ecosystem tab — AMEA / India expansion"
         },
         {
           "date": "By 2026",
           "checkpoint": "Full compliance with the 2025 Dutch Corporate Governance Code, Best Practice Provision 1.4.3(ii)-(iv)",
-          "detail": "TMICC's own Board states it is not yet fully compliant as a newly-standalone company, and expects to close the gap by 2026. A real, self-disclosed governance checkpoint distinct from the Foundation Plan for Growth shareholder-dissent issue tracked elsewhere.",
+          "detail": "TMICC's own Board states it is not yet fully compliant as a newly-standalone company, and expects to close the gap by 2026 — distinct from the Foundation Plan for Growth shareholder-dissent issue tracked in the Timeline.",
           "page": 82
         },
         {
-          "date": "By end of 2027",
+          "date": "~End 2027 (30 months from 1 July 2025)",
           "checkpoint": "Exit all remaining Transitional Services Agreements (TSAs) with Unilever",
-          "detail": "TMICC still relies on Unilever for some transitional operational support post-demerger; full independence from these arrangements is targeted for end-2027.",
+          "detail": "TMICC still relies on Unilever for some transitional operational support post-demerger; full independence is targeted for end-2027.",
           "page": 17
         },
         {
@@ -89,121 +122,161 @@
         {
           "date": "From 2026",
           "checkpoint": "New cabinet energy-efficiency technology begins rolling out on new freezer-cabinet purchases",
-          "detail": "Connects directly to the freezer-cabinet fleet risk already flagged in the Ecosystem tab (TMICC's largest single emissions source, and a fleet it doesn't own).",
+          "detail": "Connects directly to the freezer-cabinet fleet risk already flagged in Ecosystem (TMICC's largest single emissions source, a fleet it doesn't own).",
           "page": 171,
           "cross_reference": "Ecosystem tab — disclosed risk factors"
         },
         {
           "date": "By 2050",
           "checkpoint": "Net Zero ambition across Scope 1, 2, and 3 emissions",
-          "detail": "Explicit scenario-planning horizons defined elsewhere in the report: near-term 2026-2030, medium-term 2031-2039 for climate transition-risk modelling.",
+          "detail": "Explicit scenario-planning horizons defined elsewhere: near-term 2026-2030, medium-term 2031-2039.",
           "page": 32
         }
       ],
       "clarifications": [
         {
           "topic": "\"Potential acquisition in India\" in the report's cautionary statement (p.235)",
-          "clarification": "This appears only inside the standard forward-looking-statements disclaimer boilerplate (a list of example statement categories), not as a fresh, separate disclosure. Read in context, it most plausibly refers to the already-known Kwality Wall's transaction rather than signalling a second, undisclosed India deal — flagged here so it isn't mistaken for new news."
+          "clarification": "Appears only inside the standard forward-looking-statements disclaimer boilerplate (a list of example statement categories), not as a fresh disclosure. Most plausibly refers to the already-known Kwality Wall's transaction rather than a second, undisclosed India deal."
         }
       ],
       "gaps_not_found_this_pass": [
-        "The two 2026 Form 6-K filings (interim/current disclosures) haven't been read into this panel yet.",
-        "Exact page numbers for 'Definitions/reconciliation of non-IFRS measures', 'Shareholder information', and 'Cautionary statement' within the Further Information chapter are approximate — the source table of contents' pagination for this chapter was ambiguous in extraction."
+        "The two 2026 Form 6-K filings haven't been read into this panel yet.",
+        "Exact pagination for the 'Further Information' chapter's sub-sections was ambiguous in extraction — approximate, not authoritative."
       ]
     },
     {
-      "id": "pre-listing-20fr12b",
-      "label": "Pre-listing Registration Statement (Form 20FR12B, 2025)",
+      "id": "fy2024",
+      "label": "FY2024",
       "source_document": {
-        "title": "The Magnum Ice Cream Company B.V. — Form 20FR12B Registration Statement",
-        "filing_type": "Form 20FR12B — a registration statement, NOT an annual report. Filed with the SEC ahead of TMICC's Dec 2025 listing to register its shares. Included here because it's the real document carrying the ice cream business's multi-year history before TMICC existed as a standalone filer — TMICC itself has only ever published one true Annual Report (see the FY2025 entry).",
+        "title": "Combined Carve-Out Financial Statements (Ice Cream Business), FY2024",
+        "filing_type": "Not a standalone annual report — figures from the Combined Carve-Out Income Statement and Balance Sheet inside TMICC's pre-listing SEC registration statement (Form 20FR12B). TMICC did not exist as a separate filer in 2024; these are Unilever's ice cream business carved out and restated as if independent.",
         "local_filename": null,
         "pages": null,
-        "fiscal_year_covered": "Combined carve-out financial statements for the three years ended 31 December 2024 (the Ice Cream Business's stand-alone financial position/results/cash flow, carved out of Unilever's own consolidated accounts)",
-        "filed_with_sec": "4 November 2025",
+        "fiscal_year_covered": "FY2024 (year ended 31 December 2024)",
+        "filed_with_sec": "4 November 2025 (as part of the 20FR12B)",
         "sec_source": "https://www.sec.gov/Archives/edgar/data/2071668/000110465925106340/tm2515841-10_20fr12b.htm",
-        "checked_for_newer_reports": "This is the initial 20FR12B; two DRS/A (draft registration statement, amended) versions preceded it in the SEC's filing history but aren't separately analyzed here — the filed 20FR12B supersedes them."
+        "checked_for_newer_reports": null
       },
-      "report_map": [
-        {"chapter": "Offering & Key Information", "sections": [
-          {"title": "Item 1 — Identity of Directors, Senior Management and Advisers", "page": 1},
-          {"title": "Item 2 — Offer Statistics and Expected Timetable", "page": 1},
-          {"title": "Item 3 — Key Information", "page": 1}
-        ]},
-        {"chapter": "Business & Financial Review", "sections": [
-          {"title": "Item 4 — Information on the Company", "page": 29},
-          {"title": "Item 5 — Operating and Financial Review and Prospects", "page": 65},
-          {"title": "Item 6 — Directors, Senior Management and Employees", "page": 101},
-          {"title": "Item 7 — Major Shareholders and Related Party Transactions", "page": 132},
-          {"title": "Item 8 — Financial Information", "page": 133}
-        ]},
-        {"chapter": "The Offer & Additional Information", "sections": [
-          {"title": "Item 9 — The Offer and Listing", "page": 137},
-          {"title": "Item 10 — Additional Information", "page": 137},
-          {"title": "Item 11 — Quantitative and Qualitative Disclosures About Market Risk", "page": 165},
-          {"title": "Items 12-16 — Securities, Defaults, Modifications, Controls (Item 16 reserved)", "page": 166}
-        ]},
-        {"chapter": "Financial Statements & Exhibits", "sections": [
-          {"title": "Items 17-18 — Financial Statements (combined carve-out, FY2022-2024)", "page": 168},
-          {"title": "Item 19 — Exhibits", "page": 168}
-        ]}
-      ],
+      "report_map": [],
       "strategic_checkpoints": [
         {
-          "date": "1 July 2025",
-          "checkpoint": "Principal reorganisation date — the ice cream business's internal corporate restructuring within Unilever, ahead of the demerger",
-          "detail": "The base date the reorganisation into a standalone group is anchored to.",
+          "date": "FY2024",
+          "checkpoint": "Combined carve-out revenue: €7,947m",
+          "detail": "+4.3% vs FY2023's €7,618m — reported revenue growth from the raw carve-out figures, not TMICC's own constant-currency 'organic sales growth' non-IFRS metric (which isn't disclosed for these carve-out years). The strongest of the three carve-out years.",
           "page": null,
-          "cross_reference": "Reorganisation section (Item 4)"
+          "cross_reference": "Registration statement, Combined Carve-Out Income Statement"
         },
         {
-          "date": "By January 2026",
-          "checkpoint": "India demerger expected to become effective",
-          "detail": "Quoted directly: \"expected to become effective by January 2026 and Kwality Wall's India is expected to start trading...by April 2026.\" India was a Deferred Territory — not part of the main December 2025 demerger, following its own separate timeline.",
-          "page": null,
-          "cross_reference": "Ecosystem/Strategy tabs — Kwality Wall's completed 30 Mar 2026, close to but not exactly matching this original expected date"
-        },
-        {
-          "date": "By April 2026",
-          "checkpoint": "Kwality Wall's India expected to start trading as part of TMICC",
-          "detail": "Same Deferred Territories disclosure as above — India's demerger effectiveness and trading start were planned as two separate, sequential milestones.",
+          "date": "FY2024",
+          "checkpoint": "Operating profit €764m (9.6% margin)",
+          "detail": "+3.0% vs FY2023's €742m — profit grew slightly slower than revenue, margin ticked down from 9.7% to 9.6%.",
           "page": null
         },
         {
-          "date": "Q1 2026",
-          "checkpoint": "Portugal demerger expected to become effective",
-          "detail": "Quoted directly: \"expected to become effective by the first quarter of 2026.\" Portugal was the other named Deferred Territory alongside India.",
+          "date": "FY2024",
+          "checkpoint": "Net profit €595m",
+          "detail": "+16.9% vs FY2023's €509m — a real rebound, driven by no hyperinflation monetary loss in 2024 (vs a €10m loss in 2023) and higher operating profit.",
           "page": null
         },
         {
-          "date": "Within 3 years of the share sale",
-          "checkpoint": "Portugal asset sale completion window",
-          "detail": "A longer completion runway than the demerger-effectiveness date itself — the two are distinct milestones for the same territory.",
+          "date": "FY2024",
+          "checkpoint": "Regional split: Europe and ANZ €3.1bn (39% of revenue), Americas €2.9bn (36%)",
+          "detail": "Implies AMEA at roughly €1.9bn (~25%, a residual computed here, not directly disclosed at this granularity). 70% of Group revenue came from developed markets, 30% from emerging markets.",
           "page": null
         },
         {
-          "date": "30 months from 1 July 2025 (i.e. around end-2027)",
-          "checkpoint": "Transitional Period end — the outer boundary for Transitional Services Agreements (TSAs) with Unilever",
-          "detail": "Consistent with the FY2025 Annual Report's own \"exit all TSAs by end of 2027\" checkpoint — this document is the earlier, more precisely-dated version of the same commitment.",
-          "page": null,
-          "cross_reference": "FY2025 Annual Report entry — TSA exit by end of 2027"
-        },
-        {
-          "date": "30 June 2025 (pro forma capitalisation date)",
-          "checkpoint": "Pro forma capitalisation at listing: €587m cash, €4,049m total indebtedness, €2,143m share capital",
-          "detail": "The balance-sheet snapshot used to size TMICC's opening capital structure ahead of listing — a useful baseline to compare against the FY2025 Annual Report's actual post-listing figures (€3,416m financial liabilities at FY2025 year-end).",
+          "date": "FY2024 vs FY2022",
+          "checkpoint": "Goodwill and intangible assets roughly doubled: goodwill €272m to €585m, intangibles €381m to €793m",
+          "detail": "A real, dated balance-sheet signal consistent with a meaningful acquisition somewhere in this window — the specific transaction wasn't identified in this pass.",
           "page": null
         }
       ],
-      "clarifications": [
-        {
-          "topic": "This is not a second Annual Report",
-          "clarification": "TMICC has filed exactly one Annual Report to date (FY2025). This registration statement predates that — it's the prospectus-style document used to register TMICC's shares ahead of listing, built on combined carve-out financials rather than a standalone company's own consolidated accounts. Included here for real historical depth, not to imply TMICC has multiple annual reports."
-        }
-      ],
+      "clarifications": [],
       "gaps_not_found_this_pass": [
-        "Specific FY2022/FY2023/FY2024 combined carve-out revenue, organic sales growth, or margin figures were not extracted this pass — the source document points to Items 17-18 (Financial Statements) for the full figures, which weren't read in detail here. Revisit with a targeted extraction of that item specifically if year-by-year carve-out financials are needed.",
-        "The two preceding DRS/A (draft registration statement) versions weren't compared against the final 20FR12B for material differences."
+        "The specific acquisition(s) behind the FY2022-2024 goodwill/intangibles increase weren't identified.",
+        "No disclosed constant-currency organic sales growth % for this year — only reported revenue growth could be computed."
+      ]
+    },
+    {
+      "id": "fy2023",
+      "label": "FY2023",
+      "source_document": {
+        "title": "Combined Carve-Out Financial Statements (Ice Cream Business), FY2023",
+        "filing_type": "Not a standalone annual report — figures from the Combined Carve-Out Income Statement inside TMICC's pre-listing SEC registration statement (Form 20FR12B).",
+        "local_filename": null,
+        "pages": null,
+        "fiscal_year_covered": "FY2023 (year ended 31 December 2023)",
+        "filed_with_sec": "4 November 2025 (as part of the 20FR12B)",
+        "sec_source": "https://www.sec.gov/Archives/edgar/data/2071668/000110465925106340/tm2515841-10_20fr12b.htm",
+        "checked_for_newer_reports": null
+      },
+      "report_map": [],
+      "strategic_checkpoints": [
+        {
+          "date": "FY2023",
+          "checkpoint": "Combined carve-out revenue: €7,618m",
+          "detail": "+1.5% vs FY2022's €7,506m — the weakest revenue growth of the three carve-out years.",
+          "page": null,
+          "cross_reference": "Registration statement, Combined Carve-Out Income Statement"
+        },
+        {
+          "date": "FY2023",
+          "checkpoint": "Operating profit €742m (9.7% margin)",
+          "detail": "+0.7% vs FY2022's €737m — essentially flat, margin ticked down slightly from 9.8%.",
+          "page": null
+        },
+        {
+          "date": "FY2023",
+          "checkpoint": "Net profit fell to €509m despite higher revenue",
+          "detail": "-3.4% vs FY2022's €527m. The real drivers: a €10m net monetary loss from hyperinflationary economies (vs €2m in 2022), and taxation rising to €203m (vs €173m in 2022) even though profit before tax was higher. Worth noting for a strategist: revenue growth alone didn't carry through to the bottom line this year.",
+          "page": null
+        }
+      ],
+      "clarifications": [],
+      "gaps_not_found_this_pass": [
+        "No regional/segment revenue breakdown was found specifically for FY2023 (only FY2024's was disclosed at that granularity in the source document).",
+        "No disclosed constant-currency organic sales growth % — only reported revenue growth could be computed."
+      ]
+    },
+    {
+      "id": "fy2022",
+      "label": "FY2022",
+      "source_document": {
+        "title": "Combined Carve-Out Financial Statements (Ice Cream Business), FY2022",
+        "filing_type": "Not a standalone annual report — figures from the Combined Carve-Out Income Statement inside TMICC's pre-listing SEC registration statement (Form 20FR12B). This is the earliest year covered by any TMICC-related filing found this pass.",
+        "local_filename": null,
+        "pages": null,
+        "fiscal_year_covered": "FY2022 (year ended 31 December 2022)",
+        "filed_with_sec": "4 November 2025 (as part of the 20FR12B)",
+        "sec_source": "https://www.sec.gov/Archives/edgar/data/2071668/000110465925106340/tm2515841-10_20fr12b.htm",
+        "checked_for_newer_reports": null
+      },
+      "report_map": [],
+      "strategic_checkpoints": [
+        {
+          "date": "FY2022",
+          "checkpoint": "Combined carve-out revenue: €7,506m",
+          "detail": "The earliest year of carve-out data found — the baseline for the FY2023/FY2024 growth figures elsewhere in this panel.",
+          "page": null,
+          "cross_reference": "Registration statement, Combined Carve-Out Income Statement"
+        },
+        {
+          "date": "FY2022",
+          "checkpoint": "Operating profit €737m (9.8% margin)",
+          "detail": "The highest operating margin of the three carve-out years — margin drifted down slightly in both FY2023 (9.7%) and FY2024 (9.6%).",
+          "page": null
+        },
+        {
+          "date": "FY2022",
+          "checkpoint": "Net profit €527m",
+          "detail": "Higher net finance costs this year (€35m, vs €20m in FY2023 and €17m in FY2024) and a real hyperinflation adjustment for Turkey (disclosed as applying across FY2022-2024) both weigh on this figure.",
+          "page": null
+        }
+      ],
+      "clarifications": [],
+      "gaps_not_found_this_pass": [
+        "No data found for FY2021 or earlier — FY2022 is the earliest year the combined carve-out financial statements cover.",
+        "No regional/segment revenue breakdown found for this year."
       ]
     }
   ]

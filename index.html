@@ -366,7 +366,7 @@
     <div class="space-y-6">
       <div id="ar-source" class="font-mono text-xs text-muted border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 space-y-1"></div>
 
-      <div>
+      <div id="ar-map-wrap">
         <h3 class="font-display text-lg text-ivory mb-2">Report map</h3>
         <div id="ar-map" class="space-y-2 text-sm"></div>
       </div>
@@ -852,7 +852,9 @@ function renderAnnualReportDoc(doc) {
     ${src.checked_for_newer_reports ? `<div class="text-muted/80 mt-1">${src.checked_for_newer_reports}</div>` : ''}
   `;
 
-  document.getElementById('ar-map').innerHTML = (doc.report_map || []).map(chapter => `
+  const reportMap = doc.report_map || [];
+  document.getElementById('ar-map-wrap').classList.toggle('hidden', reportMap.length === 0);
+  document.getElementById('ar-map').innerHTML = reportMap.map(chapter => `
     <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-center justify-between gap-2">
         <div class="text-ivory">${chapter.chapter}</div>
