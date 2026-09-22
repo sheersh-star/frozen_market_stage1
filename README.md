@@ -203,6 +203,12 @@ The previous "pre-listing registration statement" document entry's Deferred Terr
 
 `documents` in the JSON is still the schema going forward — one entry per year now instead of per filing — so an actual FY2026 Annual Report (expected ~Feb 2027) becomes a new entry with zero `index.html` changes needed, same as before.
 
+## Round 6 (22 Sep 2026): strategic analysis added to the 10-K Analyzer
+
+Feedback: the panel was still just citing pages/figures — facts, not strategy. Added a `strategic_analysis` array to every year's entry (insight / why it matters / what to watch), rendered in its own caramel-bordered section directly under that year's checkpoints, clearly labeled as interpretation rather than a TMICC-stated position — same separation discipline as the Consultant's Brief, just scoped per-year and kept in the same tab so a strategist doesn't have to click away from the numbers to get the "so what."
+
+Closed a real gap in the process: FY2024's unexplained goodwill/intangibles jump is now plausibly tied to Unilever's real, dated acquisition of Yasso (closed Q3 2023, confirmed via contemporaneous press coverage) — which connects directly to the Strategy tab's own "Better-For-You" hedge already built around that brand. Also surfaced: FY2022-2024's margin has been drifting down every year (9.8%→9.7%→9.6%), which the €500m productivity programme has to reverse rather than just build on; FY2024's headline net-profit growth is mostly an FX-absence effect, not proof the programme is working; and four separate multi-year commitments (bond maturity, Vanilla for Change, climate scenario window, medium-term guidance) all converge on 2027-2029 — a real risk cluster, not four independent items.
+
 ## Customizing
 
 - **Port**: `DASHBOARD_PORT=8081 python3 server.py`

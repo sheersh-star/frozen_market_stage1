@@ -376,6 +376,12 @@
         <div id="ar-checkpoints" class="space-y-2"></div>
       </div>
 
+      <div id="ar-analysis-wrap" class="border border-caramel/50 rounded-lg p-4 hidden">
+        <h3 class="font-display text-lg text-ivory mb-1">Strategic analysis &mdash; what this means, and what to watch</h3>
+        <p class="font-mono text-xs text-muted mb-3">Interpretation built on the facts above, not TMICC's own stated position &mdash; click an insight to expand.</p>
+        <div id="ar-analysis" class="space-y-2"></div>
+      </div>
+
       <div id="ar-clarifications-wrap" class="hidden">
         <h3 class="font-display text-lg text-ivory mb-2">Clarifications</h3>
         <ul id="ar-clarifications" class="text-sm space-y-2 list-disc list-inside text-ivory"></ul>
@@ -880,6 +886,25 @@ function renderAnnualReportDoc(doc) {
         ${c.cross_reference ? `<div class="text-caramel">&rarr; ${c.cross_reference}</div>` : ''}
       </div>
     </details>`).join('');
+
+  const analysisWrap = document.getElementById('ar-analysis-wrap');
+  const analysis = doc.strategic_analysis || [];
+  if (analysis.length) {
+    analysisWrap.classList.remove('hidden');
+    document.getElementById('ar-analysis').innerHTML = analysis.map(a => `
+      <details class="border border-caramel/40 rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-caramel">
+        <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+          <div class="text-ivory text-sm leading-snug">${a.insight}</div>
+          <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+        </summary>
+        <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+          <div><span class="text-caramel">Why it matters:</span> ${a.why_it_matters || ''}</div>
+          <div><span class="text-caramel">What to watch:</span> ${a.what_to_watch || ''}</div>
+        </div>
+      </details>`).join('');
+  } else {
+    analysisWrap.classList.add('hidden');
+  }
 
   const clarWrap = document.getElementById('ar-clarifications-wrap');
   const clar = doc.clarifications || [];

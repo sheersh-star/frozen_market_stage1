@@ -36,6 +36,13 @@ Four chapters:
 
 One clarification worth flagging: the report's cautionary statement (p.235) lists "potential acquisition in India" only inside standard forward-looking-statements boilerplate — most plausibly the already-known Kwality Wall's deal, not a second undisclosed one.
 
+### Strategic analysis — what this means, and what to watch
+
+Two items, deliberately kept separate from the facts above (analysis, not TMICC's stated position):
+
+1. **H1 2025's operating profit fell 6.4% even as revenue rose 2.5%** — real margin compression right before listing, and the registration statement doesn't say whether it's one-off separation costs or something structural. That ambiguity is itself the finding: a strategist shouldn't wave this through. Watch FY2025's full-year results for whether separation costs get broken out as a distinct line, and whether H2 shows a clean rebound.
+2. **Four separate multi-year commitments converge on 2027-2029**: the first bond maturity (2029), the Vanilla for Change target (2028), the "near-term" climate scenario window (2026-2030), and the medium-term OSG/margin guidance all land in the same few years. That's a cluster, not four independent risks — worth underwriting as one scenario window, not a checklist of separate items.
+
 ## FY2024, FY2023, FY2022 — combined carve-out financials
 
 None of these are standalone documents — they're the Combined Carve-Out Income Statement inside the same registration statement, extracted directly from its financial-statements tables (not summarized secondhand). Real, precise figures:
@@ -55,10 +62,19 @@ Notes on what these numbers actually say:
 - **A real balance-sheet signal**: goodwill roughly doubled from €272m (FY2022) to €585m (FY2024), and intangible assets from €381m to €793m — consistent with a meaningful acquisition somewhere in this window. The specific transaction wasn't identified this pass — a genuine gap, not a guess.
 - **The growth rates above are reported revenue growth**, computed directly from the raw carve-out figures — not TMICC's own constant-currency "organic sales growth" non-IFRS metric, which isn't disclosed for these carve-out years. Worth not conflating the two.
 
+## Strategic analysis for FY2022-2024
+
+Each year's entry carries its own `strategic_analysis` — real interpretation, not just the raw figures:
+
+- **FY2022**: this is the baseline the entire standalone thesis gets judged against. Its 9.8% operating margin is the *highest* of the three carve-out years — FY2023 and FY2024 both drifted slightly lower. The €500m productivity programme has to reverse a real multi-year trend, not just build on a flat one.
+- **FY2023**: the revenue-up-profit-down pattern traces to two named, real items (hyperinflation loss, higher taxation) — and Turkey-linked hyperinflation recurs across all three years, pointing to a structural emerging-market currency exposure that TMICC no longer has Unilever's larger treasury function to absorb. Worth checking whether TMICC discloses its own hedging policy now that it's independent.
+- **FY2024**: the goodwill/intangibles jump flagged as a gap in the previous pass is now plausibly explained — Unilever's real, dated acquisition of Yasso (closed Q3 2023, confirmed via contemporaneous press coverage) lines up with the timing, and connects to the Strategy tab's own "Better-For-You" hedge already built around that same brand. Also: FY2024's headline net-profit growth (+16.9%) is largely an FX-absence effect, not proof the productivity programme is working — operating profit (+3.0%) is the more honest read. And AMEA's small revenue share (~25%) despite its outsized margin performance elsewhere in this project is a real, still-open gap the India acquisition is a direct response to.
+
 ## Honest gaps across the whole panel
 
 - FY2022 is the earliest year any TMICC-related filing covers — no data found for FY2021 or earlier.
-- The specific acquisition(s) behind the FY2022→FY2024 goodwill/intangibles increase weren't identified.
+- The Yasso connection to FY2023's goodwill increase is plausible and well-timed, but not a TMICC-confirmed attribution — treat it as a strong inference, not a stated fact.
 - No regional/segment breakdown was found for FY2022 or FY2023 (only FY2024's was disclosed at that granularity).
 - The two 2026 Form 6-K filings haven't been read into the FY2025 entry yet.
 - Exact pagination for the FY2025 Annual Report's "Further Information" chapter sub-sections is approximate.
+- No dedicated FX/hyperinflation hedging policy was found disclosed anywhere in this project's research so far — flagged in FY2023's analysis as worth chasing specifically.

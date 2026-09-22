@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-22 12:49:58",
+  "last_updated": "2026-09-22 13:00:01",
   "tmicc_financials": {
     "source": "real",
     "items": [
@@ -20306,7 +20306,7 @@
   },
   "annual_report_analysis": {
     "generated_date": "2026-09-22",
-    "framing_note": "A document-native read of TMICC's own filings, organized by fiscal year rather than by document \u2014 one entry per year, each showing that year's real dated checkpoints and financial figures, with page/item citations back to whichever filing actually covers it. Distinct from the Strategy tab (which back-traces commitments to initiatives) and the Timeline tab (which correlates TMICC against competitors/macro events). Honesty note: TMICC itself has only ever filed one true Annual Report (FY2025) \u2014 it only began independent existence in Dec 2025. FY2022-2024 are not separate 'annual reports'; they're combined carve-out financial statements for the Ice Cream Business, extracted from TMICC's own pre-listing SEC registration statement (Form 20FR12B, filed 4 Nov 2025), which is the real document that carries this history. Labeled by year for the strategist's mental model, sourced honestly underneath.",
+    "framing_note": "A document-native read of TMICC's own filings, organized by fiscal year rather than by document \u2014 one entry per year, each showing that year's real dated checkpoints and financial figures, with page/item citations back to whichever filing actually covers it. Distinct from the Strategy tab (which back-traces commitments to initiatives) and the Timeline tab (which correlates TMICC against competitors/macro events). Honesty note: TMICC itself has only ever filed one true Annual Report (FY2025) \u2014 it only began independent existence in Dec 2025. FY2022-2024 are not separate 'annual reports'; they're combined carve-out financial statements for the Ice Cream Business, extracted from TMICC's own pre-listing SEC registration statement (Form 20FR12B, filed 4 Nov 2025), which is the real document that carries this history. Labeled by year for the strategist's mental model, sourced honestly underneath. Each year also carries a `strategic_analysis` array \u2014 this is interpretation built on top of the facts above it, not a TMICC-stated position, kept in its own clearly-labeled field for the same reason the Consultant's Brief tab is kept in its own file: so analysis is never mistaken for a disclosed fact.",
     "documents": [
       {
         "id": "fy2025",
@@ -20508,6 +20508,18 @@
         "gaps_not_found_this_pass": [
           "The two 2026 Form 6-K filings haven't been read into this panel yet.",
           "Exact pagination for the 'Further Information' chapter's sub-sections was ambiguous in extraction \u2014 approximate, not authoritative."
+        ],
+        "strategic_analysis": [
+          {
+            "insight": "H1 2025's operating profit fell 6.4% even as revenue rose 2.5% \u2014 real margin compression in the run-up to listing, not just a rounding blip.",
+            "why_it_matters": "Two explanations are both plausible from the data alone: one-off separation/listing costs (common in demergers, and would be genuinely temporary), or an underlying deterioration in the core business. The registration statement doesn't disaggregate the two. This is exactly the kind of number a strategist shouldn't wave through without an answer.",
+            "what_to_watch": "TMICC's FY2025 full-year results against this H1 run-rate \u2014 specifically whether separation/listing costs are broken out as a distinct line item, and whether H2 2025 shows a clean rebound. If margin is still compressed a year after listing, the productivity programme's credibility is on the line before it's had a chance to prove itself."
+          },
+          {
+            "insight": "Four separate multi-year commitments \u2014 the 2029/2031/2034/2037 bond maturities, the 2028 Vanilla for Change target, the 2026-2030 'near-term' climate scenario window, and the medium-term 3-5% OSG/40-60bps margin guidance \u2014 all converge on the same 2027-2029 stretch.",
+            "why_it_matters": "This isn't four independent risks; it's a cluster. Refinancing pressure (first bond tranche due 2029), sustainability delivery deadlines, and the original growth algorithm's credibility test all land in the same few years. A partner or counterparty sizing up TMICC's risk profile should underwrite scenarios around this window specifically, not treat each commitment as a standalone item on a checklist.",
+            "what_to_watch": "Whether TMICC's own future disclosures start discussing 2027-2029 explicitly as a strategic inflection point, or continue presenting each commitment in isolation \u2014 the latter would suggest management hasn't yet connected these dots internally either."
+          }
         ]
       },
       {
@@ -20559,8 +20571,24 @@
         ],
         "clarifications": [],
         "gaps_not_found_this_pass": [
-          "The specific acquisition(s) behind the FY2022-2024 goodwill/intangibles increase weren't identified.",
           "No disclosed constant-currency organic sales growth % for this year \u2014 only reported revenue growth could be computed."
+        ],
+        "strategic_analysis": [
+          {
+            "insight": "The goodwill/intangibles jump flagged in this year's figures plausibly traces to Unilever's real, dated acquisition of Yasso (US frozen-novelty/protein brand), which closed Q3 2023 \u2014 confirmed via contemporaneous press coverage (Food Dive, Dairy Foods, Unilever's own press release), not TMICC's own disclosures, which don't break out deal-level goodwill.",
+            "why_it_matters": "This connects a previously-unexplained balance-sheet signal to a strategic initiative already tracked elsewhere in this project: Yasso is named in the Strategy tab as TMICC's own 'Better-For-You' hedge against GLP-1/weight-loss-drug demand risk. It means that pivot wasn't just post-demerger messaging \u2014 real M&A capital went behind it as early as 2023, two years before TMICC even existed as an independent company. It also means FY2023's already-weak +1.5% revenue growth likely included some inorganic contribution, so organic growth that year was probably softer still.",
+            "what_to_watch": "Whether TMICC makes further bolt-on moves in the wellness/protein space now that it controls its own capital allocation independent of Unilever \u2014 a second such deal would confirm this is a real, funded strategic pillar rather than a one-off."
+          },
+          {
+            "insight": "FY2024's headline +16.9% net profit growth is significantly flattered by the absence of a hyperinflation loss that year (vs a real \u20ac10m drag in FY2023) \u2014 operating profit, a cleaner measure, grew only +3.0%, roughly in line with revenue.",
+            "why_it_matters": "A strategist reading only the net-profit line would overstate FY2024's operational momentum. The more honest read: margin didn't expand (9.7% to 9.6%, if anything slightly down), meaning the productivity programme launched that same year hadn't yet shown any measurable benefit by FY2024's close \u2014 unsurprising for a programme's first year, but worth not mistaking the FX-driven profit bounce for proof it's working.",
+            "what_to_watch": "FY2025's operating margin specifically, isolated from currency/hyperinflation noise, as the first real read on whether the \u20ac500m programme is moving the needle."
+          },
+          {
+            "insight": "AMEA is the smallest region by FY2024 revenue (~25%, computed as a residual) but \u2014 per the Financials tab's own FY2025 data \u2014 the fastest-growing and by far the highest-margin (22.9% Adjusted EBITDA margin vs 13-14% for the other two regions).",
+            "why_it_matters": "AMEA's outsized profitability hadn't yet translated into revenue share as of FY2024. That's a real strategic gap TMICC seems to have identified itself \u2014 the India acquisition (Kwality Wall's, completed Mar 2026) is a direct, already-executed move to close exactly this gap. Because AMEA carries a structurally higher margin than the other two regions, any shift of revenue mix toward it should mechanically lift Group-level margin even without operational improvement elsewhere \u2014 a rare case where portfolio mix alone is a real lever, not just an operating-efficiency story.",
+            "what_to_watch": "Whether AMEA's revenue share actually climbs in FY2025/26 following the India deal, and whether Group margin moves in step \u2014 if AMEA grows but Group margin doesn't follow, something else (cost inflation, integration costs) is offsetting the mix benefit."
+          }
         ]
       },
       {
@@ -20602,6 +20630,13 @@
         "gaps_not_found_this_pass": [
           "No regional/segment revenue breakdown was found specifically for FY2023 (only FY2024's was disclosed at that granularity in the source document).",
           "No disclosed constant-currency organic sales growth % \u2014 only reported revenue growth could be computed."
+        ],
+        "strategic_analysis": [
+          {
+            "insight": "Revenue grew but net profit fell \u2014 the gap is explained by two real, named items: a \u20ac10m net monetary loss from hyperinflationary economies (vs \u20ac2m in FY2022), and taxation rising to \u20ac203m even though profit before tax was higher than FY2022's.",
+            "why_it_matters": "Turkey-linked hyperinflation accounting recurs across all three carve-out years (2022-2024), which points to a structural, recurring emerging-market currency exposure rather than a one-off. As a standalone company, TMICC no longer sits inside Unilever's much larger treasury function, which previously had more capacity to absorb this kind of volatility across a bigger, more diversified group.",
+            "what_to_watch": "Whether TMICC discloses its own dedicated FX/hyperinflation hedging policy now that it's independent (the FY2025 Annual Report didn't surface one in this pass \u2014 a gap worth chasing specifically on the next refresh), and whether Turkey-related losses recur in FY2025/26 results."
+          }
         ]
       },
       {
@@ -20643,6 +20678,13 @@
         "gaps_not_found_this_pass": [
           "No data found for FY2021 or earlier \u2014 FY2022 is the earliest year the combined carve-out financial statements cover.",
           "No regional/segment revenue breakdown found for this year."
+        ],
+        "strategic_analysis": [
+          {
+            "insight": "FY2022's 9.8% operating margin is the highest of the three carve-out years \u2014 every year since has drifted slightly lower (9.7%, then 9.6%). This is the real baseline the entire standalone/separation thesis has to be judged against.",
+            "why_it_matters": "The \u20ac500m productivity programme (launched 2024) promises 40-60 basis points of average ANNUAL margin improvement from 2026. Measured against FY2022's baseline, the trend so far is moving in the wrong direction, not the right one \u2014 three years of carve-out data show margin drifting down, not up, before the programme even started delivering. That's not a failure yet (the programme hadn't launched), but it means the programme has no cushion: it needs to reverse a real, multi-year trend, not just add to a flat one.",
+            "what_to_watch": "FY2025 and FY2026 full-year margin against this FY2022-2024 baseline \u2014 the first couple of years with the productivity programme actually running are the real test of whether TMICC can bend this curve, or whether the structural pressures that dragged FY2023/24's margin (hyperinflation, taxation, finance costs) simply continue."
+          }
         ]
       }
     ]
