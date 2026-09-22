@@ -3,40 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <title>TMICC Strategist Console</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
+  // Apple-inspired redesign (22 Sep 2026): every existing text-X/bg-X/border-X
+  // class across this file (including inside the JS render functions' template
+  // strings) is untouched — only the hex values these names resolve to changed,
+  // from a dark ice-cream-parlor palette to a light, accessible one. Names kept
+  // for zero-diff safety even though a couple now read oddly (ink/ivory are
+  // page-bg/primary-text here, not literally ink-on-ivory) — see README.md.
+  // Every text-role color re-verified at >=4.5:1 contrast against paper (#fbfbfd)
+  // and card (#ffffff) backgrounds.
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          ink: '#241712',
-          panel: '#33231B',
-          hairline: '#4A362A',
-          ivory: '#FBF1E4',
-          muted: '#C9AD93',
-          brass: '#F2839B',
-          caramel: '#E3A857',
-          positive: '#6FC796',
-          negative: '#E2634F',
+          ink: '#fbfbfd',      // page background (was near-black)
+          panel: '#ffffff',    // card background (was dark brown)
+          hairline: '#e5e5ea', // borders (was dark brown-black)
+          ivory: '#1d1d1f',    // primary text (was cream-on-dark)
+          muted: '#57575c',    // secondary text, 6.95:1 on white
+          brass: '#A03D6B',    // accent 1 (deep rose/berry), 6.22:1 on white
+          caramel: '#8C5A0F',  // accent 2 (warm amber/bronze), 5.86:1 on white
+          positive: '#1F7A45', // status green, 5.35:1 on white
+          negative: '#B03A2E', // status red, 6.02:1 on white
           neutral: '#83909C',
         },
         fontFamily: {
-          display: ['Fraunces', 'serif'],
-          body: ['Inter', 'sans-serif'],
-          mono: ['"IBM Plex Mono"', 'monospace'],
+          // Real Apple system-font stack, not a Google Fonts load — no external
+          // font request, no flash-of-unstyled-text, renders via the OS's own
+          // hinting. Mono kept as a deliberate design choice for this data-dense
+          // console (Apple's own developer-facing pages use SF Mono the same
+          // way), just switched off the Google-hosted IBM Plex Mono.
+          display: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          body: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          mono: ['ui-monospace', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
         },
       },
     },
   };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :is(a, button, input, textarea, summary):focus-visible {
+    outline: 2px solid #8C5A0F;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
 </head>
 <body class="bg-ink text-ivory font-body min-h-screen antialiased">
 
@@ -48,7 +72,7 @@
       <p class="text-sm text-muted mt-1 max-w-2xl">Rebuilt from the ground up around one subject: real news, real ecosystem, real correlated timeline, real financials — anything a TMICC strategist would want to know immediately.</p>
     </div>
     <div class="text-right font-mono text-xs text-muted">
-      <button id="refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-ink transition-colors uppercase tracking-wide text-[11px] mb-1.5" title="Re-syncs this page to the latest published data (data/processed/console_data.json). It does not run new research itself — news/financials/annual-report data only change when the maintainer runs the refresh pipeline and pushes an update.">
+      <button id="refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-white transition-colors uppercase tracking-wide text-[11px] mb-1.5" title="Re-syncs this page to the latest published data (data/processed/console_data.json). It does not run new research itself — news/financials/annual-report data only change when the maintainer runs the refresh pipeline and pushes an update.">
         <span id="refresh-icon">&#8635;</span> Refresh dashboard
       </button>
       <div id="sync-time">Loading&hellip;</div>
@@ -112,7 +136,7 @@
   </section>
 
   <!-- ================= THE MAGNUM ECOSYSTEM ================= -->
-  <section id="tab-ecosystem" data-tab="ecosystem" hidden class="bg-panel border border-hairline rounded-lg p-6">
+  <section id="tab-ecosystem" data-tab="ecosystem" hidden class="bg-panel border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
     <div class="mb-4">
       <h2 class="font-display text-2xl text-ivory">The Magnum Ecosystem</h2>
       <p class="font-mono text-sm text-muted mt-1">Shareholders &middot; brands &middot; joint ventures &middot; supply chain &middot; competitors &middot; governance &middot; disclosed risks</p>
@@ -150,7 +174,7 @@
         <div id="eco-competitors" class="space-y-2 text-sm"></div>
       </div>
 
-      <div class="border border-hairline rounded-lg p-4">
+      <div class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
         <h3 class="font-display text-lg text-ivory mb-1">Innovation signals <span class="text-muted text-xs font-mono normal-case">(is the category getting more nutritious, and who's driving it?)</span></h3>
         <div id="eco-innovation" class="text-sm space-y-3"></div>
       </div>
@@ -178,7 +202,7 @@
   </section>
 
   <!-- ================= STRATEGIC COMMITMENTS ================= -->
-  <section id="tab-strategy" data-tab="strategy" hidden class="bg-panel border border-hairline rounded-lg p-6">
+  <section id="tab-strategy" data-tab="strategy" hidden class="bg-panel border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
     <div class="mb-4">
       <h2 class="font-display text-2xl text-ivory">Strategic Priorities &amp; Commitments</h2>
       <p class="font-mono text-sm text-muted mt-1">Back-traced: the decision &rarr; the number behind it &rarr; the named initiative actually delivering it</p>
@@ -215,7 +239,7 @@
   </section>
 
   <!-- ================= CORRELATED TIMELINE ================= -->
-  <section id="tab-timeline" data-tab="timeline" hidden class="bg-panel border border-hairline rounded-lg p-6">
+  <section id="tab-timeline" data-tab="timeline" hidden class="bg-panel border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
     <div class="mb-4">
       <h2 class="font-display text-2xl text-ivory">Correlated Timeline</h2>
       <p class="font-mono text-sm text-muted mt-1">TMICC's own decisions, laid against competitor moves and macro-commodity swings in the same window</p>
@@ -233,7 +257,7 @@
   </section>
 
   <!-- ================= TMICC FINANCIAL PERFORMANCE ================= -->
-  <section id="tab-financials" data-tab="financials" hidden class="bg-panel border border-hairline rounded-lg p-6">
+  <section id="tab-financials" data-tab="financials" hidden class="bg-panel border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
     <div class="mb-4">
       <h2 class="font-display text-2xl text-ivory">TMICC Financial Performance</h2>
       <p id="fin-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
@@ -260,13 +284,18 @@
   </section>
 
   <!-- ================= 10-K / ANNUAL REPORT ANALYZER ================= -->
-  <section id="tab-annual-report" data-tab="annual-report" hidden class="bg-panel border border-hairline rounded-lg p-6">
-    <div class="mb-4">
-      <h2 class="font-display text-2xl text-ivory">10-K Analyzer</h2>
-      <p id="ar-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
+  <section id="tab-annual-report" data-tab="annual-report" hidden class="bg-panel border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+    <div class="mb-4 flex items-start justify-between gap-3">
+      <div>
+        <h2 class="font-display text-2xl text-ivory">10-K Analyzer</h2>
+        <p id="ar-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
+      </div>
+      <button id="ar-refresh-btn" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-white transition-colors uppercase tracking-wide text-[11px] font-mono" title="Re-syncs this panel to the latest published data. Does not re-run the annual-report research pass itself — that still needs a real re-read of the filing.">
+        <span id="ar-refresh-icon">&#8635;</span> Refresh
+      </button>
     </div>
     <div class="space-y-6">
-      <div id="ar-source" class="font-mono text-xs text-muted border border-hairline rounded-lg p-4 space-y-1"></div>
+      <div id="ar-source" class="font-mono text-xs text-muted border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 space-y-1"></div>
 
       <div>
         <h3 class="font-display text-lg text-ivory mb-2">Report map</h3>
@@ -432,7 +461,7 @@ function renderNewsColumn(containerId, countId, items, label) {
     const tierColor = { official: 'text-positive', press: 'text-brass', aggregator: 'text-muted' }[it.source_type] || 'text-muted';
     const badgeColor = { official: 'border-positive text-positive', press: 'border-brass text-brass', aggregator: 'border-hairline text-muted' }[it.source_type] || 'border-hairline text-muted';
     return `
-      <details class="border border-hairline rounded-lg group open:border-brass/50">
+      <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-brass/50">
         <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-2.5 flex items-start gap-2">
           <span class="shrink-0 mt-1 w-1.5 h-1.5 rounded-full ${isNew ? 'bg-caramel' : 'bg-transparent'}" title="${isNew ? 'published since your last visit' : ''}"></span>
           <div class="flex-1 min-w-0">
@@ -561,7 +590,7 @@ function renderStrategy(strat) {
   if (!strat) return;
 
   document.getElementById('strat-commitments').innerHTML = (strat.headline_commitments || []).map(c => `
-    <details class="border border-hairline rounded-lg group open:border-brass/50">
+    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-brass/50">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
         <div>
           <div class="font-mono text-[10px] uppercase tracking-wide text-caramel">${c.label}</div>
@@ -598,7 +627,7 @@ function renderStrategy(strat) {
   `;
 
   document.getElementById('strat-initiatives').innerHTML = (strat.cross_cutting_initiatives || []).map(i => `
-    <details class="border border-hairline rounded-lg group open:border-caramel/60">
+    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-caramel/60">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
         <div class="text-sm text-ivory leading-snug">${i.initiative}</div>
         <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
@@ -611,7 +640,7 @@ function renderStrategy(strat) {
     </details>`).join('');
 
   const pillarBlock = (title, pillars) => `
-    <details class="border border-hairline rounded-lg group">
+    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-center justify-between gap-2">
         <div class="text-sm text-ivory">${title}</div>
         <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
@@ -667,15 +696,15 @@ function renderFinancials(fin) {
     data: {
       labels: fin.items.map(r => 'FY' + r.fiscal_year),
       datasets: [
-        { label: 'Volume index', data: fin.items.map(r => r.volume_index), borderColor: '#6FC796', backgroundColor: 'rgba(111,199,150,0.1)', tension: 0.25 },
-        { label: 'Price index', data: fin.items.map(r => r.price_index), borderColor: '#E3A857', backgroundColor: 'rgba(227,168,87,0.1)', tension: 0.25 },
+        { label: 'Volume index', data: fin.items.map(r => r.volume_index), borderColor: '#1F7A45', backgroundColor: 'rgba(31,122,69,0.08)', tension: 0.25 },
+        { label: 'Price index', data: fin.items.map(r => r.price_index), borderColor: '#8C5A0F', backgroundColor: 'rgba(140,90,15,0.08)', tension: 0.25 },
       ],
     },
     options: {
-      plugins: { legend: { labels: { color: '#C9AD93', font: { family: 'IBM Plex Mono' } } } },
+      plugins: { legend: { labels: { color: '#57575c', font: { family: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace' } } } },
       scales: {
-        x: { ticks: { color: '#C9AD93' }, grid: { color: '#4A362A' } },
-        y: { ticks: { color: '#C9AD93' }, grid: { color: '#4A362A' } },
+        x: { ticks: { color: '#57575c' }, grid: { color: '#e5e5ea' } },
+        y: { ticks: { color: '#57575c' }, grid: { color: '#e5e5ea' } },
       },
     },
   });
@@ -739,7 +768,7 @@ function renderAnnualReport(ar) {
   `;
 
   document.getElementById('ar-map').innerHTML = (ar.report_map || []).map(chapter => `
-    <details class="border border-hairline rounded-lg group">
+    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-center justify-between gap-2">
         <div class="text-ivory">${chapter.chapter}</div>
         <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
@@ -750,7 +779,7 @@ function renderAnnualReport(ar) {
     </details>`).join('');
 
   document.getElementById('ar-checkpoints').innerHTML = (ar.strategic_checkpoints || []).map(c => `
-    <details class="border border-hairline rounded-lg group open:border-brass/50">
+    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-brass/50">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
         <div>
           <div class="font-mono text-[10px] uppercase tracking-wide text-caramel">${c.date}</div>
@@ -783,7 +812,7 @@ function renderConsultantBrief(brief) {
   if (!brief) return;
 
   document.getElementById('brief-gaps').innerHTML = (brief.top_gaps || []).map(g => `
-    <details class="border border-hairline rounded-lg group">
+    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
         <div class="text-sm text-ivory leading-snug">${g.gap}</div>
         <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
@@ -794,7 +823,7 @@ function renderConsultantBrief(brief) {
     </details>`).join('');
 
   document.getElementById('brief-dots').innerHTML = (brief.connected_dots || []).map(d => `
-    <details class="border border-hairline rounded-lg group open:border-brass/50">
+    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-brass/50">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
         <div class="text-sm text-ivory leading-snug">${d.title}</div>
         <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
@@ -855,6 +884,32 @@ document.getElementById('refresh-btn').addEventListener('click', async (e) => {
   btn.disabled = true;
   icon.classList.add('animate-spin');
   await loadDashboardData();
+  setTimeout(() => {
+    icon.classList.remove('animate-spin');
+    btn.disabled = false;
+  }, 400);
+});
+
+// Scoped refresh for the 10-K Analyzer tab only — re-fetches the same
+// published console_data.json but re-renders just this panel, not the whole
+// page. Same honesty caveat as the global button: re-syncs to what's already
+// published, doesn't re-run the annual-report research pass itself.
+document.getElementById('ar-refresh-btn').addEventListener('click', async (e) => {
+  const btn = e.currentTarget;
+  const icon = document.getElementById('ar-refresh-icon');
+  btn.disabled = true;
+  icon.classList.add('animate-spin');
+  try {
+    const res = await fetch('data/processed/console_data.json', { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      currentData = data;
+      renderAnnualReport(data.annual_report_analysis);
+      document.getElementById('sync-time').textContent = `Synced ${data.last_updated}`;
+    }
+  } catch (err) {
+    console.error(err);
+  }
   setTimeout(() => {
     icon.classList.remove('animate-spin');
     btn.disabled = false;
