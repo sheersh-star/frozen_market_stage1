@@ -6,6 +6,10 @@
 <meta name="color-scheme" content="dark light">
 <title>TMICC Strategist Console</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <script>
   // Runs synchronously, before anything paints, to avoid a flash of the
   // wrong theme. Default is dark (this console was always designed
@@ -46,13 +50,12 @@
           neutral:  '#83909C',
         },
         fontFamily: {
-          // Real Apple system-font stack, not a Google Fonts load — no external
-          // font request, no flash-of-unstyled-text, renders via the OS's own
-          // hinting. Mono kept as a deliberate design choice for this data-dense
-          // console (Apple's own developer-facing pages use SF Mono the same
-          // way), just switched off the Google-hosted IBM Plex Mono.
-          display: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-          body: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          // Fraunces is a genuinely "dynamic" variable font (optical-size axis
+          // 9-144pt plus a weight axis) rather than a single static face —
+          // headings pick up real character/warmth from it. Inter for body
+          // (its long-time pairing), system mono kept for data-dense labels.
+          display: ['Fraunces', 'serif'],
+          body: ['Inter', 'sans-serif'],
           mono: ['ui-monospace', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
         },
       },
@@ -82,16 +85,17 @@
     --c-onaccent: 255 255 255;
   }
   :root[data-theme="dark"] {
-    --c-page: 28 20 13;         /* warm near-black, not pure black */
-    --c-panel: 42 32 24;        /* lighter than page — real layering */
-    --c-hairline: 74 58 40;
-    --c-text: 245 233 214;
-    --c-muted: 199 180 153;
-    --c-brass: 232 89 143;
-    --c-caramel: 227 168 87;
-    --c-positive: 95 196 136;
-    --c-negative: 226 99 79;
-    --c-onaccent: 28 20 13;
+    /* Chocolate / rose / gold. */
+    --c-page: 43 24 16;         /* dark chocolate */
+    --c-panel: 61 40 24;        /* lighter chocolate — real layering */
+    --c-hairline: 90 63 40;
+    --c-text: 245 230 211;
+    --c-muted: 196 167 136;
+    --c-brass: 236 107 147;     /* rose */
+    --c-caramel: 240 197 85;    /* gold */
+    --c-positive: 107 203 143;
+    --c-negative: 237 114 89;
+    --c-onaccent: 43 24 16;
   }
   /* Extra "volume": a colored accent bar on every section heading, and a
      bolder filled active-tab state instead of a thin underline — both via
@@ -128,19 +132,19 @@
     <div>
       <p class="text-xs tracking-[0.2em] uppercase text-muted mb-1">Company Intelligence &middot; The Magnum Ice Cream Company (TMICC)</p>
       <h1 class="font-display text-3xl md:text-4xl font-medium text-ivory">TMICC Strategist Console</h1>
-      <p class="text-sm text-muted mt-1 max-w-2xl">Rebuilt from the ground up around one subject: real news, real ecosystem, real correlated timeline, real financials — anything a TMICC strategist would want to know immediately.</p>
+      <p class="text-sm text-muted mt-1 max-w-2xl">Live news, ecosystem mapping, correlated timeline, and financial performance — everything a TMICC strategist needs in one place.</p>
     </div>
     <div class="text-right font-mono text-xs text-muted">
       <div class="flex items-center justify-end gap-2 mb-1.5">
-        <button id="refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-onaccent transition-colors uppercase tracking-wide text-[11px]" title="Re-syncs this page to the latest published data (data/processed/console_data.json). It does not run new research itself — news/financials/annual-report data only change when the maintainer runs the refresh pipeline and pushes an update.">
+        <button id="refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-onaccent transition-colors uppercase tracking-wide text-[11px]" title="Refresh with the latest available data.">
           <span id="refresh-icon">&#8635;</span> Refresh dashboard
         </button>
         <button id="theme-toggle" class="w-8 h-8 rounded-full border border-hairline text-ivory flex items-center justify-center" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">&#9789;</button>
       </div>
       <div id="sync-time">Loading&hellip;</div>
-      <div class="mt-1 flex items-center justify-end gap-1" title="News is fetched live (run fetch_competitor_news.py on a schedule). Financial/ecosystem/annual-report panels are periodic real-data snapshots, not continuous feeds. The refresh button re-syncs to the latest published snapshot; it doesn't trigger new research on its own.">
+      <div class="mt-1 flex items-center justify-end gap-1">
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-positive"></span>
-        <span class="uppercase tracking-wide">Live news + real snapshots &middot; no API keys</span>
+        <span class="uppercase tracking-wide">Live news + real snapshots</span>
       </div>
     </div>
   </div>
@@ -170,7 +174,7 @@
       <p id="news-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
     </div>
     <div>
-      <p class="font-mono text-xs text-muted mb-3">Zero API keys &mdash; Google News RSS, tagged official/aggregator/press by matching each item's real source domain. Run <code class="text-caramel">python3 fetch_competitor_news.py</code> to refresh. <span class="text-caramel">&#9679;</span> marks anything published since your last visit &mdash; that's the express read: check the dots first, click a row to expand it.</p>
+      <p class="font-mono text-xs text-muted mb-3">Sourced via Google News RSS and tagged official/aggregator/press by each item's real source domain. <span class="text-caramel">&#9679;</span> marks anything published since your last visit &mdash; that's the express read: check the dots first, click a row to expand it.</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <div class="flex items-baseline justify-between mb-2">
@@ -204,7 +208,7 @@
       <p class="font-mono text-sm text-muted mt-1">Shareholders &middot; brands &middot; joint ventures &middot; supply chain &middot; competitors &middot; governance &middot; disclosed risks</p>
     </div>
     <div class="space-y-6">
-      <p class="font-mono text-xs text-muted">Extracted directly from TMICC's own 2025 Annual Report (146292742.pdf, 238 pages) &mdash; a first-party primary source. Full narrative: <code class="text-caramel">docs/magnum_ecosystem.md</code>.</p>
+      <p class="font-mono text-xs text-muted">Sourced directly from TMICC's 2025 Annual Report &mdash; a first-party primary source.</p>
 
       <div>
         <h3 class="font-display text-lg text-ivory mb-2">Corporate facts</h3>
@@ -270,7 +274,7 @@
       <p class="font-mono text-sm text-muted mt-1">Back-traced: the decision &rarr; the number behind it &rarr; the named initiative actually delivering it</p>
     </div>
     <div class="space-y-6">
-      <p class="font-mono text-xs text-muted">Extracted directly from TMICC's own 2025 Annual Report's "Our strategy" and remuneration sections. Full narrative: <code class="text-caramel">docs/magnum_strategic_commitments.md</code>.</p>
+      <p class="font-mono text-xs text-muted">Sourced from TMICC's 2025 Annual Report &mdash; the "Our strategy" and remuneration sections specifically.</p>
 
       <div>
         <h3 class="font-display text-lg text-ivory mb-2">The four headline commitments</h3>
@@ -353,8 +357,8 @@
         <p id="ar-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
       </div>
       <div class="flex items-center gap-2">
-        <select id="ar-doc-select" class="bg-ink border border-hairline text-ivory text-xs font-mono rounded-full px-3 py-1.5 uppercase tracking-wide" title="Choose which filing to read — TMICC has one true Annual Report so far; the other option is its pre-listing SEC registration statement, honestly labeled as such."></select>
-        <button id="ar-refresh-btn" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-onaccent transition-colors uppercase tracking-wide text-[11px] font-mono" title="Re-syncs this panel to the latest published data. Does not re-run the annual-report research pass itself — that still needs a real re-read of the filing.">
+        <select id="ar-doc-select" class="bg-ink border border-hairline text-ivory text-xs font-mono rounded-full px-3 py-1.5 uppercase tracking-wide" title="Choose which filing to view."></select>
+        <button id="ar-refresh-btn" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-onaccent transition-colors uppercase tracking-wide text-[11px] font-mono" title="Refresh this panel with the latest data.">
           <span id="ar-refresh-icon">&#8635;</span> Refresh
         </button>
       </div>
@@ -391,7 +395,7 @@
       <p class="font-mono text-sm text-muted mt-1">Analysis, not fact — built entirely on the real data in the other tabs, but this page is judgment, never confuse the two</p>
     </div>
     <div class="space-y-6">
-      <p class="font-mono text-xs text-caramel border border-caramel/40 rounded-lg p-3">Everything on this page is this project's own synthesis — gaps, connections, and recommendations built from the real, sourced facts in News/Ecosystem/Strategy/Timeline/Financials. None of it is TMICC's own stated position. Full reasoning: <code class="text-caramel">docs/magnum_consultant_brief.md</code>.</p>
+      <p class="font-mono text-xs text-caramel border border-caramel/40 rounded-lg p-3">Everything on this page is analysis — gaps, connections, and recommendations built from the real, sourced facts in News/Ecosystem/Strategy/Timeline/Financials. None of it is TMICC's own stated position.</p>
 
       <div>
         <h3 class="font-display text-lg text-ivory mb-2">Top gaps &mdash; what's not known, and why it matters</h3>
@@ -422,7 +426,6 @@
 <footer class="border-t border-hairline">
   <div class="max-w-6xl mx-auto px-6 py-6 font-mono text-xs text-muted flex flex-wrap justify-between gap-2">
     <span>Source: <a href="https://github.com/sheersh-star/frozen_market_stage1" target="_blank" rel="noopener" class="text-brass">GitHub</a></span>
-    <span>Removed in this rebuild: Executive Brief, Command Center, Brand Sentiment, Demographics, Global Market Distribution, Company Revenue, Volume vs Dollar Sales, Nutrition (raw table, replaced by Innovation signals on the Ecosystem tab) &mdash; see README.md</span>
   </div>
 </footer>
 
@@ -554,7 +557,7 @@ function renderNewsColumn(containerId, countId, items, label) {
 function renderNews(news) {
   const summaryEl = document.getElementById('news-summary');
   if (!news || !news.items || !news.items.length) {
-    summaryEl.textContent = 'No news yet — run python3 fetch_competitor_news.py';
+    summaryEl.textContent = 'No news yet.';
     ['news-tmicc', 'news-competitor', 'news-ecosystem'].forEach(id => document.getElementById(id).innerHTML = '');
     return;
   }
@@ -969,7 +972,7 @@ async function loadDashboardData() {
     document.getElementById('dashboard-main').classList.remove('opacity-60');
   } catch (err) {
     console.error(err);
-    showError("Couldn't load console_data.json. Run `python3 data_pipeline.py`, then `python3 server.py`, and reload this page.");
+    showError("Couldn't load the latest data. Please try refreshing the page.");
   }
 }
 
