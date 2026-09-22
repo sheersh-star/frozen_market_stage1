@@ -6,11 +6,12 @@ Builds data/processed/console_data.json for the dashboard.
 Rebuilt from the ground up around a single subject — The Magnum Ice Cream
 Company (TMICC) and the real ecosystem around it — rather than the earlier
 generic "frozen dessert market" framing. Every panel here is either real
-data or is simply absent from the output; there is no mock fallback left
-except for the two panels below that predate this rebuild and already had
-an honestly-labeled one (production trend, nutrition) — kept because
-"absent panel" vs "clearly-labeled mock panel" is a real design choice, not
-an oversight, and changing it wasn't part of what was asked.
+data or is simply absent from the output; the one exception is production
+trend, which predates this rebuild and already had an honestly-labeled mock
+fallback — kept because "absent panel" vs "clearly-labeled mock panel" is a
+real design choice, not an oversight, and changing it wasn't part of what
+was asked. Nutrition (which had the same mock fallback) was removed
+entirely on 22 Sep 2026 in favor of load_innovation_signals() below.
 
 Removed in this rebuild (see README.md and git history for the fuller
 account of why each one was cut, and CHANGELOG-note below for a one-line
@@ -158,93 +159,13 @@ def load_sales_trend():
 
 
 # ---------------------------------------------------------------------------
-# 2. nutrition profile (USDA FoodData Central) — kept from before
+# 2. Nutrition panel removed — see data/raw/README.md. The raw USDA dataset
+# (data/raw/nutrition/usda_nutrition.json) is untouched on disk, just no
+# longer loaded here; superseded by load_innovation_signals() below, which
+# reframes the same question ("is the category getting more nutritious") as
+# competitor intelligence rather than a raw nutrition-facts table.
 # ---------------------------------------------------------------------------
 
-UK_SUGAR_TRAFFIC_LIGHT_GREEN_MAX = 5.0
-UK_SUGAR_TRAFFIC_LIGHT_AMBER_MAX = 22.5
-WHO_FREE_SUGAR_10PCT_LIMIT_G = 50
-WHO_FREE_SUGAR_5PCT_LIMIT_G = 25
-
-
-def load_nutrition():
-    real_file = RAW_DIR / "nutrition" / "usda_nutrition.json"
-    payload = _read_json(real_file) if real_file.exists() else None
-
-    if payload:
-        foods = payload.get("foods", payload if isinstance(payload, list) else [])
-        candidates = []
-        seen_labels = set()
-        for food in foods:
-            raw_description = food.get("description") or ""
-            if "ice cream" not in raw_description.lower():
-                continue
-            description = raw_description.title()
-            brand = food.get("brandName") or food.get("brandOwner")
-            if not brand:
-                label = description
-            elif brand.lower() in description.lower() or description.lower() in brand.lower():
-                label = brand.title() if len(brand) >= len(description) else description
-            else:
-                label = f"{brand.title()} {description}"
-            if label in seen_labels:
-                continue
-            nutrients = _extract_nutrients(food.get("foodNutrients", []))
-            sugar_g = nutrients.get("Sugars, total including NLEA") or nutrients.get("Total Sugars")
-            added_sugar_g = nutrients.get("Sugars, added")
-            serving_size = food.get("servingSize")
-            serving_unit = (food.get("servingSizeUnit") or "").lower()
-
-            sugar_per_100g = None
-            if sugar_g is not None and serving_size and serving_unit == "g":
-                sugar_per_100g = sugar_g / serving_size * 100
-            if sugar_per_100g is None:
-                traffic_light = None
-            elif sugar_per_100g <= UK_SUGAR_TRAFFIC_LIGHT_GREEN_MAX:
-                traffic_light = "green"
-            elif sugar_per_100g <= UK_SUGAR_TRAFFIC_LIGHT_AMBER_MAX:
-                traffic_light = "amber"
-            else:
-                traffic_light = "red"
-
-            item = {
-                "item": label,
-                "calories": nutrients.get("Energy"),
-                "sugar_g": sugar_g,
-                "fat_g": nutrients.get("Total lipid (fat)"),
-                "protein_g": nutrients.get("Protein"),
-                "sugar_per_100g": round(sugar_per_100g, 1) if sugar_per_100g is not None else None,
-                "uk_traffic_light": traffic_light,
-                "pct_of_who_10pct_limit": (
-                    round(added_sugar_g / WHO_FREE_SUGAR_10PCT_LIMIT_G * 100) if added_sugar_g is not None else None
-                ),
-                "pct_of_who_5pct_limit": (
-                    round(added_sugar_g / WHO_FREE_SUGAR_5PCT_LIMIT_G * 100) if added_sugar_g is not None else None
-                ),
-            }
-            if item["calories"] is None and item["sugar_g"] is None:
-                continue
-            seen_labels.add(label)
-            candidates.append(item)
-
-        candidates.sort(key=lambda i: i["pct_of_who_10pct_limit"] is None)
-        out = candidates[:12]
-        if out:
-            return {"source": "real", "items": out}
-
-    # ---- fallback mock ----
-    categories = ["Premium Ice Cream", "Gelato", "Sorbet", "Frozen Yogurt", "Plant-Based Dairy"]
-    out = [
-        {
-            "item": c,
-            "calories": random.randint(180, 320),
-            "sugar_g": round(random.uniform(14, 26), 1),
-            "fat_g": round(random.uniform(6, 18), 1),
-            "protein_g": round(random.uniform(0.3, 5.5), 1),
-        }
-        for c in categories
-    ]
-    return {"source": "mock", "items": out}
 
 
 # ---------------------------------------------------------------------------
@@ -445,6 +366,22 @@ def load_consultant_brief():
     return _read_json(real_file) if real_file.exists() else None
 
 
+def load_innovation_signals():
+    """Competitor better-for-you/nutrition-innovation intelligence — rendered
+    inside the Ecosystem tab's Competitors section, not its own tab. See the
+    file's own framing_note for why this replaced the old Nutrition panel."""
+    real_file = RAW_DIR / "magnum_innovation_signals.json"
+    return _read_json(real_file) if real_file.exists() else None
+
+
+def load_annual_report_analysis():
+    """A document-native read of TMICC's Annual Report (Form 20-F) — report
+    map + dated strategic checkpoints, each with a page citation. Deliberately
+    its own tab/file rather than merged into Strategy or Timeline."""
+    real_file = RAW_DIR / "magnum_annual_report_analysis.json"
+    return _read_json(real_file) if real_file.exists() else None
+
+
 # ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
@@ -462,13 +399,9 @@ def generate_market_data():
     # at data/raw/production/ice_cream_production.csv is untouched too —
     # this is a "remove from view for now," not a deletion. Revisit with a
     # post-COVID-only cut (2020+) when that conversation happens.
-    panels = {
-        "nutrition": load_nutrition(),
-    }
 
     payload = {
         "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        **panels,
     }
 
     tmicc_financials = load_tmicc_financials()
@@ -495,14 +428,18 @@ def generate_market_data():
     if brief:
         payload["consultant_brief"] = brief
 
+    innovation = load_innovation_signals()
+    if innovation:
+        payload["innovation_signals"] = innovation
+
+    annual_report = load_annual_report_analysis()
+    if annual_report:
+        payload["annual_report_analysis"] = annual_report
+
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
 
-    live_count = sum(1 for p in panels.values() if p["source"] == "real")
-    print(f"console_data.json written to {OUT_FILE}  ({live_count}/{len(panels)} core panels on real data)")
-    for name, p in panels.items():
-        tag = {"real": "REAL", "mock": "mock"}.get(p["source"], p["source"].upper())
-        print(f"  - {name:<22} {tag}")
+    print(f"console_data.json written to {OUT_FILE}")
     if tmicc_financials:
         print(f"  - tmicc_financials       {len(tmicc_financials['items'])} fiscal years, {len(tmicc_financials.get('regions_fy2025', []))} regions")
     else:
@@ -527,6 +464,14 @@ def generate_market_data():
         print(f"  - consultant_brief       {len(brief.get('top_gaps', []))} gaps, {len(brief.get('connected_dots', []))} connected dots, {len(brief.get('recommendations', []))} recommendations")
     else:
         print("  - consultant_brief       not present (data/raw/magnum_consultant_brief.json missing)")
+    if innovation:
+        print(f"  - innovation_signals     {len(innovation.get('named_competitor_launches', []))} competitor-launch entries (gap-labeled this pass)")
+    else:
+        print("  - innovation_signals     not present (data/raw/magnum_innovation_signals.json missing)")
+    if annual_report:
+        print(f"  - annual_report_analysis {len(annual_report.get('strategic_checkpoints', []))} strategic checkpoints")
+    else:
+        print("  - annual_report_analysis not present (data/raw/magnum_annual_report_analysis.json missing)")
 
 
 if __name__ == "__main__":

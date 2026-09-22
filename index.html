@@ -48,8 +48,11 @@
       <p class="text-sm text-muted mt-1 max-w-2xl">Rebuilt from the ground up around one subject: real news, real ecosystem, real correlated timeline, real financials — anything a TMICC strategist would want to know immediately.</p>
     </div>
     <div class="text-right font-mono text-xs text-muted">
+      <button id="refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-ink transition-colors uppercase tracking-wide text-[11px] mb-1.5" title="Re-syncs this page to the latest published data (data/processed/console_data.json). It does not run new research itself — news/financials/annual-report data only change when the maintainer runs the refresh pipeline and pushes an update.">
+        <span id="refresh-icon">&#8635;</span> Refresh dashboard
+      </button>
       <div id="sync-time">Loading&hellip;</div>
-      <div class="mt-1 flex items-center justify-end gap-1" title="News is fetched live (run fetch_competitor_news.py on a schedule). Financial/nutrition/production panels are periodic real-data snapshots, not continuous feeds.">
+      <div class="mt-1 flex items-center justify-end gap-1" title="News is fetched live (run fetch_competitor_news.py on a schedule). Financial/ecosystem/annual-report panels are periodic real-data snapshots, not continuous feeds. The refresh button re-syncs to the latest published snapshot; it doesn't trigger new research on its own.">
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-positive"></span>
         <span class="uppercase tracking-wide">Live news + real snapshots &middot; no API keys</span>
       </div>
@@ -64,7 +67,7 @@
     <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="strategy">Strategy</button>
     <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="timeline">Timeline</button>
     <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="financials">Financials</button>
-    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="nutrition">Nutrition</button>
+    <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="annual-report">10-K Analyzer</button>
     <button class="tab-btn font-mono text-xs uppercase tracking-wide px-4 py-3 border-b-2 whitespace-nowrap transition-colors" data-tab="brief">Brief</button>
   </div>
 </nav>
@@ -145,6 +148,11 @@
       <div>
         <h3 class="font-display text-lg text-ivory mb-2">Competitors</h3>
         <div id="eco-competitors" class="space-y-2 text-sm"></div>
+      </div>
+
+      <div class="border border-hairline rounded-lg p-4">
+        <h3 class="font-display text-lg text-ivory mb-1">Innovation signals <span class="text-muted text-xs font-mono normal-case">(is the category getting more nutritious, and who's driving it?)</span></h3>
+        <div id="eco-innovation" class="text-sm space-y-3"></div>
       </div>
 
       <div>
@@ -251,31 +259,34 @@
     </div>
   </section>
 
-  <!-- ================= NUTRITION & REGULATORY EXPOSURE ================= -->
-  <section id="tab-nutrition" data-tab="nutrition" hidden class="bg-panel border border-hairline rounded-lg p-6">
-    <div class="mb-4 flex items-start justify-between gap-3">
-      <div>
-        <h2 class="font-display text-2xl text-ivory">Nutrition &amp; Regulatory Exposure</h2>
-        <p id="nutrition-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
-      </div>
-      <div id="seal-nutrition" class="shrink-0"></div>
+  <!-- ================= 10-K / ANNUAL REPORT ANALYZER ================= -->
+  <section id="tab-annual-report" data-tab="annual-report" hidden class="bg-panel border border-hairline rounded-lg p-6">
+    <div class="mb-4">
+      <h2 class="font-display text-2xl text-ivory">10-K Analyzer</h2>
+      <p id="ar-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
     </div>
-    <div class="overflow-x-auto">
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="text-muted border-b border-hairline">
-            <th class="pb-2 font-body font-medium">Item</th>
-            <th class="pb-2 font-body font-medium text-right">Cal</th>
-            <th class="pb-2 font-body font-medium text-right">Sugar g</th>
-            <th class="pb-2 font-body font-medium text-right">Fat g</th>
-            <th class="pb-2 font-body font-medium text-right">Protein g</th>
-            <th class="pb-2 font-body font-medium" title="UK FSA front-of-pack labelling: total sugar per 100g. Green <=5g, amber 5-22.5g, red >22.5g.">UK label&sup1;</th>
-            <th class="pb-2 font-body font-medium text-right" title="Share of WHO's free-sugar guideline for a reference adult (2000 kcal/day): <10% of energy (50g/day) is the core recommendation.">WHO free sugar&sup2;</th>
-          </tr>
-        </thead>
-        <tbody id="nutrition-body" class="font-mono divide-y divide-hairline"></tbody>
-      </table>
-      <p class="font-mono text-[10px] text-muted mt-2">&sup1; UK FSA, sugar per 100g. &sup2; % of WHO's 5% free-sugar limit (25g/day, adult). Blank = not reported.</p>
+    <div class="space-y-6">
+      <div id="ar-source" class="font-mono text-xs text-muted border border-hairline rounded-lg p-4 space-y-1"></div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Report map</h3>
+        <div id="ar-map" class="space-y-2 text-sm"></div>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Strategic checkpoints &mdash; click a date to expand</h3>
+        <div id="ar-checkpoints" class="space-y-2"></div>
+      </div>
+
+      <div id="ar-clarifications-wrap" class="hidden">
+        <h3 class="font-display text-lg text-ivory mb-2">Clarifications</h3>
+        <ul id="ar-clarifications" class="text-sm space-y-2 list-disc list-inside text-ivory"></ul>
+      </div>
+
+      <div>
+        <h3 class="font-display text-lg text-ivory mb-2">Honest gaps &mdash; nothing found this pass</h3>
+        <ul id="ar-gaps" class="font-mono text-xs text-muted space-y-1 list-disc list-inside"></ul>
+      </div>
     </div>
   </section>
 
@@ -317,7 +328,7 @@
 <footer class="border-t border-hairline">
   <div class="max-w-6xl mx-auto px-6 py-6 font-mono text-xs text-muted flex flex-wrap justify-between gap-2">
     <span>Source: <a href="https://github.com/sheersh-star/frozen_market_stage1" target="_blank" rel="noopener" class="text-brass">GitHub</a></span>
-    <span>Removed in this rebuild: Executive Brief, Command Center, Brand Sentiment, Demographics, Global Market Distribution, Company Revenue, Volume vs Dollar Sales &mdash; see README.md</span>
+    <span>Removed in this rebuild: Executive Brief, Command Center, Brand Sentiment, Demographics, Global Market Distribution, Company Revenue, Volume vs Dollar Sales, Nutrition (raw table, replaced by Innovation signals on the Ecosystem tab) &mdash; see README.md</span>
   </div>
 </footer>
 
@@ -336,7 +347,7 @@ function hideError() {
 }
 
 // ---------------- Tabs ----------------
-const TAB_NAMES = ['news', 'ecosystem', 'strategy', 'timeline', 'financials', 'nutrition', 'brief'];
+const TAB_NAMES = ['news', 'ecosystem', 'strategy', 'timeline', 'financials', 'annual-report', 'brief'];
 function switchTab(name) {
   TAB_NAMES.forEach(t => {
     document.getElementById(`tab-${t}`).hidden = t !== name;
@@ -354,19 +365,6 @@ function switchTab(name) {
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => switchTab(btn.dataset.tab));
 });
-
-function confidenceSeal(source) {
-  const el = document.createElement('span');
-  el.className = 'inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full border';
-  if (source === 'real') {
-    el.classList.add('border-positive', 'text-positive');
-    el.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-positive inline-block"></span> Live';
-  } else {
-    el.classList.add('border-neutral', 'text-neutral');
-    el.innerHTML = '<span class="w-1.5 h-1.5 rounded-full border border-neutral inline-block"></span> Mock';
-  }
-  return el;
-}
 
 // ---------------- News ----------------
 // The 4 named rivals — everything else with a matched entity that isn't
@@ -531,6 +529,31 @@ function renderEcosystem(eco) {
     document.getElementById('eco-developments-wrap').classList.remove('hidden');
     document.getElementById('eco-developments').innerHTML = devs.map(d => `<li>${d}</li>`).join('');
   }
+}
+
+// ---------------- Innovation signals (replaces the old Nutrition tab) ----------------
+function renderInnovationSignals(sig) {
+  if (!sig) { document.getElementById('eco-innovation').innerHTML = '<p class="font-mono text-xs text-muted">Not present.</p>'; return; }
+  const trend = sig.category_trend || {};
+  const launches = sig.named_competitor_launches || [];
+  const tmicc = sig.tmicc_own_position || {};
+  document.getElementById('eco-innovation').innerHTML = `
+    <div>
+      <p class="text-ivory">${trend.signal || ''}</p>
+      <div class="flex flex-wrap gap-1.5 mt-1.5">${(trend.sources || []).map(s => `<span class="font-mono text-[10px] px-1.5 py-0.5 rounded-full border border-hairline text-muted" title="${s.note}">${s.outlet}</span>`).join('')}</div>
+    </div>
+    ${launches.map(l => l.gap ? `
+      <div class="border-l-2 border-caramel pl-3">
+        <div class="font-mono text-xs text-caramel uppercase tracking-wide">Gap, not a launch</div>
+        <div class="text-ivory text-sm mt-0.5">${l.gap}</div>
+        <div class="font-mono text-[10px] text-muted mt-1">${l.why_it_still_matters || ''}</div>
+      </div>` : `
+      <div class="border-l-2 border-brass pl-3">
+        <div class="text-ivory text-sm">${l.competitor}: ${l.launch}</div>
+        <div class="font-mono text-[10px] text-muted mt-1">${l.date || ''} ${l.source ? '&middot; ' + l.source : ''}</div>
+      </div>`).join('')}
+    ${tmicc.cross_reference ? `<p class="font-mono text-[10px] text-muted italic">${tmicc.cross_reference}</p>` : ''}
+  `;
 }
 
 // ---------------- Strategic commitments ----------------
@@ -701,32 +724,54 @@ function renderFinancials(fin) {
     </div>`).join('') : '<p class="font-mono text-xs text-muted">Not present.</p>';
 }
 
-// ---------------- Nutrition (unchanged from before) ----------------
-function renderNutrition(panel) {
-  const seal = document.getElementById('seal-nutrition');
-  seal.innerHTML = '';
-  seal.appendChild(confidenceSeal(panel.source));
-  document.getElementById('nutrition-summary').textContent = `${panel.items.length} items shown`;
-  const rows = panel.items.map(item => {
-    const lightColor = { green: '#6FC796', amber: '#E3A857', red: '#E2634F' }[item.uk_traffic_light] || null;
-    const lightCell = lightColor
-      ? `<span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:${lightColor}"></span>${item.sugar_per_100g}g/100g</span>`
-      : '<span class="text-muted">—</span>';
-    let pctCell = '—';
-    if (item.pct_of_who_10pct_limit != null) {
-      pctCell = `${item.pct_of_who_10pct_limit}% of 10% limit`;
-    }
-    return `<tr>
-      <td class="py-2 pr-4 font-body">${item.item}</td>
-      <td class="py-2 text-right">${item.calories ?? '—'}</td>
-      <td class="py-2 text-right">${item.sugar_g ?? '—'}</td>
-      <td class="py-2 text-right">${item.fat_g ?? '—'}</td>
-      <td class="py-2 text-right">${item.protein_g ?? '—'}</td>
-      <td class="py-2">${lightCell}</td>
-      <td class="py-2 text-right">${pctCell}</td>
-    </tr>`;
-  }).join('');
-  document.getElementById('nutrition-body').innerHTML = rows;
+// ---------------- 10-K / Annual Report Analyzer ----------------
+function renderAnnualReport(ar) {
+  if (!ar) return;
+  const src = ar.source_document || {};
+  document.getElementById('ar-summary').textContent = `${(ar.strategic_checkpoints || []).length} strategic checkpoints, ${(ar.report_map || []).reduce((n, c) => n + (c.sections || []).length, 0)} sections mapped`;
+
+  document.getElementById('ar-source').innerHTML = `
+    <div class="text-ivory font-body text-sm">${src.title || ''}</div>
+    <div>${src.filing_type || ''}</div>
+    <div>FY covered: ${src.fiscal_year_covered || '—'} &middot; Filed with SEC: ${src.filed_with_sec || '—'} &middot; ${src.pages || '?'} pages</div>
+    ${src.sec_source ? `<div><a href="${src.sec_source}" target="_blank" rel="noopener" class="text-brass hover:underline">SEC filing &#8599;</a></div>` : ''}
+    ${src.checked_for_newer_reports ? `<div class="text-muted/80 mt-1">${src.checked_for_newer_reports}</div>` : ''}
+  `;
+
+  document.getElementById('ar-map').innerHTML = (ar.report_map || []).map(chapter => `
+    <details class="border border-hairline rounded-lg group">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-center justify-between gap-2">
+        <div class="text-ivory">${chapter.chapter}</div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-xs text-muted space-y-1">
+        ${(chapter.sections || []).map(s => `<div class="flex justify-between gap-2"><span>${s.title}</span><span class="text-caramel whitespace-nowrap">p.${s.page}</span></div>`).join('')}
+      </div>
+    </details>`).join('');
+
+  document.getElementById('ar-checkpoints').innerHTML = (ar.strategic_checkpoints || []).map(c => `
+    <details class="border border-hairline rounded-lg group open:border-brass/50">
+      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+        <div>
+          <div class="font-mono text-[10px] uppercase tracking-wide text-caramel">${c.date}</div>
+          <div class="text-ivory text-sm mt-1 leading-snug">${c.checkpoint}</div>
+        </div>
+        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+      </summary>
+      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+        <div>${c.detail || ''}</div>
+        <div><span class="text-ivory">Page:</span> ${c.page}</div>
+        ${c.cross_reference ? `<div class="text-caramel">&rarr; ${c.cross_reference}</div>` : ''}
+      </div>
+    </details>`).join('');
+
+  const clar = ar.clarifications || [];
+  if (clar.length) {
+    document.getElementById('ar-clarifications-wrap').classList.remove('hidden');
+    document.getElementById('ar-clarifications').innerHTML = clar.map(c => `<li><span class="text-ivory">${c.topic}</span> — <span class="font-mono text-xs text-muted">${c.clarification}</span></li>`).join('');
+  }
+
+  document.getElementById('ar-gaps').innerHTML = (ar.gaps_not_found_this_pass || []).map(g => `<li>${g}</li>`).join('');
 }
 
 // ---------------- Production trend ----------------
@@ -785,10 +830,11 @@ async function loadDashboardData() {
     document.getElementById('sync-time').textContent = `Synced ${data.last_updated}`;
     renderNews(data.news);
     renderEcosystem(data.ecosystem);
+    renderInnovationSignals(data.innovation_signals);
     renderStrategy(data.strategic_commitments);
     renderTimeline(data.correlated_timeline);
     renderFinancials(data.tmicc_financials);
-    renderNutrition(data.nutrition);
+    renderAnnualReport(data.annual_report_analysis);
     renderConsultantBrief(data.consultant_brief);
 
     document.getElementById('dashboard-main').classList.remove('opacity-60');
@@ -797,6 +843,23 @@ async function loadDashboardData() {
     showError("Couldn't load console_data.json. Run `python3 data_pipeline.py`, then `python3 server.py`, and reload this page.");
   }
 }
+
+// ---------------- Manual refresh button ----------------
+// Re-syncs to the latest published console_data.json immediately, rather than
+// waiting for the 30s poll. This does NOT trigger new research — news/
+// financials/annual-report data only change when the maintainer runs the
+// refresh pipeline and pushes an update. Honest about that in its tooltip.
+document.getElementById('refresh-btn').addEventListener('click', async (e) => {
+  const btn = e.currentTarget;
+  const icon = document.getElementById('refresh-icon');
+  btn.disabled = true;
+  icon.classList.add('animate-spin');
+  await loadDashboardData();
+  setTimeout(() => {
+    icon.classList.remove('animate-spin');
+    btn.disabled = false;
+  }, 400);
+});
 
 let initialTab = 'news';
 try {

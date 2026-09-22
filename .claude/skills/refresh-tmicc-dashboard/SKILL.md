@@ -1,6 +1,6 @@
 ---
 name: refresh-tmicc-dashboard
-description: Refreshes the TMICC Strategist Console's research-backed data (ecosystem, strategic commitments, correlated timeline, financials, news) by searching the web for real developments since the last pass, then updates the JSON/CSV data files, the narrative docs, and regenerates the pipeline. No API keys anywhere — WebSearch/WebFetch for research, Google News RSS (via fetch_competitor_news.py) for live news.
+description: Refreshes the TMICC Strategist Console's research-backed data (ecosystem, innovation signals, strategic commitments, correlated timeline, financials, annual report analysis, news) by searching the web for real developments since the last pass, then updates the JSON/CSV data files, the narrative docs, and regenerates the pipeline. No API keys anywhere — WebSearch/WebFetch for research, Google News RSS (via fetch_competitor_news.py) for live news.
 ---
 
 # Refresh the TMICC Strategist Console
@@ -17,7 +17,9 @@ Do not re-derive this project from scratch. Read, in order:
 3. `data/raw/magnum_strategic_commitments.json` + `docs/magnum_strategic_commitments.md`
 4. `data/raw/magnum_correlated_timeline.json` + `docs/magnum_correlated_timeline.md`
 5. `data/raw/market/*.csv` (financials)
-6. The `generated_date` / `last_verified` fields in each JSON file — that's your baseline. You're looking for what's changed **since** that date, not re-researching everything from zero.
+6. `data/raw/magnum_annual_report_analysis.json` + `docs/magnum_annual_report_analysis.md`
+7. `data/raw/magnum_innovation_signals.json` (no separate doc — small enough to live in-file)
+8. The `generated_date` / `last_verified` fields in each JSON file — that's your baseline. You're looking for what's changed **since** that date, not re-researching everything from zero.
 
 ## Step 1 — the mechanical part (no reasoning needed, run it first)
 
@@ -43,8 +45,14 @@ Check for: new TMICC strategic decisions, competitor moves, macro-commodity swin
 ### Financials (`data/raw/market/*.csv`)
 Check for: the next quarterly/half-year/annual results release, updated share price/market cap, any new regional breakdown. Add new dated rows to the existing CSVs (e.g. `magnum_share_price_snapshots.csv`) or new CSV files following the same one-dataset-per-file convention already established — don't overwrite historical rows.
 
-### Consultant's Brief (`data/raw/magnum_consultant_brief.json`) — revisit last, and only after the four above are updated
-This file is different in kind from the other four: it's analysis and judgment, not TMICC-disclosed fact. After updating Ecosystem/Strategy/Timeline/Financials, re-read this file and ask: does any new fact close a listed gap, add a new connected dot, or change whether a recommendation still makes sense? Update it to match — but never let a fact leak in here disguised as analysis, and never let an opinion leak into the other four files disguised as fact. The separation is the entire point of this file existing on its own.
+### Annual Report Analysis (`data/raw/magnum_annual_report_analysis.json`)
+Only changes when TMICC files a new Annual Report (next one expected ~Feb 2027) or when a previously-unread filing (the two 2026 Form 6-Ks are a standing gap) gets read in. Re-check TMICC's investor relations site + SEC EDGAR each pass to confirm you're still working from the current filing before spending time on it. Every checkpoint needs a real page citation — don't add one without re-opening the source PDF.
+
+### Innovation Signals (`data/raw/magnum_innovation_signals.json`)
+Re-run named-competitor searches (Froneri, Nestlé, General Mills, Ferrero/Wells Enterprises) plus "protein"/"low sugar"/"better-for-you" each pass. The moment a real, dated, named launch is found, promote it out of `named_competitor_launches`' gap entry into its own dated entry (`competitor`, `launch`, `date`, `source` fields — the render code in `index.html` already expects this shape). Don't force a weak or generic trend-piece into looking like a specific launch — the gap entry is honest and fine to leave as-is if nothing concrete turns up.
+
+### Consultant's Brief (`data/raw/magnum_consultant_brief.json`) — revisit last, and only after everything above is updated
+This file is different in kind from the others: it's analysis and judgment, not TMICC-disclosed fact. After updating Ecosystem/Strategy/Timeline/Financials/Annual Report/Innovation Signals, re-read this file and ask: does any new fact close a listed gap, add a new connected dot, or change whether a recommendation still makes sense? Update it to match — but never let a fact leak in here disguised as analysis, and never let an opinion leak into the fact files disguised as fact. The separation is the entire point of this file existing on its own.
 
 ## The non-negotiable discipline
 
@@ -68,7 +76,7 @@ Then verify end-to-end, the same way every prior change in this repo has been ve
 
 ## Step 4 — update the narrative docs
 
-`docs/magnum_ecosystem.md`, `docs/magnum_strategic_commitments.md`, and `docs/magnum_correlated_timeline.md` are the human-readable read of the JSON data — keep them in sync with whatever you changed. Match the existing tone and structure (short, sourced, gaps stated plainly) rather than introducing a new style.
+`docs/magnum_ecosystem.md`, `docs/magnum_strategic_commitments.md`, `docs/magnum_correlated_timeline.md`, and `docs/magnum_annual_report_analysis.md` are the human-readable read of the JSON data — keep them in sync with whatever you changed. Match the existing tone and structure (short, sourced, gaps stated plainly) rather than introducing a new style. Innovation Signals has no separate doc (small enough to live in-file) — update the JSON directly.
 
 ## Step 5 — commit
 

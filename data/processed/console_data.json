@@ -1,142 +1,5 @@
 {
-  "last_updated": "2026-09-18 11:06:00",
-  "nutrition": {
-    "source": "real",
-    "items": [
-      {
-        "item": "Howling Cow Ice Cream",
-        "calories": 235,
-        "sugar_g": 25.5,
-        "fat_g": 13.7,
-        "protein_g": 2.94,
-        "sugar_per_100g": 25.0,
-        "uk_traffic_light": "red",
-        "pct_of_who_10pct_limit": 41,
-        "pct_of_who_5pct_limit": 82
-      },
-      {
-        "item": "Prairie Farms Ice Cream",
-        "calories": 233,
-        "sugar_g": 22.1,
-        "fat_g": 11.6,
-        "protein_g": 3.49,
-        "sugar_per_100g": 25.7,
-        "uk_traffic_light": "red",
-        "pct_of_who_10pct_limit": 30,
-        "pct_of_who_5pct_limit": 60
-      },
-      {
-        "item": "Best Yet Ice Cream Cake Cups, Ice Cream",
-        "calories": 400,
-        "sugar_g": 20.0,
-        "fat_g": 0.0,
-        "protein_g": 0.0,
-        "sugar_per_100g": null,
-        "uk_traffic_light": null,
-        "pct_of_who_10pct_limit": 40,
-        "pct_of_who_5pct_limit": 80
-      },
-      {
-        "item": "Julie'S Ice Cream, Strawberries & Cream",
-        "calories": 209,
-        "sugar_g": 23.3,
-        "fat_g": 11.6,
-        "protein_g": 2.33,
-        "sugar_per_100g": 27.1,
-        "uk_traffic_light": "red",
-        "pct_of_who_10pct_limit": 40,
-        "pct_of_who_5pct_limit": 79
-      },
-      {
-        "item": "Lowes Foods Cookies & Cream Ice Cream",
-        "calories": 221,
-        "sugar_g": 19.8,
-        "fat_g": 10.5,
-        "protein_g": 3.49,
-        "sugar_per_100g": 23.0,
-        "uk_traffic_light": "red",
-        "pct_of_who_10pct_limit": 30,
-        "pct_of_who_5pct_limit": 60
-      },
-      {
-        "item": "Fuesta Ice Cream, Cookies & Cream",
-        "calories": 234,
-        "sugar_g": 17.0,
-        "fat_g": 11.7,
-        "protein_g": 4.26,
-        "sugar_per_100g": 18.1,
-        "uk_traffic_light": "amber",
-        "pct_of_who_10pct_limit": 28,
-        "pct_of_who_5pct_limit": 55
-      },
-      {
-        "item": "Clover Ice Cream, Cookies & Cream",
-        "calories": 242,
-        "sugar_g": 23.2,
-        "fat_g": 12.6,
-        "protein_g": 4.21,
-        "sugar_per_100g": 24.4,
-        "uk_traffic_light": "red",
-        "pct_of_who_10pct_limit": 36,
-        "pct_of_who_5pct_limit": 72
-      },
-      {
-        "item": "Hannaford Ice Cream, Cookies & Cream",
-        "calories": 239,
-        "sugar_g": 22.7,
-        "fat_g": 11.4,
-        "protein_g": 2.27,
-        "sugar_per_100g": 25.8,
-        "uk_traffic_light": "red",
-        "pct_of_who_10pct_limit": 36,
-        "pct_of_who_5pct_limit": 73
-      },
-      {
-        "item": "Clover Sonoma Ice Cream, Sweet Cream",
-        "calories": 211,
-        "sugar_g": 23.2,
-        "fat_g": 11.6,
-        "protein_g": 4.21,
-        "sugar_per_100g": 24.4,
-        "uk_traffic_light": "red",
-        "pct_of_who_10pct_limit": 36,
-        "pct_of_who_5pct_limit": 72
-      },
-      {
-        "item": "Big Easy Blends Ice Cream Flavored Snow Cone, Ice Cream",
-        "calories": 107,
-        "sugar_g": 24.9,
-        "fat_g": 0.0,
-        "protein_g": 0.0,
-        "sugar_per_100g": null,
-        "uk_traffic_light": null,
-        "pct_of_who_10pct_limit": 50,
-        "pct_of_who_5pct_limit": 100
-      },
-      {
-        "item": "Stone Ridge Creamery Neapolitan Ice Cream Sandwiches, Neapolitan Ice Cream",
-        "calories": 268,
-        "sugar_g": 23.2,
-        "fat_g": 8.93,
-        "protein_g": 3.57,
-        "sugar_per_100g": null,
-        "uk_traffic_light": null,
-        "pct_of_who_10pct_limit": 32,
-        "pct_of_who_5pct_limit": 64
-      },
-      {
-        "item": "Oberweis Dairy Turtle Ice Cream Pie, Turtle Ice Cream",
-        "calories": 333,
-        "sugar_g": 24.8,
-        "fat_g": 20.2,
-        "protein_g": 3.88,
-        "sugar_per_100g": 19.2,
-        "uk_traffic_light": "amber",
-        "pct_of_who_10pct_limit": 43,
-        "pct_of_who_5pct_limit": 87
-      }
-    ]
-  },
+  "last_updated": "2026-09-22 11:11:17",
   "tmicc_financials": {
     "source": "real",
     "items": [
@@ -20406,6 +20269,208 @@
         "why": "If it's genuinely driving AMEA's results, clarity on wider rollout is a real near-term catalyst worth getting ahead of rather than leaving as an open question analysts have to piece together themselves.",
         "partner_angle": "Field-execution/retail-execution technology, sales-force enablement."
       }
+    ]
+  },
+  "innovation_signals": {
+    "generated_date": "2026-09-22",
+    "framing_note": "Replaces the old standalone Nutrition tab (raw USDA per-item nutrition facts \u2014 real data, but not a strategist insight on its own). This file reframes the same underlying question \u2014 'is the category moving toward more nutritious products, and who's driving it?' \u2014 as a competitor-intelligence signal instead of a nutrition-facts table. Lives inside the Ecosystem tab's Competitors section, not as its own tab.",
+    "category_trend": {
+      "signal": "Better-for-you (high-protein, low-sugar, functional) frozen dessert products are a real, reported 2026 category trend, not a TMICC-specific claim.",
+      "sources": [
+        {
+          "outlet": "FoodNavigator-USA",
+          "note": "Feb 2026 roundup of new ice cream launches for the year \u2014 indulgent flavor innovation dominates; no confirmed high-profile 'better-for-you' launch from the four named competitors in this piece."
+        },
+        {
+          "outlet": "GreyB (Ice Cream Trends 2026)",
+          "note": "Names GLP-1-driven demand, clean labels, and reduced sugar as an active 2026 industry trend."
+        },
+        {
+          "outlet": "MarkWideResearch",
+          "note": "Forecasts continued growth of the protein-ice-cream market category through 2026-2036."
+        }
+      ],
+      "confidence": "real, but category-level market-research commentary \u2014 not a specific competitor product disclosure"
+    },
+    "named_competitor_launches": [
+      {
+        "gap": "No specific, dated 'better-for-you' (high-protein / low-sugar / functional) product launch could be confirmed this pass from any of the four named rivals tracked in this console \u2014 Froneri, Nestl\u00e9, General Mills, or Ferrero/Wells Enterprises. Searches surfaced only indulgence-flavor launches (e.g. H\u00e4agen-Dazs Dark Cherry Truffle, Jan 2026) and established third-party players outside the tracked set (Halo Top, Perfect Day, Protein Pints, Snooz) \u2014 none of which are one of the four named competitors.",
+        "why_it_still_matters": "The absence itself is a signal: TMICC (via Yasso and Breyers Carb Smart \u2014 see the Strategy tab's calorie-control/high-protein initiative) may currently be ahead of its four named rivals on visible better-for-you launches, not behind. Worth re-checking every refresh pass rather than assumed permanent.",
+        "next_check": "Re-run named-competitor + 'protein' / 'low sugar' / 'better-for-you' searches on the next refresh; promote to a dated entry here the moment a real, named, sourced launch is found."
+      }
+    ],
+    "tmicc_own_position": {
+      "note": "Not a competitor fact \u2014 cross-referenced from this project's own Strategy tab for context only.",
+      "cross_reference": "strat.cross_cutting_initiatives \u2014 'Calorie-control and high-protein expansion (Americas)': Yasso and Breyers Carb Smart named as TMICC's own Better-For-You hedge against GLP-1/weight-loss-drug demand risk."
+    }
+  },
+  "annual_report_analysis": {
+    "generated_date": "2026-09-22",
+    "framing_note": "A document-native read of TMICC's Annual Report \u2014 a report map and a chronological list of dated strategic checkpoints the report itself states, each with a page citation. Distinct from the Strategy tab (which back-traces commitments to initiatives) and the Timeline tab (which correlates TMICC against competitors/macro events) \u2014 this panel stays inside what one single document says, in the order/structure it says it.",
+    "source_document": {
+      "title": "The Magnum Ice Cream Company N.V. \u2014 Annual Report 2025",
+      "filing_type": "Form 20-F (Annual Report), filed with the U.S. SEC \u2014 the SEC's annual-report equivalent for a foreign private issuer. TMICC is Netherlands-incorporated and listed on NYSE, LSE, and Euronext Amsterdam, so it files a 20-F rather than a US-domestic 10-K; functionally the same disclosure role, which is why this panel is framed as a 10-K-style analyzer.",
+      "local_filename": "146292742.pdf",
+      "pages": 238,
+      "fiscal_year_covered": "FY2025 (year ended 31 December 2025)",
+      "filed_with_sec": "18 March 2026",
+      "sec_source": "https://www.sec.gov/Archives/edgar/data/2071668/000110465926029805/micc-20251231x20f.htm",
+      "checked_for_newer_reports": "Checked TMICC's investor relations site (corporate.magnumicecream.com/en/investors) and SEC EDGAR, 22 Sep 2026 \u2014 this FY2025 report remains the current, latest Annual Report; the FY2026 Annual Report isn't expected until early 2027. Two 2026 Form 6-K filings exist (interim/current disclosures, e.g. AGM results) but are not yet incorporated into this panel \u2014 gap, revisit next refresh."
+    },
+    "report_map": [
+      {
+        "chapter": "Management Report",
+        "sections": [
+          {
+            "title": "About us (At a glance, Our heritage, Our footprint, Regional overview)",
+            "page": 5
+          },
+          {
+            "title": "Leadership perspectives (Board Chair update, CEO update)",
+            "page": 10
+          },
+          {
+            "title": "Our strategy",
+            "page": 14
+          },
+          {
+            "title": "Our people / Culture and values",
+            "page": 15
+          },
+          {
+            "title": "Review of the year (Group financial review, Regional performance)",
+            "page": 19
+          },
+          {
+            "title": "Sustainability (Management Report summary)",
+            "page": 29
+          },
+          {
+            "title": "Risk management (Approach, Principal risks, Viability statement)",
+            "page": 32
+          },
+          {
+            "title": "Corporate governance (Board, Executive Leadership Team, Committee reports, Remuneration Report)",
+            "page": 42
+          }
+        ]
+      },
+      {
+        "chapter": "Financial Statements",
+        "sections": [
+          {
+            "title": "Consolidated financial statements",
+            "page": 85
+          },
+          {
+            "title": "Notes to the consolidated financial statements",
+            "page": 90
+          },
+          {
+            "title": "Company financial statements",
+            "page": 141
+          },
+          {
+            "title": "Notes to the Company financial statements",
+            "page": 143
+          }
+        ]
+      },
+      {
+        "chapter": "Sustainability Statements",
+        "sections": [
+          {
+            "title": "Environmental disclosures",
+            "page": 148
+          },
+          {
+            "title": "Social disclosures",
+            "page": 164
+          },
+          {
+            "title": "Governance disclosures",
+            "page": 187
+          }
+        ]
+      },
+      {
+        "chapter": "Further Information",
+        "sections": [
+          {
+            "title": "Definitions/reconciliation of non-IFRS measures, Shareholder information, Cautionary statement",
+            "page": 218
+          }
+        ]
+      }
+    ],
+    "strategic_checkpoints": [
+      {
+        "date": "2024",
+        "checkpoint": "\u20ac500 million productivity programme launched",
+        "detail": "Three levers named explicitly: supply chain transformation, overhead reduction, and technology-enabled operations. Designed to deliver savings over the medium term.",
+        "page": 17,
+        "cross_reference": "Strategy tab \u2014 headline commitment 'Cost / separation savings'"
+      },
+      {
+        "date": "6 December 2025",
+        "checkpoint": "Demerger from Unilever completed; TMICC began trading as an independent listed company",
+        "detail": "Described in both the Board Chair and CEO updates as the defining milestone of the year.",
+        "page": 13
+      },
+      {
+        "date": "November 2025",
+        "checkpoint": "\u20ac3 billion debut bond issuance across four tranches (2029, 2031, 2034, 2037)",
+        "detail": "Euro Medium Term Note programme, interest rate range 2.75%-4%, order book oversubscribed more than 7x. Financial liabilities rose to \u20ac3,416m (2024: \u20ac333m); average debt maturity 7.5 years. This is TMICC's real debt-maturity wall \u2014 worth tracking against future refinancing risk.",
+        "page": 28
+      },
+      {
+        "date": "2026 (to be drawn)",
+        "checkpoint": "\u20ac300 million credit facility earmarked for the Indian ice cream business acquisition",
+        "detail": "Financing detail behind the Kwality Wall's transaction (completed 30 Mar 2026, already tracked in the Ecosystem tab) \u2014 this is the specific facility funding it, not previously captured.",
+        "page": 28,
+        "cross_reference": "Ecosystem tab \u2014 AMEA / India expansion"
+      },
+      {
+        "date": "By 2026",
+        "checkpoint": "Full compliance with the 2025 Dutch Corporate Governance Code, Best Practice Provision 1.4.3(ii)-(iv)",
+        "detail": "TMICC's own Board states it is not yet fully compliant as a newly-standalone company, and expects to close the gap by 2026. A real, self-disclosed governance checkpoint distinct from the Foundation Plan for Growth shareholder-dissent issue tracked elsewhere.",
+        "page": 82
+      },
+      {
+        "date": "By end of 2027",
+        "checkpoint": "Exit all remaining Transitional Services Agreements (TSAs) with Unilever",
+        "detail": "TMICC still relies on Unilever for some transitional operational support post-demerger; full independence from these arrangements is targeted for end-2027.",
+        "page": 17
+      },
+      {
+        "date": "By 2028",
+        "checkpoint": "Vanilla for Change programme \u2014 80% of enrolled Madagascar farmers transitioned to regenerative agriculture; 1 million trees planted (up from 585,000 today), survival rate target rising from 40% to 65%",
+        "detail": "Run with Symrise and Save the Children in the vanilla-producing Sava region of Madagascar.",
+        "page": 180
+      },
+      {
+        "date": "From 2026",
+        "checkpoint": "New cabinet energy-efficiency technology begins rolling out on new freezer-cabinet purchases",
+        "detail": "Connects directly to the freezer-cabinet fleet risk already flagged in the Ecosystem tab (TMICC's largest single emissions source, and a fleet it doesn't own).",
+        "page": 171,
+        "cross_reference": "Ecosystem tab \u2014 disclosed risk factors"
+      },
+      {
+        "date": "By 2050",
+        "checkpoint": "Net Zero ambition across Scope 1, 2, and 3 emissions",
+        "detail": "Explicit scenario-planning horizons defined elsewhere in the report: near-term 2026-2030, medium-term 2031-2039 for climate transition-risk modelling.",
+        "page": 32
+      }
+    ],
+    "clarifications": [
+      {
+        "topic": "\"Potential acquisition in India\" in the report's cautionary statement (p.235)",
+        "clarification": "This appears only inside the standard forward-looking-statements disclaimer boilerplate (a list of example statement categories), not as a fresh, separate disclosure. Read in context, it most plausibly refers to the already-known Kwality Wall's transaction rather than signalling a second, undisclosed India deal \u2014 flagged here so it isn't mistaken for new news."
+      }
+    ],
+    "gaps_not_found_this_pass": [
+      "The two 2026 Form 6-K filings (interim/current disclosures) haven't been read into this panel yet.",
+      "Exact page numbers for 'Definitions/reconciliation of non-IFRS measures', 'Shareholder information', and 'Cautionary statement' within the Further Information chapter are approximate \u2014 the source table of contents' pagination for this chapter was ambiguous in extraction."
     ]
   }
 }

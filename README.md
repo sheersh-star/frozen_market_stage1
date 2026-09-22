@@ -13,7 +13,9 @@ python3 server.py                  # generates console_data.json, then opens htt
 
 `server.py` runs the pipeline itself on startup and keeps watching `data/raw/` (recursively) for changes, so you don't need to run `data_pipeline.py` by hand unless you want a one-off regeneration without starting the server. The news feed specifically needs `fetch_competitor_news.py` run separately, since fetching news is a live network operation with its own polite rate-limiting — the dashboard pipeline only reads its output.
 
-Every panel shows a small badge — a solid **LIVE** ring or a dashed **MOCK** ring — so you always know what you're looking at. In this rebuild, only two panels (Production Trend, Nutrition) still have that badge at all; everything else is either real or simply absent (see "What's in each panel" below).
+Every panel shows a small badge — a solid **LIVE** ring or a dashed **MOCK** ring — so you always know what you're looking at. In this rebuild, only Production Trend (parked, unused) still carries that badge at all; everything else is either real or simply absent (see "What's in each panel" below).
+
+A **Refresh dashboard** button sits at the top of the page. It re-syncs the browser to the latest published `console_data.json` immediately, instead of waiting for the 30s auto-poll — it does **not** trigger new research on its own. News/ecosystem/financials/annual-report data only change when the maintainer runs the refresh pipeline (see "Keeping the research current" below) and pushes an update; the button just means a viewer never has to wait up to 30s to see it.
 
 ## Self-updating
 
@@ -37,9 +39,11 @@ frozen-dessert-dashboard/
 │   │   ├── magnum_correlated_timeline.json    # real, dated, cross-referenced
 │   │   ├── magnum_strategic_commitments.json  # real, back-traced decision -> strategy -> initiative
 │   │   ├── magnum_consultant_brief.json       # ANALYSIS, not fact — gaps/dots/recommendations
+│   │   ├── magnum_innovation_signals.json     # competitor "better-for-you" intel — replaces Nutrition tab
+│   │   ├── magnum_annual_report_analysis.json # 10-K Analyzer: report map + dated, page-cited checkpoints
 │   │   ├── news/raw_items.json                # live, from fetch_competitor_news.py
 │   │   ├── production/       #   Panel removed for now (see below) — data kept, untouched
-│   │   ├── nutrition/        #   Nutrition & Regulatory Exposure (USDA)
+│   │   ├── nutrition/        #   legacy, unused — superseded by magnum_innovation_signals.json
 │   │   ├── market/           #   TMICC Financial Performance (6 files used; 3 legacy)
 │   │   ├── sentiment/        #   legacy, unused — see data/raw/README.md
 │   │   ├── demographics/     #   legacy, unused
@@ -50,24 +54,25 @@ frozen-dessert-dashboard/
 │   ├── magnum_ecosystem.md               # narrative version of magnum_ecosystem.json
 │   ├── magnum_correlated_timeline.md     # narrative version of magnum_correlated_timeline.json
 │   ├── magnum_strategic_commitments.md   # narrative version of magnum_strategic_commitments.json
-│   └── magnum_consultant_brief.md        # narrative version of magnum_consultant_brief.json
+│   ├── magnum_consultant_brief.md        # narrative version of magnum_consultant_brief.json
+│   └── magnum_annual_report_analysis.md  # narrative version of magnum_annual_report_analysis.json
 └── README.md
 ```
 
 ## Navigation
 
-The page is a tab-based single-pager, not a stacked scroll of every panel — click a tab across the top (News / Ecosystem / Strategy / Timeline / Financials / Nutrition) to switch pages; the last tab you viewed is remembered (`localStorage`) across reloads. Within a page, individual items still click-to-expand (native `<details>`/`<summary>`, no custom JS toggle needed) — the tabs replace the *outer* show/hide that used to wrap each whole panel, not the inner per-item expand.
+The page is a tab-based single-pager, not a stacked scroll of every panel — click a tab across the top (News / Ecosystem / Strategy / Timeline / Financials / 10-K Analyzer / Brief) to switch pages; the last tab you viewed is remembered (`localStorage`) across reloads. Within a page, individual items still click-to-expand (native `<details>`/`<summary>`, no custom JS toggle needed) — the tabs replace the *outer* show/hide that used to wrap each whole panel, not the inner per-item expand.
 
 ## What's in each tab
 
 | Tab | Source | Confidence |
 |---|---|---|
 | News | Google News RSS via `fetch_competitor_news.py` | real, live |
-| Ecosystem | TMICC's own 2025 Annual Report (`146292742.pdf`, kept local — see `.gitignore`) | real, first-party |
+| Ecosystem (+ Innovation signals) | TMICC's own 2025 Annual Report (`146292742.pdf`), plus competitor better-for-you launch research | real, first-party (innovation signals: real trend context, gap-labeled on specific launches) |
 | Strategy | Same Annual Report — "Our strategy" and remuneration sections specifically | real, first-party |
 | Timeline | Cross-referenced from the ecosystem doc + targeted research | real, dated, sourced |
 | Financials | Unilever/TMICC full-year results disclosures | real |
-| Nutrition | USDA FoodData Central | real (mock fallback if the file's missing) |
+| 10-K Analyzer | TMICC's Annual Report (Form 20-F) — report map + dated, page-cited strategic checkpoints | real, first-party |
 | Brief | This project's own synthesis, built on all of the above | **analysis/judgment — not a TMICC fact, deliberately kept in its own file so it's never confused with one** |
 
 Production & Sales Trend (Eurostat NACE C1052, Germany) is **removed from view for now** — see "The ground-up rebuild" below.
@@ -106,15 +111,15 @@ Each column: newest-first, capped to 8 for a one-screen read. Rows show the full
 - No documented rate limit for this endpoint — the script is polite by design (a ~1.5s gap between each of the 11 queries per run) but this is a scraping-adjacent technique, not a stable API contract; if Google changes this endpoint's behavior, this script needs revisiting.
 - This session's sandbox actually has real outbound network access (confirmed: `curl` to `news.google.com` returns real data) — worth noting since network access can't be assumed constant across environments/sessions.
 
-## Live USDA pull (nutrition panel)
+## Legacy: USDA pull (superseded)
+
+`fetch_usda_data.py` and `data/raw/nutrition/usda_nutrition.json` are no longer wired into the pipeline — the Nutrition tab they fed was removed (22 Sep 2026) in favor of the Ecosystem tab's Innovation signals sub-section, which asks the more strategist-relevant version of the same question ("is the category getting more nutritious, and who's driving it?") instead of a raw per-item facts table. The script and data are left on disk untouched, not deleted — see `data/raw/README.md`.
 
 ```bash
-python3 fetch_usda_data.py                    # searches "ice cream"
-python3 fetch_usda_data.py "gelato"            # or any query
+python3 fetch_usda_data.py                    # still runs standalone if wanted
+python3 fetch_usda_data.py "gelato"
 USDA_API_KEY=your_key python3 fetch_usda_data.py
 ```
-
-Get a free key at fdc.nal.usda.gov/api-key-signup — the shared `DEMO_KEY` works for light testing but rate-limits quickly.
 
 ## Strategic Priorities & Commitments
 
@@ -147,6 +152,13 @@ Both tabs were substantially deepened in a later pass, following the same back-t
 - **The Ben & Jerry's ruling got precise**: the vague "lawsuit narrowed" entry was refined with the actual 22 Aug 2026 ruling (Judge Castel dismissed 7 of 10 claims; 2 survive concerning $5m in missed payments tied to a 2022 Palestinian-territories trademark settlement) — timeline grew to 48 events, 9 patterns.
 - **New: the Consultant's Brief tab.** Everything above is real fact; this tab is deliberately different — analysis and judgment built on top of it (top gaps, connected dots across all four research tabs, and concrete recommendations), kept in its own file (`magnum_consultant_brief.json`) specifically so it's never confused with a TMICC-stated fact. See `docs/magnum_consultant_brief.md`.
 
+## Rebuilt again (22 Sep 2026): Nutrition retired, 10-K Analyzer added, manual refresh button
+
+- **Nutrition tab removed.** The raw USDA per-item nutrition-facts table was real data but not, on its own, a strategist insight — see "Removed and replaced" above.
+- **New: Innovation signals**, inside the Ecosystem tab's Competitors section. Reframes the same underlying question as competitor intelligence: real category-trend sourcing (FoodNavigator-USA, GreyB, MarkWideResearch), plus an explicit, honest gap — no specific, dated "better-for-you" launch could be confirmed this pass from any of the four named competitors. The absence is itself flagged as a signal (TMICC may currently be ahead via Yasso/Breyers Carb Smart), not silently dropped.
+- **New: the 10-K Analyzer tab**, replacing Nutrition's slot in the nav. A document-native read of TMICC's Annual Report (Form 20-F) — extracted directly from `146292742.pdf` via PyMuPDF this pass (not the earlier custom regex/zlib extractor) — with a page-numbered report map and nine dated, page-cited strategic checkpoints, several genuinely new to this project (TSA exit by end-2027, the €3bn debut bond issuance with real 2029/2031/2034/2037 maturities, the €300m India-acquisition credit facility, the Dutch Corporate Governance Code compliance-by-2026 gap). Cross-checked against TMICC's investor relations site and SEC EDGAR to confirm this is still the current Annual Report. See `docs/magnum_annual_report_analysis.md`.
+- **New: a "Refresh dashboard" button** at the top of the page. Re-syncs immediately to the latest published `console_data.json` rather than waiting for the 30s auto-poll — an honest capability given this is a static, zero-backend site: it does not and cannot trigger new research on its own (that still needs `/refresh-tmicc-dashboard` run by the maintainer, then a push).
+
 ## Customizing
 
 - **Port**: `DASHBOARD_PORT=8081 python3 server.py`
@@ -172,13 +184,15 @@ This repo started as a generic "UK frozen dessert market" console (production tr
 
 **Kept, reframed:**
 - **TMICC Financial Performance** (was "Real-World Precedent (Magnum)") — the exact same real data, just renamed to reflect that TMICC is now the dashboard's actual subject, not a "precedent example" for a hypothetical client.
-- **Nutrition & Regulatory Exposure** — kept as-is; real, and still serves the new scope (allergen/ingredient exposure) even though it's not TMICC-specific.
+
+**Removed and replaced (22 Sep 2026):**
+- **Nutrition & Regulatory Exposure** — real data, but a standalone per-item nutrition-facts table wasn't a strategist insight. Replaced by **Innovation signals**, a competitor-intelligence sub-section inside the Ecosystem tab — see the dated section below.
 
 **Removed from view, data kept for later:**
 - **Production & Sales Trend** (Eurostat NACE C1052, Germany) — the full 1991-present series was too big, too old, and not relevant to show as-is. `load_sales_trend()` is still defined in `data_pipeline.py` and the real data is untouched at `data/raw/production/ice_cream_production.csv` — just not called or rendered right now. The plan is to bring it back filtered to post-COVID records only (2020+) once that's worth doing; not deleted, just parked.
 
 ## Prototype vs. live — deliberate, not a limitation
 
-**Already live, free:** the News Feed panel genuinely fetches on demand, no cost. Production Trend (Eurostat) and Nutrition (USDA) sit behind free public APIs and can be re-pulled anytime — see the commands above.
+**Already live, free:** the News Feed panel genuinely fetches on demand, no cost. Production Trend (Eurostat, parked/unused) and the legacy USDA pull sit behind free public APIs and can be re-pulled anytime — see the commands above.
 
-**Periodic real-data snapshots, not continuous feeds:** The Magnum Ecosystem, Correlated Timeline, and TMICC Financial Performance are all real but hand-researched — refreshing them means re-reading TMICC's next filing or re-running the research pass that built them, not an automated pull. That's an honest description of what they are, not a shortcut that was skipped.
+**Periodic real-data snapshots, not continuous feeds:** The Magnum Ecosystem, Correlated Timeline, TMICC Financial Performance, and the 10-K Analyzer are all real but hand-researched — refreshing them means re-reading TMICC's next filing or re-running the research pass that built them, not an automated pull. The "Refresh dashboard" button re-syncs to whatever was last published; it doesn't shortcut this. That's an honest description of what they are, not a shortcut that was skipped.

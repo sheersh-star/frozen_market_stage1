@@ -1,0 +1,24 @@
+{
+  "generated_date": "2026-09-22",
+  "framing_note": "Replaces the old standalone Nutrition tab (raw USDA per-item nutrition facts — real data, but not a strategist insight on its own). This file reframes the same underlying question — 'is the category moving toward more nutritious products, and who's driving it?' — as a competitor-intelligence signal instead of a nutrition-facts table. Lives inside the Ecosystem tab's Competitors section, not as its own tab.",
+  "category_trend": {
+    "signal": "Better-for-you (high-protein, low-sugar, functional) frozen dessert products are a real, reported 2026 category trend, not a TMICC-specific claim.",
+    "sources": [
+      {"outlet": "FoodNavigator-USA", "note": "Feb 2026 roundup of new ice cream launches for the year — indulgent flavor innovation dominates; no confirmed high-profile 'better-for-you' launch from the four named competitors in this piece."},
+      {"outlet": "GreyB (Ice Cream Trends 2026)", "note": "Names GLP-1-driven demand, clean labels, and reduced sugar as an active 2026 industry trend."},
+      {"outlet": "MarkWideResearch", "note": "Forecasts continued growth of the protein-ice-cream market category through 2026-2036."}
+    ],
+    "confidence": "real, but category-level market-research commentary — not a specific competitor product disclosure"
+  },
+  "named_competitor_launches": [
+    {
+      "gap": "No specific, dated 'better-for-you' (high-protein / low-sugar / functional) product launch could be confirmed this pass from any of the four named rivals tracked in this console — Froneri, Nestlé, General Mills, or Ferrero/Wells Enterprises. Searches surfaced only indulgence-flavor launches (e.g. Häagen-Dazs Dark Cherry Truffle, Jan 2026) and established third-party players outside the tracked set (Halo Top, Perfect Day, Protein Pints, Snooz) — none of which are one of the four named competitors.",
+      "why_it_still_matters": "The absence itself is a signal: TMICC (via Yasso and Breyers Carb Smart — see the Strategy tab's calorie-control/high-protein initiative) may currently be ahead of its four named rivals on visible better-for-you launches, not behind. Worth re-checking every refresh pass rather than assumed permanent.",
+      "next_check": "Re-run named-competitor + 'protein' / 'low sugar' / 'better-for-you' searches on the next refresh; promote to a dated entry here the moment a real, named, sourced launch is found."
+    }
+  ],
+  "tmicc_own_position": {
+    "note": "Not a competitor fact — cross-referenced from this project's own Strategy tab for context only.",
+    "cross_reference": "strat.cross_cutting_initiatives — 'Calorie-control and high-protein expansion (Americas)': Yasso and Breyers Carb Smart named as TMICC's own Better-For-You hedge against GLP-1/weight-loss-drug demand risk."
+  }
+}

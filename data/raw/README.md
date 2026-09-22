@@ -24,9 +24,16 @@ account of what was cut and why.
   news/raw_items.json                Live news feed output — produced by the separate
                                       fetch_competitor_news.py (run that, not this file, to
                                       refresh it). Zero API keys — Google News RSS.
-  nutrition/usda_nutrition.json      USDA FoodData Central (use fetch_usda_data.py). Values
-                                      are US; the regulatory judgment applied to them (UK FSA
-                                      traffic-light, WHO free-sugar %) is UK/WHO.
+  magnum_innovation_signals.json     Replaces the old Nutrition tab. Real category-trend
+                                      sourcing (FoodNavigator-USA, GreyB, MarkWideResearch) plus
+                                      an honest gap: no specific, dated "better-for-you" launch
+                                      confirmed this pass from the four named competitors.
+  magnum_annual_report_analysis.json A document-native read of TMICC's Annual Report (Form
+                                      20-F, 146292742.pdf): report map + dated strategic
+                                      checkpoints, each with a page citation. Distinct from
+                                      magnum_strategic_commitments.json (back-traced) and
+                                      magnum_correlated_timeline.json (cross-company) — this
+                                      one stays inside what the single document itself says.
   market/magnum_icecream_annual.csv  Unilever FY2021-24 + TMICC FY2025 full-year results —
                                       real, cited volume/price growth splits. TMICC-specific.
   market/magnum_regional_fy2025.csv  TMICC's FY2025 continent-level organic sales growth.
@@ -78,6 +85,11 @@ not discredited.
   command_center/            Intentionally never real — simulates one hypothetical retail
                              client's private cold-chain telemetry, which by definition has
                              no public dataset. Removed with command_center.py in this rebuild.
+  nutrition/usda_nutrition.json      USDA FoodData Central raw per-item nutrition facts — real
+                             data, but a facts table on its own wasn't a strategist insight.
+                             Replaced by magnum_innovation_signals.json (competitor-intelligence
+                             framing of the same underlying "is the category getting more
+                             nutritious" question), rendered in the Ecosystem tab.
 
 ## Config
 
