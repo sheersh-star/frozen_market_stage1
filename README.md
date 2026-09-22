@@ -40,7 +40,9 @@ frozen-dessert-dashboard/
 │   │   ├── magnum_strategic_commitments.json  # real, back-traced decision -> strategy -> initiative
 │   │   ├── magnum_consultant_brief.json       # ANALYSIS, not fact — gaps/dots/recommendations
 │   │   ├── magnum_innovation_signals.json     # competitor "better-for-you" intel — replaces Nutrition tab
-│   │   ├── magnum_annual_report_analysis.json # 10-K Analyzer: report map + dated, page-cited checkpoints
+│   │   ├── magnum_annual_report_analysis.json # 10-K Analyzer: 2 documents (FY2025 Annual Report +
+│   │   │                                       # pre-listing registration statement), each with a
+│   │   │                                       # report map + dated, page-cited checkpoints
 │   │   ├── news/raw_items.json                # live, from fetch_competitor_news.py
 │   │   ├── production/       #   Panel removed for now (see below) — data kept, untouched
 │   │   ├── nutrition/        #   legacy, unused — superseded by magnum_innovation_signals.json
@@ -72,7 +74,7 @@ The page is a tab-based single-pager, not a stacked scroll of every panel — cl
 | Strategy | Same Annual Report — "Our strategy" and remuneration sections specifically | real, first-party |
 | Timeline | Cross-referenced from the ecosystem doc + targeted research | real, dated, sourced |
 | Financials | Unilever/TMICC full-year results disclosures | real |
-| 10-K Analyzer | TMICC's Annual Report (Form 20-F) — report map + dated, page-cited strategic checkpoints | real, first-party |
+| 10-K Analyzer | TMICC's Annual Report (Form 20-F) + pre-listing registration statement, dropdown-selectable — report map + dated, page-cited strategic checkpoints per document | real, first-party |
 | Brief | This project's own synthesis, built on all of the above | **analysis/judgment — not a TMICC fact, deliberately kept in its own file so it's never confused with one** |
 
 Production & Sales Trend (Eurostat NACE C1052, Germany) is **removed from view for now** — see "The ground-up rebuild" below.
@@ -166,6 +168,17 @@ Both tabs were substantially deepened in a later pass, following the same back-t
 - **Real system fonts, not a Google Fonts load.** Fraunces/Inter/IBM Plex Mono (all Google-hosted) replaced with the actual Apple system-font stack (`-apple-system`/SF Pro) for display and body text, and a system monospace stack for the data-dense mono labels — kept as a deliberate choice (Apple's own developer-facing pages use SF Mono the same way for technical/tabular content), just off the CDN. One fewer external network dependency, no flash-of-unstyled-text.
 - **Depth via shadow, not just borders.** Every card (`border-hairline rounded-lg` pattern, used ~15 times across static sections and JS-rendered `<details>` blocks alike) now also lifts on hover (`shadow-sm hover:shadow-md transition-shadow`) — Apple's soft-shadow card language instead of a flat hairline border doing all the work.
 - **Accessibility additions**: explicit `:focus-visible` rings (2px solid accent, 3px offset) on every interactive element, and a `prefers-reduced-motion` override disabling all transitions/animations for anyone who's asked for that — neither existed before this pass.
+
+## Round 3 (22 Sep 2026): richer palette + real light/dark toggle, multi-document 10-K Analyzer
+
+**Feedback on Round 2's light theme: too flat, "looks like a document."** Responded with two changes:
+
+- **Real light/dark toggle**, not just a fixed theme. Every Tailwind color name in `tailwind.config` now resolves through a CSS variable (`rgb(var(--c-x) / <alpha-value>)`, Tailwind's own documented pattern) instead of a static hex — toggled via `[data-theme]` on `<html>`, persisted in `localStorage`. This means the toggle works with **zero changes** to the hundreds of individual `text-ivory`/`bg-panel`/etc. usages across the file, same trick as Round 2's palette flip. **Dark is the actual default** on first visit (this console was always designed dark-first; light is the real alternate choice, not a fallback), set synchronously before paint to avoid a flash of the wrong theme.
+- **Richer, warmer colors in both modes** — warm cream (not stark white) in light mode, warm near-black (not pure black) in dark mode, with the card surface visibly lighter than the page background in both (real layering, not a flat monotone field). Two bolder accents (a deep rose and a warm bronze) replace Round 2's more muted ones. Every text-role color re-verified at >=4.5:1 against both page and card backgrounds in both themes; solid-fill buttons use a new `onaccent` color token (white in light mode, near-black in dark mode) instead of a hardcoded white, so they stay correct when the theme toggles.
+- **More visual "volume"**: a colored accent bar on every section heading (`main h2 { border-left: ... }`, one CSS rule, no markup changes needed anywhere) and a bolder filled pill for the active tab instead of a thin underline.
+- Chart.js (financials chart) reads its colors from the same CSS variables at render time and re-renders on toggle — it can't read Tailwind's config directly, so this needed a small dedicated helper (`cssVarRGB()`).
+
+**10-K Analyzer now covers more than one document, with a dropdown to choose.** Important honesty check first: TMICC has filed exactly **one** true Annual Report (it's only existed independently since 6 Dec 2025) — there's no second TMICC-branded annual report to add. What's real and addable is TMICC's own pre-listing SEC registration statement (**Form 20FR12B**, filed 4 Nov 2025), which carries the ice cream business's combined carve-out financial history from inside Unilever. Added as a second, honestly-labeled document (not mislabeled as a second annual report) — 7 more dated checkpoints, mostly around the **Deferred Territories** (India and Portugal weren't part of the main December 2025 demerger and ran their own separate timelines — a real structural nuance not visible anywhere else in this project). The dropdown re-renders from already-fetched data, no re-fetch needed. See `docs/magnum_annual_report_analysis.md`.
 
 ## Customizing
 

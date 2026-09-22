@@ -469,7 +469,9 @@ def generate_market_data():
     else:
         print("  - innovation_signals     not present (data/raw/magnum_innovation_signals.json missing)")
     if annual_report:
-        print(f"  - annual_report_analysis {len(annual_report.get('strategic_checkpoints', []))} strategic checkpoints")
+        docs = annual_report.get('documents', [])
+        total_checkpoints = sum(len(d.get('strategic_checkpoints', [])) for d in docs)
+        print(f"  - annual_report_analysis {len(docs)} documents, {total_checkpoints} strategic checkpoints total")
     else:
         print("  - annual_report_analysis not present (data/raw/magnum_annual_report_analysis.json missing)")
 

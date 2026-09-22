@@ -3,33 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark light">
 <title>TMICC Strategist Console</title>
 
+<script>
+  // Runs synchronously, before anything paints, to avoid a flash of the
+  // wrong theme. Default is dark (this console was always designed
+  // dark-first) unless the visitor already chose light — a real stored
+  // preference always wins over the default.
+  (function () {
+    var stored = null;
+    try { stored = localStorage.getItem('tmicc_theme'); } catch (e) {}
+    document.documentElement.setAttribute('data-theme', stored === 'light' ? 'light' : 'dark');
+  })();
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-  // Apple-inspired redesign (22 Sep 2026): every existing text-X/bg-X/border-X
-  // class across this file (including inside the JS render functions' template
-  // strings) is untouched — only the hex values these names resolve to changed,
-  // from a dark ice-cream-parlor palette to a light, accessible one. Names kept
-  // for zero-diff safety even though a couple now read oddly (ink/ivory are
-  // page-bg/primary-text here, not literally ink-on-ivory) — see README.md.
-  // Every text-role color re-verified at >=4.5:1 contrast against paper (#fbfbfd)
-  // and card (#ffffff) backgrounds.
+  // Round 2 (22 Sep 2026): the flat light "Apple document" look was too
+  // sterile per feedback — richer, warmer palette in both modes, plus a real
+  // light/dark toggle. Every existing text-X/bg-X/border-X class across this
+  // file (including inside the JS render functions' template strings) is
+  // still untouched — colors now resolve through CSS variables (set in the
+  // <style> block below, toggled via [data-theme] on <html>) instead of
+  // static hex, via Tailwind's documented rgb(var(--x) / <alpha-value>)
+  // pattern. That's what makes the toggle possible with zero changes to the
+  // hundreds of individual class usages elsewhere in this file.
   tailwind.config = {
+    darkMode: 'class',
     theme: {
       extend: {
         colors: {
-          ink: '#fbfbfd',      // page background (was near-black)
-          panel: '#ffffff',    // card background (was dark brown)
-          hairline: '#e5e5ea', // borders (was dark brown-black)
-          ivory: '#1d1d1f',    // primary text (was cream-on-dark)
-          muted: '#57575c',    // secondary text, 6.95:1 on white
-          brass: '#A03D6B',    // accent 1 (deep rose/berry), 6.22:1 on white
-          caramel: '#8C5A0F',  // accent 2 (warm amber/bronze), 5.86:1 on white
-          positive: '#1F7A45', // status green, 5.35:1 on white
-          negative: '#B03A2E', // status red, 6.02:1 on white
-          neutral: '#83909C',
+          ink:      'rgb(var(--c-page) / <alpha-value>)',      // page background
+          panel:    'rgb(var(--c-panel) / <alpha-value>)',     // card background
+          hairline: 'rgb(var(--c-hairline) / <alpha-value>)',  // borders
+          ivory:    'rgb(var(--c-text) / <alpha-value>)',      // primary text
+          muted:    'rgb(var(--c-muted) / <alpha-value>)',     // secondary text
+          brass:    'rgb(var(--c-brass) / <alpha-value>)',     // accent 1 (rose/berry)
+          caramel:  'rgb(var(--c-caramel) / <alpha-value>)',   // accent 2 (bronze/amber)
+          positive: 'rgb(var(--c-positive) / <alpha-value>)',
+          negative: 'rgb(var(--c-negative) / <alpha-value>)',
+          onaccent: 'rgb(var(--c-onaccent) / <alpha-value>)',  // text-safe color for solid accent fills
+          neutral:  '#83909C',
         },
         fontFamily: {
           // Real Apple system-font stack, not a Google Fonts load — no external
@@ -47,8 +61,53 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
+  /* Light values are the default; dark mode is the actual default *state*
+     (set via JS on first load, see bottom of file) since this console was
+     always designed dark-first — light is the real alternate choice here,
+     not the fallback, which is why it's spelled out explicitly rather than
+     deferred to system prefers-color-scheme. Every pairing re-verified at
+     >=4.5:1 text contrast against both --c-page and --c-panel; solid-fill
+     buttons use --c-onaccent instead of a hardcoded white/black so they stay
+     correct in both themes. */
+  :root {
+    --c-page: 245 238 225;      /* warm cream, not stark white */
+    --c-panel: 255 252 246;     /* slightly brighter than page — real layering */
+    --c-hairline: 221 203 174;
+    --c-text: 43 29 18;
+    --c-muted: 107 88 67;
+    --c-brass: 156 31 82;
+    --c-caramel: 149 83 10;
+    --c-positive: 31 122 69;
+    --c-negative: 176 58 46;
+    --c-onaccent: 255 255 255;
+  }
+  :root[data-theme="dark"] {
+    --c-page: 28 20 13;         /* warm near-black, not pure black */
+    --c-panel: 42 32 24;        /* lighter than page — real layering */
+    --c-hairline: 74 58 40;
+    --c-text: 245 233 214;
+    --c-muted: 199 180 153;
+    --c-brass: 232 89 143;
+    --c-caramel: 227 168 87;
+    --c-positive: 95 196 136;
+    --c-negative: 226 99 79;
+    --c-onaccent: 28 20 13;
+  }
+  /* Extra "volume": a colored accent bar on every section heading, and a
+     bolder filled active-tab state instead of a thin underline — both via
+     plain CSS so every existing <h2>/tab button gets it with no markup
+     changes. */
+  main h2 { border-left: 4px solid rgb(var(--c-caramel)); padding-left: 14px; }
+  .tab-btn.tab-active {
+    background: rgb(var(--c-caramel) / 0.14);
+    border-radius: 999px 999px 0 0;
+  }
+  #theme-toggle {
+    transition: transform 0.35s cubic-bezier(.28,.11,.32,1), background 0.25s ease;
+  }
+  #theme-toggle:hover { transform: rotate(-12deg) scale(1.06); }
   :is(a, button, input, textarea, summary):focus-visible {
-    outline: 2px solid #8C5A0F;
+    outline: 2px solid rgb(var(--c-caramel));
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -72,9 +131,12 @@
       <p class="text-sm text-muted mt-1 max-w-2xl">Rebuilt from the ground up around one subject: real news, real ecosystem, real correlated timeline, real financials — anything a TMICC strategist would want to know immediately.</p>
     </div>
     <div class="text-right font-mono text-xs text-muted">
-      <button id="refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-white transition-colors uppercase tracking-wide text-[11px] mb-1.5" title="Re-syncs this page to the latest published data (data/processed/console_data.json). It does not run new research itself — news/financials/annual-report data only change when the maintainer runs the refresh pipeline and pushes an update.">
-        <span id="refresh-icon">&#8635;</span> Refresh dashboard
-      </button>
+      <div class="flex items-center justify-end gap-2 mb-1.5">
+        <button id="refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-onaccent transition-colors uppercase tracking-wide text-[11px]" title="Re-syncs this page to the latest published data (data/processed/console_data.json). It does not run new research itself — news/financials/annual-report data only change when the maintainer runs the refresh pipeline and pushes an update.">
+          <span id="refresh-icon">&#8635;</span> Refresh dashboard
+        </button>
+        <button id="theme-toggle" class="w-8 h-8 rounded-full border border-hairline text-ivory flex items-center justify-center" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">&#9789;</button>
+      </div>
       <div id="sync-time">Loading&hellip;</div>
       <div class="mt-1 flex items-center justify-end gap-1" title="News is fetched live (run fetch_competitor_news.py on a schedule). Financial/ecosystem/annual-report panels are periodic real-data snapshots, not continuous feeds. The refresh button re-syncs to the latest published snapshot; it doesn't trigger new research on its own.">
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-positive"></span>
@@ -285,14 +347,17 @@
 
   <!-- ================= 10-K / ANNUAL REPORT ANALYZER ================= -->
   <section id="tab-annual-report" data-tab="annual-report" hidden class="bg-panel border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
-    <div class="mb-4 flex items-start justify-between gap-3">
+    <div class="mb-4 flex flex-wrap items-start justify-between gap-3">
       <div>
         <h2 class="font-display text-2xl text-ivory">10-K Analyzer</h2>
         <p id="ar-summary" class="font-mono text-sm text-muted mt-1">&mdash;</p>
       </div>
-      <button id="ar-refresh-btn" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-white transition-colors uppercase tracking-wide text-[11px] font-mono" title="Re-syncs this panel to the latest published data. Does not re-run the annual-report research pass itself — that still needs a real re-read of the filing.">
-        <span id="ar-refresh-icon">&#8635;</span> Refresh
-      </button>
+      <div class="flex items-center gap-2">
+        <select id="ar-doc-select" class="bg-ink border border-hairline text-ivory text-xs font-mono rounded-full px-3 py-1.5 uppercase tracking-wide" title="Choose which filing to read — TMICC has one true Annual Report so far; the other option is its pre-listing SEC registration statement, honestly labeled as such."></select>
+        <button id="ar-refresh-btn" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-caramel text-caramel hover:bg-caramel hover:text-onaccent transition-colors uppercase tracking-wide text-[11px] font-mono" title="Re-syncs this panel to the latest published data. Does not re-run the annual-report research pass itself — that still needs a real re-read of the filing.">
+          <span id="ar-refresh-icon">&#8635;</span> Refresh
+        </button>
+      </div>
     </div>
     <div class="space-y-6">
       <div id="ar-source" class="font-mono text-xs text-muted border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 space-y-1"></div>
@@ -382,11 +447,11 @@ function switchTab(name) {
     document.getElementById(`tab-${t}`).hidden = t !== name;
     const btn = document.querySelector(`.tab-btn[data-tab="${t}"]`);
     if (t === name) {
-      btn.classList.add('border-brass', 'text-ivory');
+      btn.classList.add('border-brass', 'text-ivory', 'tab-active');
       btn.classList.remove('border-transparent', 'text-muted');
     } else {
       btn.classList.add('border-transparent', 'text-muted');
-      btn.classList.remove('border-brass', 'text-ivory');
+      btn.classList.remove('border-brass', 'text-ivory', 'tab-active');
     }
   });
   try { localStorage.setItem('tmicc_active_tab', name); } catch (e) { /* fine to lose this across sessions */ }
@@ -685,10 +750,23 @@ function renderTimeline(tl) {
 }
 
 // ---------------- Financials ----------------
+// Chart.js can't read Tailwind's rgb(var(--x)) classes, so its colors are
+// pulled from the same CSS variables directly at render time — this is what
+// makes the chart re-theme correctly when the toggle fires (renderFinancials
+// re-runs on every theme change, see the toggle handler below).
+function cssVarRGB(name, alpha) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim(); // "R G B"
+  return alpha != null ? `rgb(${v} / ${alpha})` : `rgb(${v})`;
+}
 function renderFinancials(fin) {
   if (!fin) return; // tab stays selectable but shows no chart — no data isn't the same as "hide the tab"
 
   document.getElementById('fin-summary').textContent = `${fin.items.length} fiscal years, indexed volume/price (2020=100)`;
+
+  const cText = cssVarRGB('--c-muted');
+  const cLine = cssVarRGB('--c-hairline');
+  const cVolume = cssVarRGB('--c-positive');
+  const cPrice = cssVarRGB('--c-caramel');
 
   if (charts.fin) charts.fin.destroy();
   charts.fin = new Chart(document.getElementById('finChart'), {
@@ -696,14 +774,14 @@ function renderFinancials(fin) {
     data: {
       labels: fin.items.map(r => 'FY' + r.fiscal_year),
       datasets: [
-        { label: 'Volume index', data: fin.items.map(r => r.volume_index), borderColor: '#1F7A45', backgroundColor: 'rgba(31,122,69,0.08)', tension: 0.25 },
-        { label: 'Price index', data: fin.items.map(r => r.price_index), borderColor: '#8C5A0F', backgroundColor: 'rgba(140,90,15,0.08)', tension: 0.25 },
+        { label: 'Volume index', data: fin.items.map(r => r.volume_index), borderColor: cVolume, backgroundColor: cssVarRGB('--c-positive', 0.1), tension: 0.25 },
+        { label: 'Price index', data: fin.items.map(r => r.price_index), borderColor: cPrice, backgroundColor: cssVarRGB('--c-caramel', 0.1), tension: 0.25 },
       ],
     },
     options: {
-      plugins: { legend: { labels: { color: '#57575c', font: { family: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace' } } } },
+      plugins: { legend: { labels: { color: cText, font: { family: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace' } } } },
       scales: {
-        x: { ticks: { color: '#57575c' }, grid: { color: '#e5e5ea' } },
+        x: { ticks: { color: cText }, grid: { color: cLine } },
         y: { ticks: { color: '#57575c' }, grid: { color: '#e5e5ea' } },
       },
     },
@@ -754,20 +832,24 @@ function renderFinancials(fin) {
 }
 
 // ---------------- 10-K / Annual Report Analyzer ----------------
-function renderAnnualReport(ar) {
-  if (!ar) return;
-  const src = ar.source_document || {};
-  document.getElementById('ar-summary').textContent = `${(ar.strategic_checkpoints || []).length} strategic checkpoints, ${(ar.report_map || []).reduce((n, c) => n + (c.sections || []).length, 0)} sections mapped`;
+// TMICC has one true Annual Report (FY2025) plus its pre-listing SEC
+// registration statement, kept as separate documents in the data — selecting
+// between them is a pure re-render from already-fetched data, no re-fetch.
+let arDocuments = [];
+function renderAnnualReportDoc(doc) {
+  if (!doc) return;
+  const src = doc.source_document || {};
+  document.getElementById('ar-summary').textContent = `${(doc.strategic_checkpoints || []).length} strategic checkpoints, ${(doc.report_map || []).reduce((n, c) => n + (c.sections || []).length, 0)} sections mapped`;
 
   document.getElementById('ar-source').innerHTML = `
     <div class="text-ivory font-body text-sm">${src.title || ''}</div>
     <div>${src.filing_type || ''}</div>
-    <div>FY covered: ${src.fiscal_year_covered || '—'} &middot; Filed with SEC: ${src.filed_with_sec || '—'} &middot; ${src.pages || '?'} pages</div>
+    <div>FY/period covered: ${src.fiscal_year_covered || '—'} &middot; Filed with SEC: ${src.filed_with_sec || '—'}${src.pages ? ` &middot; ${src.pages} pages` : ''}</div>
     ${src.sec_source ? `<div><a href="${src.sec_source}" target="_blank" rel="noopener" class="text-brass hover:underline">SEC filing &#8599;</a></div>` : ''}
     ${src.checked_for_newer_reports ? `<div class="text-muted/80 mt-1">${src.checked_for_newer_reports}</div>` : ''}
   `;
 
-  document.getElementById('ar-map').innerHTML = (ar.report_map || []).map(chapter => `
+  document.getElementById('ar-map').innerHTML = (doc.report_map || []).map(chapter => `
     <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-center justify-between gap-2">
         <div class="text-ivory">${chapter.chapter}</div>
@@ -778,7 +860,7 @@ function renderAnnualReport(ar) {
       </div>
     </details>`).join('');
 
-  document.getElementById('ar-checkpoints').innerHTML = (ar.strategic_checkpoints || []).map(c => `
+  document.getElementById('ar-checkpoints').innerHTML = (doc.strategic_checkpoints || []).map(c => `
     <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-brass/50">
       <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
         <div>
@@ -789,19 +871,37 @@ function renderAnnualReport(ar) {
       </summary>
       <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
         <div>${c.detail || ''}</div>
-        <div><span class="text-ivory">Page:</span> ${c.page}</div>
+        ${c.page != null ? `<div><span class="text-ivory">Page:</span> ${c.page}</div>` : ''}
         ${c.cross_reference ? `<div class="text-caramel">&rarr; ${c.cross_reference}</div>` : ''}
       </div>
     </details>`).join('');
 
-  const clar = ar.clarifications || [];
+  const clarWrap = document.getElementById('ar-clarifications-wrap');
+  const clar = doc.clarifications || [];
   if (clar.length) {
-    document.getElementById('ar-clarifications-wrap').classList.remove('hidden');
+    clarWrap.classList.remove('hidden');
     document.getElementById('ar-clarifications').innerHTML = clar.map(c => `<li><span class="text-ivory">${c.topic}</span> — <span class="font-mono text-xs text-muted">${c.clarification}</span></li>`).join('');
+  } else {
+    clarWrap.classList.add('hidden');
   }
 
-  document.getElementById('ar-gaps').innerHTML = (ar.gaps_not_found_this_pass || []).map(g => `<li>${g}</li>`).join('');
+  document.getElementById('ar-gaps').innerHTML = (doc.gaps_not_found_this_pass || []).map(g => `<li>${g}</li>`).join('');
 }
+
+function renderAnnualReport(ar) {
+  if (!ar || !ar.documents || !ar.documents.length) return;
+  arDocuments = ar.documents;
+  const select = document.getElementById('ar-doc-select');
+  const previouslySelected = select.value;
+  select.innerHTML = arDocuments.map(d => `<option value="${d.id}">${d.label}</option>`).join('');
+  const stillExists = arDocuments.some(d => d.id === previouslySelected);
+  select.value = stillExists ? previouslySelected : arDocuments[0].id;
+  renderAnnualReportDoc(arDocuments.find(d => d.id === select.value) || arDocuments[0]);
+}
+document.getElementById('ar-doc-select').addEventListener('change', (e) => {
+  const doc = arDocuments.find(d => d.id === e.target.value);
+  if (doc) renderAnnualReportDoc(doc);
+});
 
 // ---------------- Production trend ----------------
 // renderTrend() removed along with the Production & Sales Trend panel — see
@@ -926,6 +1026,23 @@ switchTab(initialTab);
 initLastSeen();
 loadDashboardData();
 setInterval(loadDashboardData, 30000);
+
+// ---------------- Light/dark toggle ----------------
+function renderThemeIcon() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.getElementById('theme-toggle').textContent = isDark ? '☀' : '☾';
+}
+renderThemeIcon();
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('tmicc_theme', next); } catch (e) { /* fine to lose this across sessions */ }
+  renderThemeIcon();
+  // Chart.js colors are read from CSS variables at render time, not
+  // reactive to a theme change on their own — re-render to pick up the
+  // new palette immediately rather than waiting for the next data poll.
+  if (currentData && currentData.tmicc_financials) renderFinancials(currentData.tmicc_financials);
+});
 </script>
 </body>
 </html>
