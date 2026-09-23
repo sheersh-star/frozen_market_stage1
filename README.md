@@ -209,6 +209,15 @@ Feedback: the panel was still just citing pages/figures — facts, not strategy.
 
 Closed a real gap in the process: FY2024's unexplained goodwill/intangibles jump is now plausibly tied to Unilever's real, dated acquisition of Yasso (closed Q3 2023, confirmed via contemporaneous press coverage) — which connects directly to the Strategy tab's own "Better-For-You" hedge already built around that brand. Also surfaced: FY2022-2024's margin has been drifting down every year (9.8%→9.7%→9.6%), which the €500m productivity programme has to reverse rather than just build on; FY2024's headline net-profit growth is mostly an FX-absence effect, not proof the programme is working; and four separate multi-year commitments (bond maturity, Vanilla for Change, climate scenario window, medium-term guidance) all converge on 2027-2029 — a real risk cluster, not four independent items.
 
+## Round 7 (23 Sep 2026): timeline view + priority ratings on the 10-K Analyzer
+
+Feedback: sort checkpoints by recency, show which dates have passed vs haven't, add a priority rating, and expand the commitments that are actually ongoing with real milestones (the €500m productivity programme was the named example; a pro forma capitalisation reading was named as the low-priority counter-example).
+
+- Every checkpoint now carries `date_sortable` and `priority` (high/medium/low). The checkpoints list renders as an actual timeline — sorted chronologically, a "Today" divider computed client-side splits passed from upcoming, and a priority badge sits next to each date.
+- Three commitments got a `milestones` sub-array showing real tracked progress instead of a single static entry: the **€500m productivity programme** (launched 2024 → €90m/18% delivered by H1 2026 → €410m still outstanding, high priority), the **India Deferred Territory** (planned Jan/Apr 2026 vs actual completion 30 Mar 2026 — a real ~2-month slip, high priority), and **Vanilla for Change** (585,000 trees today vs 1,000,000-tree 2028 target, medium priority).
+- Pro forma capitalisation and the reorganisation anchor date are explicitly low priority — real, cited, one-time snapshots with nothing further to track.
+- A third strategic-analysis item ties the two milestone-bearing commitments together: they're the first real read on how reliable TMICC's own forward-looking statements are now that it's standalone.
+
 ## Customizing
 
 - **Port**: `DASHBOARD_PORT=8081 python3 server.py`

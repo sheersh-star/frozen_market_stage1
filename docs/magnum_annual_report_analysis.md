@@ -4,6 +4,8 @@ Where `docs/magnum_strategic_commitments.md` back-traces a commitment to the ini
 
 **Four years, selectable in the console via a dropdown** (FY2025 down to FY2022, most recent first). Important honesty note, unchanged from the previous pass: TMICC has filed exactly **one** true Annual Report (FY2025) — it only began independent existence on 6 December 2025. FY2022-2024 are not separate annual reports; they're **combined carve-out financial statements** for the Ice Cream Business, extracted from TMICC's own pre-listing SEC registration statement (Form 20FR12B, filed 4 Nov 2025) — the real document that carries this history from inside Unilever. Organized by year for the strategist's mental model; sourced honestly underneath, and each entry's `source_document.filing_type` says exactly what it actually is.
 
+**Checkpoints render as a timeline** (added 23 Sep 2026): sorted chronologically oldest-to-newest with a "Today" divider showing exactly which have passed and which are still ahead, plus a priority badge (high/medium/low — how much ongoing attention an item warrants, not how historically important the underlying fact is). A one-time reading like the pro forma capitalisation snapshot is low priority; an actively-running programme with real disclosed progress, like the €500m productivity plan, is high priority and carries its own `milestones` sub-list showing how it's tracked over time.
+
 ## FY2025 — the full Annual Report (Form 20-F)
 
 The richest entry — a real report map (see below) plus 14 dated checkpoints, merging what were previously two separate document entries in this panel: the Annual Report itself, and the Deferred Territories/reorganisation checkpoints from the registration statement (both cover events in and around FY2025, so they now live together under one year).
@@ -22,26 +24,28 @@ Four chapters:
 - **1 July 2025** — reorganisation anchor date.
 - **30 June 2025** — pro forma capitalisation at listing: €587m cash, €4,049m total indebtedness, €2,143m share capital.
 - **H1 2025** — interim combined carve-out results: revenue €4,503m (H1 2024: €4,394m, +2.5%), operating profit €569m (H1 2024: €608m, **-6.4%**) — real margin compression heading into listing, worth watching against full FY2025 once disclosed.
-- **2024** — €500m productivity programme launched (three levers: supply chain transformation, overhead reduction, technology-enabled operations).
+- **2024, ongoing — HIGH priority** — €500m productivity programme launched (three levers: supply chain transformation, overhead reduction, technology-enabled operations). **Milestones**: launched 2024 → H1 2026, €90m delivered (€70m supply chain, €20m overheads), 18% of target in one half-year → €410m (82%) still outstanding, no fixed completion date disclosed.
 - **6 December 2025** — demerger completed; TMICC began independent trading.
-- **November 2025** — €3bn debut bond issuance across four tranches (2029/2031/2034/2037), 2.75-4% interest, oversubscribed 7x+; financial liabilities €3,416m (2024: €333m), average debt maturity 7.5 years.
-- **By January 2026 / April 2026** — India Deferred Territory: demerger effective, then Kwality Wall's trading start (actual completion, per Ecosystem/Strategy tabs, was 30 March 2026 — close to but later than this original plan).
-- **Q1 2026** — Portugal Deferred Territory demerger effective; asset sale has up to 3 years from share sale to complete.
+- **November 2025 — HIGH priority** — €3bn debut bond issuance across four tranches (2029/2031/2034/2037), 2.75-4% interest, oversubscribed 7x+; financial liabilities €3,416m (2024: €333m), average debt maturity 7.5 years. Ongoing refinancing-risk watch item, not a closed event.
+- **By January 2026, ongoing — HIGH priority** — India Deferred Territory: demerger effective, then Kwality Wall's trading start. **Milestones**: planned (Nov 2025) — effective by Jan 2026, trading by Apr 2026 → actual — completed 30 March 2026, about two months later than planned but well inside the broader window.
+- **Q1 2026** — Portugal Deferred Territory demerger effective; asset sale has up to 3 years from share sale to complete. No confirmed actual completion date found yet (unlike India).
 - **2026 (to be drawn)** — €300m credit facility for the Indian acquisition.
 - **By 2026** — full Dutch Corporate Governance Code compliance (Provision 1.4.3(ii)-(iv)) — not yet met as a newly-standalone company.
 - **~End 2027** (30 months from 1 July 2025) — exit all Transitional Services Agreements with Unilever.
-- **By 2028** — Vanilla for Change: 80% of Madagascar farmers to regenerative agriculture, 1 million trees planted.
+- **By 2028, ongoing** — Vanilla for Change. **Milestones**: as of the FY2025 report — 585,000 trees planted, ~40% survival rate → 2028 target — 1,000,000 trees (+71%), 65% survival rate (+25pp), 80% of enrolled farmers on regenerative agriculture.
 - **From 2026** — new cabinet energy-efficiency technology on new freezer-cabinet purchases.
 - **By 2050** — Net Zero across Scope 1, 2, 3.
+- **Pro forma capitalisation (30 June 2025) and the reorganisation anchor date (1 July 2025) — LOW priority**: real, cited one-time snapshots, but nothing further to track from either on their own.
 
 One clarification worth flagging: the report's cautionary statement (p.235) lists "potential acquisition in India" only inside standard forward-looking-statements boilerplate — most plausibly the already-known Kwality Wall's deal, not a second undisclosed one.
 
 ### Strategic analysis — what this means, and what to watch
 
-Two items, deliberately kept separate from the facts above (analysis, not TMICC's stated position):
+Three items, deliberately kept separate from the facts above (analysis, not TMICC's stated position):
 
 1. **H1 2025's operating profit fell 6.4% even as revenue rose 2.5%** — real margin compression right before listing, and the registration statement doesn't say whether it's one-off separation costs or something structural. That ambiguity is itself the finding: a strategist shouldn't wave this through. Watch FY2025's full-year results for whether separation costs get broken out as a distinct line, and whether H2 shows a clean rebound.
 2. **Four separate multi-year commitments converge on 2027-2029**: the first bond maturity (2029), the Vanilla for Change target (2028), the "near-term" climate scenario window (2026-2030), and the medium-term OSG/margin guidance all land in the same few years. That's a cluster, not four independent risks — worth underwriting as one scenario window, not a checklist of separate items.
+3. **The two milestone-bearing commitments give the first real read on how reliable TMICC's own forward-looking statements are**: India's actual completion (30 Mar 2026) slipped about two months past its own Nov-2025-stated plan (Jan 2026) — a minor slip. The productivity programme's H1 2026 update (18% of target in one half-year) is the more consequential test: a repeat pace next period would put full delivery around H2 2027/H1 2028; a slowdown would be the first real crack in the story.
 
 ## FY2024, FY2023, FY2022 — combined carve-out financials
 

@@ -372,8 +372,9 @@
       </div>
 
       <div>
-        <h3 class="font-display text-lg text-ivory mb-2">Strategic checkpoints &mdash; click a date to expand</h3>
-        <div id="ar-checkpoints" class="space-y-2"></div>
+        <h3 class="font-display text-lg text-ivory mb-2">Strategic checkpoints &mdash; timeline, oldest to newest</h3>
+        <p class="font-mono text-xs text-muted mb-3">Sorted chronologically, split by today's date. <span class="text-caramel">&#9679;</span> high priority &mdash; ongoing, worth tracking. Click a date to expand; some carry their own progress milestones.</p>
+        <div id="ar-checkpoints" class="relative border-l-2 border-hairline space-y-4 pl-6"></div>
       </div>
 
       <div id="ar-analysis-wrap" class="border border-caramel/50 rounded-lg p-4 hidden">
@@ -845,6 +846,79 @@ function renderFinancials(fin) {
 // registration statement, kept as separate documents in the data — selecting
 // between them is a pure re-render from already-fetched data, no re-fetch.
 let arDocuments = [];
+
+const PRIORITY_STYLE = {
+  high:   { badge: 'bg-caramel text-onaccent', dot: 'bg-caramel' },
+  medium: { badge: 'border border-hairline text-muted', dot: 'bg-muted' },
+  low:    { badge: 'border border-hairline text-muted/70', dot: 'bg-muted/50' },
+};
+
+// Sorted oldest-to-newest (date_sortable ascending; items with no fixed date —
+// genuinely open-ended, like an ongoing programme with no disclosed end date —
+// sort last, after everything dated). A "Today" divider is inserted at the
+// point in that order where checkpoints stop being in the past, so "sorted by
+// recency" and "which dates have passed" are both answered by the same view.
+function renderCheckpointTimeline(checkpoints) {
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const sorted = [...checkpoints].sort((a, b) => {
+    if (!a.date_sortable && !b.date_sortable) return 0;
+    if (!a.date_sortable) return 1;
+    if (!b.date_sortable) return -1;
+    return a.date_sortable.localeCompare(b.date_sortable);
+  });
+
+  let todayInserted = false;
+  const rows = [];
+  sorted.forEach(c => {
+    const isPast = c.date_sortable ? c.date_sortable <= todayISO : false;
+    if (!todayInserted && c.date_sortable && c.date_sortable > todayISO) {
+      rows.push(`
+        <div class="relative">
+          <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-brass border-2 border-ink"></span>
+          <div class="font-mono text-xs uppercase tracking-wide text-brass">Today &mdash; ${new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+        </div>`);
+      todayInserted = true;
+    }
+    const pr = PRIORITY_STYLE[c.priority] || PRIORITY_STYLE.medium;
+    const milestones = c.milestones || [];
+    rows.push(`
+      <div class="relative">
+        <span class="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full ${pr.dot} ${isPast ? 'opacity-60' : ''} border-2 border-ink"></span>
+        <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-brass/50">
+          <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-[10px] uppercase tracking-wide text-caramel">${c.date}</span>
+                <span class="font-mono text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded-full ${pr.badge}">${c.priority || 'medium'}</span>
+                <span class="font-mono text-[9px] uppercase tracking-wide text-muted">${isPast ? 'passed' : 'upcoming'}</span>
+              </div>
+              <div class="text-ivory text-sm mt-1 leading-snug">${c.checkpoint}</div>
+            </div>
+            <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
+          </summary>
+          <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
+            <div>${c.detail || ''}</div>
+            ${c.page != null ? `<div><span class="text-ivory">Page:</span> ${c.page}</div>` : ''}
+            ${c.cross_reference ? `<div class="text-caramel">&rarr; ${c.cross_reference}</div>` : ''}
+            ${milestones.length ? `
+              <div class="mt-2 pt-2 border-t border-hairline/40 space-y-1.5">
+                <div class="text-ivory uppercase tracking-wide">Milestones</div>
+                ${milestones.map(m => `<div class="pl-2 border-l-2 border-caramel/50"><span class="text-caramel">${m.date}:</span> ${m.event}</div>`).join('')}
+              </div>` : ''}
+          </div>
+        </details>
+      </div>`);
+  });
+  if (!todayInserted) {
+    rows.push(`
+      <div class="relative">
+        <span class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-brass border-2 border-ink"></span>
+        <div class="font-mono text-xs uppercase tracking-wide text-brass">Today &mdash; ${new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+      </div>`);
+  }
+  document.getElementById('ar-checkpoints').innerHTML = rows.join('');
+}
+
 function renderAnnualReportDoc(doc) {
   if (!doc) return;
   const src = doc.source_document || {};
@@ -871,21 +945,7 @@ function renderAnnualReportDoc(doc) {
       </div>
     </details>`).join('');
 
-  document.getElementById('ar-checkpoints').innerHTML = (doc.strategic_checkpoints || []).map(c => `
-    <details class="border border-hairline rounded-lg shadow-sm hover:shadow-md transition-shadow group open:border-brass/50">
-      <summary class="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden p-3 flex items-start justify-between gap-2">
-        <div>
-          <div class="font-mono text-[10px] uppercase tracking-wide text-caramel">${c.date}</div>
-          <div class="text-ivory text-sm mt-1 leading-snug">${c.checkpoint}</div>
-        </div>
-        <span class="shrink-0 font-mono text-xs text-muted transition-transform group-open:rotate-180 mt-0.5">&#8964;</span>
-      </summary>
-      <div class="px-3 pb-3 pt-1 border-t border-hairline/60 font-mono text-[10px] text-muted space-y-1.5">
-        <div>${c.detail || ''}</div>
-        ${c.page != null ? `<div><span class="text-ivory">Page:</span> ${c.page}</div>` : ''}
-        ${c.cross_reference ? `<div class="text-caramel">&rarr; ${c.cross_reference}</div>` : ''}
-      </div>
-    </details>`).join('');
+  renderCheckpointTimeline(doc.strategic_checkpoints || []);
 
   const analysisWrap = document.getElementById('ar-analysis-wrap');
   const analysis = doc.strategic_analysis || [];

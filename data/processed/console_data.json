@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-22 13:00:01",
+  "last_updated": "2026-09-23 07:49:00",
   "tmicc_financials": {
     "source": "real",
     "items": [
@@ -20305,8 +20305,8 @@
     }
   },
   "annual_report_analysis": {
-    "generated_date": "2026-09-22",
-    "framing_note": "A document-native read of TMICC's own filings, organized by fiscal year rather than by document \u2014 one entry per year, each showing that year's real dated checkpoints and financial figures, with page/item citations back to whichever filing actually covers it. Distinct from the Strategy tab (which back-traces commitments to initiatives) and the Timeline tab (which correlates TMICC against competitors/macro events). Honesty note: TMICC itself has only ever filed one true Annual Report (FY2025) \u2014 it only began independent existence in Dec 2025. FY2022-2024 are not separate 'annual reports'; they're combined carve-out financial statements for the Ice Cream Business, extracted from TMICC's own pre-listing SEC registration statement (Form 20FR12B, filed 4 Nov 2025), which is the real document that carries this history. Labeled by year for the strategist's mental model, sourced honestly underneath. Each year also carries a `strategic_analysis` array \u2014 this is interpretation built on top of the facts above it, not a TMICC-stated position, kept in its own clearly-labeled field for the same reason the Consultant's Brief tab is kept in its own file: so analysis is never mistaken for a disclosed fact.",
+    "generated_date": "2026-09-23",
+    "framing_note": "A document-native read of TMICC's own filings, organized by fiscal year rather than by document \u2014 one entry per year, each showing that year's real dated checkpoints and financial figures, with page/item citations back to whichever filing actually covers it. Distinct from the Strategy tab (which back-traces commitments to initiatives) and the Timeline tab (which correlates TMICC against competitors/macro events). Honesty note: TMICC itself has only ever filed one true Annual Report (FY2025) \u2014 it only began independent existence in Dec 2025. FY2022-2024 are not separate 'annual reports'; they're combined carve-out financial statements for the Ice Cream Business, extracted from TMICC's own pre-listing SEC registration statement (Form 20FR12B, filed 4 Nov 2025), which is the real document that carries this history. Labeled by year for the strategist's mental model, sourced honestly underneath. Each year also carries a `strategic_analysis` array \u2014 this is interpretation built on top of the facts above it, not a TMICC-stated position, kept in its own clearly-labeled field for the same reason the Consultant's Brief tab is kept in its own file: so analysis is never mistaken for a disclosed fact. Checkpoints now carry `date_sortable` (for chronological/timeline ordering and past-vs-upcoming comparison against today) and `priority` (high/medium/low \u2014 how much ongoing strategist attention this item warrants, not how important the underlying fact is historically). A one-time snapshot like a pro forma capitalisation reading is low priority even though it's a real, cited figure; an actively-running, milestone-bearing programme like the \u20ac500m productivity plan is high priority and carries its own `milestones` sub-array.",
     "documents": [
       {
         "id": "fy2025",
@@ -20410,58 +20410,105 @@
         "strategic_checkpoints": [
           {
             "date": "1 July 2025",
+            "date_sortable": "2025-07-01",
+            "priority": "low",
             "checkpoint": "Reorganisation anchor date \u2014 the ice cream business's internal restructuring within Unilever, ahead of the demerger",
-            "detail": "The base date the standalone-group reorganisation is anchored to.",
+            "detail": "The base date the standalone-group reorganisation is anchored to. A one-time administrative marker, not something that needs ongoing tracking.",
             "page": null,
             "cross_reference": "Registration statement, Item 4"
           },
           {
             "date": "30 June 2025",
+            "date_sortable": "2025-06-30",
+            "priority": "low",
             "checkpoint": "Pro forma capitalisation at listing: \u20ac587m cash, \u20ac4,049m total indebtedness, \u20ac2,143m share capital",
-            "detail": "The balance-sheet snapshot used to size TMICC's opening capital structure ahead of listing \u2014 compare against year-end's actual \u20ac3,416m financial liabilities below.",
+            "detail": "A one-time balance-sheet snapshot used to size TMICC's opening capital structure ahead of listing \u2014 useful as a baseline, but there's nothing further to track from this figure itself. Compare against year-end's actual \u20ac3,416m financial liabilities below.",
             "page": null
           },
           {
             "date": "H1 2025 (Jan-Jun)",
+            "date_sortable": "2025-06-30",
+            "priority": "medium",
             "checkpoint": "Interim combined carve-out results: revenue \u20ac4,503m (H1 2024: \u20ac4,394m), operating profit \u20ac569m (H1 2024: \u20ac608m), net profit \u20ac464m",
             "detail": "Revenue grew +2.5% year-on-year but operating profit fell -6.4% \u2014 margin compression in the run-up to listing, worth watching against the full FY2025 figures once available.",
             "page": null,
             "cross_reference": "Registration statement, Combined Carve-Out Income Statement"
           },
           {
-            "date": "2024 (programme launched)",
+            "date": "2024 (launched) \u2014 ongoing",
+            "date_sortable": "2024-01-01",
+            "priority": "high",
             "checkpoint": "\u20ac500 million productivity programme",
-            "detail": "Three levers named explicitly: supply chain transformation, overhead reduction, and technology-enabled operations. Designed to deliver savings over the medium term.",
+            "detail": "Three levers named explicitly: supply chain transformation, overhead reduction, and technology-enabled operations. Designed to deliver savings over the medium term. High priority: this is TMICC's single largest self-directed lever for the margin improvement it has publicly committed to, it's already running, and it now has a real, disclosed progress figure \u2014 see milestones.",
             "page": 17,
-            "cross_reference": "Strategy tab \u2014 headline commitment 'Cost / separation savings'"
+            "cross_reference": "Strategy tab \u2014 headline commitment 'Cost / separation savings'",
+            "milestones": [
+              {
+                "date": "2024",
+                "date_sortable": "2024-01-01",
+                "event": "Programme launched \u2014 three levers named (supply chain transformation, overhead reduction, technology-enabled operations)."
+              },
+              {
+                "date": "H1 2026",
+                "date_sortable": "2026-06-30",
+                "event": "\u20ac90m delivered (\u20ac70m supply chain, \u20ac20m overheads) \u2014 18% of the full \u20ac500m target reached in a single half-year. First real progress figure disclosed."
+              },
+              {
+                "date": "Ongoing \u2014 no fixed completion date disclosed",
+                "date_sortable": null,
+                "event": "\u20ac410m (82%) of the target still outstanding as of the last disclosed update (H1 2026). Framed by management as 'on track,' not yet independently verified across a second period."
+              }
+            ]
           },
           {
             "date": "6 December 2025",
+            "date_sortable": "2025-12-06",
+            "priority": "medium",
             "checkpoint": "Demerger from Unilever completed; TMICC began trading as an independent listed company",
-            "detail": "Described in both the Board Chair and CEO updates as the defining milestone of the year.",
+            "detail": "Described in both the Board Chair and CEO updates as the defining milestone of the year. Historically significant, but a completed, one-time event \u2014 nothing further to track from this item itself.",
             "page": 13
           },
           {
             "date": "November 2025",
+            "date_sortable": "2025-11-15",
+            "priority": "high",
             "checkpoint": "\u20ac3 billion debut bond issuance across four tranches (2029, 2031, 2034, 2037)",
-            "detail": "Euro Medium Term Note programme, interest rate range 2.75%-4%, order book oversubscribed more than 7x. Financial liabilities rose to \u20ac3,416m (2024: \u20ac333m); average debt maturity 7.5 years \u2014 TMICC's real debt-maturity wall.",
+            "detail": "Euro Medium Term Note programme, interest rate range 2.75%-4%, order book oversubscribed more than 7x. Financial liabilities rose to \u20ac3,416m (2024: \u20ac333m); average debt maturity 7.5 years \u2014 TMICC's real debt-maturity wall. High priority: refinancing risk on these tranches is a multi-year, ongoing watch item, not a closed event.",
             "page": 28
           },
           {
-            "date": "By January 2026",
-            "checkpoint": "India demerger expected effective; Kwality Wall's India expected to start trading by April 2026",
-            "detail": "India was a Deferred Territory \u2014 not part of the main December 2025 demerger, following its own separate timeline. (For comparison: the actual completion tracked in Ecosystem/Strategy was 30 March 2026 \u2014 close to, but later than, this original expectation.)",
+            "date": "By January 2026 (planned) \u2014 ongoing",
+            "date_sortable": "2026-01-31",
+            "priority": "high",
+            "checkpoint": "India Deferred Territory: demerger effective, then Kwality Wall's trading start",
+            "detail": "India was a Deferred Territory \u2014 not part of the main December 2025 demerger, following its own separate timeline. High priority: this is the whole AMEA/India growth thesis in motion, with a real planned-vs-actual gap worth tracking.",
             "page": null,
-            "cross_reference": "Ecosystem/Strategy tabs \u2014 Kwality Wall's, AMEA / India expansion"
+            "cross_reference": "Ecosystem/Strategy tabs \u2014 Kwality Wall's, AMEA / India expansion",
+            "milestones": [
+              {
+                "date": "Nov 2025 (as planned)",
+                "date_sortable": "2025-11-04",
+                "event": "Registration statement states: demerger expected effective by January 2026, Kwality Wall's India expected to start trading by April 2026."
+              },
+              {
+                "date": "30 March 2026 (actual)",
+                "date_sortable": "2026-03-30",
+                "event": "Kwality Wall's India acquisition actually completed \u2014 about two months later than the original January 2026 plan, but well inside the broader window. A real, if modest, slippage worth noting for how TMICC's own forward timelines have held up so far."
+              }
+            ]
           },
           {
             "date": "Q1 2026",
-            "checkpoint": "Portugal demerger expected effective; Portugal asset sale has up to 3 years from the share sale to complete",
-            "detail": "Portugal was the other named Deferred Territory alongside India \u2014 two separate milestones for the same territory.",
+            "date_sortable": "2026-03-31",
+            "priority": "medium",
+            "checkpoint": "Portugal Deferred Territory: demerger expected effective; asset sale has up to 3 years from the share sale to complete",
+            "detail": "Portugal was the other named Deferred Territory alongside India \u2014 two separate milestones for the same territory. No confirmed actual completion date found yet in this project's research (unlike India/Kwality Wall's).",
             "page": null
           },
           {
             "date": "2026 (to be drawn)",
+            "date_sortable": "2026-06-30",
+            "priority": "medium",
             "checkpoint": "\u20ac300 million credit facility earmarked for the Indian ice cream business acquisition",
             "detail": "Financing detail behind the Kwality Wall's transaction \u2014 the specific facility funding it.",
             "page": 28,
@@ -20469,24 +20516,44 @@
           },
           {
             "date": "By 2026",
+            "date_sortable": "2026-12-31",
+            "priority": "medium",
             "checkpoint": "Full compliance with the 2025 Dutch Corporate Governance Code, Best Practice Provision 1.4.3(ii)-(iv)",
             "detail": "TMICC's own Board states it is not yet fully compliant as a newly-standalone company, and expects to close the gap by 2026 \u2014 distinct from the Foundation Plan for Growth shareholder-dissent issue tracked in the Timeline.",
             "page": 82
           },
           {
             "date": "~End 2027 (30 months from 1 July 2025)",
+            "date_sortable": "2027-12-31",
+            "priority": "medium",
             "checkpoint": "Exit all remaining Transitional Services Agreements (TSAs) with Unilever",
             "detail": "TMICC still relies on Unilever for some transitional operational support post-demerger; full independence is targeted for end-2027.",
             "page": 17
           },
           {
-            "date": "By 2028",
-            "checkpoint": "Vanilla for Change programme \u2014 80% of enrolled Madagascar farmers transitioned to regenerative agriculture; 1 million trees planted (up from 585,000 today), survival rate target rising from 40% to 65%",
-            "detail": "Run with Symrise and Save the Children in the vanilla-producing Sava region of Madagascar.",
-            "page": 180
+            "date": "By 2028 \u2014 ongoing",
+            "date_sortable": "2028-12-31",
+            "priority": "medium",
+            "checkpoint": "Vanilla for Change programme",
+            "detail": "80% of enrolled Madagascar farmers transitioned to regenerative agriculture; 1 million trees planted (up from 585,000 today), survival rate target rising from 40% to 65%. Run with Symrise and Save the Children in the vanilla-producing Sava region of Madagascar.",
+            "page": 180,
+            "milestones": [
+              {
+                "date": "As of FY2025 report",
+                "date_sortable": "2025-12-31",
+                "event": "585,000 trees planted so far; survival rate baseline around 40%."
+              },
+              {
+                "date": "By 2028 (target)",
+                "date_sortable": "2028-12-31",
+                "event": "1,000,000 trees planted (+71% from current); survival rate target 65% (+25pp); 80% of enrolled farmers transitioned to regenerative agriculture."
+              }
+            ]
           },
           {
             "date": "From 2026",
+            "date_sortable": "2026-01-01",
+            "priority": "medium",
             "checkpoint": "New cabinet energy-efficiency technology begins rolling out on new freezer-cabinet purchases",
             "detail": "Connects directly to the freezer-cabinet fleet risk already flagged in Ecosystem (TMICC's largest single emissions source, a fleet it doesn't own).",
             "page": 171,
@@ -20494,6 +20561,8 @@
           },
           {
             "date": "By 2050",
+            "date_sortable": "2050-12-31",
+            "priority": "medium",
             "checkpoint": "Net Zero ambition across Scope 1, 2, and 3 emissions",
             "detail": "Explicit scenario-planning horizons defined elsewhere: near-term 2026-2030, medium-term 2031-2039.",
             "page": 32
@@ -20507,7 +20576,8 @@
         ],
         "gaps_not_found_this_pass": [
           "The two 2026 Form 6-K filings haven't been read into this panel yet.",
-          "Exact pagination for the 'Further Information' chapter's sub-sections was ambiguous in extraction \u2014 approximate, not authoritative."
+          "Exact pagination for the 'Further Information' chapter's sub-sections was ambiguous in extraction \u2014 approximate, not authoritative.",
+          "No confirmed actual completion date found yet for the Portugal Deferred Territory (unlike India/Kwality Wall's, which has one)."
         ],
         "strategic_analysis": [
           {
@@ -20519,6 +20589,11 @@
             "insight": "Four separate multi-year commitments \u2014 the 2029/2031/2034/2037 bond maturities, the 2028 Vanilla for Change target, the 2026-2030 'near-term' climate scenario window, and the medium-term 3-5% OSG/40-60bps margin guidance \u2014 all converge on the same 2027-2029 stretch.",
             "why_it_matters": "This isn't four independent risks; it's a cluster. Refinancing pressure (first bond tranche due 2029), sustainability delivery deadlines, and the original growth algorithm's credibility test all land in the same few years. A partner or counterparty sizing up TMICC's risk profile should underwrite scenarios around this window specifically, not treat each commitment as a standalone item on a checklist.",
             "what_to_watch": "Whether TMICC's own future disclosures start discussing 2027-2029 explicitly as a strategic inflection point, or continue presenting each commitment in isolation \u2014 the latter would suggest management hasn't yet connected these dots internally either."
+          },
+          {
+            "insight": "The productivity programme's H1 2026 update (\u20ac90m of \u20ac500m, 18%) is the single most-tracked commitment in this panel, and India's actual completion date (30 Mar 2026) slipped about two months past its own Nov-2025-stated plan (Jan 2026).",
+            "why_it_matters": "Taken together, these are the first two real data points on how reliable TMICC's own forward-looking statements are, now that it's a standalone company without Unilever's longer public-disclosure track record backing it. A ~2-month slip on a demerger-effectiveness date is minor; whether the productivity programme's run-rate holds up through a second reporting period is the more consequential test.",
+            "what_to_watch": "The next disclosed productivity-programme update (likely with FY2025 or H1 2026 full results) \u2014 a repeat ~18%-per-half-year pace would put the programme on track for completion around H2 2027/H1 2028; a slowdown would be the first real crack in the story."
           }
         ]
       },
@@ -20539,6 +20614,8 @@
         "strategic_checkpoints": [
           {
             "date": "FY2024",
+            "date_sortable": "2024-12-31",
+            "priority": "medium",
             "checkpoint": "Combined carve-out revenue: \u20ac7,947m",
             "detail": "+4.3% vs FY2023's \u20ac7,618m \u2014 reported revenue growth from the raw carve-out figures, not TMICC's own constant-currency 'organic sales growth' non-IFRS metric (which isn't disclosed for these carve-out years). The strongest of the three carve-out years.",
             "page": null,
@@ -20546,26 +20623,34 @@
           },
           {
             "date": "FY2024",
+            "date_sortable": "2024-12-31",
+            "priority": "medium",
             "checkpoint": "Operating profit \u20ac764m (9.6% margin)",
             "detail": "+3.0% vs FY2023's \u20ac742m \u2014 profit grew slightly slower than revenue, margin ticked down from 9.7% to 9.6%.",
             "page": null
           },
           {
             "date": "FY2024",
+            "date_sortable": "2024-12-31",
+            "priority": "medium",
             "checkpoint": "Net profit \u20ac595m",
             "detail": "+16.9% vs FY2023's \u20ac509m \u2014 a real rebound, driven by no hyperinflation monetary loss in 2024 (vs a \u20ac10m loss in 2023) and higher operating profit.",
             "page": null
           },
           {
             "date": "FY2024",
+            "date_sortable": "2024-12-31",
+            "priority": "medium",
             "checkpoint": "Regional split: Europe and ANZ \u20ac3.1bn (39% of revenue), Americas \u20ac2.9bn (36%)",
             "detail": "Implies AMEA at roughly \u20ac1.9bn (~25%, a residual computed here, not directly disclosed at this granularity). 70% of Group revenue came from developed markets, 30% from emerging markets.",
             "page": null
           },
           {
             "date": "FY2024 vs FY2022",
+            "date_sortable": "2024-12-31",
+            "priority": "medium",
             "checkpoint": "Goodwill and intangible assets roughly doubled: goodwill \u20ac272m to \u20ac585m, intangibles \u20ac381m to \u20ac793m",
-            "detail": "A real, dated balance-sheet signal consistent with a meaningful acquisition somewhere in this window \u2014 the specific transaction wasn't identified in this pass.",
+            "detail": "A real, dated balance-sheet signal consistent with a meaningful acquisition somewhere in this window \u2014 see this year's Strategic Analysis for the plausible Yasso connection.",
             "page": null
           }
         ],
@@ -20608,6 +20693,8 @@
         "strategic_checkpoints": [
           {
             "date": "FY2023",
+            "date_sortable": "2023-12-31",
+            "priority": "medium",
             "checkpoint": "Combined carve-out revenue: \u20ac7,618m",
             "detail": "+1.5% vs FY2022's \u20ac7,506m \u2014 the weakest revenue growth of the three carve-out years.",
             "page": null,
@@ -20615,12 +20702,16 @@
           },
           {
             "date": "FY2023",
+            "date_sortable": "2023-12-31",
+            "priority": "medium",
             "checkpoint": "Operating profit \u20ac742m (9.7% margin)",
             "detail": "+0.7% vs FY2022's \u20ac737m \u2014 essentially flat, margin ticked down slightly from 9.8%.",
             "page": null
           },
           {
             "date": "FY2023",
+            "date_sortable": "2023-12-31",
+            "priority": "medium",
             "checkpoint": "Net profit fell to \u20ac509m despite higher revenue",
             "detail": "-3.4% vs FY2022's \u20ac527m. The real drivers: a \u20ac10m net monetary loss from hyperinflationary economies (vs \u20ac2m in 2022), and taxation rising to \u20ac203m (vs \u20ac173m in 2022) even though profit before tax was higher. Worth noting for a strategist: revenue growth alone didn't carry through to the bottom line this year.",
             "page": null
@@ -20656,6 +20747,8 @@
         "strategic_checkpoints": [
           {
             "date": "FY2022",
+            "date_sortable": "2022-12-31",
+            "priority": "medium",
             "checkpoint": "Combined carve-out revenue: \u20ac7,506m",
             "detail": "The earliest year of carve-out data found \u2014 the baseline for the FY2023/FY2024 growth figures elsewhere in this panel.",
             "page": null,
@@ -20663,12 +20756,16 @@
           },
           {
             "date": "FY2022",
+            "date_sortable": "2022-12-31",
+            "priority": "medium",
             "checkpoint": "Operating profit \u20ac737m (9.8% margin)",
             "detail": "The highest operating margin of the three carve-out years \u2014 margin drifted down slightly in both FY2023 (9.7%) and FY2024 (9.6%).",
             "page": null
           },
           {
             "date": "FY2022",
+            "date_sortable": "2022-12-31",
+            "priority": "medium",
             "checkpoint": "Net profit \u20ac527m",
             "detail": "Higher net finance costs this year (\u20ac35m, vs \u20ac20m in FY2023 and \u20ac17m in FY2024) and a real hyperinflation adjustment for Turkey (disclosed as applying across FY2022-2024) both weigh on this figure.",
             "page": null
