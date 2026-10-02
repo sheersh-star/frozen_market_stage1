@@ -45,7 +45,8 @@ frozen-dessert-dashboard/
 │   │   ├── news/raw_items.json                # live, from fetch_competitor_news.py
 │   │   ├── production/       #   Panel removed for now (see below) — data kept, untouched
 │   │   ├── nutrition/        #   legacy, unused — superseded by magnum_innovation_signals.json
-│   │   ├── market/           #   TMICC Financial Performance (6 files used; 3 legacy)
+│   │   ├── market/           #   TMICC Financial Performance (8 files used; 3 legacy)
+│   │   ├── magnum_revenue_scenario.json       # ANALYSIS: 2027-2030 revenue range, built from guidance
 │   │   ├── sentiment/        #   legacy, unused — see data/raw/README.md
 │   │   ├── demographics/     #   legacy, unused
 │   │   └── command_center/   #   legacy, unused
@@ -72,7 +73,7 @@ The page is a tab-based single-pager, not a stacked scroll of every panel — cl
 | Ecosystem (+ Innovation signals) | TMICC's own 2025 Annual Report (`146292742.pdf`), plus competitor better-for-you launch research | real, first-party (innovation signals: real trend context, gap-labeled on specific launches) |
 | Strategy | Same Annual Report — "Our strategy" and remuneration sections specifically | real, first-party |
 | Timeline | Cross-referenced from the ecosystem doc + targeted research | real, dated, sourced |
-| Financials | Unilever/TMICC full-year results disclosures | real |
+| Financials | Unilever/TMICC full-year results disclosures (real, 2022-2025) + a 2026-2030 range built from TMICC's own guidance | real + labeled analysis for the forward range |
 | 10-K Analyzer | FY2025 down to FY2022, dropdown-selectable by year — FY2025 from the real Annual Report (Form 20-F), FY2022-2024 from combined carve-out financials in the pre-listing registration statement | real, first-party |
 | Brief | This project's own synthesis, built on all of the above | **analysis/judgment — not a TMICC fact, deliberately kept in its own file so it's never confused with one** |
 
@@ -217,6 +218,18 @@ Feedback: sort checkpoints by recency, show which dates have passed vs haven't, 
 - Three commitments got a `milestones` sub-array showing real tracked progress instead of a single static entry: the **€500m productivity programme** (launched 2024 → €90m/18% delivered by H1 2026 → €410m still outstanding, high priority), the **India Deferred Territory** (planned Jan/Apr 2026 vs actual completion 30 Mar 2026 — a real ~2-month slip, high priority), and **Vanilla for Change** (585,000 trees today vs 1,000,000-tree 2028 target, medium priority).
 - Pro forma capitalisation and the reorganisation anchor date are explicitly low priority — real, cited, one-time snapshots with nothing further to track.
 - A third strategic-analysis item ties the two milestone-bearing commitments together: they're the first real read on how reliable TMICC's own forward-looking statements are now that it's standalone.
+
+## Round 8 (2 Oct 2026): a consultant-ready Financials tab, and a framing pass on every tab
+
+The brief: streamline the dashboard around one question — would a consultant look at a panel and think "I can put this in front of a client right now"? Two pieces of work:
+
+**Every tab now has an "In the room" one-liner** right under its header — a short, specific note on how that tab's content actually gets used in a client conversation (News: open with what's new; Ecosystem: show you know their structure; Strategy: the exact initiative to attach a pitch to; Timeline: the connection that proves you've studied them; 10-K Analyzer: the agenda of what's actually due; Brief: walk in with this page, trace back if challenged). Fourteen words to a sentence each, not a redesign — the point was focus, not more surface area.
+
+**The Financials tab is rebuilt around a single question: where is revenue actually headed, and why.** Previously an abstract volume/price index (2020=100) with no absolute numbers. Now:
+- A real **reported revenue, €bn chart, 2022 actual through 2030 scenario** — solid line for the real, cited figures (FY2022 €7.506bn, FY2023 €7.618bn, FY2024 €7.947bn, FY2025 €7.9bn, the first three newly captured from the 10-K Analyzer's own extraction as `magnum_reported_revenue.csv`, not duplicated prose), then a shaded low/high band for 2026-2030 built from TMICC's own 3-5% medium-term organic-growth guidance (`magnum_revenue_scenario.json`, explicitly labeled ANALYSIS, not a TMICC forecast — same fact/analysis separation as the Consultant's Brief).
+- **A real, quotable finding drives the whole framing**: FY2025's +4.2% organic sales growth produced essentially *flat* reported revenue (€7.9bn vs FY2024's €7.947bn) — a genuine currency-translation gap, not a data error. The scenario's own caveat says plainly that this could recur and pull reported revenue below even the low end of the band despite TMICC hitting its organic-growth guidance.
+- **"What's shaping the 2027-2030 range"** — real, cited, two-sided drivers: AMEA's underweighted-but-highest-margin position, premiumisation, emerging-market headroom, and penetration in low-per-capita markets on the upside; the FX-translation gap, the real and disclosed GLP-1/weight-loss-drug demand risk, and FY2022/23's price-led-growth ceiling (volume actually went negative both years) on the downside. Nothing invented — every driver traces to a fact already sourced elsewhere in this project.
+- **2020 is acknowledged honestly, not charted as a number**: Ice Cream wasn't yet Unilever's own standalone reporting segment that year, so no precise figure exists — but a real, sourced qualitative note (pandemic out-of-home collapse, in-home/better-for-you shift) sits next to the chart as the historical precedent for "channel mix isn't static."
 
 ## Customizing
 

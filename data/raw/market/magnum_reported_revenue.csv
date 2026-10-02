@@ -1,0 +1,5 @@
+fiscal_year,revenue_eur_billion,confidence,basis
+2022,7.506,real,"Combined Carve-Out Income Statement inside TMICC's pre-listing SEC registration statement (Form 20FR12B) — revenue EUR7,506m. Also used in the 10-K Analyzer's FY2022 entry."
+2023,7.618,real,"Combined Carve-Out Income Statement, same source — revenue EUR7,618m (+1.5% reported vs FY2022). Also used in the 10-K Analyzer's FY2023 entry."
+2024,7.947,real,"Combined Carve-Out Income Statement, same source — revenue EUR7,947m (+4.3% reported vs FY2023). Also used in the 10-K Analyzer's FY2024 entry."
+2025,7.9,real,"TMICC's own Annual Report 2025 / corporate facts (magnum_ecosystem.json) — revenue ~EUR7.9bn. Notable: FY2025 organic sales growth was +4.2% (magnum_icecream_annual.csv) but reported revenue was essentially flat vs FY2024's EUR7.947bn — a real currency-translation drag, not a data error. See the Financials tab's own callout on this."

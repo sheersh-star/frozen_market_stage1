@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-23 07:49:00",
+  "last_updated": "2026-10-02 11:36:20",
   "tmicc_financials": {
     "source": "real",
     "items": [
@@ -175,6 +175,32 @@
         "note": "52-week range $12.94-$20.69 \u2014 the stock has fully recovered from the Feb 2026 low and sits near its all-time high, with market cap up ~32% from the IPO's $9.1bn.",
         "confidence": "real",
         "source": "stockanalysis.com; macrotrends.net (52-week range)"
+      }
+    ],
+    "reported_revenue": [
+      {
+        "fiscal_year": 2022,
+        "revenue_eur_billion": 7.506,
+        "confidence": "real",
+        "basis": "Combined Carve-Out Income Statement inside TMICC's pre-listing SEC registration statement (Form 20FR12B) \u2014 revenue EUR7,506m. Also used in the 10-K Analyzer's FY2022 entry."
+      },
+      {
+        "fiscal_year": 2023,
+        "revenue_eur_billion": 7.618,
+        "confidence": "real",
+        "basis": "Combined Carve-Out Income Statement, same source \u2014 revenue EUR7,618m (+1.5% reported vs FY2022). Also used in the 10-K Analyzer's FY2023 entry."
+      },
+      {
+        "fiscal_year": 2024,
+        "revenue_eur_billion": 7.947,
+        "confidence": "real",
+        "basis": "Combined Carve-Out Income Statement, same source \u2014 revenue EUR7,947m (+4.3% reported vs FY2023). Also used in the 10-K Analyzer's FY2024 entry."
+      },
+      {
+        "fiscal_year": 2025,
+        "revenue_eur_billion": 7.9,
+        "confidence": "real",
+        "basis": "TMICC's own Annual Report 2025 / corporate facts (magnum_ecosystem.json) \u2014 revenue ~EUR7.9bn. Notable: FY2025 organic sales growth was +4.2% (magnum_icecream_annual.csv) but reported revenue was essentially flat vs FY2024's EUR7.947bn \u2014 a real currency-translation drag, not a data error. See the Financials tab's own callout on this."
       }
     ]
   },
@@ -20784,6 +20810,88 @@
           }
         ]
       }
+    ]
+  },
+  "revenue_scenario": {
+    "generated_date": "2026-10-02",
+    "framing_note": "ANALYSIS, not fact. TMICC has not published a 2027-2030 revenue forecast \u2014 this scenario is built here from TMICC's own disclosed medium-term guidance (3-5% organic sales growth, from the Strategy tab) compounded forward from the real FY2025 reported revenue base. It is a range for conversation, not a prediction. Kept in its own file for the same reason the Consultant's Brief is separate from the fact tabs.",
+    "covid_2020_note": {
+      "text": "2020 isn't charted as a number here \u2014 Ice Cream wasn't yet broken out as Unilever's own standalone reporting segment that year, so no precise like-for-like growth figure exists for it specifically. Unilever's own FY2020 commentary described ice cream as growing 'slightly' overall: out-of-home volume collapsed under pandemic channel closures, offset by a rapid shift toward in-home consumption and 'better-for-you'/plant-based variants (Magnum vegan, Ben & Jerry's lighter Moophoria). Worth remembering as a precedent before assuming channel mix is stable \u2014 it has moved sharply before.",
+      "source": "Unilever FY2020 Full Year Results commentary and contemporaneous press coverage"
+    },
+    "base_year": {
+      "fiscal_year": 2025,
+      "revenue_eur_billion": 7.9,
+      "source": "data/raw/market/magnum_reported_revenue.csv"
+    },
+    "guidance_used": {
+      "metric": "Organic sales growth, medium-term average",
+      "range_pct": [
+        3,
+        5
+      ],
+      "source": "Strategy tab \u2014 headline commitment 'Growth', set at TMICC's first Capital Markets Day, Sept 2025"
+    },
+    "scenario_eur_billion": [
+      {
+        "fiscal_year": 2026,
+        "low": 8.14,
+        "high": 8.29
+      },
+      {
+        "fiscal_year": 2027,
+        "low": 8.38,
+        "high": 8.71
+      },
+      {
+        "fiscal_year": 2028,
+        "low": 8.63,
+        "high": 9.15
+      },
+      {
+        "fiscal_year": 2029,
+        "low": 8.89,
+        "high": 9.6
+      },
+      {
+        "fiscal_year": 2030,
+        "low": 9.16,
+        "high": 10.08
+      }
+    ],
+    "caveat": "This band assumes organic growth converts cleanly into reported euro revenue. FY2025 is a real, recent counter-example: +4.2% organic sales growth produced essentially flat reported revenue (EUR7.9bn vs FY2024's EUR7.947bn) because currency translation ate the gain. If that pattern recurs, actual reported revenue could land below even the low end of this band despite TMICC hitting its own organic-growth guidance.",
+    "drivers_up": [
+      {
+        "driver": "AMEA is TMICC's fastest-growing AND highest-margin region (+10.9% OSG FY2025, +7.6% H1 2026, 22.9% Adjusted EBITDA margin) but still only ~25% of group revenue",
+        "why_it_matters_for_the_range": "Even modest further mix-shift toward AMEA (via the India/Kwality Wall's expansion already underway) lifts both growth and blended margin mechanically, without needing anything to improve elsewhere."
+      },
+      {
+        "driver": "Premiumisation across both indulgence and wellness is a named Group-level growth pillar, not just messaging",
+        "why_it_matters_for_the_range": "Consumers trading up within a category they're not abandoning supports price-led growth even if volumes stay flat \u2014 exactly the pattern already visible in FY2022/2023 (price offsetting weak or negative volume)."
+      },
+      {
+        "driver": "Penetration in low-per-capita markets (Pakistan named) and continued emerging-market exposure (30% of FY2024 revenue)",
+        "why_it_matters_for_the_range": "Structural headroom for volume growth that developed, already-saturated markets (Europe, Americas) don't have as much of."
+      }
+    ],
+    "drivers_down": [
+      {
+        "driver": "Currency translation drag \u2014 FY2025's real organic-vs-reported gap (+4.2% organic, ~flat reported)",
+        "why_it_matters_for_the_range": "The single biggest reason the high end of this scenario might not show up in euros even if TMICC hits its organic-growth guidance. A standalone TMICC also has less of Unilever's former treasury scale to smooth this."
+      },
+      {
+        "driver": "GLP-1/weight-loss-drug adoption \u2014 a real, named disclosed risk to indulgent ice cream demand specifically",
+        "why_it_matters_for_the_range": "A genuine two-sided consumer-choice risk: TMICC's own hedge (Yasso, Breyers Carb Smart) is a bet that demand shifts toward better-for-you formats within the category rather than away from it entirely \u2014 not yet proven at scale."
+      },
+      {
+        "driver": "Input-cost inflation forcing price-led (not volume-led) growth, as seen in FY2022 (volume -0.7%, price +9.7%) and FY2023 (volume -6.0%, price +8.8%)",
+        "why_it_matters_for_the_range": "Price-led growth has real limits \u2014 FY2023's -6.0% volume shows consumers downtrading when price rises too far, which caps how much pure pricing can carry the range toward its high end."
+      }
+    ],
+    "quotable_insights": [
+      "Organic sales growth swung from +2.3% to +9.8% in consecutive years (FY2023 to FY2024) \u2014 more volatile year-to-year than the 3-5% medium-term guidance suggests once it's averaged out.",
+      "FY2025's +4.2% organic growth translated to essentially flat reported revenue (EUR7.9bn vs EUR7.947bn in FY2024) \u2014 a real currency-translation gap worth flagging before quoting organic growth figures at face value.",
+      "AMEA holds ~25% of group revenue but delivers the highest margin (22.9%) and fastest growth of any region \u2014 a real, quantified case that the growth story is currently underweighted in the portfolio, not absent from it."
     ]
   }
 }

@@ -312,6 +312,26 @@ def load_tmicc_financials():
             })
         share_price.sort(key=lambda r: r["date"])
 
+    # Real reported revenue (EUR billion) — absolute figures, distinct from
+    # the organic-sales-growth % series above. Sourced from the 10-K
+    # Analyzer's own per-year extraction (combined carve-out income
+    # statement + the real Annual Report figure), captured here as its own
+    # dataset for the Financials tab's decade view.
+    reported_revenue = []
+    revenue_file = RAW_DIR / "market" / "magnum_reported_revenue.csv"
+    if revenue_file.exists():
+        for row in _read_csv(revenue_file):
+            try:
+                fy = int(row["fiscal_year"])
+                revenue = float(row["revenue_eur_billion"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            reported_revenue.append({
+                "fiscal_year": fy, "revenue_eur_billion": revenue,
+                "confidence": row.get("confidence", "placeholder"), "basis": row.get("basis", ""),
+            })
+        reported_revenue.sort(key=lambda r: r["fiscal_year"])
+
     return {
         "source": "real",
         "items": rows,
@@ -320,6 +340,7 @@ def load_tmicc_financials():
         "h1_2026": h1_group,
         "h1_2026_regional": h1_regional,
         "share_price_snapshots": share_price,
+        "reported_revenue": reported_revenue,
     }
 
 
@@ -382,6 +403,16 @@ def load_annual_report_analysis():
     return _read_json(real_file) if real_file.exists() else None
 
 
+def load_revenue_scenario():
+    """ANALYSIS, not fact — a 2027-2030 revenue range built from TMICC's own
+    guidance, not a TMICC forecast. Kept in its own file for the same reason
+    as the Consultant's Brief, and rendered in the Financials tab with
+    explicit scenario/fact labeling rather than merged into the real
+    reported-revenue series."""
+    real_file = RAW_DIR / "magnum_revenue_scenario.json"
+    return _read_json(real_file) if real_file.exists() else None
+
+
 # ---------------------------------------------------------------------------
 # assemble + write
 # ---------------------------------------------------------------------------
@@ -436,6 +467,10 @@ def generate_market_data():
     if annual_report:
         payload["annual_report_analysis"] = annual_report
 
+    revenue_scenario = load_revenue_scenario()
+    if revenue_scenario:
+        payload["revenue_scenario"] = revenue_scenario
+
     with open(OUT_FILE, "w") as f:
         json.dump(payload, f, indent=2)
 
@@ -474,6 +509,10 @@ def generate_market_data():
         print(f"  - annual_report_analysis {len(docs)} documents, {total_checkpoints} strategic checkpoints total")
     else:
         print("  - annual_report_analysis not present (data/raw/magnum_annual_report_analysis.json missing)")
+    if revenue_scenario:
+        print(f"  - revenue_scenario       {len(revenue_scenario.get('scenario_eur_billion', []))} years projected, base FY{revenue_scenario.get('base_year',{}).get('fiscal_year','?')}")
+    else:
+        print("  - revenue_scenario       not present (data/raw/magnum_revenue_scenario.json missing)")
 
 
 if __name__ == "__main__":
